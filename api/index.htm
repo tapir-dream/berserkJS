@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>berserkJS</title>
+<meta charset="UTF-8" />
+</head>
+<body>
+<table id="toc"><tr><td><div id="toctitle"><h2>目录</h2></div>
+<ul>
+<li><a href="#RIA_.E7.BD.91.E7.BB.9C.E6.95.B0.E6.8D.AE.E8.87.AA.E5.8A.A8.E5.8C.96.E8.BE.93.E5.87.BA.E5.B7.A5.E5.85.B7.EF.BC.88BerserkJS.EF.BC.89"><span>1</span> <span>RIA 网络数据自动化输出工具（BerserkJS）</span></a>
+<ul>
+<li><a href="#.E6.BC.94.E7.A4.BA.E8.A7.86.E9.A2.91"><span>1.1</span> <span>演示视频</span></a></li>
+<li><a href="#.E5.B7.A5.E5.85.B7.E4.BB.8B.E7.BB.8D_PPT"><span>1.2</span> <span>工具介绍 PPT</span></a></li>
+<li><a href="#.E5.B7.A5.E5.85.B7.E8.AF.B4.E6.98.8E"><span>1.3</span> <span>工具说明</span></a></li>
+<li><a href="#.E5.B7.A5.E5.85.B7.E7.9A.84.E9.80.82.E7.94.A8.E5.9C.BA.E6.99.AF"><span>1.4</span> <span>工具的适用场景</span></a></li>
+<li><a href="#.E4.BD.9C.E8.80.85.E4.BF.A1.E6.81.AF"><span>1.5</span> <span>作者信息</span></a></li>
+<li><a href="#.E5.91.BD.E5.90.8D.E4.BB.8B.E7.BB.8D"><span>1.6</span> <span>命名介绍</span></a></li>
+<li><a href="#.E5.BC.80.E5.8F.91.E7.8E.AF.E5.A2.83"><span>1.7</span> <span>开发环境</span></a></li>
+<li><a href="#.E8.8E.B7.E5.8F.96.E6.BA.90.E7.A0.81"><span>1.8</span> <span>获取源码</span></a></li>
+<li><a href="#.E5.B7.A5.E5.85.B7.E4.B8.BB.E8.A6.81.E6.96.87.E4.BB.B6"><span>1.9</span> <span>工具主要文件</span></a></li>
+<li><a href="#.E5.91.BD.E4.BB.A4.E8.A1.8C.E5.8F.82.E6.95.B0"><span>1.10</span> <span>命令行参数</span></a></li>
+<li><a href="#.E9.A1.B9.E7.9B.AE.E6.A0.B8.E5.BF.83.E6.BA.90.E6.96.87.E4.BB.B6.E6.A6.82.E8.A6.81"><span>1.11</span> <span>项目核心源文件概要</span></a></li>
+<li><a href="#.E5.86.85.E9.83.A8.E5.8C.85.E8.A3.85.E5.87.BA.E7.9A.84JS.E6.96.B9.E6.B3.95.E8.A1.A8"><span>1.12</span> <span>内部包装出的JS方法表</span></a></li>
+<li><a href="#.E5.A4.96.E9.83.A8JS.E6.A8.A1.E5.9D.97"><span>1.13</span> <span>外部JS模块</span></a></li>
+<li><a href="#.E6.A8.A1.E5.9D.97.E6.96.87.E4.BB.B6.E4.B9.A6.E5.86.99.E8.A7.84.E5.88.99"><span>1.14</span> <span>模块文件书写规则</span></a></li>
+<li><a href="#.E9.85.8D.E7.BD.AE.E7.AE.A1.E7.90.86.E6.96.87.E4.BB.B6"><span>1.15</span> <span>配置管理文件</span></a></li>
+<li><a href="#.E5.88.9D.E5.A7.8B.E5.8C.96.E9.85.8D.E7.BD.AE.E4.BB.A5.E5.8F.8A.E5.BC.80.E5.A7.8B.E8.BF.90.E8.A1.8C"><span>1.16</span> <span>初始化配置以及开始运行</span></a></li>
+<li><a href="#API_.E6.96.87.E6.A1.A3"><span>1.17</span> <span>API 文档</span></a>
+<ul>
+<li><a href="#App_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0.E4.B8.8E.E5.B1.9E.E6.80.A7"><span>1.17.1</span> <span>App 命名空间下函数与属性</span></a>
+<ul>
+<li><a href="#App.netListener.28enabled_.3CBoolean.3E.29"><span>1.17.1.1</span> <span>App.netListener(enabled &lt;Boolean&gt;)</span></a></li>
+<li><a href="#App.networkData.28.29"><span>1.17.1.2</span> <span>App.networkData()</span></a></li>
+<li><a href="#App.loadScript.28path_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.1.3</span> <span>App.loadScript(path &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.readFile.28path_.3Cstring.3E.5B.2C_charset_.3Cstring.3E.5D_.29"><span>1.17.1.4</span> <span>App.readFile(path &lt;string&gt;[, charset &lt;string&gt;] )</span></a></li>
+<li><a href="#App.writeFile.28path_.3Cstring.3E.2C_content_.3Cstring.3E.5B.2C_charset_.3Cstring.3E.2C_appendMode.3Cboolean.3E.5D_.29"><span>1.17.1.5</span> <span>App.writeFile(path &lt;string&gt;, content &lt;string&gt;[, charset &lt;string&gt;, appendMode&lt;boolean&gt;] )</span></a></li>
+<li><a href="#App.base64FormFile.28file_.3Cstring.3E.29"><span>1.17.1.6</span> <span>App.base64FormFile(file &lt;string&gt;)</span></a></li>
+<li><a href="#App.dataURIFormImage.28image_.3Cstring.3E.29"><span>1.17.1.7</span> <span>App.dataURIFormImage(image &lt;string&gt;)</span></a></li>
+<li><a href="#App.httpRequest.28method_.3Cstring.3E.2C_url_.3Cstring.3E_.5B.2C_data_.3Cstring.3E.2C_charset_.3Cstring.3E.5D.29"><span>1.17.1.8</span> <span>App.httpRequest(method &lt;string&gt;,  url &lt;string&gt; [, data &lt;string&gt;, charset &lt;string&gt;])</span></a></li>
+<li><a href="#App.process.28program_.3Cstring.3E.2C_.5Bargs_.3CArray.3E.2C_timeout_.3Cnumber.3E.2C_debug_.3Cfunction.3E.5D.29"><span>1.17.1.9</span> <span>App.process(program &lt;string&gt;, [args &lt;Array&gt;, timeout &lt;number&gt;, debug &lt;function&gt;])</span></a></li>
+<li><a href="#App.watchFile.28flie_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.1.10</span> <span>App.watchFile(flie &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.unWatcher.28file_.3Cstring.3E_.7C_callbackHandle_.3Cfunction.3E.29"><span>1.17.1.11</span> <span>App.unWatcher(file &lt;string&gt; | callbackHandle &lt;function&gt;)</span></a></li>
+<li><a href="#App.watchedFiles.28.29"><span>1.17.1.12</span> <span>App.watchedFiles()</span></a></li>
+<li><a href="#App.watcherClose.28.29"><span>1.17.1.13</span> <span>App.watcherClose()</span></a></li>
+<li><a href="#App.setTimeout.28callback_.3Cfunction.3E.2C_timeout_.3Cnumber.3E.29"><span>1.17.1.14</span> <span>App.setTimeout(callback &lt;function&gt;, timeout &lt;number&gt;)</span></a></li>
+<li><a href="#App.clearTimeout.28timeId_.3Cnumber.3E.29"><span>1.17.1.15</span> <span>App.clearTimeout(timeId &lt;number&gt;)</span></a></li>
+<li><a href="#App.setInterval.28callback_.3Cfunction.3E.2C_interval_.3Cnumber.3E.29"><span>1.17.1.16</span> <span>App.setInterval(callback &lt;function&gt;, interval &lt;number&gt;)</span></a></li>
+<li><a href="#App.clearInterval.28timeId_.3Cnumber.3E.29"><span>1.17.1.17</span> <span>App.clearInterval(timeId &lt;number&gt;)</span></a></li>
+<li><a href="#App.alert.28message_.3Cnumber.3E.7C.3Cstring.3E.7C.3Cboolean.3E.7C.3Cfunction.3E.7C.3CArray.3E.7C.3CObject.3E.29"><span>1.17.1.18</span> <span>App.alert(message &lt;number&gt;|&lt;string&gt;|&lt;boolean&gt;|&lt;function&gt;|&lt;Array&gt;|&lt;Object&gt;)</span></a></li>
+<li><a href="#App.hidn.28.29"><span>1.17.1.19</span> <span>App.hidn()</span></a></li>
+<li><a href="#App.show.28.29"><span>1.17.1.20</span> <span>App.show()</span></a></li>
+<li><a href="#App.about.28.29"><span>1.17.1.21</span> <span>App.about()</span></a></li>
+<li><a href="#App.close.28.29"><span>1.17.1.22</span> <span>App.close()</span></a></li>
+<li><a href="#App.path_.5Breadonly.5D"><span>1.17.1.23</span> <span>App.path [readonly]</span></a></li>
+<li><a href="#App.file_.5Breadonly.5D"><span>1.17.1.24</span> <span>App.file [readonly]</span></a></li>
+<li><a href="#App.args_.5Breadonly.5D"><span>1.17.1.25</span> <span>App.args [readonly]</span></a></li>
+</ul>
+</li>
+<li><a href="#App.selector_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"><span>1.17.2</span> <span>App.selector 命名空间下函数</span></a>
+<ul>
+<li><a href="#App.selector.img.28.29"><span>1.17.2.1</span> <span>App.selector.img()</span></a></li>
+<li><a href="#App.selector.png.28.29"><span>1.17.2.2</span> <span>App.selector.png()</span></a></li>
+<li><a href="#App.selector.gif.28.29"><span>1.17.2.3</span> <span>App.selector.gif()</span></a></li>
+<li><a href="#App.selector.ico.28.29"><span>1.17.2.4</span> <span>App.selector.ico()</span></a></li>
+<li><a href="#App.selector.jpg.28.29"><span>1.17.2.5</span> <span>App.selector.jpg()</span></a></li>
+<li><a href="#App.selector.svg.28.29"><span>1.17.2.6</span> <span>App.selector.svg()</span></a></li>
+<li><a href="#App.selector.doc.28.29"><span>1.17.2.7</span> <span>App.selector.doc()</span></a></li>
+<li><a href="#App.selector.css.28.29"><span>1.17.2.8</span> <span>App.selector.css()</span></a></li>
+<li><a href="#App.selector.js.28.29"><span>1.17.2.9</span> <span>App.selector.js()</span></a></li>
+<li><a href="#App.selector.cookie.28.29"><span>1.17.2.10</span> <span>App.selector.cookie()</span></a></li>
+<li><a href="#App.selector.nonegzip.28.29"><span>1.17.2.11</span> <span>App.selector.nonegzip()</span></a></li>
+<li><a href="#App.selector.nonecache.28.29"><span>1.17.2.12</span> <span>App.selector.nonecache()</span></a></li>
+<li><a href="#App.selector.nonecdn.28.29"><span>1.17.2.13</span> <span>App.selector.nonecdn()</span></a></li>
+<li><a href="#App.selector.totaltimeout.28duration_.3Cnumber.3E.29"><span>1.17.2.14</span> <span>App.selector.totaltimeout(duration &lt;number&gt;)</span></a></li>
+<li><a href="#App.selector.waittimeout.28duration_.3Cnumber.3E.29"><span>1.17.2.15</span> <span>App.selector.waittimeout(duration &lt;number&gt;)</span></a></li>
+<li><a href="#App.selector.downloadtimeout.28duration_.3Cnumber.3E.29"><span>1.17.2.16</span> <span>App.selector.downloadtimeout(duration &lt;number&gt;)</span></a></li>
+<li><a href="#App.selector.dnstimeout.28duration_.3Cnumber.3E.29"><span>1.17.2.17</span> <span>App.selector.dnstimeout(duration &lt;number&gt;)</span></a></li>
+<li><a href="#App.selector.sizeout.28size_.3Cnumber.3E.29"><span>1.17.2.18</span> <span>App.selector.sizeout(size &lt;number&gt;)</span></a></li>
+<li><a href="#App.selector.http200.28.29"><span>1.17.2.19</span> <span>App.selector.http200()</span></a></li>
+<li><a href="#App.selector.http301.28.29"><span>1.17.2.20</span> <span>App.selector.http301()</span></a></li>
+<li><a href="#App.selector.http302.28.29"><span>1.17.2.21</span> <span>App.selector.http302()</span></a></li>
+<li><a href="#App.selector.http304.28.29"><span>1.17.2.22</span> <span>App.selector.http304()</span></a></li>
+<li><a href="#App.selector.http404.28.29"><span>1.17.2.23</span> <span>App.selector.http404()</span></a></li>
+<li><a href="#App.selector.fromcdn.28.29"><span>1.17.2.24</span> <span>App.selector.fromcdn()</span></a></li>
+<li><a href="#App.selector.get.28.29"><span>1.17.2.25</span> <span>App.selector.get()</span></a></li>
+<li><a href="#App.selector.clear.28.29"><span>1.17.2.26</span> <span>App.selector.clear()</span></a></li>
+</ul>
+</li>
+<li><a href="#App.webview.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"><span>1.17.3</span> <span>App.webview命名空间下函数</span></a>
+<ul>
+<li><a href="#App.webview.setUserAgent.28userAgent_.3Cstring.3E.29"><span>1.17.3.1</span> <span>App.webview.setUserAgent(userAgent &lt;string&gt;)</span></a></li>
+<li><a href="#App.webview.userAgent.28.29"><span>1.17.3.2</span> <span>App.webview.userAgent()</span></a></li>
+<li><a href="#App.webview.defaultUserAgent.28.29"><span>1.17.3.3</span> <span>App.webview.defaultUserAgent()</span></a></li>
+<li><a href="#App.webview.getUrl.28.29"><span>1.17.3.4</span> <span>App.webview.getUrl()</span></a></li>
+<li><a href="#App.webview.open.28url_.3Cstring.3E.29"><span>1.17.3.5</span> <span>App.webview.open(url &lt;string&gt;)</span></a></li>
+<li><a href="#App.webview.setProxy.28host_.3Cstring.3E.5B.2C_type_.3Cstring.3E.2C_userName_.3Cstring.3E.2C_password_.3Cstring.3E.29"><span>1.17.3.6</span> <span>App.webview.setProxy(host &lt;string&gt;[, type &lt;string&gt;, userName &lt;string&gt;, password &lt;string&gt;)</span></a></li>
+<li><a href="#App.webview.clearProxy.28.29"><span>1.17.3.7</span> <span>App.webview.clearProxy()</span></a></li>
+<li><a href="#App.webview.useSystemProxy.28.5Bindex_.3Cnumber.3E.5D.29"><span>1.17.3.8</span> <span>App.webview.useSystemProxy([index &lt;number&gt;])</span></a></li>
+<li><a href="#App.webview.viewport.28.29"><span>1.17.3.9</span> <span>App.webview.viewport()</span></a></li>
+<li><a href="#App.webview.setViewport.28size_.3CObject.3E.29"><span>1.17.3.10</span> <span>App.webview.setViewport(size &lt;Object&gt;)</span></a></li>
+<li><a href="#App.webview.contentRect.28.29"><span>1.17.3.11</span> <span>App.webview.contentRect()</span></a></li>
+<li><a href="#App.webview.saveImage.28path_.3Cstring.3E.5B.2C_imgType_.3Cstring.3E.2C_quality_.3Cnumber.3E.2C_rect_.3CObject.3E.5D.29"><span>1.17.3.12</span> <span>App.webview.saveImage(path &lt;string&gt;[, imgType &lt;string&gt;, quality &lt;number&gt;, rect &lt;Object&gt;])</span></a></li>
+<li><a href="#App.webview.dataURIFormRect.28.5Brect_.3CObject.3E.2C_imgType_.3Cstring.3E.2C_quality_.3Cnumber.3E.5D.29"><span>1.17.3.13</span> <span>App.webview.dataURIFormRect([rect &lt;Object&gt;, imgType &lt;string&gt;, quality &lt;number&gt;])</span></a></li>
+<li><a href="#App.webview.setTimeout.28callback_.3Cfunction.3E.2C_timeout_.3Cnumber.3E.29"><span>1.17.3.14</span> <span>App.webview.setTimeout(callback &lt;function&gt;, timeout &lt;number&gt;)</span></a></li>
+<li><a href="#App.webview.clearTimeout.28timeId_.3Cnumber.3E.29"><span>1.17.3.15</span> <span>App.webview.clearTimeout(timeId &lt;number&gt;)</span></a></li>
+<li><a href="#App.webview.setInterval.28callback_.3Cfunction.3E.2C_interval_.3Cnumber.3E.29"><span>1.17.3.16</span> <span>App.webview.setInterval(callback &lt;function&gt;, interval &lt;number&gt;)</span></a></li>
+<li><a href="#App.webview.clearInterval.28timeId_.3Cnumber.3E.29"><span>1.17.3.17</span> <span>App.webview.clearInterval(timeId &lt;number&gt;)</span></a></li>
+<li><a href="#App.webview.netListener.28enabled_.3Cboolean.3E.29"><span>1.17.3.18</span> <span>App.webview.netListener(enabled &lt;boolean&gt;)</span></a></li>
+<li><a href="#App.webview.cookiesFormUrl.28.5Burl_.3Cstring.3E.5D.29"><span>1.17.3.19</span> <span>App.webview.cookiesFormUrl([url &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.setCookiesFormUrl.28cookies_.3Cstring.3E.5B.2C_url_.3Cstring.3E.5D.29"><span>1.17.3.20</span> <span>App.webview.setCookiesFormUrl(cookies &lt;string&gt;[, url &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.elementRects.28cssSelectorString_.3Cstring.3E.29"><span>1.17.3.21</span> <span>App.webview.elementRects(cssSelectorString &lt;string&gt;)</span></a></li>
+<li><a href="#App.webview.sendMouseEvent.28argPoint_.3CObject.3E.5B.2C_argEvt_.3Cstring.3E.2C_argKey_.3Cstring.3E.5D.29"><span>1.17.3.22</span> <span>App.webview.sendMouseEvent(argPoint &lt;Object&gt;[, argEvt &lt;string&gt;, argKey &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.addEventListener.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.3.23</span> <span>App.webview.addEventListener(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.removeEventListener.28eventName_.3Cstring.3E.2C_callbackHandle_.3Cfunction.3E.29"><span>1.17.3.24</span> <span>App.webview.removeEventListener(eventName &lt;string&gt;, callbackHandle &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.setDetectionRects.28rects_.3CArray.3E.5B.2C_sameRate_.3Cnumber.3E.5D.29"><span>1.17.3.25</span> <span>App.webview.setDetectionRects(rects &lt;Array&gt;[, sameRate &lt;number&gt;])</span></a></li>
+<li><a href="#App.webview.clearDetectionRects.28.29"><span>1.17.3.26</span> <span>App.webview.clearDetectionRects()</span></a></li>
+<li><a href="#App.webview.hasDetectionRects.28.29"><span>1.17.3.27</span> <span>App.webview.hasDetectionRects()</span></a></li>
+<li><a href="#App.webview.execScript.28sandbox_.3Cfunction.3E_.5B.2C_argObject_.3CObject.3E.7C.3CArray.3E.7C.3Cstring.3E.7C.3Cnumber.3E.5D.29"><span>1.17.3.28</span> <span>App.webview.execScript(sandbox &lt;function&gt; [, argObject &lt;Object&gt;|&lt;Array&gt;|&lt;string&gt;|&lt;number&gt;])</span></a></li>
+</ul>
+</li>
+<li><a href="#App.helper_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"><span>1.17.4</span> <span>App.helper 命名空间下函数</span></a>
+<ul>
+<li><a href="#App.helper.supplant.28template.3Cstring.3E.2C_data_.3CObject.3E.29"><span>1.17.4.1</span> <span>App.helper.supplant(template&lt;string&gt;, data &lt;Object&gt;)</span></a></li>
+<li><a href="#App.helper.require.28moduleName.3Cstring.3E.5B.2C_args_.3CArray.3E.5D.29"><span>1.17.4.2</span> <span>App.helper.require(moduleName&lt;string&gt;[, args &lt;Array&gt;])</span></a></li>
+<li><a href="#App.helper.alert.28msg_.3Cstring.3E.29"><span>1.17.4.3</span> <span>App.helper.alert(msg &lt;string&gt;)</span></a></li>
+<li><a href="#App.helper.log.28msg_.3Cstring.3E.7C.3Cnumber.3E.29"><span>1.17.4.4</span> <span>App.helper.log(msg &lt;string&gt;|&lt;number&gt;)</span></a></li>
+</ul>
+</li>
+<li><a href="#console_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0.E4.B8.8E.E5.B1.9E.E6.80.A7"><span>1.17.5</span> <span>console 命名空间下函数与属性</span></a>
+<ul>
+<li><a href="#console_.log.28arg1.2C_.5Barg2.2C_arg3.2C_arg4.2C_....5D.29"><span>1.17.5.1</span> <span>console .log(arg1, [arg2, arg3, arg4, ...])</span></a></li>
+</ul>
+</li>
+<li><a href="#pageExtension_.E9.A1.B5.E9.9D.A2.E6.89.A9.E5.B1.95.E5.AF.B9.E8.B1.A1"><span>1.17.6</span> <span>__pageExtension 页面扩展对象</span></a>
+<ul>
+<li><a href="#pageExtension.postMessage.28.5Bwparam_.3Cstring.3E.2C_lparam_.3Cstring.3E.5D.29"><span>1.17.6.1</span> <span>__pageExtension.postMessage([wparam &lt;string&gt;, lparam &lt;string&gt;])</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#END"><span>1.18</span> <span>END</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table><script>if (window.showTocToggle) { var tocShowText = "显示"; var tocHideText = "隐藏"; showTocToggle(); } </script>
+<h1><span id="RIA_.E7.BD.91.E7.BB.9C.E6.95.B0.E6.8D.AE.E8.87.AA.E5.8A.A8.E5.8C.96.E8.BE.93.E5.87.BA.E5.B7.A5.E5.85.B7.EF.BC.88BerserkJS.EF.BC.89">RIA 网络数据自动化输出工具（BerserkJS）</span></h1>
+<h2><span id=".E6.BC.94.E7.A4.BA.E8.A7.86.E9.A2.91"> 演示视频 </span></h2>
+<p><a href="http://www.tudou.com/v/pu5xvmzVZbU/&amp;resourceId=0_04_05_99/v.swf"  rel="nofollow" target="_blank">http://www.tudou.com/v/pu5xvmzVZbU/&amp;resourceId=0_04_05_99/v.swf</a>
+</p><p><br />
+</p>
+<h2><span id=".E5.B7.A5.E5.85.B7.E4.BB.8B.E7.BB.8D_PPT"> 工具介绍 PPT  </span></h2>
+<p>暂无</p>
+</p><p><br />
+</p>
+<h2><span id=".E5.B7.A5.E5.85.B7.E8.AF.B4.E6.98.8E"> 工具说明 </span></h2>
+<p>此工具用于尝试前端自动化分析页面网络请求数据，可以使用 JS 操作页面导向，获取所需数据。基于 QT 开发，理论上可以跨平台使用，前提是在目标平台编译并部署 QT 运行环境。
+</p><p>工具特性：
+</p>
+<ol><li> 功能性：工具内置 webkit 浏览器内核，可响应浏览器内核事件回调、支持发送鼠标消息给浏览器、包装浏览器网络请求数据为JS数据格式、可与浏览器内JS做数据交互。
+</li><li> 开放性：工具将主要操作均包装为JS语法与数据格式，采用JS语法包装，前端工程师可根据API组装出符合各自预期的检测功能。
+</li><li> 接口性：工具本身支持命令行参数，可带参调用。API支持处理外部进程读取输出流、支持HTTP发送数据。可由 WEB 程序远程调用后获取测试的返回结果。
+</li></ol>
+<p><br />
+</p>
+<h2><span id=".E5.B7.A5.E5.85.B7.E7.9A.84.E9.80.82.E7.94.A8.E5.9C.BA.E6.99.AF"> 工具的适用场景 </span></h2>
+<ol><li> 检测页面网络请求情况，包括监控页面请求时长、数据大小、文件格式、请求数量等。
+</li><li> 用户操作模拟，利用获取页面指定元素位置，发送鼠标消息点击等手段模拟真实用户操作。
+</li><li> 页面渲染情况检测，如页面一定时间内的paint数，页面首次渲染、首次布局时间等。
+</li><li> 脚本插件特性模拟，如将一些检测代码在页面某个特定时刻注入页面执行，收集获取执行结果，模拟执行异常等。
+</li><li> 远程或本地程序辅助，可执行一些本地代码讲输出流注入页面执行，远程数据亦可。
+</li><li> 方便的网页整页截图工具，可在用户操作模拟的基础上导航到指定页面状态截图保存。
+</li></ol>
+<p><br />
+</p>
+<h2><span id=".E4.BD.9C.E8.80.85.E4.BF.A1.E6.81.AF"> 作者信息 </span></h2>
+<p>微博：@貘吃馍香
+</p>
+<h2><span id=".E5.91.BD.E5.90.8D.E4.BB.8B.E7.BB.8D"> 命名介绍 </span></h2>
+<p>那么为什么工具命名为 BERSERK 呢？它取自这个词的词源信息：
+</p><p>BERSERK：巴萨卡，这个词源于古代北欧语言，意思是“披着熊皮的人”后为“狂战士”的称谓。是奇幻作品中最受欢迎的职业设定之一。狂战士受主神奥丁的加护，战斗中会陷入极度兴奋的忘我状态，以超强的肉体打击敌人，没有恐惧，疼痛的感觉。严重者会陷入癫狂而死。
+</p><p>因此，本工具的含义中包括了“披着JS皮的”且“用起来很疯狂的”，用多了会兴奋的，忘却痛苦与恐惧的诸多含义。同时告诫所有码农注意身体健康，小心真的“爽”挂了。
+</p><p>ps：如果你是个动漫迷，可以看看三浦健太郎的《烙印战士》哦~~ 连载20年还没完结的狂战士故事~~ 希望作者身体健康，愿菩萨保佑他，阿门。
+</p>
+<h2><span id=".E5.BC.80.E5.8F.91.E7.8E.AF.E5.A2.83"> 开发环境 </span></h2>
+<p>基于 QtWebKit （QtWebKit-2.2 Release 基于 WebKit 主干稳定版 r85855 ）开发，采用 <b>Qt 4.8.0</b> （Qt SDK Version 1.2）环境编译：<br />
+</p>
+<ol><li> Qt 项目地址：<a href="http://qt.nokia.com"  rel="nofollow" target="_blank">http://qt.nokia.com</a>
+</li><li> Qt SDK 地址：<a href="http://qt.nokia.com/downloads"  rel="nofollow" target="_blank">http://qt.nokia.com/downloads</a>
+</li><li> Qt 文档地址：<a href="http://doc.qt.nokia.com/"  rel="nofollow" target="_blank">http://doc.qt.nokia.com/</a>
+</li></ol>
+<p>如果你的系统是非 windows 需要重新编译源码取得当前平台的可执行文件时，才需要搭建开发环境。
+</p><p>windows 系统的用户仅从release 目录中copy出如下文件存放于同一目录，即可最小量级使用：
+</p>
+<ol><li> berserkJS.exe
+</li><li> libgcc_s_dw2-1.dll
+</li><li> mingwm10.dll
+</li><li> QtCore4.dll
+</li><li> QtGui4.dll
+</li><li> QtNetwork4.dll
+</li><li> QtScript4.dll
+</li><li> QtWebKit4.dll
+</li></ol>
+<p><br />
+</p>
+<h2><span id=".E8.8E.B7.E5.8F.96.E6.BA.90.E7.A0.81"> 获取源码 </span></h2>
+<p>https://github.com/tapir-dream/berserkJS</a>
+</p>
+<h2><span id=".E5.B7.A5.E5.85.B7.E4.B8.BB.E8.A6.81.E6.96.87.E4.BB.B6"> 工具主要文件 </span></h2>
+<pre style="font-size:12px; font-family: Consolas, Courier, SimSun, monospace;">
+工具目录 
+    + src 目录
+    |    + 源码文件 ……
+    |    
+    + build 目录
+         + release 发布目录
+              + berserkJS (工具的可执行文件)
+              + 依赖的 dll 文件们 (非必须)
+              + conf 目录 
+              |        + config.js 模块配置文件
+              |        + init.js 全局配置初始化文件
+              + module 目录
+              |        + JS 检测模块文件 (*.js)
+              |        + JS 检测模块文件 (*.js)
+              |        + JS 检测模块文件 (*.js)
+              |        + ……
+              + action 目录
+                            + helper.js 检测开始是加入的工具方法集
+                            + autoscript.js 用户的自动化浏览器控制文件
+                            + report.js 检测完成后执行的文件，用于生成检测报告
+
+</pre>
+<p>【说明】：
+</p>
+<ol><li> module 目录中的JS检测模块 ，用户可自行编写新模块。
+</li><li> conf 目录中的 config.js 中可以配置添加新检测模块，以及检测内容。
+</li><li> action 目录为 用户行为脚本目录，用于存放自动化浏览器控制文件，用于依赖的工具方法以及检测模块执行完成后的动作脚本。
+</li><li> 如果为 window 环境，工具现在采用非静态编译，需要依赖如下文件，它们均在工程的 release 目录中存在：
+<ol><li> libgcc_s_dw2-1.dll
+</li><li> mingwm10.dll
+</li><li> QtCore4.dll
+</li><li> QtGui4.dll
+</li><li> QtNetwork4.dll
+</li><li> QtScript4.dll
+</li><li> QtWebKit4.dll
+</li></ol>
+</li></ol>
+<p><br />
+</p>
+<h2><span id=".E5.91.BD.E4.BB.A4.E8.A1.8C.E5.8F.82.E6.95.B0"> 命令行参数 </span></h2>
+<p>可执行文件 berserkJS 将携带一些命令行参数。如下：
+</p>
+<ol><li> --command=value  如value参数值不为空，--command 参数将隐藏工具界面使其看起来像纯命令行工具。此方法的设计目的在于非调试环境中不启用界面窗口。<b>使用此方法时需要注意避免使用任何 alert 类方法，因为他等待用户交互，会阻塞后续代码执行。</b> 
+</li><li> --start=value  如value参数值不为空， --start 参数表明要自动执行 berserkJS 目录下 conf/init.js 文件，运行配置好的测试。
+</li><li> --script=value  如 value 参数值不为空 --script 参数表示要自动执行以 berserkJS 目录为基准的某路径下js文件。<b>此js文件将自动以 uft-8 编码格式读取并执行；此参数存在时 --start 参数自动失效。</b>
+</li></ol>
+<p><br />
+</p>
+<h2><span id=".E9.A1.B9.E7.9B.AE.E6.A0.B8.E5.BF.83.E6.BA.90.E6.96.87.E4.BB.B6.E6.A6.82.E8.A6.81"> 项目核心源文件概要 </span></h2>
+<ol><li>berserkjs.pro --------- 工程文件
+</li><li>customdownload.cpp --------- 收集所有网络请求
+</li><li>monitordata.cpp ---------------- 请求数据收集对象 并扩充一些常用请求判定方法
+</li><li>monitordatamap.cpp --------- 请求数据收集器 所有数据对象的容器
+</li><li>selector.cpp  -------------------- 请求选择器 用于定义常用的过滤方法
+</li><li>mywebpage.cpp --------------- QtWebPage 的继承类 用于扩展原有类方法
+</li><li>mywebview.cpp ---------------- QtWebView 的继承类 用于暴露一些浏览器方法给外部 JS
+</li><li>scriptbinding.cpp -------------- 用于暴露绝大部分非 QtWebKit 控制方法给外部 JS
+</li><li>pageextensioncpp ------------ 向注入页面对象方法的实现类
+</li><li>firstscreen.cpp  ---------------- 首屏渲染完毕检测实现类
+</li></ol>
+<p>【注】：全小写文件名是为了避免跨平台文件名字符大小写异常问题。
+</p><p><br />
+</p>
+<h2><span id=".E5.86.85.E9.83.A8.E5.8C.85.E8.A3.85.E5.87.BA.E7.9A.84JS.E6.96.B9.E6.B3.95.E8.A1.A8"> 内部包装出的JS方法表 </span></h2>
+<p>工具暴露出一些 JS 方法可供调用，利用这些方法我们可以做到控制浏览页面、监听特定事件、延时处理、截图等常用操作。
+</p><p>整体方法树如下：
+</p>
+<pre style="font-size:12px; font-family: Consolas, Courier, SimSun, monospace;">
+Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数组
+       |              + [function] close
+       |              + [function] loadScript
+       |              + [function] readFile
+       |              + [function] writeFile
+       |              + [function] base64FormFile
+       |              + [function] dataURIFormImage
+       |              + [function] netListener &lt;-- webview.netListener 方法的引用
+       |              + [function] process
+       |              + [function] httpRequest
+       |              + [function] watchFile
+       |              + [function] unWatcher
+       |              + [function] watchedFiles
+       |              + [function] watcherClose
+       |              + [function] alert
+       |              + [function] about
+       |              + [string] path
+       |              + [string] file
+       |              + [string] args
+       |              + [object] selector + [function] clear
+       |              |                   + [function] img
+       |              |                   + [function] png
+       |              |                   + [function] gif
+       |              |                   + [function] ico
+       |              |                   + [function] jpg
+       |              |                   + [function] svg
+       |              |                   + [function] doc
+       |              |                   + [function] css
+       |              |                   + [function] js
+       |              |                   + [function] cookie;
+       |              |                   + [function] nonegzip;
+       |              |                   + [function] nonecache;
+       |              |                   + [function] nonecdn;
+       |              |                   + [function] totaltimeout
+       |              |                   + [function] waittimeout
+       |              |                   + [function] downloadtimeout
+       |              |                   + [function] dnstimeout
+       |              |                   + [function] sizeout
+       |              |                   + [function] http200
+       |              |                   + [function] http301
+       |              |                   + [function] http302
+       |              |                   + [function] http304
+       |              |                   + [function] http404
+       |              |                   + [function] fromcdn
+       |              |                   + [function] get
+       |              |
+       |              + [object] webview + [function] getUrl
+       |              |                  + [function] open
+       |              |                  + [function] execScript &lt;-- *这里将切换到页面JS环境，与原始JS不在同一个JS引擎（即脚本沙箱）
+       |              |                  + [function] setTimeout
+       |              |                  + [function] clearTimeout
+       |              |                  + [function] setInterval
+       |              |                  + [function] clearInterval
+       |              |                  + [function] addEventListener 
+       |              |                                   &lt; - pageScriptCreated
+       |              |                                   &lt; - load
+       |              |                                   &lt; - initLayoutCompleted
+       |              |                                   &lt; - pageChanged
+       |              |                                   &lt; - contentsSizeChanged
+       |              |                                   &lt; - iconchanged
+       |              |                                   &lt; - loadStarted
+       |              |                                   &lt; - titleChanged
+       |              |                                   &lt; - urlChanged
+       |              |                                   &lt; - repaint
+       |              |                                   &lt; - pageRectChanged
+       |              |                                   &lt; - loadProgress
+       |              |                                   &lt; - firstPaintFinished
+       |              |                                   &lt; - requestStart
+       |              |                                   &lt; - requestFinished
+       |              |                  + [function] removeEventListener
+       |              |                  + [function] elementRects
+       |              |                  + [function] saveImage  &lt;-  *支持 JPG/JPEG/PNG/BMP/PPM/TIFF 格式保存;
+       |              |                  + [function] sendMouseEvent + click/mousedown/mouseup/mousemove
+       |              |                  + [function] dataURIFormRect
+       |              |                  + [function] viewport
+       |              |                  + [function] setViewport
+       |              |                  + [function] contentRect
+       |              |                  + [function] cookiesFormUrl
+       |              |                  + [function] setCookiesFormUrl
+       |              |                  + [function] userAgent
+       |              |                  + [function] defaultUserAgent
+       |              |                  + [function] setUserAgent
+       |              |                  + [function] setProxy
+       |              |                  + [function] clearProxy
+       |              |                  + [function] useSystemProxy
+       |              |                  + [function] setDetectionRects
+       |              |                  + [function] clearDetectionRects
+       |              |                  + [function] hasDetectionRects
+       |              |
+       |              + [object] helper &lt;-- 非内部包装的JS命名空间，由用户扩展
+       |
+       + [object] console + [function] log 
+       + [function] alert &lt;--- App.alert 的快捷引用
+       + [function] setTimeout &lt;-- webview.setTimeout 方法的引用
+       + [function] clearTimeout &lt;-- webview.clearTimeout 方法的引用
+       + [function] setInterval &lt;-- webview.setInterval 方法的引用
+       + [function] clearInterval &lt;-- webview.clearInterval 方法的引用                
+
+
+
+    
+ ps: 一下方法和属性由 QtWebKit 自动包装，参数以及返回值都需 Qt 类型，如无特殊需要强烈不建议使用。
+     此处仅列出供参考：
+ 
+   objectName       windowOpacity           sizeIncrement        customContextMenuRequested(QPoint)
+   modal            windowModified          baseSize             setEnabled(bool)
+   windowModality   toolTip                 palette              setDisabled(bool)
+   enabled          statusTip               font                 setWindowModified(bool)
+   geometry         whatsThis               cursor               setWindowTitle(QString)
+   frameGeometry    accessibleName          mouseTracking        setStyleSheet(QString)
+   normalGeometry   accessibleDescription   isActiveWindow       setFocus()
+   x                layoutDirection         focusPolicy          update()
+   y                autoFillBackground      focus                setVisible(bool)
+   pos              styleSheet              contextMenuPolicy    setHidden(bool)
+   frameSize        locale                  updatesEnabled       show()
+   size             windowFilePath          visible              hide()
+   width            inputMethodHints        minimized            setShown(bool)
+   height           title                   maximized            showMinimized()
+   rect             url                     fullScreen           showMaximized()
+   childrenRect     icon                    sizeHint             showFullScreen()
+   childrenRegion   selectedText            minimumSizeHint      showNormal()
+   sizePolicy       modified                acceptDrops          raise()
+   minimumSize      textSizeMultiplier      windowTitle          lower()
+   maximumSize      zoomFactor              windowIcon           updateMicroFocus()
+   minimumWidth     renderHints             windowIconText       stop()
+   minimumHeight    destroyed(QObject*)                          back()
+   maximumWidth     destroyed()                                  forward()
+   maximumHeight    deleteLater()                                reload()
+ 
+</pre>
+<h2><span id=".E5.A4.96.E9.83.A8JS.E6.A8.A1.E5.9D.97"> 外部JS模块 </span></h2>
+<p>除了工具内核包裹出的JS属性以及方法外。工具可使用外部的标准ECMAScript代码执行检测分析工作。
+</p><p>这些JS代码均是按照指定模块规格编写。
+</p>
+<h2><span id=".E6.A8.A1.E5.9D.97.E6.96.87.E4.BB.B6.E4.B9.A6.E5.86.99.E8.A7.84.E5.88.99"> 模块文件书写规则  </span></h2>
+<p>它是一个简单的匿名函数表达式，可以有返回值，也可以没有返回值。
+</p>
+<pre style="font-size:14px">
+(function() {
+   [JS Code]
+});
+</pre>
+<p>【注意】：这里<i>不需要它自动执行</i>。
+</p>
+<h2><span id=".E9.85.8D.E7.BD.AE.E7.AE.A1.E7.90.86.E6.96.87.E4.BB.B6"> 配置管理文件  </span></h2>
+<p>工具提供了一组基于JS配置管理模块，辅助用户管理自己的检测 JS 模块。
+</p><p>配置管理文件同样是一个JS模块，文件名为 ‘’‘config.js’‘’，会返回一个 JOSN 作为配置表，规格如下：
+</p>
+<pre style="font-size:14px">
+/**
+ * 配置设置模块
+ * @return {object} 返回配置对象
+ * @author Tapir | baokun@staff.sina.com.cn
+ * @date   2012-03-07               
+ */
+(function() {
+
+  var path = App.path;
+  
+  var namespace = function(name) {
+    return path + name.replace(/\./g, '/') + '.js';
+  };
+  
+  return {
+    // 全局依赖模块表
+    // 表内模块被最先被执行
+    // 依赖关系由上至下
+    global: [
+      namespace('action.helper')
+    ], 
+    
+    // 自动化脚本位置，如果为null则直接执行module部分
+    // 如果有内容则会在自动化脚本内确切时间点执行module代码
+    automation: namespace('action.autoscript'),
+
+    // 运行模块配置表
+    // 依赖关系由上至下
+    // args 为模块依赖参数。
+    // 如果参数是运行时动态指定的，
+    // 可以写为function，return array
+    // 它将在模块被调用时执行
+    module: [
+      { 
+        path: namespace('module.none_expires'),
+        args: function () {
+          return [App.networkData()];
+        }
+      },
+      { 
+        path: namespace('module.none_gzip_doc'),
+        args: []
+      },
+      ...
+    ],
+    
+    // 完成时操作列表
+    // 将在所有模块运行完成后执行
+    completed: [
+      namespace('action.report')
+    ]
+  };
+});
+</pre>
+<ol><li> log 配置项：用户可以指定检测报告输出目录。
+</li><li> global 配置项： 此数组配置项用于在检测模块执行运执行依赖代码，如用来做初始化全局工具包函数等。
+</li><li> automation 配置项：此项非缺省需要，如有存在，它将接收一个 JS 模块路径。这个JS模块用于将页面导航到某一时刻后才执行所有的检测模块内容。
+</li><li> module 配置项：此数组项中每个配置项都是一个 JSON，存在两个属性：
+<ol><li> path：用于指定JS的检测模块路径
+</li><li> args：用于指定模块执行时所需的用户参数，它是个<b>数组</b>或<b>可返回数组的函数</b>。
+<ol><li> ‘’‘数组值使用环境’‘’：如检测加载时间的模块需要一个加载时间极限值，超过这个极限值将输出问题URL，这个极限值可以在此配置中写入。
+</li><li> ‘’‘可返回数组的函数环境’‘’：通常检测代码需要依赖某种事件后执行 App.networkData() 方法得到所有请求监控数据的数组。这是个异步操作，在配置文件被执行时，App.networkData() 中还没有任何数据可返回。所以，此项中使用函数配置将可以在模块执行期再得到实际所需参数。
+</li></ol>
+</li></ol>
+</li></ol>
+<h2><span id=".E5.88.9D.E5.A7.8B.E5.8C.96.E9.85.8D.E7.BD.AE.E4.BB.A5.E5.8F.8A.E5.BC.80.E5.A7.8B.E8.BF.90.E8.A1.8C"> 初始化配置以及开始运行  </span></h2>
+<p>同配置文件一样，<b>init.js</b> 文件也是个模块文件，它负责初始化配置，并且执行具体检测模块代码。
+</p><p>init.js 文件需要使用 loadScript 方法被执行，方式如下：
+</p><p>App.loadScript(App.path + 'init.js', function(err, func){func(App,App.webview)});
+</p><p>这行代码可以在工具启动后敲入工具的 JS 执行框内运行。
+</p><p>也可以使用命令参数 --start=true 使工具在开始运行后自动执行。
+</p><p><br />
+</p>
+<h2><span id="API_.E6.96.87.E6.A1.A3"> API 文档 </span></h2>
+<h3><span id="App_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0.E4.B8.8E.E5.B1.9E.E6.80.A7"> App 命名空间下函数与属性 </span></h3>
+<h4><span id="App.netListener.28enabled_.3CBoolean.3E.29"><b>App.netListener(enabled &lt;Boolean&gt;)</b></span></h4>
+<p><b>参数:</b> enabled  &lt;Boolean&gt; 是否开始数据收集
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b>
+</p><p>当 netListener(true) 时表示开始收集网络数据，当 netListener(false) 时停止收集。<b>再次 netListener(true) 时将清空上次的数据开始新数据采集</b>。
+</p><p><br />
+</p>
+<h4><span id="App.networkData.28.29"><b>App.networkData()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> [&lt;Object&gt;,&lt;Object&gt;,&lt;Object&gt;……]
+</p><p>Object 明细：
+</p>
+<ol><li> "StatusCode": &lt;string&gt; [readonly]
+</li><li> "ReasonPhrase": &lt;string&gt; [readonly] 人类可读的 HTTP 状态字符串
+</li><li> "FromCache": &lt;boolean&gt; [readonly] 是否来自浏览器缓存
+</li><li> "url": &lt;string&gt; [readonly] 当前请 URL
+</li><li> "ResponseSize": &lt;number&gt; [readonly] 请求大小
+</li><li> "RequestStartTime": &lt;number&gt; [readonly] 建立请求的时间点
+</li><li> "ResponseDuration": &lt;number&gt; [readonly] 总应答时间
+</li><li> "ResponseDNSLookupDuration": &lt;number&gt; [readonly] dns 查找时间
+</li><li> "ResponseWaitingDuration": &lt;number&gt; [readonly] waiting 时间
+</li><li> "ResponseDownloadDuration": &lt;number&gt; [readonly] download 时间
+</li><li> "ResponseMethod": &lt;string&gt; [readonly]
+</li><li> "UserAgent": &lt;string&gt; [readonly]
+</li><li> "Accept": &lt;string&gt; [readonly]
+</li><li> "Referer": &lt;string&gt; [readonly]
+</li><li> "AcceptRanges": &lt;string&gt; [readonly]
+</li><li> "Age": &lt;string&gt; [readonly]
+</li><li> "AccessControlAllowrigin": &lt;string&gt; [readonly]
+</li><li> "CacheControl": &lt;string&gt; [readonly]
+</li><li> "Connection": &lt;string&gt; [readonly]
+</li><li> "ContentType": &lt;string&gt; [readonly]
+</li><li> "ContentLength": &lt;string&gt; [readonly]
+</li><li> "ContentEncoding": &lt;string&gt; [readonly]
+</li><li> "Cookie": &lt;string&gt; [readonly]
+</li><li> "Date": &lt;string&gt; [readonly]
+</li><li> "ETag": &lt;string&gt; [readonly]
+</li><li> "Expires": &lt;string&gt; [readonly]
+</li><li> "IfModifiedSince": &lt;string&gt; [readonly]
+</li><li> "LastModified": &lt;string&gt; [readonly]
+</li><li> "Server": &lt;string&gt; [readonly]
+</li><li> "SetCookie": &lt;string&gt; [readonly]
+</li><li> "P3P": &lt;string&gt; [readonly]
+</li><li> "Vary": &lt;string&gt; [readonly]
+</li><li> "TransferEncoding": &lt;string&gt; [readonly]
+</li><li> "XVia": &lt;string&gt; [readonly]
+</li><li> "XDEBUGIDC": &lt;string&gt; [readonly]
+</li><li> "XPoweredBy": &lt;string&gt; [readonly]
+</li><li> "XCache": &lt;string&gt; [readonly]
+</li><li> "XCacheLookup": &lt;string&gt; [readonly]
+</li><li> "XCacheVarnish": &lt;string&gt; [readonly]
+</li><li> "PoweredByChinaCache": &lt;string&gt; [readonly]
+</li><li> "SINALB":  &lt;string&gt; [readonly]
+</li><li> "hasKeepAlive": &lt;boolean&gt;
+</li><li> "hasGZip":  &lt;boolean&gt;
+</li><li> "hasCookie":  &lt;boolean&gt;
+</li><li> "hasCache":  &lt;boolean&gt;
+</li><li> "hasExpires": &lt;boolean&gt;
+</li><li> "isFromCDN": &lt;boolean&gt;
+</li><li> "isImgFile": &lt;boolean&gt;
+</li><li> "isPng": &lt;boolean&gt; 
+</li><li> "isJpg": &lt;boolean&gt;
+</li><li> "isGif": &lt;boolean&gt;
+</li><li> "isIco": &lt;boolean&gt;
+</li><li> "isSvg":  &lt;boolean&gt;
+</li><li> "isCssFile": &lt;boolean&gt;
+</li><li> "isJsFile":  &lt;boolean&gt;
+</li><li> "isDocFile": &lt;boolean&gt; 
+</li><li> "isAudioFile":  &lt;boolean&gt;
+</li><li> "isVideoFile":  &lt;boolean&gt;
+</li><li> "isAudioFile": &lt;boolean&gt;
+</li><li> "isFontFile": &lt;boolean&gt;
+</li><li> "isOtherFile":  &lt;boolean&gt;
+</li><li> "isHttp200": &lt;boolean&gt;
+</li><li> "isHttp301": &lt;boolean&gt;
+</li><li> "isHttp302": &lt;boolean&gt;
+</li><li> "isHttp304": &lt;boolean&gt;
+</li><li> "isHttp404": &lt;boolean&gt;
+</li></ol>
+<p>以上值对应同名的HTTP头数据，不再一一特殊说明。
+</p><p>其中标注  [readonly] 的值项为只读。
+</p><p>考虑到内核提供的 Boolean 数据可能会由于特殊情况而不准确。用户可以根据 HTTP头数据来复写他们，修正问题。
+</p><p>【注意】：<b>每次 App.netListener(true) 方法被执行后，工具将会收集数据，直到  App.netListener(false) 被执行 时停止，停止后 App.networkData() 方法才可以获取到数据内容。</b>
+</p><p><br />
+</p>
+<h4><span id="App.loadScript.28path_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><b>App.loadScript(path &lt;string&gt;, callback &lt;function&gt;)</b></span></h4>
+<p><b>参数:</b>
+</p><p>path  &lt;string&gt; js模块文件路径
+</p><p>callback &lt;function&gt; load完毕后执行的回调函数
+</p><p><b>返回值:</b> 依赖 callback 函数返回值
+</p><p><b>说明:</b>
+</p><p>用于加载一个js模块文件。callback 函数内有会传入 err 和 module 两个参数。
+</p>
+<ol><li> err 为 true 表示被 load 的 JS 模块有误，执行错误。
+</li><li> module 模块函数本身，可以直接调用执行。
+</li></ol>
+<p><b>这个操作是同步的</b> callback 函数的返回值就是loadScript函数的返回值。
+</p><p><br />
+例子：
+</p>
+<pre style="font-size:12px">
+var args = [1,2,3];
+var module = App.loadScript(App.path + 'module/xxx.js',  function(err, module) {
+   if (err)
+      return false;
+   return module.apply(null, args);
+});
+if (!module) {
+  ....
+}
+</pre>
+<p><br />
+</p>
+<h4><span id="App.readFile.28path_.3Cstring.3E.5B.2C_charset_.3Cstring.3E.5D_.29"><b>App.readFile(path &lt;string&gt;[, charset &lt;string&gt;] )</b></span></h4>
+<p><b>参数:</b>
+</p><p>path  &lt;string&gt; 读取的<b>文本文件</b>路径
+</p><p>charset &lt;string&gt; 读取文件的编码，可选参数，默认 ”UTF-8“。 
+</p><p><b>值范围:</b> "UTF-8"、 "UTF-16"、 "GBK"、 "GB18030-0"、 "ISO 8859-1"、 "BIG5"、 "BIG5-HKSCS"
+</p><p><b>返回值:</b> &lt;string&gt; 返回文件内容。
+</p><p><br />
+</p>
+<h4><span id="App.writeFile.28path_.3Cstring.3E.2C_content_.3Cstring.3E.5B.2C_charset_.3Cstring.3E.2C_appendMode.3Cboolean.3E.5D_.29"><b>App.writeFile(path &lt;string&gt;, content &lt;string&gt;[, charset &lt;string&gt;, appendMode&lt;boolean&gt;] )</b></span></h4>
+<p><b>参数:</b>
+</p><p>path  &lt;string&gt; 写入的<b>文本文件</b>路径
+</p><p>content &lt;string&gt; 写入内容。 
+</p><p>charset &lt;string&gt; 指定写入的文件编码，可选参数，默认 ”UTF-8“。 
+</p><p>appendMode&lt;boolean&gt; 采用追加模式写文件，可选参数。默认是值为 flase，当设置为 true 时，如文件存在，新写入内容不会将老文件内容盖，而是在文件尾追加写入新数据。
+</p><p><b>值范围:</b> "UTF-8"、 "UTF-16"、 "GBK"、 "GB18030-0"、 "ISO 8859-1"、 "BIG5"、 "BIG5-HKSCS"
+</p><p><b>返回值:</b> &lt;Boolean&gt; true 为写成功，false 为写失败。
+</p><p><br />
+</p>
+<h4><span id="App.base64FormFile.28file_.3Cstring.3E.29"><b>App.base64FormFile(file &lt;string&gt;)</b></span></h4>
+<p><b>参数:</b>  file &lt;string&gt; 一个合法的可打开的目标文件路径。
+</p><p><b>返回值:</b> &lt;string&gt; 正常情况返回文件内容的base64编码字符串。错误返回 false。
+</p><p><b>说明:</b> 此方法用来读取一个文件二进制内容，base64编码后返回字符串。它可以配合 httpRequest 方法将指定文件内容上传到服务器，服务器可解码base64后还原文件二进制内容。
+</p><p><br />
+</p>
+<h4><span id="App.dataURIFormImage.28image_.3Cstring.3E.29"><b>App.dataURIFormImage(image &lt;string&gt;)</b></span></h4>
+<p><b>参数:</b>  image &lt;string&gt; 一个合法的可打开的目标图片路径。<b>图片格式支持: jpg/jpeg/png/bmp/gi/ico，根据文件扩展名确定文件格式</b>。
+</p><p><b>返回值:</b> &lt;string&gt; 正常情况返回浏览器可识别的标准Data URI 字符串。错误返回 false。
+</p><p><b>说明:</b> 此方法用来读取图片内容，将其 Data URI 化后返回。此内容可被传入到浏览器环境中用 img 标签还原图片显示。
+</p><p><br />
+</p>
+<h4><span id="App.httpRequest.28method_.3Cstring.3E.2C_url_.3Cstring.3E_.5B.2C_data_.3Cstring.3E.2C_charset_.3Cstring.3E.5D.29"><b>App.httpRequest(method &lt;string&gt;,  url &lt;string&gt; [, data &lt;string&gt;, charset &lt;string&gt;])</b></span></h4>
+<p><b>参数:</b>
+</p><p>method &lt;string&gt; 请求方式字符串，值可以为 "GET" 或 "POST" （不区分大小写），如不在此范围则默认为 "GET"。
+</p><p>url &lt;string&gt; 一个合法的 HTTP 协议 URL，<b>注意此字符串会被检查开头字符是否为 http://，不支持其他协议</b>
+</p><p>data&lt;string&gt; 请求数据字符串，可选参数，需要符URL参数编码规范。
+</p><p>charset &lt;string&gt; 设置请求返回结果字符串编码，可选参数。
+</p><p><b>返回值:</b> 被转为 string 的 responseText。
+</p><p><b>说明:</b> 用来发起一个HTTP请求，用于获取数据或者提交数据操作。<b>其返回值编码根据 HTTP Header 的 content-type 识别，如无此 head 则将使用默认的 </b>UTF-8<b> 编码数据返回。当用户同时设置了 charset 时，以用户设置为优先。</b>
+</p><p><b>注意: 此方法是同步的，并且不能用以二进制方式上传。因为工具没有开放 enctype 设置项用来设置 multipart/form-data，同时也没有开放以流形式读取文件的功能。但是你可以配合 base64FormFile 方法，将指定文件二进制内容的 base64 字符串上传至服务器，再由服务器解码后还原文件。</b>
+</p><p><br />
+</p>
+<h4><span id="App.process.28program_.3Cstring.3E.2C_.5Bargs_.3CArray.3E.2C_timeout_.3Cnumber.3E.2C_debug_.3Cfunction.3E.5D.29"><b>App.process(program &lt;string&gt;, [args &lt;Array&gt;, timeout &lt;number&gt;, debug &lt;function&gt;])</b></span></h4>
+<p><b>参数:</b>
+</p><p>program &lt;string&gt; 目标程序路径字符串(<b>window 下请注意转义 \ 字符</b>)，均会被执行 ToString 操作后显示出来。
+</p><p>args &lt;Array&gt; 可选，进程执行所需参数列表数组。<b>注意：参数列表将解析到数组内任意值不为 string 或 number 时止</b> ，参数默认值为 null。
+</p><p>timeout &lt;number&gt; 可选，进程最长存活时间。如果处理进程执行时间过长超过此阈值，将被强行终止并返回终止前存在的标准输出。 <b>参数默认值是 30000，参数单位为 ms (毫秒)</b>
+</p><p>debug &lt;function&gt; 可选，debug 回调函数。如果进程处理事件过长或无响应时，使用此参数可<b>每 300ms</b> 获取一次进程运行状态以及标准输出。回调函数存在两个参数 state （当前状态 string）与 output (当前累积的标准输出)。 建议回调中使用 console.log 方法来输出它们辅助调试。 
+</p><p><b>返回值:</b> 被转为 string 的所有进程标准输出。
+</p><p><b>说明:</b> 用来执行一个外部命令行程序。使用者可以将工具中某些数据传入给外部处理程序处理，再从标准输出中得到处理结果，继续在工具环境中处理。
+</p><p><b>注意: 此方法是同步的，不建议用来执行运行时间很长的外部进程或是无返回值的后台运行进程。此外，需注意此方法的安全性！！不要用来执行 rm -rf  之类的操作。</b>
+</p><p><br />
+</p>
+<h4><span id="App.watchFile.28flie_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><b>App.watchFile(flie &lt;string&gt;, callback &lt;function&gt;)</b></span></h4>
+<p><b>参数:</b> 
+</p><p>file &lt;string&gt; 指定需要监听的文件。
+</p><p>callbackHandle &lt;function&gt; 文件改时执行的回调函数。
+</p><p><b>说明:</b> 此方法用来指定监听文件或目录改变，一旦<b>文件内容发生变化</b> 则触发回调函数。 此方法可以传入目录，但需要注意的是，<b>仅在指定目录内发生目录级变化</b>时 (如创建、删除子目录)，将触发回调函数。
+</p><p><b>注意:</b> 
+</p>
+<ol><li> 此方法针对文件监控时，仅对文件内容变更有效。如果文件名被修改，对该文件的监控将自动移除。
+</li><li> 此方法针对目录监控时，仅对指定目录下创建修改一级子目录有效。如果目录名被修改，对该目录的监控将自动移除。
+</li><li> 原则上不建议用来监控目录。
+</li></ol>
+<p><br />
+</p>
+<h4><span id="App.unWatcher.28file_.3Cstring.3E_.7C_callbackHandle_.3Cfunction.3E.29"><b>App.unWatcher(file &lt;string&gt; | callbackHandle &lt;function&gt;)</b></span></h4>
+<p><b>参数:</b> 
+</p><p>file &lt;string&gt; 如果传入 string 则为从监听列表内去除文件监听。
+</p><p>callbackHandle &lt;function&gt; 如果传入 function 则为从监听回调函数列表内去除指定的回调函数。
+</p><p><b>说明:</b> 移除指定监听文件、目录或指定的监听回调函数。
+</p><p><br />
+</p>
+<h4><span id="App.watchedFiles.28.29"><b>App.watchedFiles()</b></span></h4>
+<p><b>参数:</b> 无 
+</p><p><b>返回值:</b> &lt;Array&gt;  返回所有监听文件列表数组。
+</p><p>'<i>说明:</i> 查看所有监听文件和目录列表。
+</p><p><br />
+</p>
+<h4><span id="App.watcherClose.28.29"><b>App.watcherClose()</b></span></h4>
+<p><b>参数:</b> 无 
+</p><p><b>说明:</b> 关闭文件监听，调用后监听文件列表以及回调函数将全部被清除。
+</p><p><br />
+</p>
+<h4><span id="App.setTimeout.28callback_.3Cfunction.3E.2C_timeout_.3Cnumber.3E.29"><b>App.setTimeout(callback &lt;function&gt;, timeout &lt;number&gt;)</b></span></h4>
+<p><b>说明:</b>与 App.webview 内同名函数的使用方法一致。
+</p><p><b>注意: 此方法被引用到 Global 中，可以用 setTimeout直接调用。</b>
+</p><p><br />
+</p>
+<h4><span id="App.clearTimeout.28timeId_.3Cnumber.3E.29"><b>App.clearTimeout(timeId &lt;number&gt;)</b></span></h4>
+<p><b>说明:</b>与 App.webview 内同名函数的使用方法一致。
+</p><p><b>注意: 此方法被引用到 Global 中，可以用 clearTimeout直接调用。</b>
+</p><p><br />
+</p>
+<h4><span id="App.setInterval.28callback_.3Cfunction.3E.2C_interval_.3Cnumber.3E.29"><b>App.setInterval(callback &lt;function&gt;, interval &lt;number&gt;)</b></span></h4>
+<p><b>说明:</b>与 App.webview 内同名函数的使用方法一致。
+</p><p><b>注意: 此方法被引用到 Global 中，可以用 setInterval直接调用。</b>
+</p><p><br />
+</p>
+<h4><span id="App.clearInterval.28timeId_.3Cnumber.3E.29"><b>App.clearInterval(timeId &lt;number&gt;)</b></span></h4>
+<p><b>说明:</b>与 App.webview 内同名函数的使用方法一致。
+</p><p><b>注意: 此方法被引用到 Global 中，可以用 clearInterval 直接调用。</b>
+</p><p><br />
+</p>
+<h4><span id="App.alert.28message_.3Cnumber.3E.7C.3Cstring.3E.7C.3Cboolean.3E.7C.3Cfunction.3E.7C.3CArray.3E.7C.3CObject.3E.29"><b>App.alert(message &lt;number&gt;|&lt;string&gt;|&lt;boolean&gt;|&lt;function&gt;|&lt;Array&gt;|&lt;Object&gt;)</b></span></h4>
+<p><b>参数:</b> message 参数类型不限，均会被执行 ToString 操作后显示出来。message 参数支持简易的HTML标签字符串，提示窗口将渲染以HTML方式渲染他们。
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 此方法是工具提供的内置方法<b>（非浏览器提供的alert方法）</b>，其所有传入值都将在JS引擎层面做 ToString 操作。<b>这个方法预期用来辅助做简单的 JS 编码调试</b>。
+</p><p><b>注意: 此方法被引用到 Global 中，可以用 alert 直接调用。</b>
+</p><p><br />
+</p>
+<h4><span id="App.hidn.28.29"><b>App.hidn()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 隐藏工具窗口。
+</p><p><br />
+</p>
+<h4><span id="App.show.28.29"><b>App.show()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 显示工具窗口。
+</p><p><br />
+</p>
+<h4><span id="App.about.28.29"><b>App.about()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p>返回值 无
+</p><p><b>说明:</b> 关于信息提示框。
+</p><p><br />
+</p>
+<h4><span id="App.close.28.29"><b>App.close()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b>该方法用来关闭工具自身进程。
+</p><p><br />
+</p>
+<h4><span id="App.path_.5Breadonly.5D"><b>App.path [readonly]</b></span></h4>
+<p><b>说明:</b>该属性为只读，返回工具所处路径。
+</p><p><br />
+</p>
+<h4><span id="App.file_.5Breadonly.5D"><b>App.file [readonly]</b></span></h4>
+<p><b>说明:</b>该属性为只读，返回工具文件名。
+</p><p><br />
+</p>
+<h4><span id="App.args_.5Breadonly.5D"><b>App.args [readonly]</b></span></h4>
+<p><b>说明:</b>该属性为只读，返回启动工具时的运行参数数组。如无启动参数，则返回 undefined。
+</p><p><br />
+</p>
+<h3><span id="App.selector_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"> App.selector 命名空间下函数 </span></h3>
+<p>selector 是一组特定数据选择器，可以从 network 数据中<b>累积</b>选择出所要的数据子集。其返回数据结构与 App.netwrokData 函数返回值一致。
+</p><p>如下例：
+</p>
+<pre style="font-size:12px">
+// 清空选择器
+App.selecotr.clear();
+
+// 选择所有 http 304 的url
+App.selecotr.http304();
+
+// 继续选择是 img 的文件
+App.selecotr.img();
+
+// 获取数据
+seletedNetwrokData = App.selecotr.get();
+</pre>
+<p>上例中使用 selecotr 功能从所有数据集中选择出 产生 304 请求的 img 文件。 
+</p><p>【注意】：选择器所做的是<b>累积</b>操作，先选择出所有 304 请求集，然后从 304 请求集中再选择出图片类型文件。<b>而不是选择所有 304 请求和所有图片请求的合集</b>。
+</p><p><br />
+</p>
+<h4><span id="App.selector.img.28.29"><b>App.selector.img()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有图片请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.png.28.29"><b>App.selector.png()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有 png 类型图片请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.gif.28.29"><b>App.selector.gif()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有 gif 图片请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.ico.28.29"><b>App.selector.ico()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有 ico 请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.jpg.28.29"><b>App.selector.jpg()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有 jpg 请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.svg.28.29"><b>App.selector.svg()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有 svg 请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.doc.28.29"><b>App.selector.doc()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有文档类型文件（HTML/XHTML）。
+</p><p><br />
+</p>
+<h4><span id="App.selector.css.28.29"><b>App.selector.css()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有 css 请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.js.28.29"><b>App.selector.js()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有 js 请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.cookie.28.29"><b>App.selector.cookie()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出携带 cookie 头的请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.nonegzip.28.29"><b>App.selector.nonegzip()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出没有启动 gzip 的请求。
+</p>
+<h4><span id="App.selector.nonecache.28.29"><b>App.selector.nonecache()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出没有从浏览器缓存内取出的请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.nonecdn.28.29"><b>App.selector.nonecdn()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出无 CDN 的请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.totaltimeout.28duration_.3Cnumber.3E.29"><b>App.selector.totaltimeout(duration &lt;number&gt;)</b></span></h4>
+<p><b>参数:</b> duration &lt;number&gt; 用来指定最大请求时间，超过此值的请求将被选择。 <b>时间单位 ms</b>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内筛选出超出指定请求时间的请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.waittimeout.28duration_.3Cnumber.3E.29"><b>App.selector.waittimeout(duration &lt;number&gt;)</b></span></h4>
+<p><b>参数:</b> duration &lt;number&gt; 用来指定请求的最大等待时间，超过此值的请求将被选择。 <b>时间单位 ms</b>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出超出指定请求等待时间的请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.downloadtimeout.28duration_.3Cnumber.3E.29"><b>App.selector.downloadtimeout(duration &lt;number&gt;)</b></span></h4>
+<p><b>参数:</b> duration &lt;number&gt; 用来指定请求的最大数据下载时间，超过此值的请求将被选择。 <b>时间单位 ms</b>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出超出指定请求数据下载时间的请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.dnstimeout.28duration_.3Cnumber.3E.29"><b>App.selector.dnstimeout(duration &lt;number&gt;)</b></span></h4>
+<p><b>参数:</b> duration &lt;number&gt; 用来指定请求的最大 DNS 查找时间，超过此值的请求将被选择。 <b>时间单位 ms</b>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出超出指定DNS查找时间的请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.sizeout.28size_.3Cnumber.3E.29"><b>App.selector.sizeout(size &lt;number&gt;)</b></span></h4>
+<p><b>参数:</b> duration &lt;number&gt; 用来指定最大文件，超过此值的请求将被选择。 <b>尺寸单位 byte </b>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出超出指定文件大小的请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.http200.28.29"><b>App.selector.http200()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出 HTTP 200 的请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.http301.28.29"><b>App.selector.http301()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出 HTTP 301的请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.http302.28.29"><b>App.selector.http302()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出 HTTP 302 的请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.http304.28.29"><b>App.selector.http304()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出 HTTP 304 的请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.http404.28.29"><b>App.selector.http404()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出 HTTP 404 的请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.fromcdn.28.29"><b>App.selector.fromcdn()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出来自浏览器缓存的请求。
+</p><p><br />
+</p>
+<h4><span id="App.selector.get.28.29"><b>App.selector.get()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> &lt;Array&gt; 返回选择集内数据。
+</p><p><b>说明:</b> 用来得到累积选择的内容。
+</p><p><br />
+</p>
+<h4><span id="App.selector.clear.28.29"><b>App.selector.clear()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来清除累积选择的内容，建议每次选择数据前先执行此函数保证数据集纯净。
+</p><p><br />
+</p>
+<h3><span id="App.webview.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"> App.webview命名空间下函数 </span></h3>
+<p>App.webview命名空间主要封装了 webview 组件控制相关方法。
+</p><p>如果你需要浏览器的当前页面做某些工作，将会大量的使用到此命名空间下函数。
+</p><p><b>需要注意的是，该空间下的 execScript 方法将产生 JS 沙箱效果，你不能期望把页面 JS 或者页面的 DOM 对象放置到此沙箱外调用</b>。
+</p><p><br />
+</p>
+<h4><span id="App.webview.setUserAgent.28userAgent_.3Cstring.3E.29"><b>App.webview.setUserAgent(userAgent &lt;string&gt;)</b></span></h4>
+<p><b>参数:</b> userAgent &lt;string&gt;，将工具原始的 UA 值设置为自己的个性化值。
+</p><p><b>返回值:</b> &lt;string&gt; 设置的 UA 值。
+</p><p><b>说明:</b> 当前工具使用的 User Agent 字符串。
+</p><p><br />
+</p>
+<h4><span id="App.webview.userAgent.28.29"><b>App.webview.userAgent()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> &lt;string&gt; 当前工具使用的 User Agent 字符串。
+</p><p><b>说明:</b> 当前工具使用的 User Agent 字符串。
+</p><p><br />
+</p>
+<h4><span id="App.webview.defaultUserAgent.28.29"><b>App.webview.defaultUserAgent()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> &lt;string&gt; 工具原始的 User Agent 字符串。
+</p><p><b>说明:</b> 用来获取工具原始的不可被变更 User Agent 字符串，它不是 setUserAgent 之后使用的当前 UA 值。
+</p><p><br />
+</p>
+<h4><span id="App.webview.getUrl.28.29"><b>App.webview.getUrl()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> &lt;string&gt;
+</p><p><b>说明:</b> 当前浏览页面的 URL 。
+</p><p><br />
+</p>
+<h4><span id="App.webview.open.28url_.3Cstring.3E.29"><b>App.webview.open(url &lt;string&gt;)</b></span></h4>
+<p><b>参数:</b> url &lt;string&gt; 目标 URL
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 指定浏览页面，webview 将访问此 URL 并渲染页面。
+</p><p><br />
+</p>
+<h4><span id="App.webview.setProxy.28host_.3Cstring.3E.5B.2C_type_.3Cstring.3E.2C_userName_.3Cstring.3E.2C_password_.3Cstring.3E.29"><b>App.webview.setProxy(host &lt;string&gt;[, type &lt;string&gt;, userName &lt;string&gt;, password &lt;string&gt;)</b></span></h4>
+<p><b>参数:</b> 
+</p><p>host &lt;string&gt; 代理服务器地址字符串，如果有端口请用 “:” 字符分割，如 "127.0.0.1:8888"
+</p><p>type &lt;string&gt; 可选参数，代理类型字符串，可选值范围 “HTTP. SOCKS5” （不区分大小写），默认值为 "HTTP"。
+</p><p>userName &lt;string&gt; 可选参数，设置代理所需的用户名，默认值为空。
+</p><p>password &lt;string&gt; 可选参数，设置代理所需的密码，默认值为空。 
+</p><p><b>返回值:</b> &lt;boolean&gt; 如果成功返回 true， 否则 false。
+</p><p><b>说明:</b> 为 webview 设置指定代理。
+</p><p><br />
+</p>
+<h4><span id="App.webview.clearProxy.28.29"><b>App.webview.clearProxy()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b>  &lt;boolean&gt; 如果成功返回 true。
+</p><p><b>说明:</b>  清除 webview 所有代理设置（也将不使用系统代理）。
+</p><p><br />
+</p>
+<h4><span id="App.webview.useSystemProxy.28.5Bindex_.3Cnumber.3E.5D.29"><b>App.webview.useSystemProxy([index &lt;number&gt;])</b></span></h4>
+<p><b>参数:</b> index &lt;number&gt; 可选参数，系统设置的代理索引值，从 0 开始，默认值为 0。
+</p><p><b>返回值:</b>  &lt;boolean&gt; 如果成功返回 true。
+</p><p><b>说明:</b>  为 webview 设置系统代理。
+</p><p><b>注意:</b> 工具默认已经启用了系统代理，如没有使用过 clearProxy 方法，将不用手动调用此方法。
+</p><p><br />
+</p>
+<h4><span id="App.webview.viewport.28.29"><b>App.webview.viewport()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> &lt;Object&gt; {widht, height}
+</p><p><b>说明:</b> 返回 webview 的视口大小（同浏览器的浏览窗口大小）。
+</p><p><br />
+</p>
+<h4><span id="App.webview.setViewport.28size_.3CObject.3E.29"><b>App.webview.setViewport(size &lt;Object&gt;)</b></span></h4>
+<p><b>参数:</b> size &lt;Object&gt; {widht, height}
+</p><p><b>返回值:</b> &lt;Boolean&gt; 
+</p><p><b>说明:</b> 设置 webview 的视口大小，设置成功返回 true。
+</p><p><br />
+</p>
+<h4><span id="App.webview.contentRect.28.29"><b>App.webview.contentRect()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> &lt;Object&gt; {x:&lt;number&gt;,y:&lt;number&gt;, widht,&lt;number&gt;, height:&lt;number&gt;}
+</p><p><b>说明:</b> 返回当前页面正文的整体宽高。
+</p><p><br />
+</p>
+<h4><span id="App.webview.saveImage.28path_.3Cstring.3E.5B.2C_imgType_.3Cstring.3E.2C_quality_.3Cnumber.3E.2C_rect_.3CObject.3E.5D.29"><b>App.webview.saveImage(path &lt;string&gt;[, imgType &lt;string&gt;, quality &lt;number&gt;, rect &lt;Object&gt;])</b></span></h4>
+<p><b>参数:</b> 
+</p><p>path &lt;string&gt; 指定保存图片的文件绝对路径和文件名
+</p><p>imgType &lt;string&gt; 可选参数。用于指定图片格式，默认值为 "PNG"。可选值 JPG/JPEG/PNG/BMP/PPM/TIFF。
+</p><p>quality &lt;number&gt; 可选参数。用于指定图片压缩率，默认值为 100。 可选值范围 1-100。
+</p><p>rect &lt;Object&gt; 可选参数。用于指定保存区域，默认为全页面范围。<b>该参数格式: {x:&lt;number&gt;,y:&lt;number&gt;,width:&lt;number&gt;,height:&lt;number&gt;}</b> 
+</p><p><b>返回值:</b> &lt;Boolean&gt; 成功 true ，失败 false。
+</p><p><b>说明:</b> 保存当前页面截图到指定位置。
+</p><p><br />
+</p>
+<h4><span id="App.webview.dataURIFormRect.28.5Brect_.3CObject.3E.2C_imgType_.3Cstring.3E.2C_quality_.3Cnumber.3E.5D.29"><b>App.webview.dataURIFormRect([rect &lt;Object&gt;, imgType &lt;string&gt;, quality &lt;number&gt;])</b></span></h4>
+<p>rect  &lt;Object&gt; 可选参数。用于截取当前webview渲染区域内图形。<b>默认值为整个渲染区域。值格式：{x:&lt;number&gt;, y:&lt;number&gt;, width:&lt;number&gt;, height:&lt;number&gt;}</b>。
+</p><p>imgType &lt;string&gt; 可选参数。用于指定图片格式，<b>默认值为 "PNG"。可选值 JPG/JPEG/PNG/BMP/PPM/TIFF</b>。
+</p><p>quality &lt;number&gt; 可选参数。用于指定图片压缩率，<b>默认值为 100。 可选值范围 1-100</b>。
+</p><p><b>说明:</b> 此方法用将当前渲染区域内指定位置范围的渲染结果，进行 Data URI 编码后返回其字符串。一般可用将此值放置在页面的中的 img 中显示，或配合 httpRequest 方法将内容提交到远程服务器。
+</p><p><br />
+</p>
+<h4><span id="App.webview.setTimeout.28callback_.3Cfunction.3E.2C_timeout_.3Cnumber.3E.29"><b>App.webview.setTimeout(callback &lt;function&gt;, timeout &lt;number&gt;)</b></span></h4>
+<p><b>说明:</b>与浏览器内同名函数的使用方法一致，且此方法被引用到 App 命名空间以及 Globla 全局对象中，可直接调用。
+</p><p><br />
+</p>
+<h4><span id="App.webview.clearTimeout.28timeId_.3Cnumber.3E.29"><b>App.webview.clearTimeout(timeId &lt;number&gt;)</b></span></h4>
+<p><b>说明:</b>与浏览器内同名函数的使用方法一致，且此方法被引用到 App 命名空间以及 Globla 全局对象中，可直接调用。
+</p><p><br />
+</p>
+<h4><span id="App.webview.setInterval.28callback_.3Cfunction.3E.2C_interval_.3Cnumber.3E.29"><b>App.webview.setInterval(callback &lt;function&gt;, interval &lt;number&gt;)</b></span></h4>
+<p><b>说明:</b>与浏览器内同名函数的使用方法一致，且此方法被引用到 App 命名空间以及 Globla 全局对象中，可直接调用。
+</p><p><br />
+</p>
+<h4><span id="App.webview.clearInterval.28timeId_.3Cnumber.3E.29"><b>App.webview.clearInterval(timeId &lt;number&gt;)</b></span></h4>
+<p><b>说明:</b>与浏览器内同名函数的使用方法一致，且此方法被引用到 App 命名空间以及 Globla 全局对象中，可直接调用。
+</p><p><br />
+</p>
+<h4><span id="App.webview.netListener.28enabled_.3Cboolean.3E.29"><b>App.webview.netListener(enabled &lt;boolean&gt;)</b></span></h4>
+<p><b>说明:</b>此方法被引用到 App 命名空间下，见 App 命名空间下的同名 API 说明。
+</p><p><br />
+</p>
+<h4><span id="App.webview.cookiesFormUrl.28.5Burl_.3Cstring.3E.5D.29"><b>App.webview.cookiesFormUrl([url &lt;string&gt;])</b></span></h4>
+<p><b>参数:</b> url &lt;string&gt; 可选参数， 一个合法的 URL 字符串，<b>必须以 http:// 开头</b>。如果没有或不合法，则为从当前工具访问的 URL 中获取 cookies。
+</p><p><b>返回值:</b> &lt;string&gt; 指定 URL 的 cookies 字符串。
+</p><p><b>说明:</b> 此方法用来获取指定URL下的Cookies内容，<b>前提是此URL已被工具访问过</b>。用户可将获取的 Cookies 内容使用 writeFile API 保存到特特定文件中待用。
+</p><p><br />
+</p>
+<h4><span id="App.webview.setCookiesFormUrl.28cookies_.3Cstring.3E.5B.2C_url_.3Cstring.3E.5D.29"><b>App.webview.setCookiesFormUrl(cookies &lt;string&gt;[, url &lt;string&gt;])</b></span></h4>
+<p><b>参数:</b> 
+</p><p>cookies &lt;string&gt; 一个合法的 cookies 字符串，如使用 cookiesFormUrl API 获取的内容。
+</p><p>url &lt;string&gt;  可选参数，一个合法的 URL 字符串，<b>必须以 http:// 开头</b>，<b>默认值为当前工具正在访问的URL</b>。
+</p><p><b>返回值:</b> &lt;boolean&gt; 成功返回 true ，否则返回 false。
+</p><p><b>说明:</b> 此方法用来将 cookie 内容设置到指定 URL 下。一般配合  cookiesFormUrl 、writeFile 、readFile 等 API 将某 URL 中的 cookie 恢复。预期用来解决依赖cookies（cookies 中的 sessionid 或其他）的自动登录验证问题。
+</p><p><br />
+</p>
+<h4><span id="App.webview.elementRects.28cssSelectorString_.3Cstring.3E.29"><b>App.webview.elementRects(cssSelectorString &lt;string&gt;)</b></span></h4>
+<p><b>参数:</b> cssSelectorString &lt;string&gt; 一个符合 CSS 规范的选择器字符串 （同浏览器的 querySelectorAll 参数值）
+</p><p><b>返回值:</b> &lt;Array&gt; [&lt;Object&gt;, &lt;Object&gt;, &lt;Object&gt;, ……] 返回包含指定节点的渲染区域，如没有找到节点则返回 undefined。
+</p><p>&lt;Object&gt; 格式 {x, y, left, right, top, bottom, width,height} 
+</p><p><b>说明:</b> 用来返回一组元素的渲染区域信息。
+</p><p><br />
+</p>
+<h4><span id="App.webview.sendMouseEvent.28argPoint_.3CObject.3E.5B.2C_argEvt_.3Cstring.3E.2C_argKey_.3Cstring.3E.5D.29"><b>App.webview.sendMouseEvent(argPoint &lt;Object&gt;[, argEvt &lt;string&gt;, argKey &lt;string&gt;])</b></span></h4>
+<p><b>参数:</b>
+</p><p>argPoint &lt;Object&gt; {x, y} 鼠标事件发生的点
+</p><p>argEvt &lt;string&gt; 可选值。鼠标事件名，默认值为 "click"，值范围 mousedown/mouseup/mousemove。
+</p><p>argKey &lt;string&gt; 可选值。鼠标事件发生时，同时按下的按键。 默认值为空。值范围 shift/ctrl/alt。
+</p><p><b>说明:</b> 此方法用来向 webview 渲染页面的指定区域发送鼠标事件。通常配合 App.webview.elementRects 方法来向选定的 DOM 元素发送合法的 click 事件，用来做模拟用户点击操作。
+</p><p><br />
+</p>
+<h4><span id="App.webview.addEventListener.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><b>App.webview.addEventListener(eventName &lt;string&gt;, callback &lt;function&gt;)</b></span></h4>
+<p><b>参数:</b>
+</p><p>eventName &lt;string&gt; 所需监听的事件名。值范围(不区分大小写)：
+</p>
+<ul><li> "load" --页面载入完成后触发
+</li><li> "initLayoutCompleted"--页面首次布局完成后触发
+</li><li> "pageChanged"--页面跳转完成时触发
+</li><li> "contentsSizeChanged"--文档总渲染大小发生变化后触发
+</li><li> "iconChanged"--站点的 ICO 图标文件发生变化后触发
+</li><li> "loadStarted"--页面已经开始载入时触发
+</li><li> "titleChanged"--页面 title 变化后触发（一般发生在浏览器 HTML 文档读到 title 时产生）
+</li><li> "urlChanged"--页面 url 发生变化时触发
+</li><li> "repaint"--页面重绘时触发
+</li><li> "pageRectChanged" --视口位置和大小发生改变时触发
+</li><li> "loadProgress"--页面加载进度 
+</li><li> "pageScriptCreated"--页面当前JS环境准备就绪时触发（一般利用此事件在页面JS环境仅构建出Window时，注入页面级别的全局JS 对象）
+</li><li> "message"--页面使用特定扩展方法__pageExtension.postMessage时触发的回调
+</li><li> "firstPaintFinished"--页面首次渲染后触发
+</li><li> "firstScreenFinished" ---首屏渲染完成后触发
+</li><li> "requestStart"--网络请求监听被开启情况下，一旦页面某资源试图发起网络请求，此事件将被触发。
+</li><li> "requestFinished" --网络请求监听被开启情况下，页面某资源的网络请求完成时，此事件将被触发。
+</li></ul>
+<p><br />
+<b>说明:</b>用来监听页面事件，触发回调函数执行。
+</p><p><br />
+callback &lt;function&gt; 事件触发时的回调函数。
+</p><p>根据事件不同回调函的参数值也不同，其中具有参数的事件如下：
+</p>
+<ul><li> <b>contentsSizeChanged(size &lt;Object&gt;)</b> ：
+<ul><li> 参数 size 返回当前内容大小， 数据格式 {width, height}
+</li></ul>
+</li><li> <b>titleChanged(title &lt;string&gt;)</b>：
+<ul><li> 参数 title 返回当前 title 字符串。
+</li></ul>
+</li><li> <b>urlChanged(url &lt;string&gt;)</b>：
+<ul><li> 参数 url 返回当前 url 字符串。
+</li></ul>
+</li><li> <b>loadProgress(progress &lt;number&gt;)</b>：
+<ul><li> 参数 progress 返回当前加载进度值，范围 1-100。
+</li></ul>
+</li><li> <b>repaint(rect &lt;Object&gt;)</b> ：
+<ul><li> 参数 rect 返回当前重绘区域， 数据格式 {x, y, left, right, top, bottom, width,height} 。
+</li></ul>
+</li><li> <b>pageRectChanged(rect &lt;Object&gt;)</b> ：
+<ul><li> 参数 rect 返回当前视口区域， 数据格式 {x, y, left, right, top, bottom, width,height} 。
+</li></ul>
+</li><li> <b>message(wparam &lt;string&gt;, lparam&lt;string&gt;)</b>：
+<ul><li> 参数返回页面中执行 __pageExtension.postMessage 方法时的两个字符串参数。
+</li></ul>
+</li><li> <b>firstPaintFinished(timeout &lt;int&gt;, url&lt;string&gt;)</b>：
+<ul><li> 参数 timeout 返回当前从 <b>urlChanged 事件开始到首次渲染时间</b>的间隔值。
+</li><li> 参数 url 返回当前 url 字符串。
+</li><li> <b>注意：此事件可以通过其他事件组合，由JS实现，此处仅给出内置的组合方案。</b>
+</li></ul>
+</li><li> <b>firstScreenFinished(timeout &lt;int&gt;, url&lt;string&gt;)</b>：
+<ul><li> 参数 timeout 返回当前从 <b>urlChanged 事件开始到首屏渲染完毕</b>的间隔值。
+</li><li> 参数 url 返回当前 url 字符串。
+</li><li> <b>事件说明(非常重要): 此方法为模拟实现！其中，首屏区域为当前 webview 视口区域，它可以使用 setViewport 方法设置，或使用 viewport 方法获取大小。 </b>
+</li><li> <b>首屏渲染时间计算方法有两种(非常重要): </b>
+<ul><li> 默认检测方法:
+<ul><li> 从 urlChanged 事件触发开始计时
+</li><li> 从 firstPaintFinished 事件触发后，按照当前视口区域平均分布 14400 个像素监控点
+</li><li> 每 250 ms 检测一次所有监控点 RGB 值变化
+</li><li> 如果连续 12 次大于 12000 个像素点无变化，则结束计时，减去 12*250 ms 后返回耗时。
+</li><li> 如果连续 12 次内出现像素变化，则计数清空，重新循环检测直至达到上一步条件为止。
+</li></ul>
+</li><li> 自定义监控点检测方法:
+<ul><li> 从 urlChanged 事件触发开始计时
+</li><li> 从 firstPaintFinished 事件触发后，按照 setDetectionRects 方法设置的重点检测区块内分布像素级检测点
+</li><li> 每 250 ms 检测一次所有监控点 RGB 值变化
+</li><li> 如果连续 12 次大于检测区块总像素*设置相同率（见 setDetectionRects  方法说明）个像素点无变化，则结束计时，减去 12*250 ms 后返回耗时。
+</li><li> 如果连续 12 次内出现像素变化，则计数清空，重新循环检测直至达到上一步条件为止。
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+<ul><li><ul><li> <b>此事件缺陷(非常重要): </b>
+<ul><li> 默认检测方法不适合用于长时间有大规模像素变化的页面。
+</li><li> 由于检测分布点色值取自 webkit 渲染内核，如果存在 wmode 属性值为 window 的 Flash (它由系统接管渲染，而非浏览器)，那么检测点将无法获得它的色值变化。此类页面的首屏时间可能会不准确。
+</li></ul>
+</li></ul>
+</li></ul>
+<ul><li> <b>requestStart(url &lt;string&gt;)</b> ：
+<ul><li> 参数: url 返回正在发送请求的 url。
+</li><li> 说明: 当页面资源开始试图发起请求时，此事件被触发。
+</li><li> 注意: <b>此事件只能在 App.netListener(true) 设置后被响应</b>
+</li></ul>
+</li></ul>
+<ul><li> <b>requestFinished(url &lt;string&gt;)</b> ：
+<ul><li> 参数: url 返回请求已经结束的 url。
+</li><li> 说明: 当页面资源的网络请求已经完成时，此事件被触发。
+</li><li> 注意: <b>此事件只能在 App.netListener(true) 设置后被响应</b>
+</li></ul>
+</li></ul>
+<p><br />
+</p>
+<h4><span id="App.webview.removeEventListener.28eventName_.3Cstring.3E.2C_callbackHandle_.3Cfunction.3E.29"><b>App.webview.removeEventListener(eventName &lt;string&gt;, callbackHandle &lt;function&gt;)</b></span></h4>
+<p><b>参数:</b>
+</p><p>eventName &lt;string&gt; 所需监听的事件名。值范围同 addEventListener 方法 eventName 值。
+</p><p>callbackHandle &lt;function&gt; 要取消的事件触发回调函数。
+</p><p><b>返回值:</b>  成功移除事件返回值 true 否则 flase。
+</p><p><b>说明:</b> 此函数用来移除指定事件的某条执行回调。
+</p><p><br />
+</p>
+<h4><span id="App.webview.setDetectionRects.28rects_.3CArray.3E.5B.2C_sameRate_.3Cnumber.3E.5D.29"><b>App.webview.setDetectionRects(rects &lt;Array&gt;[, sameRate &lt;number&gt;])</b></span></h4>
+<p><b>参数:</b>
+</p><p>rects  &lt;Array &lt;Object&gt;&gt; 一组区块对象列表。每个区块对象需为 {x:&lt;number&gt;, y:&lt;number&gt;, width:&lt;number&gt;, height: &lt;number&gt;} 的 Object 格式。
+</p><p>sameRate &lt;number&gt; 可选参数，表示全部像素一段时间内的趋同率。该值取值范围为 0-1， 默认值为 0.95。
+</p><p><b>返回值:</b>  无
+</p><p><b>说明:</b> 此函数用来指定页面首屏渲染事件实现所需的自定义检测区块位置以及全部区块像素的趋同率。如果使用此方法，那么 firstScreenFinished 事件将由全部区块内像素一定时间内不再变化后触发。 
+</p><p><b>注意:</b> 过多的像素检测可能会带来执行效率问题，因此<b>强烈建议每个区块大小不要超过 30*30，并且最多不要超过 9 个监控区块</b>。
+</p><p><br />
+</p>
+<h4><span id="App.webview.clearDetectionRects.28.29"><b>App.webview.clearDetectionRects()</b></span></h4>
+<p><b>说明:</b> 清除 setDetectionRects 方法设置的监控区块与趋同率。
+</p><p><br />
+</p>
+<h4><span id="App.webview.hasDetectionRects.28.29"><b>App.webview.hasDetectionRects()</b></span></h4>
+<p><b>返回值:</b>  &lt;boolean&gt; 如果存在自定义检测区块，返回 true，否则 false。
+</p><p><b>说明:</b>  用来检测是否设置过自定义检测区块。
+</p><p><br />
+</p>
+<h4><span id="App.webview.execScript.28sandbox_.3Cfunction.3E_.5B.2C_argObject_.3CObject.3E.7C.3CArray.3E.7C.3Cstring.3E.7C.3Cnumber.3E.5D.29"><b>App.webview.execScript(sandbox &lt;function&gt; [, argObject &lt;Object&gt;|&lt;Array&gt;|&lt;string&gt;|&lt;number&gt;])</b></span></h4>
+<p><b>参数:</b>
+</p><p>sandbox &lt;function&gt; 在页面全局脚本环境内下执行的匿名函数沙箱，它与其他 API 调用环境是隔离的，不能使用此环境作用域中的任何变量。如果存在 argObject  参数设置，那么该函数的首参数是 argObject  参数值。
+</p><p>argObject  &lt;Object&gt;|&lt;Array&gt;|&lt;string&gt;|&lt;number&gt; 可选参数。用于向页面的 sandbox 环境中传入简单数据值。它可以是<b>朴素</b> 的对象、数组或字符串与数字。【注意】<b>不能传入function，数组与对象内也不能存在 function 引用</b>。
+</p><p><b>返回值:</b> 依赖沙箱函数回调值。沙箱函数可以将页面数据包装为 <b>朴素</b> 的对象、数组或字符串与数字返回给当前执行环境。同样需需要注意，<b>不能将页面的 DOM 、function 等复杂对象从沙箱内传出</b>。
+</p><p><b>说明:</b>此函数用来将某段脚本注入到当前页面执行。注入的代码运行在页面脚本环境中，与当前环境隔离。
+</p><p>例子：
+</p>
+<pre style="font-size:12px">
+   // 执行当前页面中的alet方法打印 'hello'
+    App.webview.execScript(function(msg) {
+      alert(msg);
+    }, 'hello');
+</pre>
+<pre style="font-size:12px">
+   // 执行当前页面中的alet方法打印 'width: 100, height:100'
+    App.webview.execScript(function(size) {
+      alert('width: ' + size.width + &quot;, &quot; + &quot;height: &quot; +  size.height);
+    }, {width:100, height:300});
+</pre>
+<p><br />
+</p>
+<pre style="font-size:12px">
+   // 将参数传入页面沙箱计算并出沙箱接受
+  var msg = App.webview.execScript(function(size) {
+      return 'width: ' + size.width + &quot;, &quot; + &quot;height: &quot; +  size.height;
+    }, {width:100, height:300});
+  if (msg)
+    ......
+</pre>
+<p><b>特别注意: 页面沙箱内所实现的 JS 内置对象会超出 ECMAScript 5th 规范设定范围。请避免在传出沙箱时使用：ArrayBuffer Uint8Array  DataView  Float32Array Int8Array Int16Array Int32Array Uint8Array Uint16Array Uint32Array 等扩展的内置对象。他们在页面沙箱内存在而APP 脚本沙箱中没有被实现。</b>
+</p><p><br />
+</p>
+<h3><span id="App.helper_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"> App.helper 命名空间下函数 </span></h3>
+<p>App.helper 命名空间是转配在 config.js 配置文件的 global 项中，它将在配置初始化时候被装配到 App 命名空间下供使用者调用。此空间中工具函数可由使用者不断添加。
+</p><p><br />
+</p>
+<h4><span id="App.helper.supplant.28template.3Cstring.3E.2C_data_.3CObject.3E.29"><b>App.helper.supplant(template&lt;string&gt;, data &lt;Object&gt;)</b></span></h4>
+<p><b>参数:</b>
+</p><p>template&lt;string&gt; 一个字符串模板 使用 ${key} 字符作为占位符，其中 key 对应 data 参数对象的同名 key 值。
+</p><p>data &lt;Object&gt; 模板所要提供的数据，是个一维的简单对象。
+</p><p><b>返回值:</b> &lt;string&gt; 组装后的字符串
+</p><p><b>说明:</b> 最为简单的字符串替换模板函数。如模板 "${hello}，我是${name}" 配合数据对象 {hello:"吃了么您", name:"小明"}，将会输出字符串 "吃了么您,，我是小明"。
+</p><p><br />
+</p>
+<h4><span id="App.helper.require.28moduleName.3Cstring.3E.5B.2C_args_.3CArray.3E.5D.29"><b>App.helper.require(moduleName&lt;string&gt;[, args &lt;Array&gt;])</b></span></h4>
+<p><b>参数:</b>
+</p><p>moduleName&lt;string&gt; 模块名，指定为 App 的 module 目录下 js 模块文件名 （不需要 ".js" 扩展名）。
+</p><p>args &lt;Array&gt; 可选参数。模块所需的执行参数。
+</p><p><b>返回值:</b> 模块执行的返回值
+</p><p><b>说明:</b> 此方法是对 App.loadScript 方法的包装，使其实用简单化。
+</p><p><br />
+</p>
+<h4><span id="App.helper.alert.28msg_.3Cstring.3E.29"><b>App.helper.alert(msg &lt;string&gt;)</b></span></h4>
+<p><b>参数:</b> msg &lt;string&gt; 提示字符串
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 此方法是对 App.webview.execScript 方法的包装，简易调用页面中的 alert 方法。
+</p><p><br />
+</p>
+<h4><span id="App.helper.log.28msg_.3Cstring.3E.7C.3Cnumber.3E.29"><b>App.helper.log(msg &lt;string&gt;|&lt;number&gt;)</b></span></h4>
+<p><b>参数:</b> msg &lt;string&gt;|&lt;number&gt; log 内容
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 此方法是对 App.webview.execScript 方法的包装，简易调用页面中的 console.log 方法，在页面控制台中输出内容。
+</p><p><br />
+</p>
+<h3><span id="console_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0.E4.B8.8E.E5.B1.9E.E6.80.A7"> console 命名空间下函数与属性 </span></h3>
+<p>为保留基于浏览器开的前端开发者习惯，在 Globla 中创建的控制台相关方法。
+</p><p><br />
+</p>
+<h4><span id="console_.log.28arg1.2C_.5Barg2.2C_arg3.2C_arg4.2C_....5D.29"><b>console .log(arg1, [arg2, arg3, arg4, ...])</b></span></h4>
+<p><b>参数:</b> arg1, [arg2, arg3, arg4, ...] 参数类型不限，<b>所有参数将被 ToString 后返回</b>。
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> <b>此方法是 App 的 console.log 方法，并非 App.helper.log 包装的浏览器内  console.log 方法</b>。 该方法将预期用来做 JS 代码调试输出。
+</p><p><br />
+</p>
+<h3><span id="pageExtension_.E9.A1.B5.E9.9D.A2.E6.89.A9.E5.B1.95.E5.AF.B9.E8.B1.A1"> <b>__pageExtension 页面扩展对象</b> </span></h3>
+<p>该对象在页面被创建初始被扩展到页面中 （pageScriptCreated事件触发时）。在此命名空间下，存放页面与 App 交互用特殊处理函数。
+</p><p><br />
+</p>
+<h4><span id="pageExtension.postMessage.28.5Bwparam_.3Cstring.3E.2C_lparam_.3Cstring.3E.5D.29"> <b>__pageExtension.postMessage([wparam &lt;string&gt;, lparam &lt;string&gt;])  </b> </span></h4>
+<p><b>参数:</b>
+</p><p>wparam &lt;string&gt; 可选参数。用来附加的消息特定的字符串类型信息。
+</p><p>lparam&lt;string&gt; 可选参数。用来附加的消息特定的字符串类型信息。
+</p><p><b>返回值:</b>无
+</p><p><b>说明:</b>此方法在页面中被使用，该方法触发时，如果App中存在 message 事件监听，则会触发监听回调函数。通常 wparam 和 lparam 参数通常用来标示消息字符串和消息辅助辨别信息，它们具体使用方式由用户确定。
+</p><p><b>例如:</b>
+</p>
+<pre style="font-size:12px">
+App.webview.addEventListener('message', function(w, l) {
+  if ('page' == l) {
+    App.webview.execScript(function(msg) {
+      // 显示 &quot;this is a message&quot; 信息。
+      alert(msg);
+    }, w);
+  }
+});
+
+App.webview.execScript(function(s) {
+  __pageExtension.postMessage(&quot;this is a message&quot;, &quot;page&quot;);
+});
+</pre>
+<h2><span id="END"> END </span></h2>
+</body>
+</html>
