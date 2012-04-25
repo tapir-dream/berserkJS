@@ -3,11 +3,128 @@
 <head>
 <title>berserkJS</title>
 <meta charset="UTF-8" />
+<style>
+* {
+  font-family: "Microsoft YaHei", arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 2em;
+}
+
+h1, h2, h3, h4 {
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  -ms-border-radius: 4px;
+  padding: 0.5em;
+  color: #EEE;
+}
+
+h1 {
+  font-size: 26px;
+  background-color: #521; 
+}
+
+h2 {
+  font-size: 22px;
+	background-color: #213; 
+}
+
+h3 {
+  font-size: 18px;
+	background-color: #033; 
+}
+
+h4 {
+  font-size: 14px;
+  background-color: #444; 
+}
+
+a:link, a:visited {
+  color: #333;
+  text-decoration: none;
+	outline: none;
+}
+
+a:hover, a:active {
+  color: #00F;
+  outline: none;
+}
+
+ul {
+  background-color: #013; 
+  color: #ACE;
+  font-size: 14px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  -ms-border-radius: 4px;
+  padding:1em 2em 1em 2em;
+}
+
+ol {
+  background-color: #CCC; 
+  font-size: 14px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  -ms-border-radius: 4px;
+  padding:1em 2em 1em 2em;
+}
+
+p {
+  font-size: 14px;
+  padding: 0.4em;
+  margin: 0;
+}
+
+ul a:link, ul a:visited {
+  color: #ACE;
+  text-decoration: none;
+	outline: none;
+}
+
+ul a:hover, ul a:active {
+  color: #FF0;
+  outline: none;
+}
+
+li {
+  padding: 0.2em;
+  margin: 0;
+}
+
+pre {
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -o-border-radius: 6px;
+  -ms-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #05232B;
+  margin-bottom: 2em;
+  padding: 1em;
+  color: #93A1A1;
+  background: #002B36;
+  overflow: auto;
+  -moz-box-shadow: rgba(0,0,0,0.06) 0 0 10px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.06) 0 0 10px;
+  -o-box-shadow: rgba(0,0,0,0.06) 0 0 10px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0 0 10px;
+	font-size:14px;
+	font-family: Consolas, Courier, SimSun, monospace;
+}
+
+</style>
 </head>
 <body>
 <table id="toc"><tr><td><div id="toctitle"><h2>目录</h2></div>
 <ul>
-<li><a href="#RIA_.E7.BD.91.E7.BB.9C.E6.95.B0.E6.8D.AE.E8.87.AA.E5.8A.A8.E5.8C.96.E8.BE.93.E5.87.BA.E5.B7.A5.E5.85.B7.EF.BC.88BerserkJS.EF.BC.89"><span>1</span> <span>RIA 网络数据自动化输出工具（BerserkJS）</span></a>
+<li><a href="#RIA_.E7.BD.91.E7.BB.9C.E6.95.B0.E6.8D.AE.E8.87.AA.E5.8A.A8.E5.8C.96.E8.BE.93.E5.87.BA.E5.B7.A5.E5.85.B7.EF.BC.88BerserkJS.EF.BC.89"><span>1</span> <span>网络数据自动化输出工具（BerserkJS）</span></a>
 <ul>
 <li><a href="#.E6.BC.94.E7.A4.BA.E8.A7.86.E9.A2.91"><span>1.1</span> <span>演示视频</span></a></li>
 <li><a href="#.E5.B7.A5.E5.85.B7.E4.BB.8B.E7.BB.8D_PPT"><span>1.2</span> <span>工具介绍 PPT</span></a></li>
@@ -206,7 +323,7 @@
 <p>https://github.com/tapir-dream/berserkJS</a>
 </p>
 <h2><span id=".E5.B7.A5.E5.85.B7.E4.B8.BB.E8.A6.81.E6.96.87.E4.BB.B6"> 工具主要文件 </span></h2>
-<pre style="font-size:12px; font-family: Consolas, Courier, SimSun, monospace;">
+<pre>
 工具目录 
     + src 目录
     |    + 源码文件 ……
@@ -274,7 +391,7 @@
 <p>工具暴露出一些 JS 方法可供调用，利用这些方法我们可以做到控制浏览页面、监听特定事件、延时处理、截图等常用操作。
 </p><p>整体方法树如下：
 </p>
-<pre style="font-size:12px; font-family: Consolas, Courier, SimSun, monospace;">
+<pre>
 Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数组
        |              + [function] close
        |              + [function] loadScript
@@ -412,7 +529,7 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
 <h2><span id=".E6.A8.A1.E5.9D.97.E6.96.87.E4.BB.B6.E4.B9.A6.E5.86.99.E8.A7.84.E5.88.99"> 模块文件书写规则  </span></h2>
 <p>它是一个简单的匿名函数表达式，可以有返回值，也可以没有返回值。
 </p>
-<pre style="font-size:14px">
+<pre>
 (function() {
    [JS Code]
 });
@@ -423,7 +540,7 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
 <p>工具提供了一组基于JS配置管理模块，辅助用户管理自己的检测 JS 模块。
 </p><p>配置管理文件同样是一个JS模块，文件名为 ‘’‘config.js’‘’，会返回一个 JOSN 作为配置表，规格如下：
 </p>
-<pre style="font-size:14px">
+<pre>
 /**
  * 配置设置模块
  * @return {object} 返回配置对象
@@ -599,7 +716,7 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
 </p><p><br />
 例子：
 </p>
-<pre style="font-size:12px">
+<pre>
 var args = [1,2,3];
 var module = App.loadScript(App.path + 'module/xxx.js',  function(err, module) {
    if (err)
@@ -762,7 +879,7 @@ if (!module) {
 <p>selector 是一组特定数据选择器，可以从 network 数据中<b>累积</b>选择出所要的数据子集。其返回数据结构与 App.netwrokData 函数返回值一致。
 </p><p>如下例：
 </p>
-<pre style="font-size:12px">
+<pre>
 // 清空选择器
 App.selecotr.clear();
 
@@ -1207,13 +1324,13 @@ callback &lt;function&gt; 事件触发时的回调函数。
 </p><p><b>说明:</b>此函数用来将某段脚本注入到当前页面执行。注入的代码运行在页面脚本环境中，与当前环境隔离。
 </p><p>例子：
 </p>
-<pre style="font-size:12px">
+<pre>
    // 执行当前页面中的alet方法打印 'hello'
     App.webview.execScript(function(msg) {
       alert(msg);
     }, 'hello');
 </pre>
-<pre style="font-size:12px">
+<pre>
    // 执行当前页面中的alet方法打印 'width: 100, height:100'
     App.webview.execScript(function(size) {
       alert('width: ' + size.width + &quot;, &quot; + &quot;height: &quot; +  size.height);
@@ -1221,7 +1338,7 @@ callback &lt;function&gt; 事件触发时的回调函数。
 </pre>
 <p><br />
 </p>
-<pre style="font-size:12px">
+<pre>
    // 将参数传入页面沙箱计算并出沙箱接受
   var msg = App.webview.execScript(function(size) {
       return 'width: ' + size.width + &quot;, &quot; + &quot;height: &quot; +  size.height;
@@ -1286,7 +1403,7 @@ callback &lt;function&gt; 事件触发时的回调函数。
 </p><p><b>说明:</b>此方法在页面中被使用，该方法触发时，如果App中存在 message 事件监听，则会触发监听回调函数。通常 wparam 和 lparam 参数通常用来标示消息字符串和消息辅助辨别信息，它们具体使用方式由用户确定。
 </p><p><b>例如:</b>
 </p>
-<pre style="font-size:12px">
+<pre>
 App.webview.addEventListener('message', function(w, l) {
   if ('page' == l) {
     App.webview.execScript(function(msg) {
