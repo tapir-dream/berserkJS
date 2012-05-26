@@ -4,11 +4,11 @@ App.webview.open("http://www.weibo.com");
 App.webview.addEventListener("load", function() {
   // 进入页面沙箱执行页面脚本
   App.webview.execScript(function() {
-    // 输入测试账号密码. 
-    //请使用你自己的账号密码
-    //document.getElementById("loginname").value = "";
-    //document.getElementById("password").value = "";
+    // 输入测试账号密码, 请自行添加用户名与密码
+    //document.querySelectorAll('input[node-type=loginname]')[0].value = "xxxxx";
+    //document.querySelectorAll('input[node-type=password]')[0].value = "xxxxx";
   });
   // 点下登录按键
-  App.webview.sendMouseEvent(w.elementRects("#login_submit_btn")[0]);
+  App.webview.sendMouseEvent(App.webview.elementRects("a[node-type=submit]")[0]);
 });
+
