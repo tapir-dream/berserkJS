@@ -6,7 +6,7 @@
  */
 (function() {
 
-  var path = App.path;
+  var path = App.path + 'js/';
   
   var namespace = function(name) {
     return path + name.replace(/\./g, '/') + '.js';

@@ -45,7 +45,7 @@ void MainWindow::initUserScript()
     }
 
     if (cmdParams.hasStart()) {
-        QString scriptFunc = "App.loadScript(App.path + 'conf/init.js', function(err, func){func(App,App.webview)});";
+        QString scriptFunc = "App.loadScript(App.path + 'js/conf/init.js', function(err, func){func(App,App.webview)});";
         script->runScript(scriptFunc);
         return;
     }

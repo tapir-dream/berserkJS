@@ -517,7 +517,7 @@ QScriptValue MyWebView::dataURIFormRect(QScriptValue rect, QScriptValue type, QS
     clipRect.setY(rect.property("y").toString().toInt());
     clipRect.setWidth(rect.property("width").toString().toInt());
     clipRect.setHeight(rect.property("height").toString().toInt());
-    QImage image = randerToImage();
+    QImage image = renderToImage();
     image = image.copy(clipRect);
 
     // 创建临时文件
@@ -533,7 +533,7 @@ QScriptValue MyWebView::dataURIFormRect(QScriptValue rect, QScriptValue type, QS
     return dataURI;
 }
 
-QImage MyWebView::randerToImage()
+QImage MyWebView::renderToImage()
 {
     // page content size
     QSize size = myFrame->contentsSize();
@@ -559,9 +559,9 @@ QImage MyWebView::randerToImage()
     return image;
 }
 
-bool MyWebView::clipRanderToImage(QString path, QString type, int quality, QRect clipRect)
+bool MyWebView::clipRenderToImage(QString path, QString type, int quality, QRect clipRect)
 {
-    QImage image = randerToImage();
+    QImage image = renderToImage();
     type = type.toUpper();
     QStringList typeList;
     typeList << "PNG" << "JPG" << "JPEG" << "BMP" << "PPM" << "TIFF";
@@ -600,10 +600,10 @@ QScriptValue MyWebView::saveImage(QScriptValue path, QScriptValue type, QScriptV
         clipRect.setWidth(rect.property("width").toString().toInt());
         clipRect.setHeight(rect.property("height").toString().toInt());
 
-        return  QScriptValue(clipRanderToImage(path.toString(), type.toString(), q, clipRect));
+        return  QScriptValue(clipRenderToImage(path.toString(), type.toString(), q, clipRect));
     }
 
-    return QScriptValue(clipRanderToImage(path.toString(), type.toString(), q));
+    return QScriptValue(clipRenderToImage(path.toString(), type.toString(), q));
 }
 
 QScriptValue MyWebView::elementRects(QScriptValue cssSelector)

@@ -316,6 +316,9 @@ pre {
 </li><li> QtNetwork4.dll
 </li><li> QtScript4.dll
 </li><li> QtWebKit4.dll
+</li><li> codecs 目录
+</li><li> iconengines 目录
+</li><li> imageformats 目录
 </li></ol>
 <p><br />
 </p>
@@ -332,15 +335,20 @@ pre {
          + release 发布目录
               + berserkJS (工具的可执行文件)
               + 依赖的 dll 文件们 (非必须)
-              + conf 目录 
-              |        + config.js 模块配置文件
-              |        + init.js 全局配置初始化文件
-              + module 目录
-              |        + JS 检测模块文件 (*.js)
-              |        + JS 检测模块文件 (*.js)
-              |        + JS 检测模块文件 (*.js)
-              |        + ……
-              + action 目录
+              + 依赖的插件 dll 目录 (非必须)
+              + codecs
+              + iconengines
+              + imageformats
+              + js (脚本目录)
+                   + conf 目录 
+                   |        + config.js 模块配置文件
+                   |        + init.js 全局配置初始化文件
+                   + module 目录
+                   |        + JS 检测模块文件 (*.js)
+                   |        + JS 检测模块文件 (*.js)
+                   |        + JS 检测模块文件 (*.js)
+                   |        + ……
+                   + action 目录
                             + helper.js 检测开始是加入的工具方法集
                             + autoscript.js 用户的自动化浏览器控制文件
                             + report.js 检测完成后执行的文件，用于生成检测报告
@@ -359,6 +367,18 @@ pre {
 </li><li> QtNetwork4.dll
 </li><li> QtScript4.dll
 </li><li> QtWebKit4.dll
+</li><li> codecs\qcncodecs4.dll
+</li><li> codecs\qjpcodecs4.dll
+</li><li> codecs\qkrcodecs4
+</li><li> codecs\qtwcodecs4.dll
+</li><li> iconengines\qsvgicon4.dll
+</li><li> imageformats\qgif4.dll
+</li><li> imageformats\qico4.dll
+</li><li> imageformats\qjpeg4.dll
+</li><li> imageformats\qmng4.dll
+</li><li> imageformats\qsvg4.dll
+</li><li> imageformats\qtga4.dll
+</li><li> imageformats\qtiff4.dll
 </li></ol>
 </li></ol>
 <p><br />
@@ -367,7 +387,7 @@ pre {
 <p>可执行文件 berserkJS 将携带一些命令行参数。如下：
 </p>
 <ol><li> --command=value  如value参数值不为空，--command 参数将隐藏工具界面使其看起来像纯命令行工具。此方法的设计目的在于非调试环境中不启用界面窗口。<b>使用此方法时需要注意避免使用任何 alert 类方法，因为他等待用户交互，会阻塞后续代码执行。</b> 
-</li><li> --start=value  如value参数值不为空， --start 参数表明要自动执行 berserkJS 目录下 conf/init.js 文件，运行配置好的测试。
+</li><li> --start=value  如value参数值不为空， --start 参数表明要自动执行 berserkJS 目录下 js/conf/init.js 文件，运行配置好的测试。
 </li><li> --script=value  如 value 参数值不为空 --script 参数表示要自动执行以 berserkJS 目录为基准的某路径下js文件。<b>此js文件将自动以 uft-8 编码格式读取并执行；此参数存在时 --start 参数自动失效。</b>
 </li></ol>
 <p><br />
@@ -543,13 +563,11 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
 <pre>
 /**
  * 配置设置模块
- * @return {object} 返回配置对象
- * @author Tapir | baokun@staff.sina.com.cn
- * @date   2012-03-07               
+ * @return {object} 返回配置对象    
  */
 (function() {
 
-  var path = App.path;
+  var path = App.path + 'js/';
   
   var namespace = function(name) {
     return path + name.replace(/\./g, '/') + '.js';
@@ -609,7 +627,7 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
 <h2><span id=".E5.88.9D.E5.A7.8B.E5.8C.96.E9.85.8D.E7.BD.AE.E4.BB.A5.E5.8F.8A.E5.BC.80.E5.A7.8B.E8.BF.90.E8.A1.8C"> 初始化配置以及开始运行  </span></h2>
 <p>同配置文件一样，<b>init.js</b> 文件也是个模块文件，它负责初始化配置，并且执行具体检测模块代码。
 </p><p>init.js 文件需要使用 loadScript 方法被执行，方式如下：
-</p><p>App.loadScript(App.path + 'init.js', function(err, func){func(App,App.webview)});
+</p><p>App.loadScript(App.path + 'js/init.js', function(err, func){func(App,App.webview)});
 </p><p>这行代码可以在工具启动后敲入工具的 JS 执行框内运行。
 </p><p>也可以使用命令参数 --start=true 使工具在开始运行后自动执行。
 </p><p><br />
@@ -1273,7 +1291,7 @@ callback &lt;function&gt; 事件触发时的回调函数。
 </li></ul>
 </li></ul>
 </li></ul>
-<ul><li><ul><li> <b>此事件缺陷(非常重要): </b>
+<ul><li><ul><li> <b>firstScreenFinished 事件缺陷(非常重要): </b>
 <ul><li> 默认检测方法不适合用于长时间有大规模像素变化的页面。
 </li><li> 由于检测分布点色值取自 webkit 渲染内核，如果存在 wmode 属性值为 window 的 Flash (它由系统接管渲染，而非浏览器)，那么检测点将无法获得它的色值变化。此类页面的首屏时间可能会不准确。
 </li></ul>

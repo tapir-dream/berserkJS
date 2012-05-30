@@ -69,9 +69,9 @@ public:
     Q_INVOKABLE QScriptValue hasDetectionRects();
     Q_INVOKABLE QScriptValue clearDetectionRects();
 
-    bool clipRanderToImage(QString path, QString type = "JPG",
+    bool clipRenderToImage(QString path, QString type = "JPG",
                        int quality = 60,  QRect clipRect = QRect());
-    QImage randerToImage();
+    QImage renderToImage();
 
 private:
 

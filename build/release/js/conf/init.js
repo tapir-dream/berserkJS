@@ -6,7 +6,7 @@
 
 (function (app, web) {
 
-  var CONFIG_PATH = app.path + 'conf/config.js';
+  var CONFIG_PATH = app.path + 'js/conf/config.js';
   var CONFIG_LOAD_ERROR_MSG = '配置文件载入错误！';
   var CONFIG_PARAM_ERROR_MSG = '配置文件参数错误！'
   var GLOBAL_MODULE_LOAD_ERROR_MSG = '全局模块载入错误！模块路径为：';
