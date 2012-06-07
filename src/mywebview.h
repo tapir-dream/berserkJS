@@ -117,6 +117,10 @@ private:
     QList<ContextInfo> pageFirstScreenFinishedFunc;
     QList<ContextInfo> requestFinishedFunc;
     QList<ContextInfo> requestStartFunc;
+    QList<ContextInfo> pageConsoleMessageFunc;
+    QList<ContextInfo> pagePromptFunc;
+    QList<ContextInfo> pageConfirmFunc;
+    QList<ContextInfo> pageAlertFunc;
 
     QMap<QString, TimerInfo> timeEventMap;
 
@@ -172,6 +176,11 @@ private slots:
 
     void onRequestStart(QString url);
     void onRequestFinished(QString url);
+
+    void onPageConsoleMessage(QString message, int lineNumber, QString sourceID);
+    void onPagePrompt(QString msg, QString defaultValue);
+    void onPageConfirm(QString msg);
+    void onPageAlert(QString msg);
 
     void onOpenUrl(QUrl targetURL);
 };

@@ -22,16 +22,21 @@ class MyWebPage: public QWebPage
 
     protected:
       // Overloaded virtual function reserve.
-      // void javaScriptConsoleMessage(const QString & message, int lineNumber, const QString & sourceID);
-      // bool javaScriptPrompt(QWebFrame* frame, const QString & msg, const QString & defaultValue, QString* result);
-      // void javaScriptAlert(QWebFrame* frame, const QString & msg);
-      // bool javaScriptConfirm(QWebFrame* frame, const QString & msg);
+      void javaScriptConsoleMessage(const QString & message, int lineNumber, const QString & sourceID);
+      bool javaScriptPrompt(QWebFrame* frame, const QString & msg, const QString & defaultValue, QString* result);
+      void javaScriptAlert(QWebFrame* frame, const QString & msg);
+      bool javaScriptConfirm(QWebFrame* frame, const QString & msg);
 
       QString userAgentForUrl(const QUrl & url) const;
 
     private:
       QString myUserAgent;
 
+    signals:
+        void pageConsoleMessage(QString message, int lineNumber, QString sourceID);
+        void pagePrompt(QString msg, QString defaultValue);
+        void pageConfirm(QString msg);
+        void pageAlert(QString msg);
 };
 
 #endif // MYWEBPAGE_H

@@ -1,7 +1,7 @@
 /**
  * 常用工具方法模块
  *
- * @author Tapir | baokun@staff.sina.com.cn
+ * @author Tapir
  * @date   2012-03-06
  */
 (function() {
@@ -26,18 +26,12 @@
     return (!module) ? null : module;
   };
   
-  var alert = function(msg) {
-    web.execScript(function(msg) {
-      alert(msg);
-    }, msg);
-  }
-  
   var log = function(msg) {
     web.execScript(function(msg) {
       console.log(msg);
     }, msg);
   } 
-  
+
   App.helper = {
     supplant: supplant,
     require: require,

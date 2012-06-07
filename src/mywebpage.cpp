@@ -43,26 +43,28 @@ QString MyWebPage::userAgentForUrl(const QUrl & url) const
     return defaultUserAgent;
 }
 
-/*
+
 void MyWebPage::javaScriptConsoleMessage(const QString & message, int lineNumber, const QString & sourceID)
 {
-    //TODO: ...
-}
-
-void MyWebPage::javaScriptAlert(QWebFrame* frame, const QString& msg)
-{
-    //TODO:...
+    emit pageConsoleMessage(message, lineNumber, sourceID);
 }
 
 bool MyWebPage::javaScriptPrompt(QWebFrame* frame, const QString & msg, const QString & defaultValue, QString* result)
 {
-    //TODO:...
-    return true;
+    emit pagePrompt(msg, defaultValue);
+    return false;
 }
+
+
+void MyWebPage::javaScriptAlert(QWebFrame* frame, const QString& msg)
+{
+    emit pageAlert(msg);
+}
+
 
 bool MyWebPage::javaScriptConfirm(QWebFrame* frame, const QString & msg)
 {
-    //TODO:...
-    return true;
+    emit pageConfirm(msg);
+    return false;
 }
-*/
+

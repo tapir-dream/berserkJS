@@ -66,6 +66,11 @@ void MyWebView::initEventNameMap()
     eventNameMap.insert("loadprogress", &loadProgressFunc);
 
     eventNameMap.insert("message", &pageMessageFunc);
+    eventNameMap.insert("consolemessage", &pageConsoleMessageFunc);
+    eventNameMap.insert("confirm", &pageConfirmFunc);
+    eventNameMap.insert("alert", &pageAlertFunc);
+    eventNameMap.insert("prompt", &pagePromptFunc);
+
 
     // 加入页面首次渲染完成事件回调
     eventNameMap.insert("firstpaintfinished", &pageFirstPaintFinishedFunc);
@@ -99,6 +104,14 @@ void MyWebView::initEvents()
     connect(myPage, SIGNAL(loadProgress(int)), this, SLOT(onLoadProgress(int)));
     connect(myPage, SIGNAL(repaintRequested(const QRect)), this, SLOT(onRepaintRequested(const QRect)));
     connect(myPage, SIGNAL(geometryChangeRequested(const QRect)), this, SLOT(onGeometryChangeRequested(const QRect)));
+
+    connect(myPage, SIGNAL(pageConsoleMessage(QString,int,QString)), this, SLOT(onPageConsoleMessage(QString,int,QString)));
+    connect(myPage, SIGNAL(pageAlert(QString)), this, SLOT(onPageAlert(QString)));
+    connect(myPage, SIGNAL(pageConfirm(QString)), this, SLOT(onPageConfirm(QString)));
+    connect(myPage, SIGNAL(pagePrompt(QString,QString)), this, SLOT(onPagePrompt(QString,QString)));
+
+
+
 
     connect(newManager, SIGNAL(requestFinished(QString)),
             this, SLOT(onRequestFinished(QString)));
@@ -1034,6 +1047,65 @@ void MyWebView::onOpenUrl(QUrl targetURL)
 void MyWebView::sendPageMessage(QString wparam, QString lparam)
 {
     onPageMessage(wparam, lparam);
+}
+
+void MyWebView::onPageConsoleMessage(QString message, int lineNumber, QString sourceID)
+{
+    int c = pageConsoleMessageFunc.size();
+    if (c > 0) {
+        for (int i = 0; i < c; ++i) {
+            ContextInfo contextInfo = pageConsoleMessageFunc.at(i);
+            contextInfo.func.setScope(contextInfo.activationObject.scope());
+            contextInfo.func.call(contextInfo.thisObject,
+                                  QScriptValueList()
+                                  << QScriptValue(message)
+                                  << QScriptValue(lineNumber)
+                                  << QScriptValue(sourceID));
+        }
+    }
+}
+
+void MyWebView::onPagePrompt(QString msg, QString defaultValue)
+{
+    int c = pagePromptFunc.size();
+    if (c > 0) {
+        for (int i = 0; i < c; ++i) {
+            ContextInfo contextInfo = pagePromptFunc.at(i);
+            contextInfo.func.setScope(contextInfo.activationObject.scope());
+            contextInfo.func.call(contextInfo.thisObject,
+                                  QScriptValueList()
+                                  << QScriptValue(msg)
+                                  << QScriptValue(defaultValue));
+        }
+    }
+}
+
+void MyWebView::onPageConfirm(QString msg)
+{
+    int c = pageConfirmFunc.size();
+    if (c > 0) {
+        for (int i = 0; i < c; ++i) {
+            ContextInfo contextInfo = pageConfirmFunc.at(i);
+            contextInfo.func.setScope(contextInfo.activationObject.scope());
+            contextInfo.func.call(contextInfo.thisObject,
+                                  QScriptValueList()
+                                  << QScriptValue(msg));
+        }
+    }
+}
+
+void MyWebView::onPageAlert(QString msg)
+{
+    int c = pageAlertFunc.size();
+    if (c > 0) {
+        for (int i = 0; i < c; ++i) {
+            ContextInfo contextInfo = pageAlertFunc.at(i);
+            contextInfo.func.setScope(contextInfo.activationObject.scope());
+            contextInfo.func.call(contextInfo.thisObject,
+                                  QScriptValueList()
+                                  << QScriptValue(msg));
+        }
+    }
 }
 
 void MyWebView::onPageMessage(QString wparam, QString lparam)

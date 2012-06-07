@@ -24,16 +24,18 @@
   var loginWeibo = function() {
     w.removeEventListener("load", loginWeibo);
     w.addEventListener("load", getNetworkData);
-    w.execScript(function() {
-      // 输入测试账号密码
-      //document.getElementById("loginname").value = "";
-      //document.getElementById("password").value = "";
-      alert('action\autoscript.js line 30, 需要用你的账号与密码哦~~亲~~');
-    });
-    // 点下登录按键
-    w.sendMouseEvent(w.elementRects("#login_submit_btn")[0]);
-    // 开启网络监听
-    w.netListener(true);
+		setTimeout(function(){
+			w.execScript(function() {
+				// 输入测试账号密码
+				//document.querySelectorAll("input[node-type=loginname]")[0].value = "";
+				//document.querySelectorAll("input[node-type=password]")[0].value = "";
+				alert('action\autoscript.js line 30, 需要用你的账号与密码哦~~亲~~');
+			});
+			// 点下登录按键
+			w.sendMouseEvent(w.elementRects("a[node-type=submit]")[0]);
+			// 开启网络监听
+			w.netListener(true);
+		}, 3000);
   };
 
   // 加载工具函数库

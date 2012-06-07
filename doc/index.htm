@@ -239,8 +239,7 @@ pre {
 <ul>
 <li><a href="#App.helper.supplant.28template.3Cstring.3E.2C_data_.3CObject.3E.29"><span>1.17.4.1</span> <span>App.helper.supplant(template&lt;string&gt;, data &lt;Object&gt;)</span></a></li>
 <li><a href="#App.helper.require.28moduleName.3Cstring.3E.5B.2C_args_.3CArray.3E.5D.29"><span>1.17.4.2</span> <span>App.helper.require(moduleName&lt;string&gt;[, args &lt;Array&gt;])</span></a></li>
-<li><a href="#App.helper.alert.28msg_.3Cstring.3E.29"><span>1.17.4.3</span> <span>App.helper.alert(msg &lt;string&gt;)</span></a></li>
-<li><a href="#App.helper.log.28msg_.3Cstring.3E.7C.3Cnumber.3E.29"><span>1.17.4.4</span> <span>App.helper.log(msg &lt;string&gt;|&lt;number&gt;)</span></a></li>
+<li><a href="#App.helper.log.28msg_.3Cstring.3E.7C.3Cnumber.3E.29"><span>1.17.4.3</span> <span>App.helper.log(msg &lt;string&gt;|&lt;number&gt;)</span></a></li>
 </ul>
 </li>
 <li><a href="#console_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0.E4.B8.8E.E5.B1.9E.E6.80.A7"><span>1.17.5</span> <span>console 命名空间下函数与属性</span></a>
@@ -386,7 +385,7 @@ pre {
 <h2><span id=".E5.91.BD.E4.BB.A4.E8.A1.8C.E5.8F.82.E6.95.B0"> 命令行参数 </span></h2>
 <p>可执行文件 berserkJS 将携带一些命令行参数。如下：
 </p>
-<ol><li> --command=value  如value参数值不为空，--command 参数将隐藏工具界面使其看起来像纯命令行工具。此方法的设计目的在于非调试环境中不启用界面窗口。<b>使用此方法时需要注意避免使用任何 alert 类方法，因为他等待用户交互，会阻塞后续代码执行。</b> 
+<ol><li> --command=value  如value参数值不为空，--command 参数将隐藏工具界面使其看起来像纯命令行工具。此方法的设计目的在于非调试环境中不启用界面窗口。 
 </li><li> --start=value  如value参数值不为空， --start 参数表明要自动执行 berserkJS 目录下 js/conf/init.js 文件，运行配置好的测试。
 </li><li> --script=value  如 value 参数值不为空 --script 参数表示要自动执行以 berserkJS 目录为基准的某路径下js文件。<b>此js文件将自动以 uft-8 编码格式读取并执行；此参数存在时 --start 参数自动失效。</b>
 </li></ol>
@@ -1231,6 +1230,10 @@ seletedNetwrokData = App.selecotr.get();
 </li><li> "pageRectChanged" --视口位置和大小发生改变时触发
 </li><li> "loadProgress"--页面加载进度 
 </li><li> "pageScriptCreated"--页面当前JS环境准备就绪时触发（一般利用此事件在页面JS环境仅构建出Window时，注入页面级别的全局JS 对象）
+</li><li> "consoleMessage" --页面控制台输出内容时触发
+</li><li> "alert" --页面使用alert方法时触发 <b>【注意】工具中页面调用alert方法将无法显示出对话框，它的输出被事件化。</b>
+</li><li> "confirm" --页面使用confirm方法时触发 <b>【注意】工具中页面调用confirm方法将无法显示出对话框，它的输出被事件化。</b>
+</li><li> "propmt" --页面使用propmt方法时触发 <b>【注意】工具中页面调用propmt方法将无法显示出对话框，它的输出被事件化。</b>
 </li><li> "message"--页面使用特定扩展方法__pageExtension.postMessage时触发的回调
 </li><li> "firstPaintFinished"--页面首次渲染后触发
 </li><li> "firstScreenFinished" ---首屏渲染完成后触发
@@ -1260,6 +1263,21 @@ callback &lt;function&gt; 事件触发时的回调函数。
 </li></ul>
 </li><li> <b>pageRectChanged(rect &lt;Object&gt;)</b> ：
 <ul><li> 参数 rect 返回当前视口区域， 数据格式 {x, y, left, right, top, bottom, width,height} 。
+</li></ul>
+</li><li> <b>consoleMessage(msg&lt;string&gt;, lineNumber&lt;number&gt;, sourceID&lt;string&gt;)：</b> ：
+<ul><li> 参数 msg: 控制台输出内容
+</li><li> 参数 lineNumber: 行号
+</li><li> 参数 sourceID: 如果是脚本执行错误，则 sourceID 会指出是那个脚本触发。
+</li></ul>
+</li><li> <b>prompt(msg&lt;string&gt;, defaultValue&lt;number&gt;)：</b> ：
+<ul><li> 参数 msg: prompt方法的首参数
+</li><li>参数 defaultValue: prompt方法的次参数
+</li></ul>
+</li><li> <b>confirm(msg&lt;string&gt;)：</b> ：
+<ul><li> 参数 msg: confirm中的提示文字
+</li></ul>
+</li><li> <b>alert(msg&lt;string&gt;)：</b> ：
+<ul><li> 参数 msg: alert中的提示文字
 </li></ul>
 </li><li> <b>message(wparam &lt;string&gt;, lparam&lt;string&gt;)</b>：
 <ul><li> 参数返回页面中执行 __pageExtension.postMessage 方法时的两个字符串参数。
@@ -1346,15 +1364,15 @@ callback &lt;function&gt; 事件触发时的回调函数。
 </p><p>例子：
 </p>
 <pre>
-   // 执行当前页面中的alet方法打印 'hello'
+    // 执行当前页面中的console.log方法打印在控制台中打印 'hello'
     App.webview.execScript(function(msg) {
-      alert(msg);
+      console.log(msg);
     }, 'hello');
 </pre>
 <pre>
-   // 执行当前页面中的alet方法打印 'width: 100, height:100'
+    // 执行当前页面中的console.log方法在控制台中打印 'width: 100, height:100''
     App.webview.execScript(function(size) {
-      alert('width: ' + size.width + &quot;, &quot; + &quot;height: &quot; +  size.height);
+      console.log('width: ' + size.width + &quot;, &quot; + &quot;height: &quot; +  size.height);
     }, {width:100, height:300});
 </pre>
 <p><br />
@@ -1390,12 +1408,6 @@ callback &lt;function&gt; 事件触发时的回调函数。
 </p><p><b>说明:</b> 此方法是对 App.loadScript 方法的包装，使其实用简单化。
 </p><p><br />
 </p>
-<h4><span id="App.helper.alert.28msg_.3Cstring.3E.29"><b>App.helper.alert(msg &lt;string&gt;)</b></span></h4>
-<p><b>参数:</b> msg &lt;string&gt; 提示字符串
-</p><p><b>返回值:</b> 无
-</p><p><b>说明:</b> 此方法是对 App.webview.execScript 方法的包装，简易调用页面中的 alert 方法。
-</p><p><br />
-</p>
 <h4><span id="App.helper.log.28msg_.3Cstring.3E.7C.3Cnumber.3E.29"><b>App.helper.log(msg &lt;string&gt;|&lt;number&gt;)</b></span></h4>
 <p><b>参数:</b> msg &lt;string&gt;|&lt;number&gt; log 内容
 </p><p><b>返回值:</b> 无
@@ -1429,7 +1441,7 @@ App.webview.addEventListener('message', function(w, l) {
   if ('page' == l) {
     App.webview.execScript(function(msg) {
       // 显示 &quot;this is a message&quot; 信息。
-      alert(msg);
+      console.log(msg);
     }, w);
   }
 });
