@@ -12,6 +12,8 @@ QT       += script
 TARGET = berserkJS
 TEMPLATE = app
 
+qmake_lflags += -staticï¼
+
 SOURCES += main.cpp\
         mainwindow.cpp \
     networkaccessmanager.cpp \
@@ -26,7 +28,8 @@ SOURCES += main.cpp\
     mywebpage.cpp \
     filesystemwatcher.cpp \
     firstscreen.cpp \
-    scriptsignalfactory.cpp
+    scriptsignalfactory.cpp \
+    getcpupercentage.cpp
 
 HEADERS  += mainwindow.h \
     networkaccessmanager.h \
@@ -41,9 +44,12 @@ HEADERS  += mainwindow.h \
     mywebpage.h \
     filesystemwatcher.h \
     firstscreen.h \
-    scriptsignalfactory.h
+    scriptsignalfactory.h \
+    getcpupercentage.h
 
 FORMS    += mainwindow.ui
+
+
 
 
 

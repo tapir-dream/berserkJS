@@ -37,7 +37,12 @@ MyWebView::MyWebView()
 
 }
 
-
+MyWebView::~MyWebView() {
+   delete cookieJar;
+   delete firstScreen;
+   delete myPage;
+   delete newManager;
+}
 
 void MyWebView::setAppScriptEngine(ScriptBinding* scriptBinding)
 {

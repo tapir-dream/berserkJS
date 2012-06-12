@@ -1,5 +1,4 @@
 #include <QDateTime>
-#include <qDebug>
 #include "firstscreen.h"
 
 FirstScreen::FirstScreen(QWebPage* webPage)

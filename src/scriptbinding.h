@@ -15,6 +15,7 @@
 #include "monitordatamap.h"
 #include "selector.h"
 #include "filesystemwatcher.h"
+#include "getcpupercentage.h"
 
 
 /**
@@ -43,6 +44,7 @@
  *        |              + [function] unWatcher
  *        |              + [function] watchedFiles
  *        |              + [function] watcherClose
+ *        |              + [function] cpu
  *        |              + [function] hide
  *        |              + [function] show
  *        |              + [function] alert
@@ -191,9 +193,11 @@ public:
     static const QString OPEN_FILE_ERROR;
 
     static FileSystemWatcher* fileSystemWatcher;
+    static GetCPUPercentage* getCPUPercentage;
 
 
     ScriptBinding();
+    ~ScriptBinding();
 
     QScriptValue getRootSpace();
     QScriptValue getGlobalObject();
@@ -255,6 +259,7 @@ public:
     static QScriptValue about(QScriptContext *context, QScriptEngine *interpreter);
     static QScriptValue base64FormFile(QScriptContext *context, QScriptEngine *interpreter);
     static QScriptValue dataURIFormImage(QScriptContext *context, QScriptEngine *interpreter);
+    static QScriptValue cpu(QScriptContext *context, QScriptEngine *interpreter);
 
     /* 文件观察系统包裹方法  */
     static QScriptValue watchFile(QScriptContext *context, QScriptEngine *interpreter);

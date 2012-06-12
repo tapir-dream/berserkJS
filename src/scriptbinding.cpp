@@ -14,6 +14,7 @@ const QString ScriptBinding::OPEN_FILE_ERROR = "Error: Cannot open file ";
 Selector* ScriptBinding::selector = 0;
 QWebView* ScriptBinding::webView = 0;
 
+GetCPUPercentage* ScriptBinding::getCPUPercentage = new GetCPUPercentage();
 FileSystemWatcher* ScriptBinding::fileSystemWatcher;
 
 ScriptBinding::ScriptBinding()
@@ -30,6 +31,14 @@ ScriptBinding::ScriptBinding()
 
     //暂时不用的
     //initExpandMethodToRootSpace();
+}
+
+ScriptBinding::~ScriptBinding()
+{
+    delete selector;
+    delete fileSystemWatcher;
+    delete engine;
+    delete getCPUPercentage;
 }
 
 void ScriptBinding::initScriptEngine()
@@ -474,6 +483,9 @@ void ScriptBinding::initNativeMethodToRootSpace()
     nativeMathod = engine->newFunction(ScriptBinding::dataURIFormImage);
     getRootSpace().setProperty("dataURIFormImage", nativeMathod);
 
+    nativeMathod = engine->newFunction(ScriptBinding::cpu);
+    getRootSpace().setProperty("cpu", nativeMathod);
+
     nativeMathod = engine->newFunction(ScriptBinding::alert);
     getRootSpace().setProperty("alert", nativeMathod);
 
@@ -826,8 +838,8 @@ QScriptValue ScriptBinding::process(QScriptContext *context, QScriptEngine *inte
         msecs = context->argument(2).toString().toInt();
     }
 
-    QProcess* process = new QProcess();
-    process->start(program, args);
+    QProcess process;
+    process.start(program, args);
     QByteArray output;
 
     QTime time;
@@ -835,11 +847,11 @@ QScriptValue ScriptBinding::process(QScriptContext *context, QScriptEngine *inte
     int startTime = time.elapsed();
 
     // 每隔300ms输出一次，避免页面锁死
-    while (!process->waitForFinished(300)) {
+    while (!process.waitForFinished(300)) {
         // 如果开启debug的回调模式
         if (context->argument(3).isFunction()) {
             QString state;
-            switch (process->state()) {
+            switch (process.state()) {
              case QProcess::NotRunning:
                 state = "Error the process not running.";
                 break;
@@ -855,21 +867,21 @@ QScriptValue ScriptBinding::process(QScriptContext *context, QScriptEngine *inte
                  .call(context->thisObject(),
                        QScriptValueList() <<
                        QScriptValue(state) <<
-                       QScriptValue(QString(process->readAllStandardOutput()))
+                       QScriptValue(QString(process.readAllStandardOutput()))
                        );
         }
         // 超时处理
         if (time.elapsed() - startTime > msecs) {
-            if (!process->exitStatus() == QProcess::NormalExit) {
-                process->kill();
+            if (!process.exitStatus() == QProcess::NormalExit) {
+                process.kill();
             }
-            return QScriptValue(QString(process->readAllStandardOutput()));
+            return QScriptValue(QString(process.readAllStandardOutput()));
         }
         // 激活 UI 避免锁死
         qApp->processEvents();
     }
     // 300 ms 处理时间之内完成的内容 立即返回结果
-    return QScriptValue(QString(process->readAllStandardOutput()));
+    return QScriptValue(QString(process.readAllStandardOutput()));
 }
 
 QScriptValue ScriptBinding::httpRequest(QScriptContext *context, QScriptEngine *interpreter)
@@ -962,6 +974,12 @@ QScriptValue ScriptBinding::httpRequest(QScriptContext *context, QScriptEngine *
     return QScriptValue(QString(stream.readAll()));
 }
 
+
+QScriptValue ScriptBinding::cpu(QScriptContext *context, QScriptEngine *interpreter)
+{
+    return QScriptValue(getCPUPercentage->get());
+}
+
 QScriptValue ScriptBinding::alert(QScriptContext *context, QScriptEngine *interpreter)
 {
     CommandParameters cmdParams;
@@ -985,7 +1003,7 @@ QScriptValue ScriptBinding::about(QScriptContext *context, QScriptEngine *interp
 {
     QStringList about;
     about << "<h3 style=\"color:red;\">Welcome use of semi-finished products of the berserk</h3>"
-          << "<p>Version: 0.35 Beta</p>"
+          << "<p>Version: 0.4.1 Beta</p>"
           << "<p>Author: Tapir</p>"
           << "<p>Weibo: <a href=\"http://weibo.com/itapir/\">@Tapir</a></p>"
           << "<p>E-mail: <a href=\"mailto:baokun@staff.sina.com.cn\">baokun@staff.sina.com.cn</a></p>";

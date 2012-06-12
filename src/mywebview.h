@@ -29,7 +29,7 @@ class MyWebView : public QWebView
     Q_OBJECT
 public:
     MyWebView();
-
+    ~MyWebView();
     void setAppScriptEngine(ScriptBinding* scriptBinding);
     void sendPageMessage(QString message, QString type);
 
