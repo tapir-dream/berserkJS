@@ -4,13 +4,13 @@
 PageExtension::PageExtension(MyWebView* webview)
 {
     this->webview = webview;
-    this->getCPUPercentage = new GetCPUPercentage();
+    this->appInfo = new AppInfo();
 }
 
 PageExtension::~PageExtension()
 {
     delete webview;
-    delete getCPUPercentage;
+    delete appInfo;
 }
 
 void PageExtension::postMessage(QString wparam , QString lparam)
@@ -20,7 +20,12 @@ void PageExtension::postMessage(QString wparam , QString lparam)
 
 double PageExtension::cpu()
 {
-    return this->getCPUPercentage->get();
+    return this->appInfo->getCPU();
+}
+
+double PageExtension::memory()
+{
+    return this->appInfo->getMemory();
 }
 
 

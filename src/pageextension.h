@@ -5,7 +5,7 @@
 #include <QtScript>
 #include "scriptbinding.h"
 #include "mywebview.h"
-#include "getcpupercentage.h"
+#include "appinfo.h"
 
 class PageExtension : public QObject
 {
@@ -16,12 +16,13 @@ private:
 public:
     explicit PageExtension(MyWebView* webview);
     ~PageExtension();
-    GetCPUPercentage* getCPUPercentage;
+    AppInfo* appInfo;
 signals:
 
 public slots:
     void postMessage(QString wparam  ="", QString lparam  = "");
     double cpu();
+    double memory();
 };
 
 #endif // PAGEEXTENSION_H

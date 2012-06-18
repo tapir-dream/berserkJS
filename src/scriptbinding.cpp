@@ -14,7 +14,7 @@ const QString ScriptBinding::OPEN_FILE_ERROR = "Error: Cannot open file ";
 Selector* ScriptBinding::selector = 0;
 QWebView* ScriptBinding::webView = 0;
 
-GetCPUPercentage* ScriptBinding::getCPUPercentage = new GetCPUPercentage();
+AppInfo* ScriptBinding::appInfo = new AppInfo();
 FileSystemWatcher* ScriptBinding::fileSystemWatcher;
 
 ScriptBinding::ScriptBinding()
@@ -38,7 +38,7 @@ ScriptBinding::~ScriptBinding()
     delete selector;
     delete fileSystemWatcher;
     delete engine;
-    delete getCPUPercentage;
+    delete appInfo;
 }
 
 void ScriptBinding::initScriptEngine()
@@ -485,6 +485,9 @@ void ScriptBinding::initNativeMethodToRootSpace()
 
     nativeMathod = engine->newFunction(ScriptBinding::cpu);
     getRootSpace().setProperty("cpu", nativeMathod);
+
+    nativeMathod = engine->newFunction(ScriptBinding::memory);
+    getRootSpace().setProperty("memory", nativeMathod);
 
     nativeMathod = engine->newFunction(ScriptBinding::alert);
     getRootSpace().setProperty("alert", nativeMathod);
@@ -977,7 +980,12 @@ QScriptValue ScriptBinding::httpRequest(QScriptContext *context, QScriptEngine *
 
 QScriptValue ScriptBinding::cpu(QScriptContext *context, QScriptEngine *interpreter)
 {
-    return QScriptValue(getCPUPercentage->get());
+    return QScriptValue(appInfo->getCPU());
+}
+
+QScriptValue ScriptBinding::memory(QScriptContext *context, QScriptEngine *interpreter)
+{
+    return QScriptValue(appInfo->getMemory());
 }
 
 QScriptValue ScriptBinding::alert(QScriptContext *context, QScriptEngine *interpreter)
