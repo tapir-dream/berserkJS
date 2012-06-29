@@ -141,7 +141,7 @@ QScriptValue MyWebView::getWebViewObjcet()
     return script->getRootSpace().property("webview");
 }
 
-QScriptValue MyWebView::cookiesFormUrl(QScriptValue url)
+QScriptValue MyWebView::cookiesFromUrl(QScriptValue url)
 {
     QUrl targetUrl;
     if (url.isUndefined()) {
@@ -163,7 +163,7 @@ QScriptValue MyWebView::cookiesFormUrl(QScriptValue url)
     return QScriptValue(QString(str));
 }
 
-QScriptValue MyWebView::setCookiesFormUrl(QScriptValue cookie, QScriptValue url)
+QScriptValue MyWebView::setCookiesFromUrl(QScriptValue cookie, QScriptValue url)
 {
     QUrl targetUrl;
     QString targetCookie;
@@ -510,7 +510,7 @@ QScriptValue MyWebView::contentRect()
     return rect;
 }
 
-QScriptValue MyWebView::dataURIFormRect(QScriptValue rect, QScriptValue type, QScriptValue quality)
+QScriptValue MyWebView::dataURIFromRect(QScriptValue rect, QScriptValue type, QScriptValue quality)
 {
     // 参数初始化
     int q = quality.toString().toInt();

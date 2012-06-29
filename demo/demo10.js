@@ -13,7 +13,7 @@ App.webview.addEventListener('firstScreenFinished', function(timeout, url) {
     cssText += 'position: fixed; top: 0; left:0; z-index:99999;';
     node.style.cssText = cssText;
     node.innerHTML = '<ul><li>' + o.timeout + ' ms</li>' +
-      '<li> ' + o.url + '</li><ul>';
+      '<li> ' + o.url + '</li></ul>';
     document.body.appendChild(node);
   }, {timeout: timeout, url: url});
 });

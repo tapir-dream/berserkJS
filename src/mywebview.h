@@ -47,14 +47,14 @@ public:
     Q_INVOKABLE QScriptValue elementRects(QScriptValue cssSelector);
     Q_INVOKABLE QScriptValue viewport();
     Q_INVOKABLE QScriptValue contentRect();
-    Q_INVOKABLE QScriptValue dataURIFormRect(QScriptValue rect = QScriptValue::UndefinedValue,
+    Q_INVOKABLE QScriptValue dataURIFromRect(QScriptValue rect = QScriptValue::UndefinedValue,
                                              QScriptValue type = QScriptValue::UndefinedValue,
                                              QScriptValue quality = QScriptValue(-1));
     Q_INVOKABLE QScriptValue setViewport(QScriptValue size);
     Q_INVOKABLE QScriptValue getUrl();
     Q_INVOKABLE QScriptValue netListener(QScriptValue enabled = QScriptValue(true));
-    Q_INVOKABLE QScriptValue cookiesFormUrl(QScriptValue url = QScriptValue::UndefinedValue);
-    Q_INVOKABLE QScriptValue setCookiesFormUrl(QScriptValue cookie,
+    Q_INVOKABLE QScriptValue cookiesFromUrl(QScriptValue url = QScriptValue::UndefinedValue);
+    Q_INVOKABLE QScriptValue setCookiesFromUrl(QScriptValue cookie,
                                                QScriptValue url = QScriptValue::UndefinedValue);
     Q_INVOKABLE QScriptValue setProxy(QScriptValue host,
                                       QScriptValue type = QScriptValue::UndefinedValue,

@@ -477,11 +477,11 @@ void ScriptBinding::initNativeMethodToRootSpace()
     nativeMathod = engine->newFunction(ScriptBinding::writeFile);
     getRootSpace().setProperty("writeFile", nativeMathod);
 
-    nativeMathod = engine->newFunction(ScriptBinding::base64FormFile);
-    getRootSpace().setProperty("base64FormFile", nativeMathod);
+    nativeMathod = engine->newFunction(ScriptBinding::base64FromFile);
+    getRootSpace().setProperty("base64FromFile", nativeMathod);
 
-    nativeMathod = engine->newFunction(ScriptBinding::dataURIFormImage);
-    getRootSpace().setProperty("dataURIFormImage", nativeMathod);
+    nativeMathod = engine->newFunction(ScriptBinding::dataURIFromImage);
+    getRootSpace().setProperty("dataURIFromImage", nativeMathod);
 
     nativeMathod = engine->newFunction(ScriptBinding::cpu);
     getRootSpace().setProperty("cpu", nativeMathod);
@@ -722,7 +722,7 @@ QScriptValue ScriptBinding::selectedSizeOut(QScriptContext *context, QScriptEngi
 }
 
 
-QScriptValue ScriptBinding::base64FormFile(QScriptContext *context, QScriptEngine *interpreter)
+QScriptValue ScriptBinding::base64FromFile(QScriptContext *context, QScriptEngine *interpreter)
 {
     QScriptValue path = context->argument(0);
     if (!path.isString())
@@ -735,7 +735,7 @@ QScriptValue ScriptBinding::base64FormFile(QScriptContext *context, QScriptEngin
     return QScriptValue(QString::fromAscii(((file.readAll()).toBase64())));
 }
 
-QScriptValue ScriptBinding::dataURIFormImage(QScriptContext *context, QScriptEngine *interpreter)
+QScriptValue ScriptBinding::dataURIFromImage(QScriptContext *context, QScriptEngine *interpreter)
 {
     QScriptValue path = context->argument(0);
 
@@ -1011,7 +1011,7 @@ QScriptValue ScriptBinding::about(QScriptContext *context, QScriptEngine *interp
 {
     QStringList about;
     about << "<h3 style=\"color:red;\">Welcome use of semi-finished products of the berserk</h3>"
-          << "<p>Version: 0.4.1 Beta</p>"
+          << "<p>Version: 0.4.3 Beta</p>"
           << "<p>Author: Tapir</p>"
           << "<p>Weibo: <a href=\"http://weibo.com/itapir/\">@Tapir</a></p>"
           << "<p>E-mail: <a href=\"mailto:baokun@staff.sina.com.cn\">baokun@staff.sina.com.cn</a></p>";

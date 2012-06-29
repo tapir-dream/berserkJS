@@ -35,8 +35,8 @@
  * gc     |              + [function] loadScript
  * version|              + [function] readFile
  *        |              + [function] writeFile
- *        |              + [function] base64FormFile
- *        |              + [function] dataURIFormImage
+ *        |              + [function] base64FrommFile
+ *        |              + [function] dataURIFromImage
  *        |              + [function] netListener <--referenced from webview.netListener method
  *        |              + [function] process
  *        |              + [function] httpRequest
@@ -106,15 +106,15 @@
  *        |                              + [function] removeEventListener
  *        |                              + [function] elementRects
  *        |                              + [function] saveImage  <-  * JPG/JPEG/PNG/BMP/PPM/TIFF;
- *        |                              + [function] dataURIFormRect
+ *        |                              + [function] dataURIFromRect
  *        |                              + [function] sendMouseEvent + click/mousedown/mouseup/mousemove
  *        |                                                          + and key shift/alt/ctrl
  *        |                              + [function] viewport
  *        |                              + [function] setViewport
  *        |                              + [function] contentRect
  *        |                              + [function] netListener
- *        |                              + [function] cookiesFormUrl
- *        |                              + [function] setCookiesFormUrl
+ *        |                              + [function] cookiesFromUrl
+ *        |                              + [function] setCookiesFromUrl
  *        |                              + [function] userAgent
  *        |                              + [function] defaultUserAgent
  *        |                              + [function] setUserAgent
@@ -257,8 +257,8 @@ public:
     static QScriptValue readFile(QScriptContext *context, QScriptEngine *interpreter);
     static QScriptValue alert(QScriptContext *context, QScriptEngine *interpreter);
     static QScriptValue about(QScriptContext *context, QScriptEngine *interpreter);
-    static QScriptValue base64FormFile(QScriptContext *context, QScriptEngine *interpreter);
-    static QScriptValue dataURIFormImage(QScriptContext *context, QScriptEngine *interpreter);
+    static QScriptValue base64FromFile(QScriptContext *context, QScriptEngine *interpreter);
+    static QScriptValue dataURIFromImage(QScriptContext *context, QScriptEngine *interpreter);
     static QScriptValue cpu(QScriptContext *context, QScriptEngine *interpreter);
     static QScriptValue memory(QScriptContext *context, QScriptEngine *interpreter);
 
