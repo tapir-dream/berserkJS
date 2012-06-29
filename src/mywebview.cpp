@@ -230,10 +230,35 @@ QScriptValue MyWebView::netListener(QScriptValue enabled)
     return QScriptValue(true);
 }
 
-QScriptValue MyWebView::jsonStringify(QScriptValue scriptObject)
+QString MyWebView::jsonStringify(QScriptValue scriptObject)
 {
     QScriptValue json = appEngine->globalObject().property("JSON");
-    return json.property("stringify").call(json, QScriptValueList() << scriptObject);
+    json = json.property("stringify")
+            .call(json, QScriptValueList() << scriptObject);
+    QString argsToJsonStr = json.toString();
+    int stringLength = argsToJsonStr.size();
+    // 如果是字符串，首尾会有"字符，否则为非字符串的转义处理
+    /*
+    .replace("\\n", "\\\\n")
+    .replace("\\r'", "\\\\r")
+    .replace("\\t'", "\\\\t")
+    .replace("\b'", "\\\\b")
+    .replace("\\\"", "\\\\\"")
+    .replace("\\\'", "\\\\\'")
+    .replace("\"", "\\\"")
+    .replace("\'","\\\'");
+    */
+    //qDebug()<<argsToJsonStr;
+    if (argsToJsonStr.mid(0, 1) == "\"" && argsToJsonStr.mid(stringLength - 1, stringLength) == "\"") {
+        argsToJsonStr = argsToJsonStr.mid(1, stringLength - 2);
+        argsToJsonStr.replace("\\", "\\\\");
+        argsToJsonStr.replace("\\\\\"", "\\\\\\\"");
+        argsToJsonStr = "\\\"" + argsToJsonStr + "\\\"";
+    } else {
+        argsToJsonStr.replace("\\", "\\\\");
+        argsToJsonStr.replace("\"", "\\\"");
+    }
+    return argsToJsonStr;
 }
 
 QScriptValue MyWebView::jsonParse(QScriptValue jsonString)
@@ -272,31 +297,8 @@ QScriptValue MyWebView::execScript(QScriptValue scriptFunc, QScriptValue args)
     })({x: 20});
     */
 
-    QString argsToJsonStr = jsonStringify(args)
-            .toString();
-    int stringLength = argsToJsonStr.size();
-    // 如果是字符串，首尾会有"字符，否则为非字符串的转义处理
-    if (argsToJsonStr.mid(0, 1) == "\"" && argsToJsonStr.mid(stringLength - 1, stringLength) == "\"") {
-        argsToJsonStr = argsToJsonStr.mid(1, stringLength - 2);
-        argsToJsonStr.replace("\\", "\\\\");
-        argsToJsonStr.replace("\\\\\"", "\\\\\\\"");
-        argsToJsonStr = "\\\"" + argsToJsonStr + "\\\"";
-    } else {
-        argsToJsonStr.replace("\\", "\\\\");
-        argsToJsonStr.replace("\"", "\\\"");
-    }
+    QString argsToJsonStr = jsonStringify(args);
 
-    /*
-    .replace("\\n", "\\\\n")
-    .replace("\\r'", "\\\\r")
-    .replace("\\t'", "\\\\t")
-    .replace("\b'", "\\\\b")
-    .replace("\\\"", "\\\\\"")
-    .replace("\\\'", "\\\\\'")
-    .replace("\"", "\\\"")
-    .replace("\'","\\\'");
-    */
-    //qDebug()<<argsToJsonStr;
     result = myFrame->evaluateJavaScript("JSON.stringify((function(param){ return (" +
                                          scriptFunc.toString() +
                                          ")(JSON.parse(param))" +
@@ -1026,6 +1028,14 @@ void MyWebView::onLoadStarted()
 void MyWebView::onJavaScriptWindowObjectCleared()
 {
     myFrame->addToJavaScriptWindowObject("__pageExtension", pageExtension);
+    QStringList postMessageScript;
+    postMessageScript
+            << "__pageExtension.postMessage = function(wparam, lparam) {"
+            << "wparam = (wparam === void 0) ? '' : wparam;"
+            << "lparam = (lparam === void 0) ? '' : lparam;"
+            << "__pageExtension.message(JSON.stringify(wparam), JSON.stringify(lparam));"
+            << "}";
+    myFrame->evaluateJavaScript(postMessageScript.join(""));
     normalFireEvent(javaScriptWindowObjectClearedFunc);
 }
 
@@ -1122,8 +1132,8 @@ void MyWebView::onPageMessage(QString wparam, QString lparam)
             contextInfo.func.setScope(contextInfo.activationObject.scope());
             contextInfo.func.call(contextInfo.thisObject,
                                   QScriptValueList()
-                                  << QScriptValue(wparam)
-                                  << QScriptValue(lparam));
+                                  << jsonParse(wparam)
+                                  << jsonParse(lparam));
         }
     }
 }

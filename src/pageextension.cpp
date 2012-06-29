@@ -13,7 +13,7 @@ PageExtension::~PageExtension()
     delete appInfo;
 }
 
-void PageExtension::postMessage(QString wparam , QString lparam)
+void PageExtension::message(QString wparam, QString lparam)
 {
     webview->sendPageMessage(wparam, lparam);
 }

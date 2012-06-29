@@ -145,7 +145,7 @@ private:
 
     QScriptValue rectToScriptObject(const QRect & rect);
     QScriptValue sizeToScriptObject(const QSize & size);
-    QScriptValue jsonStringify(QScriptValue scriptObject);
+    QString jsonStringify(QScriptValue scriptObject);
     QScriptValue jsonParse(QScriptValue jsonString);
     QScriptValue timer(QScriptValue scriptFunc, QScriptValue timeout, bool singleShot);
     QScriptValue clearTimer(QScriptValue timeId);

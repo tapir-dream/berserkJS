@@ -20,7 +20,8 @@ public:
 signals:
 
 public slots:
-    void postMessage(QString wparam  ="", QString lparam  = "");
+    void message(QString wparam = "",
+                 QString lparam = "");
     double cpu();
     double memory();
 };

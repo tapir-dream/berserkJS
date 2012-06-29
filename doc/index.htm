@@ -1448,26 +1448,26 @@ callback &lt;function&gt; 事件触发时的回调函数。
 <p>该对象在页面被创建初始被扩展到页面中 （pageScriptCreated事件触发时）。在此命名空间下，存放页面与 App 交互用特殊处理函数。
 </p><p><br />
 </p>
-<h4><span id="pageExtension.postMessage.28.5Bwparam_.3Cstring.3E.2C_lparam_.3Cstring.3E.5D.29"> <b>__pageExtension.postMessage([wparam &lt;string&gt;, lparam &lt;string&gt;])  </b> </span></h4>
+<h4><span id="pageExtension.postMessage.28.5Bwparam_.3CObject.7Cstring.7Cnumber.3E.2C_lparam_.3CObject.7Cstring.7Cnumber.3E.5D.29"> <b>__pageExtension.postMessage([wparam &lt;Object|string|number&gt;, lparam &lt;Object|string|number&gt;])  </b> </span></h4>
 <p><b>参数:</b>
-</p><p>wparam &lt;string&gt; 可选参数。用来附加的消息特定的字符串类型信息。
-</p><p>lparam&lt;string&gt; 可选参数。用来附加的消息特定的字符串类型信息。
+</p><p>wparam &lt;Object|string|number&gt; 可选参数。用来附加特定消息，通常用于发送消息内容。
+</p><p>lparam&lt;Object|string|number&gt; 可选参数。用来附加特定消息，通常用来发送消息辨别数据。
 </p><p><b>返回值:</b>无
-</p><p><b>说明:</b>此方法在页面中被使用，该方法触发时，如果App中存在 message 事件监听，则会触发监听回调函数。通常 wparam 和 lparam 参数通常用来标示消息字符串和消息辅助辨别信息，它们具体使用方式由用户确定。
+</p><p><b>说明:</b>此方法在页面中被使用，该方法触发时，如果App中存在 message 事件监听，则会触发监听回调函数。通常 wparam 和 lparam 参数通常用来标示消息字符串和消息辅助辨别信息，它们具体使用方式由用户确定。 wparam 和 lparam 参数还可以私用 JSON 数据，它们会被序列化后发送给 message 事件监听函数，监听函数获取消息后会自动反序列化数据。
 </p><p><b>例如:</b>
 </p>
 <pre>
 App.webview.addEventListener('message', function(w, l) {
-  if ('page' == l) {
+  if ('page' == l.b) {
     App.webview.execScript(function(msg) {
-      // 显示 &quot;this is a message&quot; 信息。
-      console.log(msg);
+      // 显示 "this is a message" 信息。
+      console.log(msg.a);
     }, w);
   }
 });
 
 App.webview.execScript(function(s) {
-  __pageExtension.postMessage(&quot;this is a message&quot;, &quot;page&quot;);
+  __pageExtension.postMessage({a:"hello world"}, {b:"page"});
 });
 </pre>
 
