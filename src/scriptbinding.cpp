@@ -364,7 +364,7 @@ QScriptValue ScriptBinding::wrapperHttpDataArray(QMap<QString, MonitorData*> map
     return array;
 }
 
-QScriptValue ScriptBinding::warpperSelector()
+QScriptValue ScriptBinding::wrapperSelector()
 {
     // 暴露selector相关方法
     QScriptValue obj = engine->newObject();
@@ -456,7 +456,7 @@ void ScriptBinding::initNativeMethodToRootSpace()
     QScriptValue nativeMathod;
 
     // selector 空间下所有函数统一包装
-    getRootSpace().setProperty("selector", warpperSelector());
+    getRootSpace().setProperty("selector", wrapperSelector());
 
     // 其他内置函数包装
     nativeMathod = engine->newFunction(ScriptBinding::getNetworkData);
@@ -550,7 +550,7 @@ QScriptValue ScriptBinding::getNetworkData(QScriptContext *context, QScriptEngin
 QScriptValue ScriptBinding::selectorClear(QScriptContext *context, QScriptEngine *interpreter)
 {
     ScriptBinding::selector->clear();
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::getSelectedData(QScriptContext *context, QScriptEngine *interpreter)
@@ -562,123 +562,125 @@ QScriptValue ScriptBinding::getSelectedData(QScriptContext *context, QScriptEngi
     arr.length;
     */
     QMap<QString, MonitorData*> map = ScriptBinding::selector->get();
-    return wrapperHttpDataArray(map, interpreter);
+    QScriptValue data = wrapperHttpDataArray(map, interpreter);
+    ScriptBinding::selector->clear();
+    return data;
 }
 
 QScriptValue ScriptBinding::selectedIMG(QScriptContext *context, QScriptEngine *interpreter)
 {
     ScriptBinding::selector->selectedIMG();
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::selectedPNG(QScriptContext *context, QScriptEngine *interpreter)
 {
     ScriptBinding::selector->selectedPNG();
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::selectedGIF(QScriptContext *context, QScriptEngine *interpreter)
 {
     ScriptBinding::selector->selectedGIF();
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::selectedICO(QScriptContext *context, QScriptEngine *interpreter)
 {
     ScriptBinding::selector->selectedICO();
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::selectedJPG(QScriptContext *context, QScriptEngine *interpreter)
 {
     ScriptBinding::selector->selectedJPG();
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::selectedSVG(QScriptContext *context, QScriptEngine *interpreter)
 {
     ScriptBinding::selector->selectedSVG();
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::selectedDoc(QScriptContext *context, QScriptEngine *interpreter)
 {
     ScriptBinding::selector->selectedDoc();
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::selectedCSS(QScriptContext *context, QScriptEngine *interpreter)
 {
     ScriptBinding::selector->selectedCSS();
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::selectedJS(QScriptContext *context, QScriptEngine *interpreter)
 {
     ScriptBinding::selector->selectedJS();
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::selectedNoneGZip(QScriptContext *context, QScriptEngine *interpreter)
 {
     ScriptBinding::selector->selectedNoneGZip();
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::selectedNoneCache(QScriptContext *context, QScriptEngine *interpreter)
 {
     ScriptBinding::selector->selectedNoneCache();
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::selectedNoneCDN(QScriptContext *context, QScriptEngine *interpreter)
 {
     ScriptBinding::selector->selectedNoneCDN();
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 
 QScriptValue ScriptBinding::selectedCookie(QScriptContext *context, QScriptEngine *interpreter)
 {
     ScriptBinding::selector->selectedCookie();
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::selectedHttp200(QScriptContext *context, QScriptEngine *interpreter)
 {
     ScriptBinding::selector->selectedHttp200();
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::selectedHttp301(QScriptContext *context, QScriptEngine *interpreter)
 {
     ScriptBinding::selector->selectedHttp301();
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::selectedHttp302(QScriptContext *context, QScriptEngine *interpreter)
 {
     ScriptBinding::selector->selectedHttp302();
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::selectedHttp304(QScriptContext *context, QScriptEngine *interpreter)
 {
     ScriptBinding::selector->selectedHttp304();
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::selectedHttp404(QScriptContext *context, QScriptEngine *interpreter)
 {
     ScriptBinding::selector->selectedHttp404();
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 
 QScriptValue ScriptBinding::selectedFromCDN(QScriptContext *context, QScriptEngine *interpreter)
 {
     ScriptBinding::selector->selectedFromCDN();
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::selectedTotalTimeout(QScriptContext *context, QScriptEngine *interpreter)
@@ -686,7 +688,7 @@ QScriptValue ScriptBinding::selectedTotalTimeout(QScriptContext *context, QScrip
     QScriptValue arg1 = context->argument(0);
     if (arg1.isNumber() && arg1.toInt32() > 0)
         ScriptBinding::selector->selectedTotalTimeout(arg1.toInt32());
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::selectedWaitTimeout(QScriptContext *context, QScriptEngine *interpreter)
@@ -694,7 +696,7 @@ QScriptValue ScriptBinding::selectedWaitTimeout(QScriptContext *context, QScript
     QScriptValue arg1 = context->argument(0);
     if (arg1.isNumber() && arg1.toInt32() > 0)
         ScriptBinding::selector->selectedWaitTimeout(arg1.toInt32());
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::selectedDownloadTimeout(QScriptContext *context, QScriptEngine *interpreter)
@@ -702,7 +704,7 @@ QScriptValue ScriptBinding::selectedDownloadTimeout(QScriptContext *context, QSc
     QScriptValue arg1 = context->argument(0);
     if (arg1.isNumber() && arg1.toInt32() > 0)
         ScriptBinding::selector->selectedDownloadTimeout(arg1.toInt32());
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::selectedDNSLookupTimeout(QScriptContext *context, QScriptEngine *interpreter)
@@ -710,7 +712,7 @@ QScriptValue ScriptBinding::selectedDNSLookupTimeout(QScriptContext *context, QS
     QScriptValue arg1 = context->argument(0);
     if (arg1.isNumber() && arg1.toInt32() > 0)
         ScriptBinding::selector->selectedDNSLookupTimeout(arg1.toInt32());
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 QScriptValue ScriptBinding::selectedSizeOut(QScriptContext *context, QScriptEngine *interpreter)
@@ -718,7 +720,7 @@ QScriptValue ScriptBinding::selectedSizeOut(QScriptContext *context, QScriptEngi
     QScriptValue arg1 = context->argument(0);
     if (arg1.isNumber() && arg1.toInt32() > 0)
         ScriptBinding::selector->selectedSizeOut(arg1.toInt32());
-    return QScriptValue::UndefinedValue;
+    return context->thisObject();
 }
 
 

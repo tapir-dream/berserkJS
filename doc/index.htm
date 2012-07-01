@@ -933,7 +933,7 @@ App.selecotr.img();
 seletedNetwrokData = App.selecotr.get();
 </pre>
 <p>上例中使用 selecotr 功能从所有数据集中选择出 产生 304 请求的 img 文件。 
-</p><p>【注意】：选择器所做的是<b>累积</b>操作，先选择出所有 304 请求集，然后从 304 请求集中再选择出图片类型文件。<b>而不是选择所有 304 请求和所有图片请求的合集</b>。
+</p><p>【注意】：选择器所做的是<b>累积</b>操作，先选择出所有 304 请求集，然后从 304 请求集中再选择出图片类型文件。<b>而不是选择所有 304 请求和所有图片请求的合集</b>。<b>并且，此方法附带 App.selector.clear() 效果，执行后将会自动清理累积选择数据。</b>。
 </p><p><br />
 </p>
 <h4><span id="App.selector.img.28.29"><b>App.selector.img()</b></span></h4>
@@ -1088,7 +1088,7 @@ seletedNetwrokData = App.selecotr.get();
 <h4><span id="App.selector.clear.28.29"><b>App.selector.clear()</b></span></h4>
 <p><b>参数:</b> 无
 </p><p><b>返回值:</b> 无
-</p><p><b>说明:</b> 用来清除累积选择的内容，建议每次选择数据前先执行此函数保证数据集纯净。
+</p><p><b>说明:</b> 用来清除累积选择的内容，如果没有执行过 App.selector.get() 方法获取累积选择记录，则在需要选择新数据内容前执行此函数保证数据集纯净。
 </p><p><br />
 </p>
 <h3><span id="App.webview.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"> App.webview命名空间下函数 </span></h3>

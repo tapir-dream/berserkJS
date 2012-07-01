@@ -185,7 +185,7 @@ private:
     QScriptValue toWrapper(QObject *object);
 
     // 统一包装 Selector 内部的方法
-    QScriptValue warpperSelector();
+    QScriptValue wrapperSelector();
 
 public:
     static const QString ROOT;
