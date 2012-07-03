@@ -295,17 +295,20 @@ QScriptValue ScriptBinding::wrapperHttpDataArray(QMap<QString, MonitorData*> map
         obj.setProperty("ContentType", QScriptValue(map[keys.at(i)]->ContentType), QScriptValue::ReadOnly);
         obj.setProperty("ContentLength", QScriptValue(map[keys.at(i)]->ContentLength), QScriptValue::ReadOnly);
         obj.setProperty("ContentEncoding", QScriptValue(map[keys.at(i)]->ContentEncoding), QScriptValue::ReadOnly);
+        obj.setProperty("ContentLanguange", QScriptValue(map[keys.at(i)]->ContentLanguage), QScriptValue::ReadOnly);
         obj.setProperty("Cookie", QScriptValue(map[keys.at(i)]->Cookie), QScriptValue::ReadOnly);
         obj.setProperty("Date", QScriptValue(map[keys.at(i)]->Date), QScriptValue::ReadOnly);
         obj.setProperty("ETag", QScriptValue(map[keys.at(i)]->ETag), QScriptValue::ReadOnly);
         obj.setProperty("Expires", QScriptValue(map[keys.at(i)]->Expires), QScriptValue::ReadOnly);
         obj.setProperty("IfModifiedSince", QScriptValue(map[keys.at(i)]->IfModifiedSince), QScriptValue::ReadOnly);
         obj.setProperty("LastModified", QScriptValue(map[keys.at(i)]->LastModified), QScriptValue::ReadOnly);
+        obj.setProperty("Location", QScriptValue(map[keys.at(i)]->Location), QScriptValue::ReadOnly);
         obj.setProperty("Server", QScriptValue(map[keys.at(i)]->Server), QScriptValue::ReadOnly);
         obj.setProperty("SetCookie", QScriptValue(map[keys.at(i)]->SetCookie), QScriptValue::ReadOnly);
         obj.setProperty("P3P", QScriptValue(map[keys.at(i)]->P3P), QScriptValue::ReadOnly);
         obj.setProperty("Vary", QScriptValue(map[keys.at(i)]->Vary), QScriptValue::ReadOnly);
         obj.setProperty("TransferEncoding", QScriptValue(map[keys.at(i)]->TransferEncoding), QScriptValue::ReadOnly);
+        obj.setProperty("Via", QScriptValue(map[keys.at(i)]->Via), QScriptValue::ReadOnly);
         obj.setProperty("XVia", QScriptValue(map[keys.at(i)]->XVia), QScriptValue::ReadOnly);
         obj.setProperty("XDEBUGIDC", QScriptValue(map[keys.at(i)]->XDEBUGIDC), QScriptValue::ReadOnly);
         obj.setProperty("XPoweredBy", QScriptValue(map[keys.at(i)]->XPoweredBy), QScriptValue::ReadOnly);
@@ -314,6 +317,34 @@ QScriptValue ScriptBinding::wrapperHttpDataArray(QMap<QString, MonitorData*> map
         obj.setProperty("XCacheVarnish", QScriptValue(map[keys.at(i)]->XCacheVarnish), QScriptValue::ReadOnly);
         obj.setProperty("PoweredByChinaCache", QScriptValue(map[keys.at(i)]->PoweredByChinaCache), QScriptValue::ReadOnly);
         obj.setProperty("SINALB", QScriptValue(map[keys.at(i)]->SINALB), QScriptValue::ReadOnly);
+
+        // 遍历输出未知应答头（自定义私有头）
+        QMap<QString, QString> other = map[keys.at(i)]->other;
+        int otherHeadSize = other.size();
+        if (otherHeadSize > 0) {
+            for (int j = 0; j < otherHeadSize; ++j) {
+                QList<QString> otherKeys = other.keys();
+                obj.setProperty(otherKeys.at(j),
+                                QScriptValue(other[otherKeys.at(j)]),
+                                QScriptValue::ReadOnly);
+            }
+        }
+
+        // 由于无法从监听reply中读到请求的字节数据，只能将url放到浏览器中 new Image
+        // 此时浏览器已经加载完成图片，可以立即得到宽高值。
+        // 无奈…… 阿弥陀佛……
+        if (map[keys.at(i)]->isImgFile()) {
+            QStringList rect = ScriptBinding::webView->page()->mainFrame()->evaluateJavaScript(
+                "(function() {var img = new Image(); img.src = '" +
+                map[keys.at(i)]->RequestURL +
+                "'; return img.width + '|' + img.height;})();"
+             ).toString().split("|");
+             obj.setProperty("width", QScriptValue(rect.at(0).toInt()), QScriptValue::ReadOnly);
+             obj.setProperty("height", QScriptValue(rect.at(0).toInt()), QScriptValue::ReadOnly);
+        } else {
+            obj.setProperty("width", QScriptValue(-1), QScriptValue::ReadOnly);
+            obj.setProperty("height", QScriptValue(-1), QScriptValue::ReadOnly);
+        }
 
         // 由内核提供的一些辅助数据可被更改
         obj.setProperty("hasKeepAlive", QScriptValue(map[keys.at(i)]->hasKeepAlive()));
@@ -341,22 +372,6 @@ QScriptValue ScriptBinding::wrapperHttpDataArray(QMap<QString, MonitorData*> map
         obj.setProperty("isHttp302", QScriptValue(map[keys.at(i)]->isHttp302()));
         obj.setProperty("isHttp304", QScriptValue(map[keys.at(i)]->isHttp304()));
         obj.setProperty("isHttp404", QScriptValue(map[keys.at(i)]->isHttp404()));
-
-        // 由于无法从监听reply中读到请求的字节数据，只能将url放到浏览器中 new Image
-        // 此时浏览器已经加载完成图片，可以立即得到宽高值。
-        // 无奈…… 阿弥陀佛……
-        if (map[keys.at(i)]->isImgFile()) {
-            QStringList rect = ScriptBinding::webView->page()->mainFrame()->evaluateJavaScript(
-                "(function() {var img = new Image(); img.src = '" +
-                map[keys.at(i)]->RequestURL +
-                "'; return img.width + '|' + img.height;})();"
-             ).toString().split("|");
-             obj.setProperty("width", QScriptValue(rect.at(0).toInt()));
-             obj.setProperty("height", QScriptValue(rect.at(0).toInt()));
-        } else {
-            obj.setProperty("width", QScriptValue(-1));
-            obj.setProperty("height", QScriptValue(-1));
-        }
 
         // 将当前对象push到数组内
         array.setProperty(i, obj);

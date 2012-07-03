@@ -118,7 +118,7 @@ void CustomDownload::onFinished()
             monitorData->Age = value;
         } else if ("Access-Control-Allow-Origin" == key) {
             monitorData->AccessControlAllowOrigin = value;
-        } else if ("Cahce-Control" == key) {
+        } else if ("Cache-Control" == key) {
             monitorData->CacheControl = value;
         } else if ("Connection" == key) {
             monitorData->Connection = value;
@@ -128,6 +128,10 @@ void CustomDownload::onFinished()
             monitorData->ContentLength = value.toUInt();
         } else if ("Content-Encoding" == key) {
             monitorData->ContentEncoding = value;
+        } else if ("Content-Language" == key) {
+            monitorData->ContentLanguage = value;
+        } else if ("Location" == key) {
+            monitorData->Location = value;
         } else if ("Cookie" == key) {
             monitorData->Cookie = value;
         } else if ("Date" == key) {
@@ -152,6 +156,8 @@ void CustomDownload::onFinished()
             monitorData->Vary = value;
         } else if ("Transfer-Encoding" == key) {
             monitorData->TransferEncoding = value;
+        } else if ("Via" == key) {
+            monitorData->Via = value;
         } else if ("X-Via" == key) {
             monitorData->XVia = value;
         } else if ("X-DEBUG-IDC" == key) {
@@ -168,6 +174,8 @@ void CustomDownload::onFinished()
             monitorData->PoweredByChinaCache = value;
         } else if ("SINA-LB" == key) {
             monitorData->SINALB = value;
+        } else {
+            monitorData->other[key] = value;
         }
         MonitorDataMap::getMonitorDataMap()->set(monitorData->RequestURL, monitorData);
     }

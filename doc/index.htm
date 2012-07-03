@@ -674,17 +674,20 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
 </li><li> "ContentType": &lt;string&gt; [readonly]
 </li><li> "ContentLength": &lt;string&gt; [readonly]
 </li><li> "ContentEncoding": &lt;string&gt; [readonly]
+</li><li> "ContentLanguage": &lt;string&gt; [readonly]
 </li><li> "Cookie": &lt;string&gt; [readonly]
 </li><li> "Date": &lt;string&gt; [readonly]
 </li><li> "ETag": &lt;string&gt; [readonly]
 </li><li> "Expires": &lt;string&gt; [readonly]
 </li><li> "IfModifiedSince": &lt;string&gt; [readonly]
 </li><li> "LastModified": &lt;string&gt; [readonly]
+</li><li> "Location": &lt;string&gt; [readonly]
 </li><li> "Server": &lt;string&gt; [readonly]
 </li><li> "SetCookie": &lt;string&gt; [readonly]
 </li><li> "P3P": &lt;string&gt; [readonly]
 </li><li> "Vary": &lt;string&gt; [readonly]
 </li><li> "TransferEncoding": &lt;string&gt; [readonly]
+</li><li> "Via": &lt;string&gt; [readonly]
 </li><li> "XVia": &lt;string&gt; [readonly]
 </li><li> "XDEBUGIDC": &lt;string&gt; [readonly]
 </li><li> "XPoweredBy": &lt;string&gt; [readonly]
@@ -712,7 +715,6 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
 </li><li> "isDocFile": &lt;boolean&gt; 
 </li><li> "isAudioFile":  &lt;boolean&gt;
 </li><li> "isVideoFile":  &lt;boolean&gt;
-</li><li> "isAudioFile": &lt;boolean&gt;
 </li><li> "isFontFile": &lt;boolean&gt;
 </li><li> "isOtherFile":  &lt;boolean&gt;
 </li><li> "isHttp200": &lt;boolean&gt;
@@ -724,6 +726,7 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
 <p>以上值对应同名的HTTP头数据，不再一一特殊说明。
 </p><p>其中标注  [readonly] 的值项为只读。
 </p><p>考虑到内核提供的 Boolean 数据可能会由于特殊情况而不准确。用户可以根据 HTTP头数据来复写他们，修正问题。
+</p><p>【注意】：<b>如果有非常规头数据或者未被收录在此规定数据中的头内容，同样会被收集，采用 头名 + 值 形式存放。因此实际每条请求所获取的数据并非仅有以上罗列内容。</b>
 </p><p>【注意】：<b>每次 App.netListener(true) 方法被执行后，工具将会收集数据，直到  App.netListener(false) 被执行 时停止，停止后 App.networkData() 方法才可以获取到数据内容。</b>
 </p><p><br />
 </p>
@@ -933,7 +936,7 @@ App.selecotr.img();
 seletedNetwrokData = App.selecotr.get();
 </pre>
 <p>上例中使用 selecotr 功能从所有数据集中选择出 产生 304 请求的 img 文件。 
-</p><p>【注意】：选择器所做的是<b>累积</b>操作，先选择出所有 304 请求集，然后从 304 请求集中再选择出图片类型文件。<b>而不是选择所有 304 请求和所有图片请求的合集</b>。<b>并且，此方法附带 App.selector.clear() 效果，执行后将会自动清理累积选择数据。</b>。
+</p><p>【注意】：选择器所做的是<b>累积</b>操作，先选择出所有 304 请求集，然后从 304 请求集中再选择出图片类型文件。<b>而不是选择所有 304 请求和所有图片请求的合集</b>。<b>并且，此方法附带 App.selector.clear() 效果，执行后将会自动清理累积选择数据。</b>
 </p><p><br />
 </p>
 <h4><span id="App.selector.img.28.29"><b>App.selector.img()</b></span></h4>

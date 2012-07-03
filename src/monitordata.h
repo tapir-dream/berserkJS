@@ -53,18 +53,21 @@ public:
     QString Connection;
     QString ContentType;
     uint ContentLength;
+    QString ContentLanguage;
     QString ContentEncoding;
     QString Cookie;
     QString Date;
     QString ETag;
     QString Expires;
     QString IfModifiedSince;
+    QString Location;
     QString LastModified;
     QString Server;
     QString SetCookie;
     QString P3P;
     QString Vary;
     QString TransferEncoding;
+    QString Via;
     QString XVia;
     QString XDEBUGIDC;
     QString XPoweredBy;
@@ -73,6 +76,7 @@ public:
     QString XCacheVarnish;
     QString PoweredByChinaCache;
     QString SINALB;
+    QMap<QString, QString> other;
 
     bool hasKeepAlive();
     bool hasGZip();
