@@ -22,12 +22,22 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout_5">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_6"/>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMaximumSize</enum>
+      </property>
+     </layout>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMinimumSize</enum>
+      </property>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <layout class="QVBoxLayout" name="verticalLayout_1">
         <item>
          <widget class="QPlainTextEdit" name="inputScriptCode_txt">
           <property name="styleSheet">
@@ -39,7 +49,7 @@
          </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <layout class="QHBoxLayout" name="horizontalLayout_1">
           <item>
            <widget class="QPushButton" name="runScript_btn">
             <property name="styleSheet">
@@ -88,6 +98,9 @@
       </item>
       <item>
        <widget class="QPlainTextEdit" name="outputLogResults_txt">
+        <property name="toolTip">
+         <string>F12 隐藏或显示调试区</string>
+        </property>
         <property name="styleSheet">
          <string notr="true"/>
         </property>

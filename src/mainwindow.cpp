@@ -57,7 +57,7 @@ void MainWindow::initLayout()
     // 布局自定义部件，并加入到窗口中
     webView = new MyWebView();
     webView->setGeometry(10,10,1024,600);
-    this->ui->verticalLayout_6->addWidget(webView);
+    this->ui->verticalLayout->addWidget(webView);
 }
 
 void MainWindow::initWebViewAttributes()
@@ -296,6 +296,12 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
        && e->key() == Qt::Key_Return) {
         on_clearLog_btn_clicked();
     }
+    if ((e->key() == Qt::Key_F12) ||
+        (e->modifiers() == (Qt::ControlModifier | Qt::ShiftModifier)
+            && e->key() == Qt::Key_J))  {
+        viewChange();
+    }
+
 }
 
 void MainWindow::on_clearLog_btn_clicked()
@@ -309,4 +315,23 @@ void MainWindow::onConsoleLogMessage(QString str)
     ui->outputLogResults_txt
       ->setPlainText(str + "\n------------------------------\n" +
                      ui->outputLogResults_txt->toPlainText());
+}
+
+
+
+void MainWindow::viewChange()
+{
+    if (!ui->inputScriptCode_txt->isHidden()) {
+        ui->inputScriptCode_txt->hide();
+        ui->outputLogResults_txt->hide();
+        ui->outputScriptResults_txt->hide();
+        ui->runScript_btn->hide();
+        ui->clearLog_btn->hide();
+    } else {
+        ui->inputScriptCode_txt->show();
+        ui->outputLogResults_txt->show();
+        ui->outputScriptResults_txt->show();
+        ui->runScript_btn->show();
+        ui->clearLog_btn->show();
+    }
 }

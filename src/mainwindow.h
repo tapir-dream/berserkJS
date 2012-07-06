@@ -55,6 +55,7 @@ private:
     void initWebViewAttributes();
     void initAppEngine();
     void keyPressEvent(QKeyEvent *e);
+    void viewChange();
 
 
 public slots:
@@ -66,7 +67,6 @@ private slots:
     //使用自动槽
     void on_runScript_btn_clicked();
     void on_clearLog_btn_clicked();
-
 };
 
 #endif // MAINWINDOW_H
