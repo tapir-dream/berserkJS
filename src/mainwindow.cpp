@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     initLayout();
     initWebViewAttributes();
     initAppEngine();
-    // 延时至 exec() 的消息循环启动，否则 close 、hiden 等方法会失效。
+    // 延时至 exec() 的消息循环启动，否则 close 、hide 等方法会失效。
     QTimer::singleShot(1, this, SLOT(initUserScript()));
 }
 
