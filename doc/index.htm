@@ -632,7 +632,7 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
 <h2><span id=".E5.88.9D.E5.A7.8B.E5.8C.96.E9.85.8D.E7.BD.AE.E4.BB.A5.E5.8F.8A.E5.BC.80.E5.A7.8B.E8.BF.90.E8.A1.8C"> 初始化配置以及开始运行  </span></h2>
 <p>同配置文件一样，<b>init.js</b> 文件也是个模块文件，它负责初始化配置，并且执行具体检测模块代码。
 </p><p>init.js 文件需要使用 loadScript 方法被执行，方式如下：
-</p><p>App.loadScript(App.path + 'js/init.js', function(err, func){func(App,App.webview)});
+</p><p>App.loadScript(App.path + 'js/conf/init.js', function(err, func){func(App,App.webview)});
 </p><p>这行代码可以在工具启动后敲入工具的 JS 执行框内运行。
 </p><p>也可以使用命令参数 --start=true 使工具在开始运行后自动执行。
 </p><p><br />
