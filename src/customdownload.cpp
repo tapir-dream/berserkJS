@@ -14,6 +14,7 @@ CustomDownload::CustomDownload(QNetworkReply *reply,
     this->dnsLookupTime = dnsLookupTime;
     this->request = request;
     this->reply = reply;
+    this->bytesTotal = 0;
 
     connect(reply, SIGNAL(finished()),
                  this, SLOT(onFinished()));
