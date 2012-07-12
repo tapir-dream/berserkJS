@@ -57,6 +57,9 @@ private:
     void keyPressEvent(QKeyEvent *e);
     void viewChange();
 
+    QString helpUrl;
+    QString scriptFunc;
+
 
 public slots:
 

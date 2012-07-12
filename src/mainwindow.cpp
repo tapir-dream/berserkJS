@@ -19,6 +19,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    helpUrl = "http://tapir-dream.github.com/berserkJS";
+    scriptFunc = "App.loadScript(App.path + 'js/conf/init.js', function(err, func){func(App,App.webview)});";
+
     window = this;
     ui->setupUi(this);
     initLayout();
@@ -31,6 +34,11 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::initUserScript()
 {
     CommandParameters cmdParams;
+
+    if (cmdParams.hasHelp()) {
+        webView->load(QUrl(helpUrl));
+        return;
+    }
 
     if (cmdParams.hasScript()) {
         QString scriptFunc = script->readFile(getAppPath() +
@@ -45,7 +53,6 @@ void MainWindow::initUserScript()
     }
 
     if (cmdParams.hasStart()) {
-        QString scriptFunc = "App.loadScript(App.path + 'js/conf/init.js', function(err, func){func(App,App.webview)});";
         script->runScript(scriptFunc);
         return;
     }

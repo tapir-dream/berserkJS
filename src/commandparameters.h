@@ -12,6 +12,7 @@ public:
     bool isCommandMode();
     bool hasScript();
     bool hasStart();
+    bool hasHelp();
 };
 
 #endif // COMMANDPARAMETERS_H

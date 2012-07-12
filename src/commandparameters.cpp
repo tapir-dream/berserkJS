@@ -21,8 +21,14 @@ QMap<QString, QString> CommandParameters::getParams()
       value = strchr(s, '=');
 
       if (value == NULL) {
-        // TODO: error
-        break;
+          if (strncmp("--help", s, 6) == 0) {
+              params["help"] = "1";
+          } else if (strncmp("--start", s, 7) == 0) {
+              params["start"] = "1";
+          } else if (strncmp("--command", s, 9) == 0) {
+              params["command"] = "1";
+          }
+          continue;
       }
 
       nlen = value++ - s;
@@ -34,9 +40,11 @@ QMap<QString, QString> CommandParameters::getParams()
         params["script"] = value;
       } else if (strncmp("--command", s, nlen) == 0) {
         params["command"] = value;
+      } else if (strncmp("--help", s, nlen) == 0) {
+        params["help"] = value;
       } else {
         //error
-        break;
+        continue;
       }
     }
     return params;
@@ -45,14 +53,13 @@ QMap<QString, QString> CommandParameters::getParams()
 bool CommandParameters::isCommandMode()
 {
     QMap<QString, QString> params = getParams();
-    return params.contains("command") && params["command"] != "";
+    return params.contains("command");
 }
-
 
 bool CommandParameters::hasStart()
 {
     QMap<QString, QString> params = getParams();
-    return params.contains("start") && params["start"] != "";
+    return params.contains("start");
 }
 
 
@@ -60,4 +67,11 @@ bool CommandParameters::hasScript()
 {
     QMap<QString, QString> params = getParams();
     return params.contains("script") && params["script"] != "";
+}
+
+
+bool CommandParameters::hasHelp()
+{
+    QMap<QString, QString> params = getParams();
+    return params.contains("help");
 }

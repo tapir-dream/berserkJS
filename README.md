@@ -13,4 +13,3 @@ http://tapir-dream.github.com/berserkJS
 介绍PPT
 =========
 下载地址：http://t.cn/zWcKani
-辅助 Demo: http://t.cn/zWcKan6

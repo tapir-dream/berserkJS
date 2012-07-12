@@ -124,7 +124,7 @@ pre {
 <body>
 <table id="toc"><tr><td><div id="toctitle"><h2>目录</h2></div>
 <ul>
-<li><a href="#RIA_.E7.BD.91.E7.BB.9C.E6.95.B0.E6.8D.AE.E8.87.AA.E5.8A.A8.E5.8C.96.E8.BE.93.E5.87.BA.E5.B7.A5.E5.85.B7.EF.BC.88BerserkJS.EF.BC.89"><span>1</span> <span>网络数据自动化输出工具（BerserkJS）</span></a>
+<li><a href="#RIA_.E7.BD.91.E7.BB.9C.E6.95.B0.E6.8D.AE.E8.87.AA.E5.8A.A8.E5.8C.96.E8.BE.93.E5.87.BA.E5.B7.A5.E5.85.B7.EF.BC.88berserkJS.EF.BC.89"><span>1</span> <span>网络数据自动化输出工具（berserkJS）</span></a>
 <ul>
 <li><a href="#.E6.BC.94.E7.A4.BA.E8.A7.86.E9.A2.91"><span>1.1</span> <span>演示视频</span></a></li>
 <li><a href="#.E5.B7.A5.E5.85.B7.E4.BB.8B.E7.BB.8D_PPT"><span>1.2</span> <span>工具介绍 PPT</span></a></li>
@@ -262,16 +262,14 @@ pre {
 </ul>
 </li>
 </ul>
-</td></tr></table><script>if (window.showTocToggle) { var tocShowText = "显示"; var tocHideText = "隐藏"; showTocToggle(); } </script>
-<h1><span id="RIA_.E7.BD.91.E7.BB.9C.E6.95.B0.E6.8D.AE.E8.87.AA.E5.8A.A8.E5.8C.96.E8.BE.93.E5.87.BA.E5.B7.A5.E5.85.B7.EF.BC.88BerserkJS.EF.BC.89">RIA 网络数据自动化输出工具（BerserkJS）</span></h1>
+</td></tr></table>
+<h1><span id="RIA_.E7.BD.91.E7.BB.9C.E6.95.B0.E6.8D.AE.E8.87.AA.E5.8A.A8.E5.8C.96.E8.BE.93.E5.87.BA.E5.B7.A5.E5.85.B7.EF.BC.88berserkJS.EF.BC.89">RIA 网络数据自动化输出工具（berserkJS）</span></h1>
 <h2><span id=".E6.BC.94.E7.A4.BA.E8.A7.86.E9.A2.91"> 演示视频 </span></h2>
 <p><a href="http://www.tudou.com/v/pu5xvmzVZbU/&amp;resourceId=0_04_05_99/v.swf"  rel="nofollow" target="_blank">http://www.tudou.com/v/pu5xvmzVZbU/&amp;resourceId=0_04_05_99/v.swf</a>
 </p><p><br />
 </p>
 <h2><span id=".E5.B7.A5.E5.85.B7.E4.BB.8B.E7.BB.8D_PPT"> 工具介绍 PPT  </span></h2>
 <p> D2 前端论坛中使用的 PPT : <a href="http://t.cn/zWcKani">【点此下载】</a>
-</p>
-<p> PPT 配套的 Demo: <a href="http://t.cn/zWcKan6">【点此下载】</a>
 </p>
 <p><br />
 </p>
@@ -392,8 +390,9 @@ pre {
 <h2><span id=".E5.91.BD.E4.BB.A4.E8.A1.8C.E5.8F.82.E6.95.B0"> 命令行参数 </span></h2>
 <p>可执行文件 berserkJS 将携带一些命令行参数。如下：
 </p>
-<ol><li> --command=value  如value参数值不为空，--command 参数将隐藏工具界面使其看起来像纯命令行工具。此方法的设计目的在于非调试环境中不启用界面窗口。 
-</li><li> --start=value  如value参数值不为空， --start 参数表明要自动执行 berserkJS 目录下 js/conf/init.js 文件，运行配置好的测试。
+<ol><li> --help 该参数将在浏览器界面内显示远程 help 页，该页地址为：http://github.com/tapir-dream/berserkJS/。 <b>启用该参数时 --command 参数自动失效。</b> 
+</li><li> --command 该参数将隐藏工具界面使其看起来像纯命令行工具。此方法的设计目的在于非调试环境中不启用界面窗口。 
+</li><li> --start  该参数表明要自动执行 berserkJS 目录下 js/conf/init.js 文件，运行配置好的测试。
 </li><li> --script=value  如 value 参数值不为空 --script 参数表示要自动执行以 berserkJS 目录为基准的某路径下js文件。<b>此js文件将自动以 uft-8 编码格式读取并执行；此参数存在时 --start 参数自动失效。</b>
 </li></ol>
 <p><br />
