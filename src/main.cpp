@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
         }
 
         // 开启命令模式时 --script 参数值为空则立即退出
-        if (!commandParameters.hasScript() ||
+        if (!commandParameters.hasScript() &&
             !commandParameters.hasStart()) {
             a.quit();
             return 0;
