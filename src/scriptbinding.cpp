@@ -655,7 +655,7 @@ QScriptValue ScriptBinding::consoleDir(QScriptContext *context, QScriptEngine *i
             << "});";
         QScriptValue dir = interpreter->evaluate(func.join("\n"));
         QScriptValue output = dir.call(interpreter->globalObject(), QScriptValueList()<<arg);
-        ssf->fire(ssf->consoleLog, output.toString().toUtf8());
+        ssf->fire(ssf->consoleLog, output.toString());
     }
     return QScriptValue::UndefinedValue;
 }
