@@ -127,7 +127,9 @@
  *        |
  *        |
  *        + [object] console + [function] log
- *                           + [function] ...
+ *                           + [function] dir
+ *                           + [function] time
+ *                           + [function] timeEnd
  *        + [function] alert  <--referenced from App.alert method
  *        + [function] setTimeout <--referenced from webview.setTimeout method
  *        + [function] clearTimeout <--referenced from webview.clearTimeout method
@@ -216,7 +218,11 @@ public:
     /* 包裹方法需要是静态的  */
 
     /* console 相关方法实现 */
+    static QMap<QString, qint64> timeMap;
     static QScriptValue consoleLog(QScriptContext *context, QScriptEngine *interpreter);
+    static QScriptValue consoleTime(QScriptContext *context, QScriptEngine *interpreter);
+    static QScriptValue consoleTimeEnd(QScriptContext *context, QScriptEngine *interpreter);
+    static QScriptValue consoleDir(QScriptContext *context, QScriptEngine *interpreter);
 
     /* JS获取当前所有network数据 */
     static QScriptValue getNetworkData(QScriptContext *context, QScriptEngine *interpreter);

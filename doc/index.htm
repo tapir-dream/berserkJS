@@ -63,7 +63,7 @@ ul {
   -moz-border-radius: 4px;
   -o-border-radius: 4px;
   -ms-border-radius: 4px;
-  padding:1em 2em 1em 2em;
+  padding:1em 1em 1em 2em;
 }
 
 ol {
@@ -74,7 +74,7 @@ ol {
   -moz-border-radius: 4px;
   -o-border-radius: 4px;
   -ms-border-radius: 4px;
-  padding:1em 2em 1em 2em;
+  padding:1em 1em 1em 2em;
 }
 
 p {
@@ -117,6 +117,16 @@ pre {
   box-shadow: rgba(0, 0, 0, 0.06) 0 0 10px;
 	font-size:14px;
 	font-family: Consolas, Courier, SimSun, monospace;
+}
+
+#toc {
+	float:right;
+	width: 480px;
+	table-layout: fixed;
+}
+
+#doc {
+	margin-right:500px;
 }
 
 </style>
@@ -247,6 +257,9 @@ pre {
 <li><a href="#console_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0.E4.B8.8E.E5.B1.9E.E6.80.A7"><span>1.17.5</span> <span>console 命名空间下函数与属性</span></a>
 <ul>
 <li><a href="#console_.log.28arg1.2C_.5Barg2.2C_arg3.2C_arg4.2C_....5D.29"><span>1.17.5.1</span> <span>console .log(arg1, [arg2, arg3, arg4, ...])</span></a></li>
+<li><a href="#console_.dir.28arg.29"><span>1.17.5.2</span> <span>console .dir(arg)</span></a></li>
+<li><a href="#console_.time.28flag_.3Cstring.3E.29"><span>1.17.5.3</span> <span>console .time(flag &lt;string&gt;)</span></a></li>
+<li><a href="#console_.timeEnd.28flag_.3Cstring.3E.29"><span>1.17.5.4</span> <span>console .timeEnd(flag &lt;string&gt;)</span></a></li>
 </ul>
 </li>
 <li><a href="#pageExtension_.E9.A1.B5.E9.9D.A2.E6.89.A9.E5.B1.95.E5.AF.B9.E8.B1.A1"><span>1.17.6</span> <span>__pageExtension 页面扩展对象</span></a>
@@ -263,6 +276,7 @@ pre {
 </li>
 </ul>
 </td></tr></table>
+<div id="doc">
 <h1><span id="RIA_.E7.BD.91.E7.BB.9C.E6.95.B0.E6.8D.AE.E8.87.AA.E5.8A.A8.E5.8C.96.E8.BE.93.E5.87.BA.E5.B7.A5.E5.85.B7.EF.BC.88berserkJS.EF.BC.89">RIA 网络数据自动化输出工具（berserkJS）</span></h1>
 <h2><span id=".E6.BC.94.E7.A4.BA.E8.A7.86.E9.A2.91"> 演示视频 </span></h2>
 <p><a href="http://www.tudou.com/v/pu5xvmzVZbU/&amp;resourceId=0_04_05_99/v.swf"  rel="nofollow" target="_blank">http://www.tudou.com/v/pu5xvmzVZbU/&amp;resourceId=0_04_05_99/v.swf</a>
@@ -511,6 +525,9 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
        |              + [object] helper &lt;-- 非内部包装的JS命名空间，由用户扩展
        |
        + [object] console + [function] log 
+                          + [function] dir 
+                          + [function] time 
+                          + [function] timeEnd													
        + [function] alert &lt;--- App.alert 的快捷引用
        + [function] setTimeout &lt;-- webview.setTimeout 方法的引用
        + [function] clearTimeout &lt;-- webview.clearTimeout 方法的引用
@@ -1449,6 +1466,32 @@ callback &lt;function&gt; 事件触发时的回调函数。
 </p><p><b>说明:</b> <b>此方法是 App 的 console.log 方法，并非 App.helper.log 包装的浏览器内  console.log 方法</b>。 该方法将预期用来做 JS 代码调试输出。
 </p><p><br />
 </p>
+<h4><span id="console_.dir.28arg.29"><b>console .dir(arg)</b></span></h4>
+<p><b>参数:</b> arg 参数类型不限，为需要打印说有方法和属性的数据内容。
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 将一个对象的所有方法和属性通过 console.log 功能打印出来，<b>如果对象多层嵌套仅递归 5 层</b>。
+</p>
+<h4><span id="console_.time.28flag_.3Cstring.3E.29"><b>console .time(flag &lt;string&gt;)</b></span></h4>
+<p><b>参数:</b> flag &lt;string&gt;，时间戳标识。
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 此方法与 console .timeEnd 方法配对使用，用于检测同一时间标识中 console .time 与 console .timeEnd 执行之间所差间隔。
+</p><p><br />
+</p>
+<h4><span id="console_.timeEnd.28flag_.3Cstring.3E.29"><b>console .timeEnd(flag &lt;string&gt;)</b></span></h4>
+<p><b>参数:</b> flag &lt;string&gt;，时间戳标识。
+</p><p><b>返回值:</b> 时间间隔毫秒数。
+</p><p><b>说明:</b> 此方法与 console .time 方法配对使用，用于检测同一时间标识中 console .time 与 console .timeEnd 执行之间所差间隔。
+</p><p><b>例如:</b>
+</p>
+<pre>
+console.time('flag');
+setTimeout(function() {
+  console.timeEnd('flag');
+}, 2000);
+
+// 输出 flag: 2003ms
+</pre>
+
 <h3><span id="pageExtension_.E9.A1.B5.E9.9D.A2.E6.89.A9.E5.B1.95.E5.AF.B9.E8.B1.A1"> <b>__pageExtension 页面扩展对象</b> </span></h3>
 <p>该对象在页面被创建初始被扩展到页面中 （pageScriptCreated事件触发时）。在此命名空间下，存放页面与 App 交互用特殊处理函数。
 </p><p><br />
@@ -1494,5 +1537,6 @@ App.webview.execScript(function(s) {
 </p>
 
 <h2><span id="END"> END </span></h2>
+</div>
 </body>
 </html>

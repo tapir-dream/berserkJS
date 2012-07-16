@@ -17,6 +17,8 @@ QWebView* ScriptBinding::webView = 0;
 AppInfo* ScriptBinding::appInfo = new AppInfo();
 FileSystemWatcher* ScriptBinding::fileSystemWatcher;
 
+QMap<QString, qint64> ScriptBinding::timeMap;
+
 ScriptBinding::ScriptBinding()
 {
     // 初始化文件监控对象
@@ -66,6 +68,12 @@ void ScriptBinding::initConsoleSpace()
     QScriptValue nativeMathod;
     nativeMathod = engine->newFunction(ScriptBinding::consoleLog);
     obj.setProperty("log", nativeMathod);
+    nativeMathod = engine->newFunction(ScriptBinding::consoleTime);
+    obj.setProperty("time", nativeMathod);
+    nativeMathod = engine->newFunction(ScriptBinding::consoleTimeEnd);
+    obj.setProperty("timeEnd", nativeMathod);
+    nativeMathod = engine->newFunction(ScriptBinding::consoleDir);
+    obj.setProperty("dir", nativeMathod);
 
     globalObject.setProperty(CONSOLE, obj);
 }
@@ -553,6 +561,105 @@ QScriptValue ScriptBinding::consoleLog(QScriptContext *context, QScriptEngine *i
     return QScriptValue::UndefinedValue;
 }
 
+QScriptValue ScriptBinding::consoleTime(QScriptContext *context, QScriptEngine *interpreter)
+{
+    int argc = context->argumentCount();
+    if (argc == 0) {
+        context->throwError("TypeError: Not enough arguments");
+    }
+    timeMap[context->argument(0).toString()] = QDateTime::currentDateTime().toMSecsSinceEpoch();
+    return QScriptValue::UndefinedValue;
+}
+
+QScriptValue ScriptBinding::consoleTimeEnd(QScriptContext *context, QScriptEngine *interpreter)
+{
+    int argc = context->argumentCount();
+    if (argc == 0) {
+        context->throwError("TypeError: Not enough arguments");
+    }
+
+    QString arg = context->argument(0).toString();
+    QString output = "0ms";
+
+    if (timeMap.keys().contains(arg)) {
+        QString timeout = QString::number(QDateTime::currentDateTime().toMSecsSinceEpoch() - timeMap[arg]);
+        output = arg + ": " +  timeout + "ms";
+        timeMap.remove(arg);
+        ScriptSignalFactory* ssf = (new ScriptSignalFactory())->instantiat();
+        ssf->fire(ssf->consoleLog, output);
+        return QScriptValue(timeout.toDouble());
+    } else {
+        return QScriptValue::UndefinedValue;
+    }
+}
+
+QScriptValue ScriptBinding::consoleDir(QScriptContext *context, QScriptEngine *interpreter)
+{
+    int argc = context->argumentCount();
+    if (argc == 0) {
+        return QScriptValue::UndefinedValue;
+    }
+    ScriptSignalFactory* ssf = (new ScriptSignalFactory())->instantiat();
+    QScriptValue arg = context->argument(0);
+    if (arg.isString()) {
+      ssf->fire(ssf->consoleLog, "\"" + arg.toString() + "\"");
+    } else if (arg.isBool() || arg.isNumber() ||
+        arg.isUndefined() || arg.isNull() || arg.isRegExp()) {
+        ssf->fire(ssf->consoleLog, arg.toString());
+    } else if (arg.isFunction()) {
+        ssf->fire(ssf->consoleLog, "[Function]");
+    } else if (arg.isObject()) {
+        // 无比蛋疼的方法开始了…… 吐……
+        QStringList func;
+        func << "(function(json) {"
+            << "    var output = ['{'];"
+            << "    var depth = 5;"
+            << "    var cDepth = 0;"
+            << "    function dir(obj) {"
+            << "        if (cDepth >= depth) {"
+            << "            output.push(', {...}');"
+            << "            return;"
+            << "        }"
+            << "        for (var i in obj) {"
+            << "            output.push(i + ': ');"
+            << "            var o = obj[i] ;"
+            << "            if (typeof o === 'string') {"
+            << "                output.push('\"' + o + '\"');"
+            << "            } else if (typeof o === 'number') {"
+            << "                output.push(o);"
+            << "          } else if (typeof o === 'undefined') {"
+            << "                output.push('undefined');"
+            << "            } else if (typeof o === 'function' && objectToString(o) != '[object RegExp]') {"
+            << "                output.push('[Function]');"
+            << "            } else if (typeof o === 'object' && objectToString(o) === '[object Null]') {"
+            << "                output.push('null');"
+            << "            } else if (typeof o === 'object' && objectToString(o) === '[object Date]') {"
+            << "                output.push(o.toLocaleString());"
+            << "            } else if (objectToString(o) === '[object RegExp]') {"
+            << "                output.push(o.toString());"
+            << "            } else if (typeof o === 'object' && objectToString(o) === '[object Object]') {"
+            << "                output.push('{');"
+            << "                dir(o);"
+            << "                output.push('}');"
+            << "            }"
+            << "            output.push(', ');"
+            << "        }"
+            << "        output = output.slice(0, -1);"
+            << "    };"
+            << "    function objectToString(o) {"
+            << "        return Object.prototype.toString.call(o);"
+            << "    }"
+            << "    dir(json);"
+            << "    output.push('}');"
+            << "    return output.join('');"
+            << "});";
+        QScriptValue dir = interpreter->evaluate(func.join("\n"));
+        QScriptValue output = dir.call(interpreter->globalObject(), QScriptValueList()<<arg);
+        ssf->fire(ssf->consoleLog, output.toString().toUtf8());
+    }
+    return QScriptValue::UndefinedValue;
+}
+
 /* 给JS暴露的network数据方法 */
 QScriptValue ScriptBinding::getNetworkData(QScriptContext *context, QScriptEngine *interpreter)
 {
@@ -1028,7 +1135,7 @@ QScriptValue ScriptBinding::about(QScriptContext *context, QScriptEngine *interp
 {
     QStringList about;
     about << "<h3 style=\"color:red;\">Welcome use of semi-finished products of the berserk</h3>"
-          << "<p>Version: 0.4.3 Beta</p>"
+          << "<p>Version: 0.4.5 Beta</p>"
           << "<p>Author: Tapir</p>"
           << "<p>Weibo: <a href=\"http://weibo.com/itapir/\">@Tapir</a></p>"
           << "<p>E-mail: <a href=\"mailto:baokun@staff.sina.com.cn\">baokun@staff.sina.com.cn</a></p>";
