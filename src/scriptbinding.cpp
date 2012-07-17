@@ -1135,7 +1135,7 @@ QScriptValue ScriptBinding::about(QScriptContext *context, QScriptEngine *interp
 {
     QStringList about;
     about << "<h3 style=\"color:red;\">Welcome use of semi-finished products of the berserk</h3>"
-          << "<p>Version: 0.4.5 Beta</p>"
+          << "<p>Version: 0.4.5.1 Beta</p>"
           << "<p>Author: Tapir</p>"
           << "<p>Weibo: <a href=\"http://weibo.com/itapir/\">@Tapir</a></p>"
           << "<p>E-mail: <a href=\"mailto:baokun@staff.sina.com.cn\">baokun@staff.sina.com.cn</a></p>";

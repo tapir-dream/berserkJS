@@ -510,6 +510,57 @@ QScriptValue MyWebView::contentRect()
     return rect;
 }
 
+QImage MyWebView::renderToImage()
+{
+    // page content size
+    QSize size = myFrame->contentsSize();
+    QSize oldSize = myPage->viewportSize();
+    myPage->setViewportSize(myFrame->contentsSize());
+
+    QImage image(size, QImage::Format_ARGB32);
+    // transprent background
+    image.fill(Qt::transparent);
+
+    // render the web page in QImage Object.
+    QPainter p;
+    p.begin(&image);
+
+    p.setRenderHint(QPainter::Antialiasing, true);
+    p.setRenderHint(QPainter::TextAntialiasing, true);
+    p.setRenderHint(QPainter::SmoothPixmapTransform, true);
+
+    myFrame->render(&p);
+    p.end();
+    // reset old option
+    myPage->setViewportSize(oldSize);
+    return image;
+}
+
+void MyWebView::fixClipRectToRenderRect(QRect* clipRect, QImage* image )
+{
+    // 此处做特殊处理
+    // 如果给定的截图区域超过图片宽高则将多余部分省去
+    // 避免出现白边和黑边
+    int imgW = image->width();
+    int imgH = image->height();
+    int clipW = clipRect->x() + clipRect->width();
+    int clipH = clipRect->y() + clipRect->height();
+
+    if (clipRect->x() > imgW) {
+        clipRect->setX(imgW);
+    }
+    if (clipRect->y() > imgH) {
+        clipRect->setY(imgH);
+    }
+
+    if (clipW > imgW) {
+        clipRect->setWidth(imgW - clipRect->x());
+    }
+    if (clipH > imgH) {
+        clipRect->setHeight(imgH - clipRect->y());
+    }
+}
+
 QScriptValue MyWebView::dataURIFromRect(QScriptValue rect, QScriptValue type, QScriptValue quality)
 {
     // 参数初始化
@@ -538,6 +589,9 @@ QScriptValue MyWebView::dataURIFromRect(QScriptValue rect, QScriptValue type, QS
     clipRect.setWidth(rect.property("width").toString().toInt());
     clipRect.setHeight(rect.property("height").toString().toInt());
     QImage image = renderToImage();
+    fixClipRectToRenderRect(&clipRect, &image);
+
+    // 把修正后的区域截取出来
     image = image.copy(clipRect);
 
     // 创建临时文件
@@ -553,32 +607,6 @@ QScriptValue MyWebView::dataURIFromRect(QScriptValue rect, QScriptValue type, QS
     return dataURI;
 }
 
-QImage MyWebView::renderToImage()
-{
-    // page content size
-    QSize size = myFrame->contentsSize();
-    QSize oldSize = myPage->viewportSize();
-    myPage->setViewportSize(myFrame->contentsSize());
-
-    QImage image(size, QImage::Format_ARGB32);
-    // transprent background
-    image.fill(Qt::transparent);
-
-    // render the web page in QImage Object.
-    QPainter p;
-    p.begin(&image);
-
-    p.setRenderHint(QPainter::Antialiasing, true);
-    p.setRenderHint(QPainter::TextAntialiasing, true);
-    p.setRenderHint(QPainter::SmoothPixmapTransform, true);
-
-    myFrame->render(&p);
-    p.end();
-    // reset old option
-    myPage->setViewportSize(oldSize);
-    return image;
-}
-
 bool MyWebView::clipRenderToImage(QString path, QString type, int quality, QRect clipRect)
 {
     QImage image = renderToImage();
@@ -590,6 +618,8 @@ bool MyWebView::clipRenderToImage(QString path, QString type, int quality, QRect
     }
     quality = (quality > 100) ? 100 : quality;
     quality = (quality < 0) ? -1 : quality;
+
+    fixClipRectToRenderRect(&clipRect, &image);
 
     if (!clipRect.isEmpty()) {
         image = image.copy(clipRect);

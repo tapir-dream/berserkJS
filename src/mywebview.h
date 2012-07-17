@@ -72,6 +72,7 @@ public:
     bool clipRenderToImage(QString path, QString type = "JPG",
                        int quality = 60,  QRect clipRect = QRect());
     QImage renderToImage();
+    void fixClipRectToRenderRect(QRect* clipRect, QImage* image);
 
 private:
 

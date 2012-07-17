@@ -1197,14 +1197,14 @@ seletedNetwrokData = App.selecotr.get();
 </p><p>quality &lt;number&gt; 可选参数。用于指定图片压缩率，默认值为 100。 可选值范围 1-100。
 </p><p>rect &lt;Object&gt; 可选参数。用于指定保存区域，默认为全页面范围。<b>该参数格式: {x:&lt;number&gt;,y:&lt;number&gt;,width:&lt;number&gt;,height:&lt;number&gt;}</b> 
 </p><p><b>返回值:</b> &lt;Boolean&gt; 成功 true ，失败 false。
-</p><p><b>说明:</b> 保存当前页面截图到指定位置。
+</p><p><b>说明:</b> 保存当前页面截图到指定位置，<b>保存区域如果超出整体图片范围，则该指定区域会被调整，超出部分被忽略</b>。
 </p><p><br />
 </p>
 <h4><span id="App.webview.dataURIFromRect.28.5Brect_.3CObject.3E.2C_imgType_.3Cstring.3E.2C_quality_.3Cnumber.3E.5D.29"><b>App.webview.dataURIFromRect([rect &lt;Object&gt;, imgType &lt;string&gt;, quality &lt;number&gt;])</b></span></h4>
 <p>rect  &lt;Object&gt; 可选参数。用于截取当前webview渲染区域内图形。<b>默认值为整个渲染区域。值格式：{x:&lt;number&gt;, y:&lt;number&gt;, width:&lt;number&gt;, height:&lt;number&gt;}</b>。
 </p><p>imgType &lt;string&gt; 可选参数。用于指定图片格式，<b>默认值为 "PNG"。可选值 JPG/JPEG/PNG/BMP/PPM/TIFF</b>。
 </p><p>quality &lt;number&gt; 可选参数。用于指定图片压缩率，<b>默认值为 100。 可选值范围 1-100</b>。
-</p><p><b>说明:</b> 此方法用将当前渲染区域内指定位置范围的渲染结果，进行 Data URI 编码后返回其字符串。一般可用将此值放置在页面的中的 img 中显示，或配合 httpRequest 方法将内容提交到远程服务器。
+</p><p><b>说明:</b> 此方法用将当前渲染区域内指定位置范围的渲染结果，进行 Data URI 编码后返回其字符串。一般可用将此值放置在页面的中的 img 中显示，或配合 httpRequest 方法将内容提交到远程服务器。<b>指定位置范围如果超出整体渲染区域，则该范围会被调整，超出部分被忽略。</b>。
 </p><p><br />
 </p>
 <h4><span id="App.webview.setTimeout.28callback_.3Cfunction.3E.2C_timeout_.3Cnumber.3E.29"><b>App.webview.setTimeout(callback &lt;function&gt;, timeout &lt;number&gt;)</b></span></h4>
