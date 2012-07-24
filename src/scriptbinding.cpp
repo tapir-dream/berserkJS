@@ -1045,12 +1045,14 @@ QScriptValue ScriptBinding::httpRequest(QScriptContext *context, QScriptEngine *
     }
 
     QNetworkReply* reply;
+    QNetworkRequest req;
     QNetworkAccessManager* manager = new QNetworkAccessManager();
 
     if (method == POST) {
         // post 数据编码
-        reply = manager->post(QNetworkRequest(QUrl(url)),
-                              QUrl(data).toEncoded());
+        req.setUrl(QUrl(url));
+        req.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
+        reply = manager->post(req, QUrl(data).toEncoded());
     } else {
         if (data != "") {
             if (url.indexOf("?") != -1) {

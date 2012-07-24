@@ -45,6 +45,11 @@ int main(int argc, char *argv[])
         }
     }
 
+    // 用来修补sendEvent在不显示窗口时失效问题
+    // 先最小化显示再隐藏
+    // 初步怀疑是show窗口之后才能开始接收GUI归属的消息
+    w.showMinimized();
+    w.hide();
 
     return a.exec();
 }
