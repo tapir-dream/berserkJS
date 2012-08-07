@@ -1069,11 +1069,6 @@ void MyWebView::onJavaScriptWindowObjectCleared()
     normalFireEvent(javaScriptWindowObjectClearedFunc);
 }
 
-void MyWebView::onLoadFinished(bool ok)
-{
-    normalFireEvent(loadFinishedFunc);
-}
-
 void MyWebView::onInitialLayoutCompleted()
 {
     normalFireEvent(initialLayoutCompletedFunc);
@@ -1093,6 +1088,21 @@ void MyWebView::sendPageMessage(QString wparam, QString lparam)
 {
     onPageMessage(wparam, lparam);
 }
+
+void MyWebView::onLoadFinished(bool ok)
+{
+    int c = loadFinishedFunc.size();
+    if (c > 0) {
+        for (int i = 0; i < c; ++i) {
+            ContextInfo contextInfo = loadFinishedFunc.at(i);
+            contextInfo.func.setScope(contextInfo.activationObject.scope());
+            contextInfo.func.call(contextInfo.thisObject,
+                                  QScriptValueList()
+                                  << QScriptValue(this->url().toString()));
+        }
+    }
+}
+
 
 void MyWebView::onPageConsoleMessage(QString message, int lineNumber, QString sourceID)
 {
