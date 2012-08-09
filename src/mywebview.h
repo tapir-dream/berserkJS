@@ -44,6 +44,8 @@ public:
     Q_INVOKABLE QScriptValue saveImage(QScriptValue path, QScriptValue type = QScriptValue("JPG"),
                                      QScriptValue quality = QScriptValue(-1),
                                      QScriptValue rect = QScriptValue::UndefinedValue);
+    Q_INVOKABLE QScriptValue savePdf(QScriptValue path);
+
     Q_INVOKABLE QScriptValue elementRects(QScriptValue cssSelector);
     Q_INVOKABLE QScriptValue viewport();
     Q_INVOKABLE QScriptValue contentRect();
@@ -72,6 +74,7 @@ public:
     bool clipRenderToImage(QString path, QString type = "JPG",
                        int quality = 60,  QRect clipRect = QRect());
     QImage renderToImage();
+
     void fixClipRectToRenderRect(QRect* clipRect, QImage* image);
 
 private:

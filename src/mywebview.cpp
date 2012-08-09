@@ -2,7 +2,7 @@
 #include "pageextension.h"
 
 #include <QTemporaryFile>
-
+#include <QPrinter>
 
 PageExtension* pageExtension;
 
@@ -654,6 +654,32 @@ QScriptValue MyWebView::saveImage(QScriptValue path, QScriptValue type, QScriptV
     }
 
     return QScriptValue(clipRenderToImage(path.toString(), type.toString(), q));
+}
+
+QScriptValue MyWebView::savePdf(QScriptValue path)
+{
+    // page content size
+    QSize oldSize = myPage->viewportSize();
+    QSize contentsSize = myFrame->contentsSize();
+    myPage->setViewportSize(contentsSize);
+    QSizeF size(contentsSize);
+    // render the web page in Printer Object.
+    QPrinter printer;
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setOutputFileName(path.toString());
+    //printer.setResolution(72);
+    printer.setPaperSize(size, QPrinter::DevicePixel);
+    printer.setFullPage(true);
+    QPainter p;
+    p.begin(&printer);
+    p.setRenderHint(QPainter::Antialiasing, true);
+    p.setRenderHint(QPainter::TextAntialiasing, true);
+    p.setRenderHint(QPainter::SmoothPixmapTransform, true);
+    myFrame->render(&p);
+    p.end();
+    // reset old option.
+    myPage->setViewportSize(oldSize);
+    return true;
 }
 
 QScriptValue MyWebView::elementRects(QScriptValue cssSelector)

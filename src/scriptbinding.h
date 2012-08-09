@@ -107,6 +107,7 @@
  *        |                              + [function] elementRects
  *        |                              + [function] saveImage  <-  * JPG/JPEG/PNG/BMP/PPM/TIFF;
  *        |                              + [function] dataURIFromRect
+ *        |                              + [function] savePdf
  *        |                              + [function] sendMouseEvent + click/mousedown/mouseup/mousemove
  *        |                                                          + and key shift/alt/ctrl
  *        |                              + [function] viewport
