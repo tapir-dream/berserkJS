@@ -192,6 +192,7 @@ QScriptValue MyWebView::open(QScriptValue url)
     QString cUrl = url.toString();
 
     if (cUrl.toLower().indexOf("http") == 0 ||
+        cUrl.toLower().indexOf("https") == 0 ||
         cUrl.toLower().indexOf("ftp") == 0 ||
         cUrl.toLower().indexOf("file") == 0) {
 
