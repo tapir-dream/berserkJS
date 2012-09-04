@@ -232,8 +232,12 @@ QScriptValue ScriptBinding::writeFile(QScriptContext *context, QScriptEngine *in
     if (context->argumentCount() == 0)
         return QScriptValue(false);
 
-    if (!path.isString() || !text.isString())
+    if (!path.isString())
         return QScriptValue(false);
+
+    if (!text.isString()) {
+        text = text.toString();
+    }
 
     bool isAppend = appendMode.toBool();
 
