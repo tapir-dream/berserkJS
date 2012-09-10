@@ -127,7 +127,7 @@ QString ScriptBinding::readFile(QString fileName, QTextCodec* charset)
 
 /*
  * loadScript 方法
- * @param string  js路径
+ * @param string  js路径(支持本地路径以及http与https协议下远程js获取)
  * @param function 调用函数
  * @return
  *   如果第二个参数不存在, load 失败，返回 false 。
@@ -148,16 +148,57 @@ QScriptValue ScriptBinding::loadScript(QScriptContext *context, QScriptEngine *i
     if (!path.isString())
         return QScriptValue(false);
 
-    if (!path.toString().toLower().lastIndexOf(".js") + 3 == path.toString().length())
-        return QScriptValue(false);
 
-    QString content = ScriptBinding::readFile(path.toString(), getCodec("UTF-8"));
-    bool err = (content.indexOf(OPEN_FILE_ERROR) == 0);
+    QString pathStr = path.toString().toLower().trimmed();
+    QString content = "";
+    bool err = false;
 
-    if (err)
-        return QScriptValue(false);
+    // 如果是 HTTP 、 HTTPS 则尝试从远端获取源码
+    if (pathStr.indexOf("http://") == 0 || pathStr.indexOf("https://") == 0 ) {
+        QNetworkReply* reply;
+        QNetworkAccessManager* manager = new QNetworkAccessManager();
+        reply = manager->get(QNetworkRequest(QUrl(pathStr)));
 
-    //content = "(function (){\n" + content + "\n});(function(){});";
+        QEventLoop eventLoop;
+        connect(manager, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
+        eventLoop.exec();
+
+        QByteArray responseData;
+        responseData = reply->readAll();
+
+        // 通过 Content-Type 来嗅探字节流编码
+        // 默认为 utf-8 编码
+        QString charset = QString(reply->rawHeader("Content-Type")).toLower();
+        QRegExp charsetRegExp("charset=([\\w-]+)\\b");
+        int pos = charset.indexOf(charsetRegExp);
+        if (pos > 0) {
+            if (charsetRegExp.cap().size() < 2) {
+                charset = "utf-8";
+            } else {
+                charset = charsetRegExp.cap(1);
+            }
+
+        } else {
+            charset = "utf-8";
+        }
+
+        QTextStream stream(responseData);
+        stream.setCodec(getCodec(charset));
+        content = QString(stream.readAll());
+
+    } else {
+        // 如果是本地文件则尝试读取 并且需要判断扩展名
+        if (!pathStr.lastIndexOf(".js") + 3 == path.toString().length()) {
+            return QScriptValue(false);
+        }
+
+        content = ScriptBinding::readFile(path.toString(), getCodec("UTF-8"));
+        err = (content.indexOf(OPEN_FILE_ERROR) == 0);
+
+        if (err) {
+            return QScriptValue(false);
+        }
+    }
 
     if (!interpreter->canEvaluate(content))
         return QScriptValue(false);
@@ -165,13 +206,27 @@ QScriptValue ScriptBinding::loadScript(QScriptContext *context, QScriptEngine *i
     QScriptValue scope = context->activationObject().scope();
     QScriptValue thisObject = context->thisObject();
 
-    if (!scriptFunc.isFunction())
+    // 如果没有第二个参数 则说明代码可以直接执行
+    if (!scriptFunc.isFunction()) {
+        // 直接执行代码
+        interpreter->evaluate(content);
+        // 如果遇到错误就用console.log 显示，并且return false;
+        if (interpreter->hasUncaughtException()) {
+            QString scriptErr = "Uncaught exception at line "
+                 + QString::number(interpreter->uncaughtExceptionLineNumber()) + ": "
+                 + interpreter->uncaughtException().toString()
+                 + "Backtrace: "
+                 + interpreter->uncaughtExceptionBacktrace().join(", ");
+            interpreter->evaluate("console.log('" + scriptErr + "')");
+            return  QScriptValue(false);
+        }
         return QScriptValue(true);
+    }
 
     if (scriptFunc.isFunction()) {
         QScriptValue contentFunc = interpreter->evaluate(content);
         scriptFunc.setScope(scope);
-        return scriptFunc.call(thisObject, QScriptValueList()<< (err ? true : false) << contentFunc);
+        return scriptFunc.call(thisObject, QScriptValueList() << (err ? true : false) << contentFunc);
     }
 
     return QScriptValue(false);
