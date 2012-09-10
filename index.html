@@ -690,11 +690,11 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
 <h4><b>App.loadScript(path &lt;string&gt;, callback &lt;function&gt;)</b></h4>
 
 <p><b>参数:</b>
-</p><p>path  &lt;string&gt; js模块文件路径
+</p><p>path  &lt;string&gt; js模块文件路径（支持本地文件路径或 HTTP 、HTTPS 协议的远程文件路径）
 </p><p>callback &lt;function&gt; load完毕后执行的回调函数
 </p><p><b>返回值:</b> 依赖 callback 函数返回值
 </p><p><b>说明:</b>
-</p><p>用于加载一个js模块文件。callback 函数内有会传入 err 和 module 两个参数。
+</p><p>如果可载人的 js 文件是一个js模块文件。callback 函数内有会传入 err 和 module 两个参数。
 </p>
 
 <ol>
@@ -718,6 +718,21 @@ if (!module) {
   ....
 }
 </pre>
+
+<p>反之被加载的 js 文件为非模块写法，则直接运行 JS 文件代码。</p>
+
+<pre>
+//远程 JS 文件， URL 为 http://www.berserkJS.org/test.js
+// test.js 文件内容
+var a =  1;
+
+App.loadScript('http://www.berserkJS.org/test.js');
+alert(a);
+// 显示 1
+</pre>
+
+<p>【注意】：<b>远程JS文件的实际编码取决于 content-type 内 charset 值，默认为 utf-8。</b>
+</p>
 
 <p><br></p>
 
