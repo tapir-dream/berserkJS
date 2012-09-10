@@ -719,7 +719,7 @@ if (!module) {
 }
 </pre>
 
-<p>反之被加载的 js 文件为非模块写法，则直接运行 JS 文件代码。</p>
+<p>反之被加载的 js 文件为非模块写法，则直接<b>在全局上下文环境中</b>运行 JS 文件代码。</p>
 
 <pre>
 //远程 JS 文件， URL 为 http://www.berserkJS.org/test.js
