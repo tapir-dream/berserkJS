@@ -94,7 +94,7 @@ void MainWindow::initAppEngine()
     // 监听 信号工厂发出的信号
     connect(ssf, SIGNAL(consoleLogMessage(QString)), this, SLOT(onConsoleLogMessage(QString)));
 
-    // 将应用程序脚本环境给webView对象，以便内部调用大app环境。
+    // 将应用程序脚本环境给webView对象，以便内部调用大App环境。
     webView->setAppScriptEngine(script);
 
     // 为脚本挂APP控制相关方法
@@ -138,8 +138,15 @@ void MainWindow::initAppEngine()
         webViewNamespace.property("clearInterval"),
         QScriptValue::ReadOnly);
 
-    // 做APP下方法的便捷引用
+    // 做 webview 相关方法的别名
+    webViewNamespace.setProperty("on",
+        webViewNamespace.property("addEventListener"));
+    webViewNamespace.setProperty("un",
+        webViewNamespace.property("removeEventListener"));
+    webViewNamespace.setProperty("unAll",
+        webViewNamespace.property("removeAllEventListener"));
 
+    // 做APP下方法的便捷引用
     script->getGlobalObject().setProperty("alert",
         script->getRootSpace().property("alert"),
         QScriptValue::ReadOnly);
@@ -155,6 +162,20 @@ void MainWindow::initAppEngine()
     script->getGlobalObject().setProperty("clearInterval",
         webViewNamespace.property("clearInterval"),
         QScriptValue::ReadOnly);
+
+    // 构造内置对象基于 js 语法的简便包装
+    // once 包装
+    script->getScriptEngine()->evaluate("\
+        App.webview.once = function(evtName, func) {\n\
+            if (!evtName) return;\n\
+            if (typeof func != 'function') return;\n\
+            var cb = function() {\n\
+               func.apply(App.webview, arguments);\n\
+               App.webview.removeEventListener(evtName, cb);\n\
+            };\n\
+            App.webview.addEventListener(evtName, cb);\n\
+        };\
+   ");
 }
 
 QString MainWindow::getAppPath()

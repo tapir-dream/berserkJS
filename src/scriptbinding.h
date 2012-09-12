@@ -103,7 +103,12 @@
  *        |                                                            < - firstScreenFinished
  *        |                                                            < - requestStart
  *        |                                                            < - requestFinished
+ *        |                              + [function] on <- addEventListener alias
  *        |                              + [function] removeEventListener
+ *        |                              + [function] un <- removeEventListener alias
+ *        |                              + [function] once
+ *        |                              + [function] removeAllEventListener
+ *        |                              + [function] unAll <- removeAllEventListener alias
  *        |                              + [function] elementRects
  *        |                              + [function] saveImage  <-  * JPG/JPEG/PNG/BMP/PPM/TIFF;
  *        |                              + [function] dataURIFromRect

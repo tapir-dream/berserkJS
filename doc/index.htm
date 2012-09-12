@@ -241,11 +241,16 @@ pre {
 <li><a href="#App.webview.elementRects.28cssSelectorString_.3Cstring.3E.29"><span>1.17.3.22</span> <span>App.webview.elementRects(cssSelectorString &lt;string&gt;)</span></a></li>
 <li><a href="#App.webview.sendMouseEvent.28argPoint_.3CObject.3E.5B.2C_argEvt_.3Cstring.3E.2C_argKey_.3Cstring.3E.5D.29"><span>1.17.3.23</span> <span>App.webview.sendMouseEvent(argPoint &lt;Object&gt;[, argEvt &lt;string&gt;, argKey &lt;string&gt;])</span></a></li>
 <li><a href="#App.webview.addEventListener.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.3.24</span> <span>App.webview.addEventListener(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
-<li><a href="#App.webview.removeEventListener.28eventName_.3Cstring.3E.2C_callbackHandle_.3Cfunction.3E.29"><span>1.17.3.25</span> <span>App.webview.removeEventListener(eventName &lt;string&gt;, callbackHandle &lt;function&gt;)</span></a></li>
-<li><a href="#App.webview.setDetectionRects.28rects_.3CArray.3E.5B.2C_sameRate_.3Cnumber.3E.5D.29"><span>1.17.3.26</span> <span>App.webview.setDetectionRects(rects &lt;Array&gt;[, sameRate &lt;number&gt;])</span></a></li>
-<li><a href="#App.webview.clearDetectionRects.28.29"><span>1.17.3.27</span> <span>App.webview.clearDetectionRects()</span></a></li>
-<li><a href="#App.webview.hasDetectionRects.28.29"><span>1.17.3.28</span> <span>App.webview.hasDetectionRects()</span></a></li>
-<li><a href="#App.webview.execScript.28sandbox_.3Cfunction.3E_.5B.2C_argObject_.3CObject.3E.7C.3CArray.3E.7C.3Cstring.3E.7C.3Cnumber.3E.5D.29"><span>1.17.3.29</span> <span>App.webview.execScript(sandbox &lt;function&gt; [, argObject &lt;Object&gt;|&lt;Array&gt;|&lt;string&gt;|&lt;number&gt;])</span></a></li>
+<li><a href="#App.webview.on.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.3.25</span> <span class="toctext">App.webview.on(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.removeEventListener.28eventName_.3Cstring.3E.2C_callbackHandle_.3Cfunction.3E.29"><span>1.17.3.26</span> <span class="toctext">App.webview.removeEventListener(eventName &lt;string&gt;, callbackHandle &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.un.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.3.27</span> <span class="toctext">App.webview.un(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.once.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.3.28</span> <span class="toctext">App.webview.once(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.removeAllEventListener.28.5BeventName_.3Cstring.3E.5D.29"><span>1.17.3.29</span> <span class="toctext">App.webview.removeAllEventListener([eventName &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.unAll.28.5BeventName_.3Cstring.3E.5D.29"><span>1.17.3.30</span> <span class="toctext">App.webview.unAll([eventName &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.setDetectionRects.28rects_.3CArray.3E.5B.2C_sameRate_.3Cnumber.3E.5D.29"><span>1.17.3.31</span> <span>App.webview.setDetectionRects(rects &lt;Array&gt;[, sameRate &lt;number&gt;])</span></a></li>
+<li><a href="#App.webview.clearDetectionRects.28.29"><span>1.17.3.32</span> <span>App.webview.clearDetectionRects()</span></a></li>
+<li><a href="#App.webview.hasDetectionRects.28.29"><span>1.17.3.33</span> <span>App.webview.hasDetectionRects()</span></a></li>
+<li><a href="#App.webview.execScript.28sandbox_.3Cfunction.3E_.5B.2C_argObject_.3CObject.3E.7C.3CArray.3E.7C.3Cstring.3E.7C.3Cnumber.3E.5D.29"><span>1.17.3.34</span> <span>App.webview.execScript(sandbox &lt;function&gt; [, argObject &lt;Object&gt;|&lt;Array&gt;|&lt;string&gt;|&lt;number&gt;])</span></a></li>
 </ul>
 </li>
 <li><a href="#App.helper_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"><span>1.17.4</span> <span>App.helper 命名空间下函数</span></a>
@@ -386,6 +391,8 @@ pre {
 </li><li> QtNetwork4.dll
 </li><li> QtScript4.dll
 </li><li> QtWebKit4.dll
+</li><li> libeay32.dll
+</li><li> ssleay32.dll
 </li><li> codecs\qcncodecs4.dll
 </li><li> codecs\qjpcodecs4.dll
 </li><li> codecs\qkrcodecs4
@@ -503,7 +510,12 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
        |              |                                   &lt; - firstPaintFinished
        |              |                                   &lt; - requestStart
        |              |                                   &lt; - requestFinished
+       |              |                  + [function] on &lt;- addEventListener alias
        |              |                  + [function] removeEventListener
+       |              |                  + [function] un &lt;- removeEventListener alias
+       |              |                  + [function] once
+       |              |                  + [function] removeAllEventListener
+       |              |                  + [function] unAll &lt;- removeAllEventListener alias
        |              |                  + [function] elementRects
        |              |                  + [function] saveImage  &lt;-  *支持 JPG/JPEG/PNG/BMP/PPM/TIFF 格式保存;
        |              |                  + [function] savePdf 
@@ -529,7 +541,7 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
        + [object] console + [function] log 
                           + [function] dir 
                           + [function] time 
-                          + [function] timeEnd													
+                          + [function] timeEnd
        + [function] alert &lt;--- App.alert 的快捷引用
        + [function] setTimeout &lt;-- webview.setTimeout 方法的引用
        + [function] clearTimeout &lt;-- webview.clearTimeout 方法的引用
@@ -1393,12 +1405,35 @@ callback &lt;function&gt; 事件触发时的回调函数。
 </li></ul>
 <p><br />
 </p>
+<h4><span id="App.webview.on.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><b>App.webview.on(eventName &lt;string&gt;, callback &lt;function&gt;)</b></span></h4>
+<p><b>说明:</b> addEventListener 方法的别名方法。
+</p><p><br />
+</p>
 <h4><span id="App.webview.removeEventListener.28eventName_.3Cstring.3E.2C_callbackHandle_.3Cfunction.3E.29"><b>App.webview.removeEventListener(eventName &lt;string&gt;, callbackHandle &lt;function&gt;)</b></span></h4>
 <p><b>参数:</b>
 </p><p>eventName &lt;string&gt; 所需监听的事件名。值范围同 addEventListener 方法 eventName 值。
 </p><p>callbackHandle &lt;function&gt; 要取消的事件触发回调函数。
 </p><p><b>返回值:</b>  成功移除事件返回值 true 否则 flase。
 </p><p><b>说明:</b> 此函数用来移除指定事件的某条执行回调。
+</p><p><br />
+</p>
+<h4><span id="App.webview.un.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><b>App.webview.un(eventName &lt;string&gt;, callback &lt;function&gt;)</b></span></h4>
+<p><b>说明:</b> removeEventListener 方法的别名方法。
+</p><p><br />
+</p>
+<h4><span id="App.webview.once.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><b>App.webview.once(eventName &lt;string&gt;, callback &lt;function&gt;)</b></span></h4>
+<p><b>说明:</b> <b>单次</b>事件触发绑定函数。使用方法同 addEventListener ，差异仅为事件触发一次后，立即移除 callback 监听函数。
+</p><p><br />
+</p>
+<h4><span id="App.webview.removeAllEventListener.28.5BeventName_.3Cstring.3E.5D.29"><b>App.webview.removeAllEventListener([eventName &lt;string&gt;])</b></span></h4>
+<p><b>参数:</b>
+</p><p>eventName &lt;string&gt; 所需监听的事件名，非必选参数，值范围同 addEventListener 方法 eventName 值。
+</p><p><b>返回值:</b>  成功移除事件返回值 true 否则 flase。
+</p><p><b>说明:</b> 此函数用来移除指定事件的<b>全部</b>执行回调。如果 eventName 值为空字符串或者未传值，则会<b>移除所有事件的全部</b>执行回调。
+</p><p><br />
+</p>
+<h4><span id="App.webview.unAll.28.5BeventName_.3Cstring.3E.5D.29"><b>App.webview.unAll([eventName &lt;string&gt;])</b></span></h4>
+<p><b>说明:</b> removeAllEventListener 方法的别名方法。
 </p><p><br />
 </p>
 <h4><span id="App.webview.setDetectionRects.28rects_.3CArray.3E.5B.2C_sameRate_.3Cnumber.3E.5D.29"><b>App.webview.setDetectionRects(rects &lt;Array&gt;[, sameRate &lt;number&gt;])</b></span></h4>

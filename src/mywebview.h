@@ -41,6 +41,7 @@ public:
     Q_INVOKABLE QScriptValue clearInterval(QScriptValue timeId);
     Q_INVOKABLE QScriptValue addEventListener(QScriptValue eventName, QScriptValue scriptFunc);
     Q_INVOKABLE QScriptValue removeEventListener(QScriptValue eventName, QScriptValue scriptFunc);
+    Q_INVOKABLE QScriptValue removeAllEventListener(QScriptValue eventName =  QScriptValue(""));
     Q_INVOKABLE QScriptValue saveImage(QScriptValue path, QScriptValue type = QScriptValue("JPG"),
                                      QScriptValue quality = QScriptValue(-1),
                                      QScriptValue rect = QScriptValue::UndefinedValue);

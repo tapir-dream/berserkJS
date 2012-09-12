@@ -891,7 +891,7 @@ QScriptValue MyWebView::removeEventListener(QScriptValue eventName, QScriptValue
     if (!scriptFunc.isFunction())
         return QScriptValue::UndefinedValue;
 
-    QString event = eventName.toString().toLower();
+    QString event = eventName.toString().toLower().trimmed();
 
     if (!eventNameMap.contains(event))
         return QScriptValue::UndefinedValue;
@@ -908,6 +908,27 @@ QScriptValue MyWebView::removeEventListener(QScriptValue eventName, QScriptValue
         }
     }
     return QScriptValue(isRemoved);
+}
+
+QScriptValue MyWebView::removeAllEventListener(QScriptValue eventName)
+{
+    if (!eventName.isString())
+        return QScriptValue::UndefinedValue;
+    QString event = eventName.toString().toLower().trimmed();
+    if (event == "") {
+        int c = eventNameMap.keys().size();
+        for (int i = 0; i < c; ++i) {
+            eventNameMap[eventNameMap.keys().at(i)]->clear();
+        }
+        return QScriptValue(true);
+    }
+
+    if (!eventNameMap.contains(event))
+        return QScriptValue(false);
+
+    QList<ContextInfo>* callbacks = eventNameMap[event];
+    callbacks->clear();
+    return QScriptValue(true);
 }
 
 void MyWebView::normalFireEvent(QList<ContextInfo> eventHandleList)
