@@ -41,8 +41,20 @@ void MainWindow::initUserScript()
     }
 
     if (cmdParams.hasScript()) {
-        QString scriptFunc = script->readFile(getAppPath() +
-                                              cmdParams.getParams()["script"],
+        QString file = cmdParams.getParams()["script"];
+        QFileInfo fileInfo(file);
+        // 尝试直接路径探测文件存在否
+        if (!fileInfo.exists()) {
+            file = getAppPath() + cmdParams.getParams()["script"];
+            fileInfo.setFile(file);
+            // 尝试从应用程序路径探测文件存在否
+            if (!fileInfo.exists()) {
+                QApplication::quit();
+                return;
+            }
+        }
+
+        QString scriptFunc = script->readFile(file,
                                               QTextCodec::codecForName("UTF-8"));
 
         if (script->getScriptEngine()->canEvaluate(scriptFunc)) {

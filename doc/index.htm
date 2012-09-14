@@ -415,7 +415,7 @@ pre {
 <ol><li> --help 该参数将在浏览器界面内显示远程 help 页，该页地址为：http://github.com/tapir-dream/berserkJS/。 <b>启用该参数时 --command 参数自动失效。</b> 
 </li><li> --command 该参数将隐藏工具界面使其看起来像纯命令行工具。此方法的设计目的在于非调试环境中不启用界面窗口。 
 </li><li> --start  该参数表明要自动执行 berserkJS 目录下 js/conf/init.js 文件，运行配置好的测试。
-</li><li> --script=value  如 value 参数值不为空 --script 参数表示要自动执行以 berserkJS 目录为基准的某路径下js文件。<b>此js文件将自动以 uft-8 编码格式读取并执行；此参数存在时 --start 参数自动失效。</b>
+<li> --script 该参数表示要自动执行某路径下js文件。其规则是<b>先以参数值为实际路径</b>嗅探文件，如果存在则执行，否则执行<b>以berserkJS路径为基准</b>的脚本文件。<b>此js文件将自动以 uft-8 编码格式读取并执行；此参数存在时 --start 参数自动失效。</b>
 </li></ol>
 <p><br />
 </p>
