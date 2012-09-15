@@ -126,8 +126,7 @@
 <p>https://github.com/tapir-dream/berserkJS
 </p>
 <h2> 工具主要文件 </h2>
-<pre>
-工具目录 
+<pre>工具目录 
     + src 目录
     |    + 源码文件 ……
     |    
@@ -256,8 +255,7 @@
 </p>
 <p>整体方法树如下：
 </p>
-<pre>
-Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数组
+<pre>Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数组
        |              + [function] close
        |              + [function] loadScript
        |              + [function] readFile
@@ -359,13 +357,13 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
        + [object] console + [function] log 
                           + [function] dir 
                           + [function] time 
-                          + [function] timeEnd                                                  
+                          + [function] timeEnd
        + [function] alert &lt;--- App.alert 的快捷引用
        + [function] setTimeout &lt;-- webview.setTimeout 方法的引用
        + [function] clearTimeout &lt;-- webview.clearTimeout 方法的引用
        + [function] setInterval &lt;-- webview.setInterval 方法的引用
        + [function] clearInterval &lt;-- webview.clearInterval 方法的引用                
-
+       + [function] print
 
 
     
@@ -406,8 +404,7 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
 <h2> 模块文件书写规则  </h2>
 <p>它是一个简单的匿名函数表达式，可以有返回值，也可以没有返回值。
 </p>
-<pre>
-(function() {
+<pre>(function() {
    [JS Code]
 });
 </pre>
@@ -418,8 +415,7 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
 </p>
 <p>配置管理文件同样是一个JS模块，文件名为 ‘’‘config.js’‘’，会返回一个 JOSN 作为配置表，规格如下：
 </p>
-<pre>
-/**
+<pre>/**
  * 配置设置模块
  * @return {object} 返回配置对象    
  */
@@ -703,8 +699,7 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
 <p><br>
 例子：
 </p>
-<pre>
-var args = [1,2,3];
+<pre>var args = [1,2,3];
 var module = App.loadScript(App.path + 'module/xxx.js',  function(err, module) {
    if (err)
       return false;
@@ -715,8 +710,7 @@ if (!module) {
 }
 </pre>
 <p>反之被加载的 js 文件为非模块写法，则直接<b>在全局上下文环境中</b>运行 JS 文件代码。</p>
-<pre>
-//远程 JS 文件， URL 为 http://www.berserkJS.org/test.js
+<pre>//远程 JS 文件， URL 为 http://www.berserkJS.org/test.js
 // test.js 文件内容
 var a =  1;
 
@@ -948,8 +942,7 @@ alert(a);
 </p>
 <p>如下例：
 </p>
-<pre>
-// 清空选择器
+<pre>// 清空选择器
 App.selecotr.clear();
 
 // 选择所有 http 304 的url
@@ -1646,21 +1639,18 @@ callback &lt;function&gt; 事件触发时的回调函数。
 </p>
 <p>例子：
 </p>
-<pre>
-    // 执行当前页面中的console.log方法打印在控制台中打印 'hello'
+<pre>    // 执行当前页面中的console.log方法打印在控制台中打印 'hello'
     App.webview.execScript(function(msg) {
       console.log(msg);
     }, 'hello');
 </pre>
-<pre>
-    // 执行当前页面中的console.log方法在控制台中打印 'width: 100, height:100''
+<pre>    // 执行当前页面中的console.log方法在控制台中打印 'width: 100, height:100''
     App.webview.execScript(function(size) {
       console.log('width: ' + size.width + ", " + "height: " +  size.height);
     }, {width:100, height:300});
 </pre>
 <p><br></p>
-<pre>
-   // 将参数传入页面沙箱计算并出沙箱接受
+<pre>   // 将参数传入页面沙箱计算并出沙箱接受
   var msg = App.webview.execScript(function(size) {
       return 'width: ' + size.width + ", " + "height: " +  size.height;
     }, {width:100, height:300});
@@ -1668,42 +1658,6 @@ callback &lt;function&gt; 事件触发时的回调函数。
     ......
 </pre>
 <p><b>特别注意: 页面沙箱内所实现的 JS 内置对象会超出 ECMAScript 5th 规范设定范围。请避免在传出沙箱时使用：ArrayBuffer Uint8Array  DataView  Float32Array Int8Array Int16Array Int32Array Uint8Array Uint16Array Uint32Array 等扩展的内置对象。他们在页面沙箱内存在而APP 脚本沙箱中没有被实现。</b>
-</p>
-<p><br></p>
-<h3> App.helper 命名空间下函数 </h3>
-<p>App.helper 命名空间是转配在 config.js 配置文件的 global 项中，它将在配置初始化时候被装配到 App 命名空间下供使用者调用。此空间中工具函数可由使用者不断添加。
-</p>
-<p><br></p>
-<h4><b>App.helper.supplant(template&lt;string&gt;, data &lt;Object&gt;)</b></h4>
-<p><b>参数:</b>
-</p>
-<p>template&lt;string&gt; 一个字符串模板 使用 ${key} 字符作为占位符，其中 key 对应 data 参数对象的同名 key 值。
-</p>
-<p>data &lt;Object&gt; 模板所要提供的数据，是个一维的简单对象。
-</p>
-<p><b>返回值:</b> &lt;string&gt; 组装后的字符串
-</p>
-<p><b>说明:</b> 最为简单的字符串替换模板函数。如模板 "${hello}，我是${name}" 配合数据对象 {hello:"吃了么您", name:"小明"}，将会输出字符串 "吃了么您,，我是小明"。
-</p>
-<p><br></p>
-<h4><b>App.helper.require(moduleName&lt;string&gt;[, args &lt;Array&gt;])</b></h4>
-<p><b>参数:</b>
-</p>
-<p>moduleName&lt;string&gt; 模块名，指定为 App 的 module 目录下 js 模块文件名 （不需要 ".js" 扩展名）。
-</p>
-<p>args &lt;Array&gt; 可选参数。模块所需的执行参数。
-</p>
-<p><b>返回值:</b> 模块执行的返回值
-</p>
-<p><b>说明:</b> 此方法是对 App.loadScript 方法的包装，使其实用简单化。
-</p>
-<p><br></p>
-<h4><b>App.helper.log(msg &lt;string&gt;|&lt;number&gt;)</b></h4>
-<p><b>参数:</b> msg &lt;string&gt;|&lt;number&gt; log 内容
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 此方法是对 App.webview.execScript 方法的包装，简易调用页面中的 console.log 方法，在页面控制台中输出内容。
 </p>
 <p><br></p>
 <h3> console 命名空间下函数与属性 </h3>
@@ -1742,8 +1696,7 @@ callback &lt;function&gt; 事件触发时的回调函数。
 </p>
 <p><b>例如:</b>
 </p>
-<pre>
-console.time('flag');
+<pre>console.time('flag');
 setTimeout(function() {
   console.timeEnd('flag');
 }, 2000);
@@ -1768,8 +1721,7 @@ setTimeout(function() {
 </p>
 <p><b>例如:</b>
 </p>
-<pre>
-App.webview.addEventListener('message', function(w, l) {
+<pre>App.webview.addEventListener('message', function(w, l) {
   if ('page' == l.b) {
     App.webview.execScript(function(msg) {
       // 显示 "this is a message" 信息。
@@ -1799,6 +1751,43 @@ App.webview.execScript(function(s) {
 </p>
 <p><b>说明:</b> 此方法会在页面脚本沙箱中跨沙箱调用 App.memory 方法获取当前进程的内存占用量。
 </p>
+
+<h3> App.helper 命名空间下函数 </h3>
+<p>App.helper 命名空间是转配在 config.js 配置文件的 global 项中，它将在配置初始化时候被装配到 App 命名空间下供使用者调用。此空间中工具函数可由使用者不断添加。
+</p>
+<p><br></p>
+<h4><b>App.helper.supplant(template&lt;string&gt;, data &lt;Object&gt;)</b></h4>
+<p><b>参数:</b>
+</p>
+<p>template&lt;string&gt; 一个字符串模板 使用 ${key} 字符作为占位符，其中 key 对应 data 参数对象的同名 key 值。
+</p>
+<p>data &lt;Object&gt; 模板所要提供的数据，是个一维的简单对象。
+</p>
+<p><b>返回值:</b> &lt;string&gt; 组装后的字符串
+</p>
+<p><b>说明:</b> 最为简单的字符串替换模板函数。如模板 "${hello}，我是${name}" 配合数据对象 {hello:"吃了么您", name:"小明"}，将会输出字符串 "吃了么您,，我是小明"。
+</p>
+<p><br></p>
+<h4><b>App.helper.require(moduleName&lt;string&gt;[, args &lt;Array&gt;])</b></h4>
+<p><b>参数:</b>
+</p>
+<p>moduleName&lt;string&gt; 模块名，指定为 App 的 module 目录下 js 模块文件名 （不需要 ".js" 扩展名）。
+</p>
+<p>args &lt;Array&gt; 可选参数。模块所需的执行参数。
+</p>
+<p><b>返回值:</b> 模块执行的返回值
+</p>
+<p><b>说明:</b> 此方法是对 App.loadScript 方法的包装，使其实用简单化。
+</p>
+<p><br></p>
+<h4><b>App.helper.log(msg &lt;string&gt;|&lt;number&gt;)</b></h4>
+<p><b>参数:</b> msg &lt;string&gt;|&lt;number&gt; log 内容
+</p>
+<p><b>返回值:</b> 无
+</p>
+<p><b>说明:</b> 此方法是对 App.webview.execScript 方法的包装，简易调用页面中的 console.log 方法，在页面控制台中输出内容。
+</p>
+<p><br></p>
 
 <h2> END </h2>
 </div>
