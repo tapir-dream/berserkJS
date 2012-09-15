@@ -215,7 +215,7 @@ QScriptValue ScriptBinding::loadScript(QScriptContext *context, QScriptEngine *i
             QString scriptErr = "Uncaught exception at line "
                  + QString::number(interpreter->uncaughtExceptionLineNumber()) + ": "
                  + interpreter->uncaughtException().toString()
-                 + "Backtrace: "
+                 + "; Backtrace: "
                  + interpreter->uncaughtExceptionBacktrace().join(", ");
             interpreter->evaluate("console.log('" + scriptErr + "')");
             return  QScriptValue(false);
@@ -607,11 +607,9 @@ QScriptValue ScriptBinding::consoleLog(QScriptContext *context, QScriptEngine *i
     }
     QStringList args;
     for (int i = 0; i < argc; ++i) {
-        args.append(context->argument(i).toString() + ", ");
+        args.append(context->argument(i).toString());
     }
-    QString output = args.join("");
-
-    output = output.left(output.size() - 2);
+    QString output = args.join("\n");
 
     // 通过信号工厂单例发消息
     // 避免绑定js的方法是静态的无法调用实例方法的问题。

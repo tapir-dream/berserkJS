@@ -141,6 +141,7 @@
  *        + [function] clearTimeout <--referenced from webview.clearTimeout method
  *        + [function] setInterval <--referenced from webview.setInterval method
  *        + [function] clearInterval <--referenced from webview.clearInterval method
+ *        + [function] print
  *
  * ps: Exposed webview object to the js Engine. It default exposed the following methods and propertys.
  *     which propertys is readonly and methods section need Qt Object.

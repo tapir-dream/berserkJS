@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "commandparameters.h"
 #include "scriptsignalfactory.h"
 
 #include <QtGui/QApplication>
@@ -11,6 +10,7 @@
 #include <QHBoxLayout>
 #include <QNetworkDiskCache>
 #include <QDesktopServices>
+#include <QTime>
 
 MyWebView* MainWindow::webView;
 MainWindow* MainWindow::window;
@@ -29,23 +29,26 @@ MainWindow::MainWindow(QWidget *parent) :
     initAppEngine();
     // 延时至 exec() 的消息循环启动，否则 close 、hide 等方法会失效。
     QTimer::singleShot(1, this, SLOT(initUserScript()));
+
 }
 
 void MainWindow::initUserScript()
 {
-    CommandParameters cmdParams;
 
-    if (cmdParams.hasHelp()) {
+    cmdParams = new CommandParameters();
+    startSafeMode(cmdParams);
+
+    if (cmdParams->hasHelp()) {
         webView->load(QUrl(helpUrl));
         return;
     }
 
-    if (cmdParams.hasScript()) {
-        QString file = cmdParams.getParams()["script"];
+    if (cmdParams->hasScript()) {
+        QString file = cmdParams->getParams()["script"];
         QFileInfo fileInfo(file);
         // 尝试直接路径探测文件存在否
         if (!fileInfo.exists()) {
-            file = getAppPath() + cmdParams.getParams()["script"];
+            file = getAppPath() + cmdParams->getParams()["script"];
             fileInfo.setFile(file);
             // 尝试从应用程序路径探测文件存在否
             if (!fileInfo.exists()) {
@@ -57,19 +60,26 @@ void MainWindow::initUserScript()
         QString scriptFunc = script->readFile(file,
                                               QTextCodec::codecForName("UTF-8"));
 
-        if (script->getScriptEngine()->canEvaluate(scriptFunc)) {
+        QScriptEngine* interpreter = script->getScriptEngine();
+
+        if (interpreter->canEvaluate(scriptFunc)) {
             script->runScript(scriptFunc);
         } else {
             ui->outputScriptResults_txt->setPlainText(scriptFunc);
         }
+
+
+        if (interpreter->hasUncaughtException()) {
+             ui->outputScriptResults_txt->setPlainText(getScriptError(interpreter));
+        }
+
     }
 
-    if (cmdParams.hasStart()) {
+    if (cmdParams->hasStart()) {
         script->runScript(scriptFunc);
         return;
     }
 }
-
 
 void MainWindow::initLayout()
 {
@@ -108,6 +118,11 @@ void MainWindow::initAppEngine()
 
     // 将应用程序脚本环境给webView对象，以便内部调用大App环境。
     webView->setAppScriptEngine(script);
+
+    // 全局方法挂载
+    script->getGlobalObject().setProperty("print",
+        script->getScriptEngine()->newFunction(MainWindow::print),
+        QScriptValue::ReadOnly);
 
     // 为脚本挂APP控制相关方法
     script->getRootSpace().setProperty("close",
@@ -188,6 +203,7 @@ void MainWindow::initAppEngine()
             App.webview.addEventListener(evtName, cb);\n\
         };\
    ");
+
 }
 
 QString MainWindow::getAppPath()
@@ -236,10 +252,25 @@ QScriptValue MainWindow::hideOfScript(QScriptContext *context, QScriptEngine *in
     window->hide();
     return QScriptValue(true);
 }
+
 QScriptValue MainWindow::showOfScript(QScriptContext *context, QScriptEngine *interpreter)
 {
     window->show();
     return QScriptValue(true);
+}
+QScriptValue MainWindow::print(QScriptContext *context, QScriptEngine *interpreter)
+{
+    int argc = context->argumentCount();
+    if (argc == 0) {
+        return QScriptValue::UndefinedValue;
+    }
+    QStringList args;
+    for (int i = 0; i < argc; ++i) {
+        args.append(context->argument(i).toString());
+    }
+    QString output = args.join("\n");
+    qDebug() << output;
+    return QScriptValue::UndefinedValue;
 }
 
 QScriptValue MainWindow::sendEvent(QScriptContext *context, QScriptEngine *interpreter)
@@ -341,23 +372,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
             && e->key() == Qt::Key_J))  {
         viewChange();
     }
-
 }
-
-void MainWindow::on_clearLog_btn_clicked()
-{
-    ui->outputLogResults_txt->setPlainText("");
-    ui->outputScriptResults_txt->setPlainText("");
-}
-
-void MainWindow::onConsoleLogMessage(QString str)
-{
-    ui->outputLogResults_txt
-      ->setPlainText(str + "\n------------------------------\n" +
-                     ui->outputLogResults_txt->toPlainText());
-}
-
-
 
 void MainWindow::viewChange()
 {
@@ -375,3 +390,50 @@ void MainWindow::viewChange()
         ui->clearLog_btn->show();
     }
 }
+
+void MainWindow::on_clearLog_btn_clicked()
+{
+    ui->outputLogResults_txt->setPlainText("");
+    ui->outputScriptResults_txt->setPlainText("");
+}
+
+void MainWindow::onConsoleLogMessage(QString str)
+{
+    if (cmdParams->isCommandMode()) {
+        qDebug()<< str;
+        return;
+    }
+    ui->outputLogResults_txt
+      ->setPlainText(str + "\n------------------------------\n" +
+                     ui->outputLogResults_txt->toPlainText());
+}
+
+void MainWindow::startSafeMode(CommandParameters* cmdParam)
+{
+    if (cmdParam->isCommandMode()) {
+        QTimer* timer = new QTimer(this);
+        connect(timer, SIGNAL(timeout()), this, SLOT(onTimeout()));
+        timer->start(1000);
+    }
+}
+
+
+QString MainWindow::getScriptError(QScriptEngine* interpreter)
+{
+    QString scriptErr = "Uncaught exception at line "
+         + QString::number(interpreter->uncaughtExceptionLineNumber()) + ": "
+         + interpreter->uncaughtException().toString()
+         + "; Backtrace: "
+         + interpreter->uncaughtExceptionBacktrace().join(", ");
+    return scriptErr;
+}
+
+void MainWindow::onTimeout()
+{
+    QScriptEngine* interpreter = script->getScriptEngine();
+    if (interpreter->hasUncaughtException()) {
+        qDebug() << getScriptError(interpreter);
+        QApplication::quit();
+    }
+}
+

@@ -6,6 +6,7 @@
 int main(int argc, char *argv[])
 {
     QTextCodec *localCode = QTextCodec::codecForLocale();
+    //QTextCodec *localCode = QTextCodec::codecForName("UTF-8");
     QTextCodec::setCodecForLocale(localCode);
     QTextCodec::setCodecForCStrings(localCode);
     QTextCodec::setCodecForTr(localCode);

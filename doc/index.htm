@@ -10,7 +10,7 @@
 
 body {
   margin: 0;
-  padding: 2em;
+  padding: 0 2em;
 }
 
 h1, h2, h3, h4 {
@@ -95,8 +95,9 @@ ul a:hover, ul a:active {
 }
 
 li {
-  padding: 0.2em;
+  padding: 0.2em 0.1 em;
   margin: 0;
+  word-break: break-all;
 }
 
 pre {
@@ -120,21 +121,27 @@ pre {
 }
 
 #toc {
-	float:right;
 	width: 480px;
-	table-layout: fixed;
+  position: fixed;
+  right: 0;
+  top: 0;
 }
 
 #doc {
 	margin-right:500px;
 }
 
+#tocList {
+  height: 500px;
+  overflow-y: scroll;
+}
+
 </style>
 </head>
 <body>
 <table id="toc"><tr><td><div id="toctitle"><h2>目录</h2></div>
-<ul>
-<li><a href="#RIA_.E7.BD.91.E7.BB.9C.E6.95.B0.E6.8D.AE.E8.87.AA.E5.8A.A8.E5.8C.96.E8.BE.93.E5.87.BA.E5.B7.A5.E5.85.B7.EF.BC.88berserkJS.EF.BC.89"><span>1</span> <span>网络数据自动化输出工具（berserkJS）</span></a>
+<ul id="tocList">
+<li><a href="#RIA_.E7.BD.91.E7.BB.9C.E6.95.B0.E6.8D.AE.E8.87.AA.E5.8A.A8.E5.8C.96.E8.BE.93.E5.87.BA.E5.B7.A5.E5.85.B7.EF.BC.88BerserkJS.EF.BC.89"><span>1</span> <span>RIA 网络数据自动化输出工具（BerserkJS）</span></a>
 <ul>
 <li><a href="#.E6.BC.94.E7.A4.BA.E8.A7.86.E9.A2.91"><span>1.1</span> <span>演示视频</span></a></li>
 <li><a href="#.E5.B7.A5.E5.85.B7.E4.BB.8B.E7.BB.8D_PPT"><span>1.2</span> <span>工具介绍 PPT</span></a></li>
@@ -154,110 +161,108 @@ pre {
 <li><a href="#.E5.88.9D.E5.A7.8B.E5.8C.96.E9.85.8D.E7.BD.AE.E4.BB.A5.E5.8F.8A.E5.BC.80.E5.A7.8B.E8.BF.90.E8.A1.8C"><span>1.16</span> <span>初始化配置以及开始运行</span></a></li>
 <li><a href="#API_.E6.96.87.E6.A1.A3"><span>1.17</span> <span>API 文档</span></a>
 <ul>
-<li><a href="#App_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0.E4.B8.8E.E5.B1.9E.E6.80.A7"><span>1.17.1</span> <span>App 命名空间下函数与属性</span></a>
+<li><a href="#.E5.85.A8.E5.B1.80.E7.8B.AC.E7.AB.8B.E5.87.BD.E6.95.B0"><span>1.17.1</span> <span>全局独立函数</span></a>
 <ul>
-<li><a href="#App.netListener.28enabled_.3CBoolean.3E.29"><span>1.17.1.1</span> <span>App.netListener(enabled &lt;Boolean&gt;)</span></a></li>
-<li><a href="#App.networkData.28.29"><span>1.17.1.2</span> <span>App.networkData()</span></a></li>
-<li><a href="#App.loadScript.28path_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.1.3</span> <span>App.loadScript(path &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
-<li><a href="#App.readFile.28path_.3Cstring.3E.5B.2C_charset_.3Cstring.3E.5D_.29"><span>1.17.1.4</span> <span>App.readFile(path &lt;string&gt;[, charset &lt;string&gt;] )</span></a></li>
-<li><a href="#App.writeFile.28path_.3Cstring.3E.2C_content_.3Cstring.3E.5B.2C_charset_.3Cstring.3E.2C_appendMode.3Cboolean.3E.5D_.29"><span>1.17.1.5</span> <span>App.writeFile(path &lt;string&gt;, content &lt;string&gt;[, charset &lt;string&gt;, appendMode&lt;boolean&gt;] )</span></a></li>
-<li><a href="#App.base64FromFile.28file_.3Cstring.3E.29"><span>1.17.1.6</span> <span>App.base64FromFile(file &lt;string&gt;)</span></a></li>
-<li><a href="#App.dataURIFromImage.28image_.3Cstring.3E.29"><span>1.17.1.7</span> <span>App.dataURIFromImage(image &lt;string&gt;)</span></a></li>
-<li><a href="#App.httpRequest.28method_.3Cstring.3E.2C_url_.3Cstring.3E_.5B.2C_data_.3Cstring.3E.2C_charset_.3Cstring.3E.5D.29"><span>1.17.1.8</span> <span>App.httpRequest(method &lt;string&gt;,  url &lt;string&gt; [, data &lt;string&gt;, charset &lt;string&gt;])</span></a></li>
-<li><a href="#App.process.28program_.3Cstring.3E.2C_.5Bargs_.3CArray.3E.2C_timeout_.3Cnumber.3E.2C_debug_.3Cfunction.3E.5D.29"><span>1.17.1.9</span> <span>App.process(program &lt;string&gt;, [args &lt;Array&gt;, timeout &lt;number&gt;, debug &lt;function&gt;])</span></a></li>
-<li><a href="#App.watchFile.28flie_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.1.10</span> <span>App.watchFile(flie &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
-<li><a href="#App.unWatcher.28file_.3Cstring.3E_.7C_callbackHandle_.3Cfunction.3E.29"><span>1.17.1.11</span> <span>App.unWatcher(file &lt;string&gt; | callbackHandle &lt;function&gt;)</span></a></li>
-<li><a href="#App.watchedFiles.28.29"><span>1.17.1.12</span> <span>App.watchedFiles()</span></a></li>
-<li><a href="#App.watcherClose.28.29"><span>1.17.1.13</span> <span>App.watcherClose()</span></a></li>
-<li><a href="#App.cpu.28.29"><span>1.17.1.14</span> <span>App.cpu()</span></a></li>
-<li><a href="#App.memory.28.29"><span>1.17.1.15</span> <span>App.memory()</span></a></li>
-<li><a href="#App.setTimeout.28callback_.3Cfunction.3E.2C_timeout_.3Cnumber.3E.29"><span>1.17.1.16</span> <span>App.setTimeout(callback &lt;function&gt;, timeout &lt;number&gt;)</span></a></li>
-<li><a href="#App.clearTimeout.28timeId_.3Cnumber.3E.29"><span>1.17.1.17</span> <span>App.clearTimeout(timeId &lt;number&gt;)</span></a></li>
-<li><a href="#App.setInterval.28callback_.3Cfunction.3E.2C_interval_.3Cnumber.3E.29"><span>1.17.1.18</span> <span>App.setInterval(callback &lt;function&gt;, interval &lt;number&gt;)</span></a></li>
-<li><a href="#App.clearInterval.28timeId_.3Cnumber.3E.29"><span>1.17.1.19</span> <span>App.clearInterval(timeId &lt;number&gt;)</span></a></li>
-<li><a href="#App.alert.28message_.3Cnumber.3E.7C.3Cstring.3E.7C.3Cboolean.3E.7C.3Cfunction.3E.7C.3CArray.3E.7C.3CObject.3E.29"><span>1.17.1.20</span> <span>App.alert(message &lt;number&gt;|&lt;string&gt;|&lt;boolean&gt;|&lt;function&gt;|&lt;Array&gt;|&lt;Object&gt;)</span></a></li>
-<li><a href="#App.hide.28.29"><span>1.17.1.21</span> <span>App.hide()</span></a></li>
-<li><a href="#App.show.28.29"><span>1.17.1.22</span> <span>App.show()</span></a></li>
-<li><a href="#App.about.28.29"><span>1.17.1.23</span> <span>App.about()</span></a></li>
-<li><a href="#App.close.28.29"><span>1.17.1.24</span> <span>App.close()</span></a></li>
-<li><a href="#App.path_.5Breadonly.5D"><span>1.17.1.25</span> <span>App.path [readonly]</span></a></li>
-<li><a href="#App.file_.5Breadonly.5D"><span>1.17.1.26</span> <span>App.file [readonly]</span></a></li>
-<li><a href="#App.args_.5Breadonly.5D"><span>1.17.1.27</span> <span>App.args [readonly]</span></a></li>
+<li><a href="#print.28arg1.2C_.5Barg2.2C_arg3.2C_arg4.2C_....29"><span>1.17.1.1</span> <span>print(arg1, [arg2, arg3, arg4, ...)</span></a></li>
 </ul>
 </li>
-<li><a href="#App.selector_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"><span>1.17.2</span> <span>App.selector 命名空间下函数</span></a>
+<li><a href="#App_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0.E4.B8.8E.E5.B1.9E.E6.80.A7"><span>1.17.2</span> <span>App 命名空间下函数与属性</span></a>
 <ul>
-<li><a href="#App.selector.img.28.29"><span>1.17.2.1</span> <span>App.selector.img()</span></a></li>
-<li><a href="#App.selector.png.28.29"><span>1.17.2.2</span> <span>App.selector.png()</span></a></li>
-<li><a href="#App.selector.gif.28.29"><span>1.17.2.3</span> <span>App.selector.gif()</span></a></li>
-<li><a href="#App.selector.ico.28.29"><span>1.17.2.4</span> <span>App.selector.ico()</span></a></li>
-<li><a href="#App.selector.jpg.28.29"><span>1.17.2.5</span> <span>App.selector.jpg()</span></a></li>
-<li><a href="#App.selector.svg.28.29"><span>1.17.2.6</span> <span>App.selector.svg()</span></a></li>
-<li><a href="#App.selector.doc.28.29"><span>1.17.2.7</span> <span>App.selector.doc()</span></a></li>
-<li><a href="#App.selector.css.28.29"><span>1.17.2.8</span> <span>App.selector.css()</span></a></li>
-<li><a href="#App.selector.js.28.29"><span>1.17.2.9</span> <span>App.selector.js()</span></a></li>
-<li><a href="#App.selector.cookie.28.29"><span>1.17.2.10</span> <span>App.selector.cookie()</span></a></li>
-<li><a href="#App.selector.nonegzip.28.29"><span>1.17.2.11</span> <span>App.selector.nonegzip()</span></a></li>
-<li><a href="#App.selector.nonecache.28.29"><span>1.17.2.12</span> <span>App.selector.nonecache()</span></a></li>
-<li><a href="#App.selector.nonecdn.28.29"><span>1.17.2.13</span> <span>App.selector.nonecdn()</span></a></li>
-<li><a href="#App.selector.totaltimeout.28duration_.3Cnumber.3E.29"><span>1.17.2.14</span> <span>App.selector.totaltimeout(duration &lt;number&gt;)</span></a></li>
-<li><a href="#App.selector.waittimeout.28duration_.3Cnumber.3E.29"><span>1.17.2.15</span> <span>App.selector.waittimeout(duration &lt;number&gt;)</span></a></li>
-<li><a href="#App.selector.downloadtimeout.28duration_.3Cnumber.3E.29"><span>1.17.2.16</span> <span>App.selector.downloadtimeout(duration &lt;number&gt;)</span></a></li>
-<li><a href="#App.selector.dnstimeout.28duration_.3Cnumber.3E.29"><span>1.17.2.17</span> <span>App.selector.dnstimeout(duration &lt;number&gt;)</span></a></li>
-<li><a href="#App.selector.sizeout.28size_.3Cnumber.3E.29"><span>1.17.2.18</span> <span>App.selector.sizeout(size &lt;number&gt;)</span></a></li>
-<li><a href="#App.selector.http200.28.29"><span>1.17.2.19</span> <span>App.selector.http200()</span></a></li>
-<li><a href="#App.selector.http301.28.29"><span>1.17.2.20</span> <span>App.selector.http301()</span></a></li>
-<li><a href="#App.selector.http302.28.29"><span>1.17.2.21</span> <span>App.selector.http302()</span></a></li>
-<li><a href="#App.selector.http304.28.29"><span>1.17.2.22</span> <span>App.selector.http304()</span></a></li>
-<li><a href="#App.selector.http404.28.29"><span>1.17.2.23</span> <span>App.selector.http404()</span></a></li>
-<li><a href="#App.selector.fromcdn.28.29"><span>1.17.2.24</span> <span>App.selector.fromcdn()</span></a></li>
-<li><a href="#App.selector.get.28.29"><span>1.17.2.25</span> <span>App.selector.get()</span></a></li>
-<li><a href="#App.selector.clear.28.29"><span>1.17.2.26</span> <span>App.selector.clear()</span></a></li>
+<li><a href="#App.netListener.28enabled_.3CBoolean.3E.29"><span>1.17.2.1</span> <span>App.netListener(enabled &lt;Boolean&gt;)</span></a></li>
+<li><a href="#App.networkData.28.29"><span>1.17.2.2</span> <span>App.networkData()</span></a></li>
+<li><a href="#App.loadScript.28path_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.2.3</span> <span>App.loadScript(path &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.readFile.28path_.3Cstring.3E.5B.2C_charset_.3Cstring.3E.5D_.29"><span>1.17.2.4</span> <span>App.readFile(path &lt;string&gt;[, charset &lt;string&gt;] )</span></a></li>
+<li><a href="#App.writeFile.28path_.3Cstring.3E.2C_content_.3Cstring.3E.5B.2C_charset_.3Cstring.3E.2C_appendMode.3Cboolean.3E.5D_.29"><span>1.17.2.5</span> <span>App.writeFile(path &lt;string&gt;, content &lt;string&gt;[, charset &lt;string&gt;, appendMode&lt;boolean&gt;] )</span></a></li>
+<li><a href="#App.base64FromFile.28file_.3Cstring.3E.29"><span>1.17.2.6</span> <span>App.base64FromFile(file &lt;string&gt;)</span></a></li>
+<li><a href="#App.dataURIFromImage.28image_.3Cstring.3E.29"><span>1.17.2.7</span> <span>App.dataURIFromImage(image &lt;string&gt;)</span></a></li>
+<li><a href="#App.httpRequest.28method_.3Cstring.3E.2C_url_.3Cstring.3E_.5B.2C_data_.3Cstring.3E.2C_charset_.3Cstring.3E.5D.29"><span>1.17.2.8</span> <span>App.httpRequest(method &lt;string&gt;,  url &lt;string&gt; [, data &lt;string&gt;, charset &lt;string&gt;])</span></a></li>
+<li><a href="#App.process.28program_.3Cstring.3E.2C_.5Bargs_.3CArray.3E.2C_timeout_.3Cnumber.3E.2C_debug_.3Cfunction.3E.5D.29"><span>1.17.2.9</span> <span>App.process(program &lt;string&gt;, [args &lt;Array&gt;, timeout &lt;number&gt;, debug &lt;function&gt;])</span></a></li>
+<li><a href="#App.watchFile.28flie_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.2.10</span> <span>App.watchFile(flie &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.unWatcher.28file_.3Cstring.3E_.7C_callbackHandle_.3Cfunction.3E.29"><span>1.17.2.11</span> <span>App.unWatcher(file &lt;string&gt; | callbackHandle &lt;function&gt;)</span></a></li>
+<li><a href="#App.watchedFiles.28.29"><span>1.17.2.12</span> <span>App.watchedFiles()</span></a></li>
+<li><a href="#App.watcherClose.28.29"><span>1.17.2.13</span> <span>App.watcherClose()</span></a></li>
+<li><a href="#App.cpu.28.29"><span>1.17.2.14</span> <span>App.cpu()</span></a></li>
+<li><a href="#App.memory.28.29"><span>1.17.2.15</span> <span>App.memory()</span></a></li>
+<li><a href="#App.setTimeout.28callback_.3Cfunction.3E.2C_timeout_.3Cnumber.3E.29"><span>1.17.2.16</span> <span>App.setTimeout(callback &lt;function&gt;, timeout &lt;number&gt;)</span></a></li>
+<li><a href="#App.clearTimeout.28timeId_.3Cnumber.3E.29"><span>1.17.2.17</span> <span>App.clearTimeout(timeId &lt;number&gt;)</span></a></li>
+<li><a href="#App.setInterval.28callback_.3Cfunction.3E.2C_interval_.3Cnumber.3E.29"><span>1.17.2.18</span> <span>App.setInterval(callback &lt;function&gt;, interval &lt;number&gt;)</span></a></li>
+<li><a href="#App.clearInterval.28timeId_.3Cnumber.3E.29"><span>1.17.2.19</span> <span>App.clearInterval(timeId &lt;number&gt;)</span></a></li>
+<li><a href="#App.alert.28message_.3Cnumber.3E.7C.3Cstring.3E.7C.3Cboolean.3E.7C.3Cfunction.3E.7C.3CArray.3E.7C.3CObject.3E.29"><span>1.17.2.20</span> <span>App.alert(message &lt;number&gt;|&lt;string&gt;|&lt;boolean&gt;|&lt;function&gt;|&lt;Array&gt;|&lt;Object&gt;)</span></a></li>
+<li><a href="#App.hide.28.29"><span>1.17.2.21</span> <span>App.hide()</span></a></li>
+<li><a href="#App.show.28.29"><span>1.17.2.22</span> <span>App.show()</span></a></li>
+<li><a href="#App.about.28.29"><span>1.17.2.23</span> <span>App.about()</span></a></li>
+<li><a href="#App.close.28.29"><span>1.17.2.24</span> <span>App.close()</span></a></li>
+<li><a href="#App.path_.5Breadonly.5D"><span>1.17.2.25</span> <span>App.path [readonly]</span></a></li>
+<li><a href="#App.file_.5Breadonly.5D"><span>1.17.2.26</span> <span>App.file [readonly]</span></a></li>
+<li><a href="#App.args_.5Breadonly.5D"><span>1.17.2.27</span> <span>App.args [readonly]</span></a></li>
 </ul>
 </li>
-<li><a href="#App.webview.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"><span>1.17.3</span> <span>App.webview命名空间下函数</span></a>
+<li class="toclevel-3 tocsection-49"><a href="#App.selector_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"><span>1.17.3</span> <span>App.selector 命名空间下函数</span></a>
 <ul>
-<li><a href="#App.webview.setUserAgent.28userAgent_.3Cstring.3E.29"><span>1.17.3.1</span> <span>App.webview.setUserAgent(userAgent &lt;string&gt;)</span></a></li>
-<li><a href="#App.webview.userAgent.28.29"><span>1.17.3.2</span> <span>App.webview.userAgent()</span></a></li>
-<li><a href="#App.webview.defaultUserAgent.28.29"><span>1.17.3.3</span> <span>App.webview.defaultUserAgent()</span></a></li>
-<li><a href="#App.webview.getUrl.28.29"><span>1.17.3.4</span> <span>App.webview.getUrl()</span></a></li>
-<li><a href="#App.webview.open.28url_.3Cstring.3E.29"><span>1.17.3.5</span> <span>App.webview.open(url &lt;string&gt;)</span></a></li>
-<li><a href="#App.webview.setProxy.28host_.3Cstring.3E.5B.2C_type_.3Cstring.3E.2C_userName_.3Cstring.3E.2C_password_.3Cstring.3E.29"><span>1.17.3.6</span> <span>App.webview.setProxy(host &lt;string&gt;[, type &lt;string&gt;, userName &lt;string&gt;, password &lt;string&gt;)</span></a></li>
-<li><a href="#App.webview.clearProxy.28.29"><span>1.17.3.7</span> <span>App.webview.clearProxy()</span></a></li>
-<li><a href="#App.webview.useSystemProxy.28.5Bindex_.3Cnumber.3E.5D.29"><span>1.17.3.8</span> <span>App.webview.useSystemProxy([index &lt;number&gt;])</span></a></li>
-<li><a href="#App.webview.viewport.28.29"><span>1.17.3.9</span> <span>App.webview.viewport()</span></a></li>
-<li><a href="#App.webview.setViewport.28size_.3CObject.3E.29"><span>1.17.3.10</span> <span>App.webview.setViewport(size &lt;Object&gt;)</span></a></li>
-<li><a href="#App.webview.contentRect.28.29"><span>1.17.3.11</span> <span>App.webview.contentRect()</span></a></li>
-<li><a href="#App.webview.saveImage.28path_.3Cstring.3E.5B.2C_imgType_.3Cstring.3E.2C_quality_.3Cnumber.3E.2C_rect_.3CObject.3E.5D.29"><span>1.17.3.12</span> <span>App.webview.saveImage(path &lt;string&gt;[, imgType &lt;string&gt;, quality &lt;number&gt;, rect &lt;Object&gt;])</span></a></li>
-<li><a href="#App.webview.dataURIFromRect.28.5Brect_.3CObject.3E.2C_imgType_.3Cstring.3E.2C_quality_.3Cnumber.3E.5D.29"><span>1.17.3.13</span> <span>App.webview.dataURIFromRect([rect &lt;Object&gt;, imgType &lt;string&gt;, quality &lt;number&gt;])</span></a></li>
-<li><a href="#App.webview.savePdf.28path_.3Cstring.3E.29"><span>1.17.3.14</span> <span class="toctext">App.webview.savePdf(path &lt;string&gt;)</span></a></li>
-<li><a href="#App.webview.setTimeout.28callback_.3Cfunction.3E.2C_timeout_.3Cnumber.3E.29"><span>1.17.3.15</span> <span>App.webview.setTimeout(callback &lt;function&gt;, timeout &lt;number&gt;)</span></a></li>
-<li><a href="#App.webview.clearTimeout.28timeId_.3Cnumber.3E.29"><span>1.17.3.16</span> <span>App.webview.clearTimeout(timeId &lt;number&gt;)</span></a></li>
-<li><a href="#App.webview.setInterval.28callback_.3Cfunction.3E.2C_interval_.3Cnumber.3E.29"><span>1.17.3.17</span> <span>App.webview.setInterval(callback &lt;function&gt;, interval &lt;number&gt;)</span></a></li>
-<li><a href="#App.webview.clearInterval.28timeId_.3Cnumber.3E.29"><span>1.17.3.18</span> <span>App.webview.clearInterval(timeId &lt;number&gt;)</span></a></li>
-<li><a href="#App.webview.netListener.28enabled_.3Cboolean.3E.29"><span>1.17.3.19</span> <span>App.webview.netListener(enabled &lt;boolean&gt;)</span></a></li>
-<li><a href="#App.webview.cookiesFromUrl.28.5Burl_.3Cstring.3E.5D.29"><span>1.17.3.20</span> <span>App.webview.cookiesFromUrl([url &lt;string&gt;])</span></a></li>
-<li><a href="#App.webview.setCookiesFromUrl.28cookies_.3Cstring.3E.5B.2C_url_.3Cstring.3E.5D.29"><span>1.17.3.21</span> <span>App.webview.setCookiesFromUrl(cookies &lt;string&gt;[, url &lt;string&gt;])</span></a></li>
-<li><a href="#App.webview.elementRects.28cssSelectorString_.3Cstring.3E.29"><span>1.17.3.22</span> <span>App.webview.elementRects(cssSelectorString &lt;string&gt;)</span></a></li>
-<li><a href="#App.webview.sendMouseEvent.28argPoint_.3CObject.3E.5B.2C_argEvt_.3Cstring.3E.2C_argKey_.3Cstring.3E.5D.29"><span>1.17.3.23</span> <span>App.webview.sendMouseEvent(argPoint &lt;Object&gt;[, argEvt &lt;string&gt;, argKey &lt;string&gt;])</span></a></li>
-<li><a href="#App.webview.addEventListener.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.3.24</span> <span>App.webview.addEventListener(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
-<li><a href="#App.webview.on.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.3.25</span> <span class="toctext">App.webview.on(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
-<li><a href="#App.webview.removeEventListener.28eventName_.3Cstring.3E.2C_callbackHandle_.3Cfunction.3E.29"><span>1.17.3.26</span> <span class="toctext">App.webview.removeEventListener(eventName &lt;string&gt;, callbackHandle &lt;function&gt;)</span></a></li>
-<li><a href="#App.webview.un.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.3.27</span> <span class="toctext">App.webview.un(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
-<li><a href="#App.webview.once.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.3.28</span> <span class="toctext">App.webview.once(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
-<li><a href="#App.webview.removeAllEventListener.28.5BeventName_.3Cstring.3E.5D.29"><span>1.17.3.29</span> <span class="toctext">App.webview.removeAllEventListener([eventName &lt;string&gt;])</span></a></li>
-<li><a href="#App.webview.unAll.28.5BeventName_.3Cstring.3E.5D.29"><span>1.17.3.30</span> <span class="toctext">App.webview.unAll([eventName &lt;string&gt;])</span></a></li>
-<li><a href="#App.webview.setDetectionRects.28rects_.3CArray.3E.5B.2C_sameRate_.3Cnumber.3E.5D.29"><span>1.17.3.31</span> <span>App.webview.setDetectionRects(rects &lt;Array&gt;[, sameRate &lt;number&gt;])</span></a></li>
-<li><a href="#App.webview.clearDetectionRects.28.29"><span>1.17.3.32</span> <span>App.webview.clearDetectionRects()</span></a></li>
-<li><a href="#App.webview.hasDetectionRects.28.29"><span>1.17.3.33</span> <span>App.webview.hasDetectionRects()</span></a></li>
-<li><a href="#App.webview.execScript.28sandbox_.3Cfunction.3E_.5B.2C_argObject_.3CObject.3E.7C.3CArray.3E.7C.3Cstring.3E.7C.3Cnumber.3E.5D.29"><span>1.17.3.34</span> <span>App.webview.execScript(sandbox &lt;function&gt; [, argObject &lt;Object&gt;|&lt;Array&gt;|&lt;string&gt;|&lt;number&gt;])</span></a></li>
+<li><a href="#App.selector.img.28.29"><span>1.17.3.1</span> <span>App.selector.img()</span></a></li>
+<li><a href="#App.selector.png.28.29"><span>1.17.3.2</span> <span>App.selector.png()</span></a></li>
+<li><a href="#App.selector.gif.28.29"><span>1.17.3.3</span> <span>App.selector.gif()</span></a></li>
+<li><a href="#App.selector.ico.28.29"><span>1.17.3.4</span> <span>App.selector.ico()</span></a></li>
+<li><a href="#App.selector.jpg.28.29"><span>1.17.3.5</span> <span>App.selector.jpg()</span></a></li>
+<li><a href="#App.selector.svg.28.29"><span>1.17.3.6</span> <span>App.selector.svg()</span></a></li>
+<li><a href="#App.selector.doc.28.29"><span>1.17.3.7</span> <span>App.selector.doc()</span></a></li>
+<li><a href="#App.selector.css.28.29"><span>1.17.3.8</span> <span>App.selector.css()</span></a></li>
+<li><a href="#App.selector.js.28.29"><span>1.17.3.9</span> <span>App.selector.js()</span></a></li>
+<li><a href="#App.selector.cookie.28.29"><span>1.17.3.10</span> <span>App.selector.cookie()</span></a></li>
+<li><a href="#App.selector.nonegzip.28.29"><span>1.17.3.11</span> <span>App.selector.nonegzip()</span></a></li>
+<li><a href="#App.selector.nonecache.28.29"><span>1.17.3.12</span> <span>App.selector.nonecache()</span></a></li>
+<li><a href="#App.selector.nonecdn.28.29"><span>1.17.3.13</span> <span>App.selector.nonecdn()</span></a></li>
+<li><a href="#App.selector.totaltimeout.28duration_.3Cnumber.3E.29"><span>1.17.3.14</span> <span>App.selector.totaltimeout(duration &lt;number&gt;)</span></a></li>
+<li><a href="#App.selector.waittimeout.28duration_.3Cnumber.3E.29"><span>1.17.3.15</span> <span>App.selector.waittimeout(duration &lt;number&gt;)</span></a></li>
+<li><a href="#App.selector.downloadtimeout.28duration_.3Cnumber.3E.29"><span>1.17.3.16</span> <span>App.selector.downloadtimeout(duration &lt;number&gt;)</span></a></li>
+<li><a href="#App.selector.dnstimeout.28duration_.3Cnumber.3E.29"><span>1.17.3.17</span> <span>App.selector.dnstimeout(duration &lt;number&gt;)</span></a></li>
+<li><a href="#App.selector.sizeout.28size_.3Cnumber.3E.29"><span>1.17.3.18</span> <span>App.selector.sizeout(size &lt;number&gt;)</span></a></li>
+<li><a href="#App.selector.http200.28.29"><span>1.17.3.19</span> <span>App.selector.http200()</span></a></li>
+<li><a href="#App.selector.http301.28.29"><span>1.17.3.20</span> <span>App.selector.http301()</span></a></li>
+<li><a href="#App.selector.http302.28.29"><span>1.17.3.21</span> <span>App.selector.http302()</span></a></li>
+<li><a href="#App.selector.http304.28.29"><span>1.17.3.22</span> <span>App.selector.http304()</span></a></li>
+<li><a href="#App.selector.http404.28.29"><span>1.17.3.23</span> <span>App.selector.http404()</span></a></li>
+<li><a href="#App.selector.fromcdn.28.29"><span>1.17.3.24</span> <span>App.selector.fromcdn()</span></a></li>
+<li><a href="#App.selector.get.28.29"><span>1.17.3.25</span> <span>App.selector.get()</span></a></li>
+<li><a href="#App.selector.clear.28.29"><span>1.17.3.26</span> <span>App.selector.clear()</span></a></li>
 </ul>
 </li>
-<li><a href="#App.helper_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"><span>1.17.4</span> <span>App.helper 命名空间下函数</span></a>
+<li class="toclevel-3 tocsection-76"><a href="#App.webview.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"><span>1.17.4</span> <span>App.webview命名空间下函数</span></a>
 <ul>
-<li><a href="#App.helper.supplant.28template.3Cstring.3E.2C_data_.3CObject.3E.29"><span>1.17.4.1</span> <span>App.helper.supplant(template&lt;string&gt;, data &lt;Object&gt;)</span></a></li>
-<li><a href="#App.helper.require.28moduleName.3Cstring.3E.5B.2C_args_.3CArray.3E.5D.29"><span>1.17.4.2</span> <span>App.helper.require(moduleName&lt;string&gt;[, args &lt;Array&gt;])</span></a></li>
-<li><a href="#App.helper.log.28msg_.3Cstring.3E.7C.3Cnumber.3E.29"><span>1.17.4.3</span> <span>App.helper.log(msg &lt;string&gt;|&lt;number&gt;)</span></a></li>
+<li><a href="#App.webview.setUserAgent.28userAgent_.3Cstring.3E.29"><span>1.17.4.1</span> <span>App.webview.setUserAgent(userAgent &lt;string&gt;)</span></a></li>
+<li><a href="#App.webview.userAgent.28.29"><span>1.17.4.2</span> <span>App.webview.userAgent()</span></a></li>
+<li><a href="#App.webview.defaultUserAgent.28.29"><span>1.17.4.3</span> <span>App.webview.defaultUserAgent()</span></a></li>
+<li><a href="#App.webview.getUrl.28.29"><span>1.17.4.4</span> <span>App.webview.getUrl()</span></a></li>
+<li><a href="#App.webview.open.28url_.3Cstring.3E.29"><span>1.17.4.5</span> <span>App.webview.open(url &lt;string&gt;)</span></a></li>
+<li><a href="#App.webview.setProxy.28host_.3Cstring.3E.5B.2C_type_.3Cstring.3E.2C_userName_.3Cstring.3E.2C_password_.3Cstring.3E.29"><span>1.17.4.6</span> <span>App.webview.setProxy(host &lt;string&gt;[, type &lt;string&gt;, userName &lt;string&gt;, password &lt;string&gt;)</span></a></li>
+<li><a href="#App.webview.clearProxy.28.29"><span>1.17.4.7</span> <span>App.webview.clearProxy()</span></a></li>
+<li><a href="#App.webview.useSystemProxy.28.5Bindex_.3Cnumber.3E.5D.29"><span>1.17.4.8</span> <span>App.webview.useSystemProxy([index &lt;number&gt;])</span></a></li>
+<li><a href="#App.webview.viewport.28.29"><span>1.17.4.9</span> <span>App.webview.viewport()</span></a></li>
+<li><a href="#App.webview.setViewport.28size_.3CObject.3E.29"><span>1.17.4.10</span> <span>App.webview.setViewport(size &lt;Object&gt;)</span></a></li>
+<li><a href="#App.webview.contentRect.28.29"><span>1.17.4.11</span> <span>App.webview.contentRect()</span></a></li>
+<li><a href="#App.webview.saveImage.28path_.3Cstring.3E.5B.2C_imgType_.3Cstring.3E.2C_quality_.3Cnumber.3E.2C_rect_.3CObject.3E.5D.29"><span>1.17.4.12</span> <span>App.webview.saveImage(path &lt;string&gt;[, imgType &lt;string&gt;, quality &lt;number&gt;, rect &lt;Object&gt;])</span></a></li>
+<li><a href="#App.webview.dataURIFromRect.28.5Brect_.3CObject.3E.2C_imgType_.3Cstring.3E.2C_quality_.3Cnumber.3E.5D.29"><span>1.17.4.13</span> <span>App.webview.dataURIFromRect([rect &lt;Object&gt;, imgType &lt;string&gt;, quality &lt;number&gt;])</span></a></li>
+<li><a href="#App.webview.savePdf.28path_.3Cstring.3E.29"><span>1.17.4.14</span> <span>App.webview.savePdf(path &lt;string&gt;)</span></a></li>
+<li><a href="#App.webview.setTimeout.28callback_.3Cfunction.3E.2C_timeout_.3Cnumber.3E.29"><span>1.17.4.15</span> <span>App.webview.setTimeout(callback &lt;function&gt;, timeout &lt;number&gt;)</span></a></li>
+<li><a href="#App.webview.clearTimeout.28timeId_.3Cnumber.3E.29"><span>1.17.4.16</span> <span>App.webview.clearTimeout(timeId &lt;number&gt;)</span></a></li>
+<li><a href="#App.webview.setInterval.28callback_.3Cfunction.3E.2C_interval_.3Cnumber.3E.29"><span>1.17.4.17</span> <span>App.webview.setInterval(callback &lt;function&gt;, interval &lt;number&gt;)</span></a></li>
+<li><a href="#App.webview.clearInterval.28timeId_.3Cnumber.3E.29"><span>1.17.4.18</span> <span>App.webview.clearInterval(timeId &lt;number&gt;)</span></a></li>
+<li><a href="#App.webview.netListener.28enabled_.3Cboolean.3E.29"><span>1.17.4.19</span> <span>App.webview.netListener(enabled &lt;boolean&gt;)</span></a></li>
+<li><a href="#App.webview.cookiesFromUrl.28.5Burl_.3Cstring.3E.5D.29"><span>1.17.4.20</span> <span>App.webview.cookiesFromUrl([url &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.setCookiesFromUrl.28cookies_.3Cstring.3E.5B.2C_url_.3Cstring.3E.5D.29"><span>1.17.4.21</span> <span>App.webview.setCookiesFromUrl(cookies &lt;string&gt;[, url &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.elementRects.28cssSelectorString_.3Cstring.3E.29"><span>1.17.4.22</span> <span>App.webview.elementRects(cssSelectorString &lt;string&gt;)</span></a></li>
+<li><a href="#App.webview.sendMouseEvent.28argPoint_.3CObject.3E.5B.2C_argEvt_.3Cstring.3E.2C_argKey_.3Cstring.3E.5D.29"><span>1.17.4.23</span> <span>App.webview.sendMouseEvent(argPoint &lt;Object&gt;[, argEvt &lt;string&gt;, argKey &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.addEventListener.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.4.24</span> <span>App.webview.addEventListener(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.on.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.4.25</span> <span>App.webview.on(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.removeEventListener.28eventName_.3Cstring.3E.2C_callbackHandle_.3Cfunction.3E.29"><span>1.17.4.26</span> <span>App.webview.removeEventListener(eventName &lt;string&gt;, callbackHandle &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.un.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.4.27</span> <span>App.webview.un(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.once.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.4.28</span> <span>App.webview.once(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.removeAllEventListener.28.5BeventName_.3Cstring.3E.5D.29"><span>1.17.4.29</span> <span>App.webview.removeAllEventListener([eventName &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.unAll.28.5BeventName_.3Cstring.3E.5D.29"><span>1.17.4.30</span> <span>App.webview.unAll([eventName &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.setDetectionRects.28rects_.3CArray.3E.5B.2C_sameRate_.3Cnumber.3E.5D.29"><span>1.17.4.31</span> <span>App.webview.setDetectionRects(rects &lt;Array&gt;[, sameRate &lt;number&gt;])</span></a></li>
+<li><a href="#App.webview.clearDetectionRects.28.29"><span>1.17.4.32</span> <span>App.webview.clearDetectionRects()</span></a></li>
+<li><a href="#App.webview.hasDetectionRects.28.29"><span>1.17.4.33</span> <span>App.webview.hasDetectionRects()</span></a></li>
+<li><a href="#App.webview.execScript.28sandbox_.3Cfunction.3E_.5B.2C_argObject_.3CObject.3E.7C.3CArray.3E.7C.3Cstring.3E.7C.3Cnumber.3E.5D.29"><span>1.17.4.34</span> <span>App.webview.execScript(sandbox &lt;function&gt; [, argObject &lt;Object&gt;|&lt;Array&gt;|&lt;string&gt;|&lt;number&gt;])</span></a></li>
 </ul>
 </li>
 <li><a href="#console_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0.E4.B8.8E.E5.B1.9E.E6.80.A7"><span>1.17.5</span> <span>console 命名空间下函数与属性</span></a>
@@ -270,14 +275,21 @@ pre {
 </li>
 <li><a href="#pageExtension_.E9.A1.B5.E9.9D.A2.E6.89.A9.E5.B1.95.E5.AF.B9.E8.B1.A1"><span>1.17.6</span> <span>__pageExtension 页面扩展对象</span></a>
 <ul>
-<li><a href="#pageExtension.postMessage.28.5Bwparam_.3Cstring.3E.2C_lparam_.3Cstring.3E.5D.29"><span>1.17.6.1</span> <span>__pageExtension.postMessage([wparam &lt;string&gt;, lparam &lt;string&gt;])</span></a></li>
-<li><a href="#pageExtension.cpu.28.29"><span>1.17.6.2</span> <span class="toctext">__pageExtension.cpu()</span></a></li>
+<li><a href="#pageExtension.postMessage.28.5Bwparam_.3CObject.7Cstring.7Cnumber.3E.2C_lparam_.3CObject.7Cstring.7Cnumber.3E.5D.29"><span>1.17.6.1</span> <span>__pageExtension.postMessage([wparam &lt;Object|string|number&gt;, lparam &lt;Object|string|number&gt;])</span></a></li>
+<li><a href="#pageExtension.cpu.28.29"><span>1.17.6.2</span> <span>__pageExtension.cpu()</span></a></li>
 <li><a href="#pageExtension.memory.28.29"><span>1.17.6.3</span> <span>__pageExtension.memory()</span></a></li>
 </ul>
 </li>
+<li class="toclevel-3 tocsection-120"><a href="#App.helper_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"><span>1.17.7</span> <span>App.helper 命名空间下函数</span></a>
+<ul>
+<li><a href="#App.helper.supplant.28template.3Cstring.3E.2C_data_.3CObject.3E.29"><span>1.17.7.1</span> <span>App.helper.supplant(template&lt;string&gt;, data &lt;Object&gt;)</span></a></li>
+<li><a href="#App.helper.require.28moduleName.3Cstring.3E.5B.2C_args_.3CArray.3E.5D.29"><span>1.17.7.2</span> <span>App.helper.require(moduleName&lt;string&gt;[, args &lt;Array&gt;])</span></a></li>
+<li><a href="#App.helper.log.28msg_.3Cstring.3E.7C.3Cnumber.3E.29"><span>1.17.7.3</span> <span>App.helper.log(msg &lt;string&gt;|&lt;number&gt;)</span></a></li>
 </ul>
 </li>
-<li><a href="#END"><span>1.18</span> <span>END</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-124"><a href="#END"><span>1.18</span> <span>END</span></a></li>
 </ul>
 </li>
 </ul>
@@ -546,7 +558,8 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
        + [function] setTimeout &lt;-- webview.setTimeout 方法的引用
        + [function] clearTimeout &lt;-- webview.clearTimeout 方法的引用
        + [function] setInterval &lt;-- webview.setInterval 方法的引用
-       + [function] clearInterval &lt;-- webview.clearInterval 方法的引用                
+       + [function] clearInterval &lt;-- webview.clearInterval 方法的引用   
+       + [function] print
 
 
 
@@ -1487,32 +1500,6 @@ callback &lt;function&gt; 事件触发时的回调函数。
 <p><b>特别注意: 页面沙箱内所实现的 JS 内置对象会超出 ECMAScript 5th 规范设定范围。请避免在传出沙箱时使用：ArrayBuffer Uint8Array  DataView  Float32Array Int8Array Int16Array Int32Array Uint8Array Uint16Array Uint32Array 等扩展的内置对象。他们在页面沙箱内存在而APP 脚本沙箱中没有被实现。</b>
 </p><p><br />
 </p>
-<h3><span id="App.helper_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"> App.helper 命名空间下函数 </span></h3>
-<p>App.helper 命名空间是转配在 config.js 配置文件的 global 项中，它将在配置初始化时候被装配到 App 命名空间下供使用者调用。此空间中工具函数可由使用者不断添加。
-</p><p><br />
-</p>
-<h4><span id="App.helper.supplant.28template.3Cstring.3E.2C_data_.3CObject.3E.29"><b>App.helper.supplant(template&lt;string&gt;, data &lt;Object&gt;)</b></span></h4>
-<p><b>参数:</b>
-</p><p>template&lt;string&gt; 一个字符串模板 使用 ${key} 字符作为占位符，其中 key 对应 data 参数对象的同名 key 值。
-</p><p>data &lt;Object&gt; 模板所要提供的数据，是个一维的简单对象。
-</p><p><b>返回值:</b> &lt;string&gt; 组装后的字符串
-</p><p><b>说明:</b> 最为简单的字符串替换模板函数。如模板 "${hello}，我是${name}" 配合数据对象 {hello:"吃了么您", name:"小明"}，将会输出字符串 "吃了么您,，我是小明"。
-</p><p><br />
-</p>
-<h4><span id="App.helper.require.28moduleName.3Cstring.3E.5B.2C_args_.3CArray.3E.5D.29"><b>App.helper.require(moduleName&lt;string&gt;[, args &lt;Array&gt;])</b></span></h4>
-<p><b>参数:</b>
-</p><p>moduleName&lt;string&gt; 模块名，指定为 App 的 module 目录下 js 模块文件名 （不需要 ".js" 扩展名）。
-</p><p>args &lt;Array&gt; 可选参数。模块所需的执行参数。
-</p><p><b>返回值:</b> 模块执行的返回值
-</p><p><b>说明:</b> 此方法是对 App.loadScript 方法的包装，使其实用简单化。
-</p><p><br />
-</p>
-<h4><span id="App.helper.log.28msg_.3Cstring.3E.7C.3Cnumber.3E.29"><b>App.helper.log(msg &lt;string&gt;|&lt;number&gt;)</b></span></h4>
-<p><b>参数:</b> msg &lt;string&gt;|&lt;number&gt; log 内容
-</p><p><b>返回值:</b> 无
-</p><p><b>说明:</b> 此方法是对 App.webview.execScript 方法的包装，简易调用页面中的 console.log 方法，在页面控制台中输出内容。
-</p><p><br />
-</p>
 <h3><span id="console_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0.E4.B8.8E.E5.B1.9E.E6.80.A7"> console 命名空间下函数与属性 </span></h3>
 <p>为保留基于浏览器开的前端开发者习惯，在 Globla 中创建的控制台相关方法。
 </p><p><br />
@@ -1591,6 +1578,33 @@ App.webview.execScript(function(s) {
 <p><b>返回值:</b> number 类型，表示当前工具占用的内存值，单位 KB。
 </p>
 <p><b>说明:</b> 此方法会在页面脚本沙箱中跨沙箱调用 App.memory 方法获取当前进程的内存占用量。
+</p>
+
+<h3><span id="App.helper_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"> App.helper 命名空间下函数 </span></h3>
+<p>App.helper 命名空间是转配在 config.js 配置文件的 global 项中，它将在配置初始化时候被装配到 App 命名空间下供使用者调用。此空间中工具函数可由使用者不断添加。
+</p><p><br />
+</p>
+<h4><span id="App.helper.supplant.28template.3Cstring.3E.2C_data_.3CObject.3E.29"><b>App.helper.supplant(template&lt;string&gt;, data &lt;Object&gt;)</b></span></h4>
+<p><b>参数:</b>
+</p><p>template&lt;string&gt; 一个字符串模板 使用 ${key} 字符作为占位符，其中 key 对应 data 参数对象的同名 key 值。
+</p><p>data &lt;Object&gt; 模板所要提供的数据，是个一维的简单对象。
+</p><p><b>返回值:</b> &lt;string&gt; 组装后的字符串
+</p><p><b>说明:</b> 最为简单的字符串替换模板函数。如模板 "${hello}，我是${name}" 配合数据对象 {hello:"吃了么您", name:"小明"}，将会输出字符串 "吃了么您,，我是小明"。
+</p><p><br />
+</p>
+<h4><span id="App.helper.require.28moduleName.3Cstring.3E.5B.2C_args_.3CArray.3E.5D.29"><b>App.helper.require(moduleName&lt;string&gt;[, args &lt;Array&gt;])</b></span></h4>
+<p><b>参数:</b>
+</p><p>moduleName&lt;string&gt; 模块名，指定为 App 的 module 目录下 js 模块文件名 （不需要 ".js" 扩展名）。
+</p><p>args &lt;Array&gt; 可选参数。模块所需的执行参数。
+</p><p><b>返回值:</b> 模块执行的返回值
+</p><p><b>说明:</b> 此方法是对 App.loadScript 方法的包装，使其实用简单化。
+</p><p><br />
+</p>
+<h4><span id="App.helper.log.28msg_.3Cstring.3E.7C.3Cnumber.3E.29"><b>App.helper.log(msg &lt;string&gt;|&lt;number&gt;)</b></span></h4>
+<p><b>参数:</b> msg &lt;string&gt;|&lt;number&gt; log 内容
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 此方法是对 App.webview.execScript 方法的包装，简易调用页面中的 console.log 方法，在页面控制台中输出内容。
+</p><p><br />
 </p>
 
 <h2><span id="END"> END </span></h2>

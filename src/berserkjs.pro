@@ -9,6 +9,8 @@ QT       += webkit
 QT       += network
 QT       += script
 
+CONFIG += qtestlib
+
 TARGET = berserkJS
 TEMPLATE = app
 
