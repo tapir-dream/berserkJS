@@ -52,6 +52,7 @@ void MainWindow::initUserScript()
             fileInfo.setFile(file);
             // 尝试从应用程序路径探测文件存在否
             if (!fileInfo.exists()) {
+                qDebug() <<( file + " File not found.");
                 QApplication::quit();
                 return;
             }
@@ -269,7 +270,7 @@ QScriptValue MainWindow::print(QScriptContext *context, QScriptEngine *interpret
         args.append(context->argument(i).toString());
     }
     QString output = args.join("\n");
-    qDebug() << output;
+    printf(output.toAscii());
     return QScriptValue::UndefinedValue;
 }
 
@@ -400,7 +401,7 @@ void MainWindow::on_clearLog_btn_clicked()
 void MainWindow::onConsoleLogMessage(QString str)
 {
     if (cmdParams->isCommandMode()) {
-        qDebug()<< str;
+        printf(str.toAscii());
         return;
     }
     ui->outputLogResults_txt
@@ -432,7 +433,7 @@ void MainWindow::onTimeout()
 {
     QScriptEngine* interpreter = script->getScriptEngine();
     if (interpreter->hasUncaughtException()) {
-        qDebug() << getScriptError(interpreter);
+        printf(getScriptError(interpreter).toAscii());
         QApplication::quit();
     }
 }
