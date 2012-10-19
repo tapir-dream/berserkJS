@@ -27,6 +27,8 @@ QMap<QString, QString> CommandParameters::getParams()
               params["start"] = "1";
           } else if (strncmp("--command", s, 9) == 0) {
               params["command"] = "1";
+          } else if (strncmp("--version", s, 9) == 0) {
+              params["version"] = "1";
           }
           continue;
       }
@@ -74,4 +76,10 @@ bool CommandParameters::hasHelp()
 {
     QMap<QString, QString> params = getParams();
     return params.contains("help");
+}
+
+bool CommandParameters::hasVersion()
+{
+    QMap<QString, QString> params = getParams();
+    return params.contains("version") && params["version"] != "";
 }

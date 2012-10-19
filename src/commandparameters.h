@@ -13,6 +13,7 @@ public:
     bool hasScript();
     bool hasStart();
     bool hasHelp();
+    bool hasVersion();
 };
 
 #endif // COMMANDPARAMETERS_H

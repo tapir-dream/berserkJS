@@ -1,6 +1,6 @@
 #include "mywebview.h"
 #include "pageextension.h"
-
+#include "consts.h"
 #include <QTemporaryFile>
 #include <QPrinter>
 
@@ -8,6 +8,7 @@ PageExtension* pageExtension;
 
 MyWebView::MyWebView()
 {        
+
     // 扩展页面对象
     pageExtension = new PageExtension(this);
 
@@ -787,6 +788,117 @@ QScriptValue MyWebView::setDetectionRects(QScriptValue rects, QScriptValue sameR
         rectToPoints(&rect, &customFirstScreenDetectionPoints);
     }
     return QScriptValue(true);
+}
+
+QScriptValue MyWebView::setPageZoom(QScriptValue zoom)
+{
+    if (zoom.isNumber()) {
+        myFrame->setZoomFactor(zoom.toNumber());
+        return QScriptValue(true);
+    }
+    return QScriptValue(false);
+}
+
+QScriptValue MyWebView::pageZoom()
+{
+    return QScriptValue(myFrame->zoomFactor());
+}
+
+QScriptValue MyWebView::setPageScroll(QScriptValue point)
+{
+    if (!point.isObject()) {
+        return QScriptValue(false);
+    }
+
+    if (point.property("left").isUndefined() &&
+        point.property("top").isUndefined()) {
+        return QScriptValue(false);
+    }
+
+    if (point.property("left").isUndefined() ||
+        point.property("left").isNull()) {
+        point.setProperty("left", QScriptValue(0));
+    }
+
+    if (point.property("top").isUndefined() ||
+        point.property("top").isNull()) {
+        point.setProperty("top", QScriptValue(0));
+    }
+
+    QPoint scrollPoint(point.property("left").toString().toInt(),
+                       point.property("top").toString().toInt());
+
+    myFrame->setScrollPosition(scrollPoint);
+    return true;
+}
+
+QScriptValue MyWebView::pageScroll()
+{
+    QScriptValue object = appEngine->newObject();
+    QPoint point = myFrame->scrollPosition();
+    object.setProperty("left", QScriptValue(point.x()));
+    object.setProperty("top", QScriptValue(point.y()));
+    return object;
+}
+
+QScriptValue MyWebView::pageHTML()
+{
+    return QScriptValue(myFrame->toHtml());
+}
+
+QScriptValue MyWebView::setPageHTML(QScriptValue html)
+{
+    if (html.isNull() || html.isUndefined() ) {
+        return QScriptValue(false);
+    }
+    myFrame->setHtml(html.toString());
+    return QScriptValue(true);
+}
+
+QScriptValue MyWebView::pageText()
+{
+    return QScriptValue(myFrame->toPlainText());
+}
+
+QScriptValue MyWebView::setUploadFile(QScriptValue selector, QScriptValue path, QScriptValue index)
+{
+    if (!selector.isString())
+        return QScriptValue(false);
+
+    if (!path.isString()) {
+        return QScriptValue(false);
+    }
+
+    QString uploadFile = path.toString();
+
+    QFileInfo fileInfo(uploadFile);
+    // 尝试探测文件存在否
+    if (!fileInfo.exists()) {
+        return QScriptValue(false);
+    }
+
+    QWebElementCollection elements = myFrame->findAllElements(selector.toString());
+    int c = elements.count();
+    if (c == 0) {
+        return QScriptValue(false);
+    }
+
+    int i = index.toString().toInt();
+
+    if (i > c) {
+        i = c;
+    }
+
+    if (i < 0) {
+        i = 0;
+    }
+
+    myPage->uploadFile = uploadFile;
+    appEngine->evaluate(
+                "App.webview.sendMouseEvent(App.webview.elementRects('" +
+                selector.toString() +
+                "')[0]);");
+    return  QScriptValue(true);
 }
 
 void MyWebView::fixRectToViewport(QRect* rect, QSize* viewport)

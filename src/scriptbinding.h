@@ -130,6 +130,14 @@
  *        |                              + [function] setDetectionRects
  *        |                              + [function] clearDetectionRects
  *        |                              + [function] hasDetectionRects
+ *        |                              + [function] setPageZoom
+ *        |                              + [function] pageZoom
+ *        |                              + [function] setPageScroll
+ *        |                              + [function] pageScroll
+ *        |                              + [function] pageHTML
+ *        |                              + [function] setPageHTML
+ *        |                              + [function] pageText
+ *        |                              + [function] setUploadFile
  *        |
  *        |
  *        + [object] console + [function] log

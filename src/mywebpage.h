@@ -19,6 +19,7 @@ class MyWebPage: public QWebPage
       QString setUserAgent(const QString & userAgent);
       QString userAgent();
       QString defaultUserAgent;
+      QString uploadFile;
 
     protected:
       // Overloaded virtual function reserve.
@@ -26,6 +27,9 @@ class MyWebPage: public QWebPage
       bool javaScriptPrompt(QWebFrame* frame, const QString & msg, const QString & defaultValue, QString* result);
       void javaScriptAlert(QWebFrame* frame, const QString & msg);
       bool javaScriptConfirm(QWebFrame* frame, const QString & msg);
+      bool extension(Extension extension, const ExtensionOption* option, ExtensionReturn* output);
+      bool supportsExtension(Extension extension) const;
+      QString chooseFile(QWebFrame *originatingFrame, const QString &oldFile);
 
       QString userAgentForUrl(const QUrl & url) const;
 

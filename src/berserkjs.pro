@@ -45,7 +45,8 @@ HEADERS  += mainwindow.h \
     filesystemwatcher.h \
     firstscreen.h \
     scriptsignalfactory.h \
-    appinfo.h
+    appinfo.h \
+    consts.h
 
 FORMS    += mainwindow.ui
 

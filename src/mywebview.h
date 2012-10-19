@@ -72,6 +72,15 @@ public:
     Q_INVOKABLE QScriptValue hasDetectionRects();
     Q_INVOKABLE QScriptValue clearDetectionRects();
 
+    Q_INVOKABLE QScriptValue setPageZoom(QScriptValue zoom);
+    Q_INVOKABLE QScriptValue pageZoom();
+    Q_INVOKABLE QScriptValue setPageScroll(QScriptValue point);
+    Q_INVOKABLE QScriptValue pageScroll();
+    Q_INVOKABLE QScriptValue pageHTML();
+    Q_INVOKABLE QScriptValue setPageHTML(QScriptValue html = QScriptValue(""));
+    Q_INVOKABLE QScriptValue pageText();
+    Q_INVOKABLE QScriptValue setUploadFile(QScriptValue selector, QScriptValue path, QScriptValue index = QScriptValue(0));
+
     bool clipRenderToImage(QString path, QString type = "JPG",
                        int quality = 60,  QRect clipRect = QRect());
     QImage renderToImage();

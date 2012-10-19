@@ -2,7 +2,7 @@
 
 MyWebPage::MyWebPage()
 {
-    defaultUserAgent = QWebPage::userAgentForUrl(this->mainFrame()->url());
+    defaultUserAgent = QWebPage::userAgentForUrl(this->mainFrame()->url()) + " berserkJS";
     // 开启开发者工具
     settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
     // 其他设置
@@ -15,10 +15,33 @@ MyWebPage::MyWebPage()
     settings()->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, true);
     settings()->setAttribute(QWebSettings::OfflineWebApplicationCacheEnabled, true);
     settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
+
     // 暂时不开启它，功能待测。
     // settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, true);
     // 启用后台渲染将导致操作渲染错误
     //page->settings()->setAttribute(QWebSettings::TiledBackingStoreEnabled, true);
+}
+
+bool MyWebPage::supportsExtension(Extension extension) const {
+    return extension == ChooseMultipleFilesExtension;
+}
+
+QString MyWebPage::chooseFile(QWebFrame *originatingFrame, const QString &oldFile) {
+    Q_UNUSED(originatingFrame);
+    Q_UNUSED(oldFile);
+    return uploadFile;
+}
+
+bool MyWebPage::extension(Extension extension, const ExtensionOption* option, ExtensionReturn* output)
+{
+    Q_UNUSED(option);
+
+    if (extension == ChooseMultipleFilesExtension) {
+        static_cast<ChooseMultipleFilesExtensionReturn*>(output)->fileNames = QStringList() << uploadFile;
+        return true;
+    } else {
+        return false;
+    }
 }
 
 QString MyWebPage::setUserAgent(const QString & userAgent)

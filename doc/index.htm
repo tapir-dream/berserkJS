@@ -263,6 +263,14 @@ pre {
 <li><a href="#App.webview.clearDetectionRects.28.29"><span>1.17.4.32</span> <span>App.webview.clearDetectionRects()</span></a></li>
 <li><a href="#App.webview.hasDetectionRects.28.29"><span>1.17.4.33</span> <span>App.webview.hasDetectionRects()</span></a></li>
 <li><a href="#App.webview.execScript.28sandbox_.3Cfunction.3E_.5B.2C_argObject_.3CObject.3E.7C.3CArray.3E.7C.3Cstring.3E.7C.3Cnumber.3E.5D.29"><span>1.17.4.34</span> <span>App.webview.execScript(sandbox &lt;function&gt; [, argObject &lt;Object&gt;|&lt;Array&gt;|&lt;string&gt;|&lt;number&gt;])</span></a></li>
+<li><a href="#App.webview.setPageZoom.28zoom_.3Cnumber.3E.29"><span>1.17.4.35</span> <span>App.webview.setPageZoom(zoom &lt;number&gt;)</span></a></li>
+<li><a href="#App.webview.pageZoom.28.29"><span>1.17.4.36</span> <span>App.webview.pageZoom()</span></a></li>
+<li><a href="#App.webview.setPageScroll.28point_.3CObject.3E.29"><span>1.17.4.37</span> <span>App.webview.setPageScroll(point &lt;Object&gt;)</span></a></li>
+<li><a href="#App.webview.pageScroll.28.29"><span>1.17.4.38</span> <span>App.webview.pageScroll()</span></a></li>
+<li><a href="#App.webview.setPageHTML.28html_.3Cstring.3E.29"><span>1.17.4.39</span> <span>App.webview.setPageHTML(html &lt;string&gt;)</span></a></li>
+<li><a href="#App.webview.pageHTML.28.29"><span>1.17.4.40</span> <span>App.webview.pageHTML()</span></a></li>
+<li><a href="#App.webview.pageText.28.29"><span>1.17.4.41</span> <span>App.webview.pageText()</span></a></li>
+<li><a href="#App.webview.setUploadFile.28cssSelectorString_.3Cstring.3E.2C_path_.3Cstring.3E.5B.2C_index_.3Cnumber.3E.5D.29"><span>1.17.4.42</span> <span>App.webview.setUploadFile(cssSelectorString &lt;string&gt;, path &lt;string&gt;[, index &lt;number&gt;])</span></a></li>
 </ul>
 </li>
 <li><a href="#console_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0.E4.B8.8E.E5.B1.9E.E6.80.A7"><span>1.17.5</span> <span>console 命名空间下函数与属性</span></a>
@@ -424,7 +432,8 @@ pre {
 <h2><span id=".E5.91.BD.E4.BB.A4.E8.A1.8C.E5.8F.82.E6.95.B0"> 命令行参数 </span></h2>
 <p>可执行文件 berserkJS 将携带一些命令行参数。如下：
 </p>
-<ol><li> --help 该参数将在浏览器界面内显示远程 help 页，该页地址为：http://github.com/tapir-dream/berserkJS/。 <b>启用该参数时 --command 参数自动失效。</b> 
+<ol><li> --version 该参数将显示工具当前版本号，并使其它参数失效。
+</li><li> --help 该参数将在浏览器界面内显示远程 help 页，该页地址为：http://github.com/tapir-dream/berserkJS/。 <b>启用该参数时 --command 参数自动失效。</b> 
 </li><li> --command 该参数将隐藏工具界面使其看起来像纯命令行工具。此方法的设计目的在于非调试环境中不启用界面窗口。 
 </li><li> --start  该参数表明要自动执行 berserkJS 目录下 js/conf/init.js 文件，运行配置好的测试。
 <li> --script 该参数表示要自动执行某路径下js文件。其规则是<b>先以参数值为实际路径</b>嗅探文件，如果存在则执行，否则执行<b>以berserkJS路径为基准</b>的脚本文件。<b>此js文件将自动以 uft-8 编码格式读取并执行；此参数存在时 --start 参数自动失效。</b>
@@ -547,6 +556,14 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
        |              |                  + [function] setDetectionRects
        |              |                  + [function] clearDetectionRects
        |              |                  + [function] hasDetectionRects
+       |              |                  + [function] setPageZoom
+       |              |                  + [function] pageZoom
+       |              |                  + [function] setPageScroll
+       |              |                  + [function] pageScroll
+       |              |                  + [function] pageHTML
+       |              |                  + [function] setPageHTML
+       |              |                  + [function] pageText
+       |              |                  + [function] setUploadFile
        |              |
        |              + [object] helper &lt;-- 非内部包装的JS命名空间，由用户扩展
        |
@@ -1498,6 +1515,55 @@ callback &lt;function&gt; 事件触发时的回调函数。
     ......
 </pre>
 <p><b>特别注意: 页面沙箱内所实现的 JS 内置对象会超出 ECMAScript 5th 规范设定范围。请避免在传出沙箱时使用：ArrayBuffer Uint8Array  DataView  Float32Array Int8Array Int16Array Int32Array Uint8Array Uint16Array Uint32Array 等扩展的内置对象。他们在页面沙箱内存在而APP 脚本沙箱中没有被实现。</b>
+</p><p><br />
+</p>
+<h4><span id="App.webview.setPageZoom.28zoom_.3Cnumber.3E.29"><b>App.webview.setPageZoom(zoom &lt;number&gt;)</b></span></h4>
+<p><b>参数:</b> zoom &lt;number&gt; 页面缩放级别数字，支持浮点数。
+</p><p><b>返回值:</b> &lt;boolean&gt; 成功设置返回 true，反之返回 false。
+</p><p><b>说明:</b> 此函数用于指定页面缩放界别。
+</p><p><br />
+</p>
+<h4><span id="App.webview.pageZoom.28.29"><b>App.webview.pageZoom()</b></span></h4>
+<p><b>返回值:</b> &lt;number&gt; 当前页面缩放级别数字，默认为 1。
+</p><p><b>说明:</b> 检测当前页面缩放级别。
+</p><p><br />
+</p>
+<h4><span id="App.webview.setPageScroll.28point_.3CObject.3E.29"><b>App.webview.setPageScroll(point &lt;Object&gt;)</b></span></h4>
+<p><b>参数:</b> point <Object> 数据格式必须为 {top: &lt;number&gt;, left: &lt;number&gt;}，top 或 left 未设置时默认值为 0。
+</p><p><b>返回值:</b> &lt;boolean&gt; 成功设置返回 true，反之返回 false。
+</p><p><b>说明:</b> 此函数用于设置页面滚动条位置，如 setPageScroll({top: 100, left: 0})，将会使页面滚动条定位到距离顶部 100 px 位置。
+</p><p><br />
+</p>
+<h4><span id="App.webview.pageScroll.28.29"><b>App.webview.pageScroll()</b></span></h4>
+<p><b>返回值:</b> &lt;Object&gt; 格式为 {top: &lt;number&gt;, left: &lt;number&gt;}，表示页面滚动条距离页面顶部和左部的距离。
+</p><p><b>说明:</b> 此函数用于设置页面滚动条位置，如 setPageScroll({top: 100, left: 0})，将会使页面滚动条定位到距离顶部 100 px 位置。
+</p><p><br />
+</p>
+<h4><span id="App.webview.setPageHTML.28html_.3Cstring.3E.29"><b>App.webview.setPageHTML(html &lt;string&gt;)</b></span></h4>
+<p><b>参数:</b> html <string> html格式的字符串。
+</p><p><b>返回值:</b> &lt;boolean&gt; 成功设置返回 true，反之返回 false。
+</p><p><b>说明:</b> 此函数用于设置全页的html内容。
+</p><p><br />
+</p>
+<h4><span id="App.webview.pageHTML.28.29"><b>App.webview.pageHTML()</b></span></h4>
+<p><b>返回值:</b> &lt;string&gt; 页面的全部 HTML 字符串。
+</p><p><b>说明:</b> 返回整页的 HTML 字符串。
+</p><p><br />
+</p>
+<h4><span id="App.webview.pageText.28.29"><b>App.webview.pageText()</b></span></h4>
+<p><b>返回值:</b>  &lt;string&gt; 页面的全部文本字符串(不含HTML标记)。
+</p><p><b>说明:</b> 返回整页的文本字符串内容，如同 DOM 的 textContent 属性。
+</p><p><br />
+</p>
+<h4><span id="App.webview.setUploadFile.28cssSelectorString_.3Cstring.3E.2C_path_.3Cstring.3E.5B.2C_index_.3Cnumber.3E.5D.29"><b>App.webview.setUploadFile(cssSelectorString &lt;string&gt;, path &lt;string&gt;[, index &lt;number&gt;])</b></span></h4>
+<p><b>参数:</b> 
+</p><p>cssSelectorString &lt;string&gt; 一个可用的 Selector 选择器字符串，用它来选择指定的 &lt;input type="file"&gt; 节点。如果该 Selector 将返回多个 node ，那么具体使用列表中哪个 node 将由第三个参数 index 值来决定。
+</p><p>path &lt;string&gt; 一个可用的待上传本地文件路径。
+</p><p>index &lt;number&gt;非必须参数，默认值为 0，它用于指定 Selector 选择的 nodeList 中具体索引项值。该值小于0时会为0，大于 Selector 返回 nodeList 长度值是会为最大长度值。
+</p><p><br />
+<b>返回值:</b> &lt;boolean&gt; 成功设置返回 true，反之返回 false。
+</p><p><b>说明:</b> 此函数用于为指定文件域 (&lt;input type="file"&gt;) 设置上传文件内容。
+</p><p><b>【注意】：为了实现此功能，GUI 模式下页面的文件域将无法通过手动点击打开文件选择对话框。</b>
 </p><p><br />
 </p>
 <h3><span id="console_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0.E4.B8.8E.E5.B1.9E.E6.80.A7"> console 命名空间下函数与属性 </span></h3>

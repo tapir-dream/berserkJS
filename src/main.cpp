@@ -1,6 +1,7 @@
 #include <QtGui/QApplication>
 #include "mainwindow.h"
 #include "commandparameters.h"
+#include "consts.h"
 
 
 int main(int argc, char *argv[])
@@ -14,6 +15,12 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
     CommandParameters commandParameters;
+
+    // 显示版本号时无视其它参数内容
+    if (commandParameters.hasVersion()) {
+        printf(VERSION_STRING);
+        return 0;
+    }
 
     // 显示帮助时 无视 --command 参数值 立即显示出窗口
     if (commandParameters.hasHelp()) {
