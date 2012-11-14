@@ -1,36 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="berserkJS : 基于 qt webkit，使用 JS 语法开发检测逻辑的 webkit netwrok request 检测工具。" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>berserkJS by tapir-dream</title>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>berserkJS</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
-
   <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">berserkJS</h1>
+        <p class="header">基于 qt webkit，使用 JS 语法开发检测逻辑的 webkit netwrok request 检测工具。</p>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/tapir-dream/berserkJS">View on GitHub</a>
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/tapir-dream/berserkJS/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/tapir-dream/berserkJS/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/tapir-dream/berserkJS">View On GitHub</a></li>
+        </ul>
 
-          <h1 id="project_title">berserkJS</h1>
-          <h2 id="project_tagline">基于 qt webkit，使用 JS 语法开发检测逻辑的 webkit netwrok request 检测工具。</h2>
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/tapir-dream">tapir-dream</a></p>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/tapir-dream/berserkJS/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/tapir-dream/berserkJS/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
+      </header>
+      <section>
         <div>
 <h1>RIA 网络数据自动化输出工具（berserkJS）</h1>
 <h2> 演示视频 </h2>
@@ -1374,6 +1373,8 @@ seletedNetwrokData = App.selecotr.get();
 </p>
 <p><b>说明:</b> 此方法用来向 webview 渲染页面的指定区域发送鼠标事件。通常配合 App.webview.elementRects 方法来向选定的 DOM 元素发送合法的 click 事件，用来做模拟用户点击操作。
 </p>
+<p><b>【注意】: 由于 App.webview.elementRects 方法仅返回元素布局信息，如果需要更为精确的点击到元素上，你应该将 App.webview.elementRects 方法返回的 x 与 y 值均多加几像素值。</b>
+</p>
 <p><br></p>
 <h4><b>App.webview.addEventListener(eventName &lt;string&gt;, callback &lt;function&gt;)</b></h4>
 <p><b>参数:</b>
@@ -1864,17 +1865,11 @@ App.webview.execScript(function(s) {
 <h2> END </h2>
 </div>
       </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">berserkJS maintained by <a href="https://github.com/tapir-dream">tapir-dream</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
       </footer>
     </div>
-
-    
-
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
   </body>
 </html>
