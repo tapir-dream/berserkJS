@@ -322,8 +322,8 @@ QScriptValue MyWebView::setViewport(QScriptValue size)
         return QScriptValue(false);
     if (!size.property("width").isNumber() || !size.property("height").isNumber())
         return QScriptValue(false);
-    QSize viewportSize(size.property("width").toString().toInt(),
-                       size.property("height").toString().toInt());
+    QSize viewportSize(int(size.property("width").toNumber()),
+                       int(size.property("height").toNumber()));
     myPage->setViewportSize(viewportSize);
     return QScriptValue(true);
 }
@@ -346,7 +346,7 @@ QScriptValue MyWebView::timer(QScriptValue scriptFunc, QScriptValue timeout, boo
     }
 
     connect(timer, SIGNAL(timeout()), this, SLOT(onTimeout()));
-    timer->start(timeout.toString().toInt());
+    timer->start(timeout.toInt32());
 
     // start 后才有 id 可用。
     QString key = QString::number(timer->timerId());
@@ -462,7 +462,7 @@ QScriptValue MyWebView::useSystemProxy(QScriptValue index)
         return QScriptValue(false);
     }
 
-    num = index.toString().toInt();
+    num = int(index.toNumber());
    ;
 
     QList<QNetworkProxy> proxyList =
@@ -566,7 +566,7 @@ void MyWebView::fixClipRectToRenderRect(QRect* clipRect, QImage* image )
 QScriptValue MyWebView::dataURIFromRect(QScriptValue rect, QScriptValue type, QScriptValue quality)
 {
     // 参数初始化
-    int q = quality.toString().toInt();
+    int q = int(quality.toNumber());
     q = (q == 0) ? -1 : q;
     q = (q > 100) ? 100 : q;
 
@@ -586,10 +586,10 @@ QScriptValue MyWebView::dataURIFromRect(QScriptValue rect, QScriptValue type, QS
     }
 
     QRect clipRect;
-    clipRect.setX(rect.property("x").toString().toInt());
-    clipRect.setY(rect.property("y").toString().toInt());
-    clipRect.setWidth(rect.property("width").toString().toInt());
-    clipRect.setHeight(rect.property("height").toString().toInt());
+    clipRect.setX(int(rect.property("x").toNumber()));
+    clipRect.setY(int(rect.property("y").toNumber()));
+    clipRect.setWidth(int(rect.property("width").toNumber()));
+    clipRect.setHeight(int(rect.property("height").toNumber()));
     QImage image = renderToImage();
     fixClipRectToRenderRect(&clipRect, &image);
 
@@ -636,7 +636,7 @@ QScriptValue MyWebView::saveImage(QScriptValue path, QScriptValue type, QScriptV
 {
     if (!path.isString())
         return QScriptValue(false);
-    int q = quality.toString().toInt();
+    int q = int(quality.toNumber());
     q = (q == 0) ? -1 : q;
     q = (q > 100) ? 100 : q;
 
@@ -647,10 +647,10 @@ QScriptValue MyWebView::saveImage(QScriptValue path, QScriptValue type, QScriptV
         rect.property("height").isNumber()) {
 
         QRect clipRect;
-        clipRect.setX(rect.property("x").toString().toInt());
-        clipRect.setY(rect.property("y").toString().toInt());
-        clipRect.setWidth(rect.property("width").toString().toInt());
-        clipRect.setHeight(rect.property("height").toString().toInt());
+        clipRect.setX(int(rect.property("x").toNumber()));
+        clipRect.setY(int(rect.property("y").toNumber()));
+        clipRect.setWidth(int(rect.property("width").toNumber()));
+        clipRect.setHeight(int(rect.property("height").toNumber()));
 
         return  QScriptValue(clipRenderToImage(path.toString(), type.toString(), q, clipRect));
     }
@@ -780,10 +780,10 @@ QScriptValue MyWebView::setDetectionRects(QScriptValue rects, QScriptValue sameR
         }
         // 符合属性的建立为Rect内置对象
         QRect rect;
-        rect.setX(rectObject.property("x").toString().toInt());
-        rect.setY(rectObject.property("y").toString().toInt());
-        rect.setWidth(rectObject.property("width").toString().toInt());
-        rect.setHeight(rectObject.property("height").toString().toInt());
+        rect.setX(int(rectObject.property("x").toNumber()));
+        rect.setY(int(rectObject.property("y").toNumber()));
+        rect.setWidth(int(rectObject.property("width").toNumber()));
+        rect.setHeight(int(rectObject.property("height").toNumber()));
         fixRectToViewport(&rect, &viewport);
         rectToPoints(&rect, &customFirstScreenDetectionPoints);
     }
@@ -791,7 +791,7 @@ QScriptValue MyWebView::setDetectionRects(QScriptValue rects, QScriptValue sameR
 }
 
 QScriptValue MyWebView::setPageZoom(QScriptValue zoom)
-{
+{   
     if (zoom.isNumber()) {
         myFrame->setZoomFactor(zoom.toNumber());
         return QScriptValue(true);
@@ -825,8 +825,8 @@ QScriptValue MyWebView::setPageScroll(QScriptValue point)
         point.setProperty("top", QScriptValue(0));
     }
 
-    QPoint scrollPoint(point.property("left").toString().toInt(),
-                       point.property("top").toString().toInt());
+    QPoint scrollPoint(int(point.property("left").toNumber()),
+                       int(point.property("top").toNumber()));
 
     myFrame->setScrollPosition(scrollPoint);
     return true;
@@ -883,7 +883,7 @@ QScriptValue MyWebView::setUploadFile(QScriptValue selector, QScriptValue path, 
         return QScriptValue(false);
     }
 
-    int i = index.toString().toInt();
+    int i = int(index.toNumber());
 
     if (i > c) {
         i = c;

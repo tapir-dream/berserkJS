@@ -1315,6 +1315,7 @@ seletedNetwrokData = App.selecotr.get();
 </p><p>argEvt &lt;string&gt; 可选值。鼠标事件名，默认值为 "click"，值范围 mousedown/mouseup/mousemove。
 </p><p>argKey &lt;string&gt; 可选值。鼠标事件发生时，同时按下的按键。 默认值为空。值范围 shift/ctrl/alt。
 </p><p><b>说明:</b> 此方法用来向 webview 渲染页面的指定区域发送鼠标事件。通常配合 App.webview.elementRects 方法来向选定的 DOM 元素发送合法的 click 事件，用来做模拟用户点击操作。
+</p><p><b>【注意】: 由于 App.webview.elementRects 方法仅返回元素布局信息，如果需要更为精确的点击到元素上，你应该将 App.webview.elementRects 方法返回的 x 与 y 值均多加几像素值。</b>
 </p><p><br />
 </p>
 <h4><span id="App.webview.addEventListener.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><b>App.webview.addEventListener(eventName &lt;string&gt;, callback &lt;function&gt;)</b></span></h4>

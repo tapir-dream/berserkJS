@@ -291,11 +291,62 @@ QScriptValue MainWindow::sendEvent(QScriptContext *context, QScriptEngine *inter
     int x = 0;
     int y = 0;
     if (argPoint.property("x").isNumber())
-        x = argPoint.property("x").toString().toInt();
+        x = int(argPoint.property("x").toNumber());
     if (argPoint.property("y").isNumber())
-        y = argPoint.property("y").toString().toInt();
+        y = int(argPoint.property("y").toNumber());
 
-    QPoint targetPoint(x, y);
+
+
+    // 这里对目标点位置进行识别
+    // 如果目标点不在视口区域内
+    // 那么将调整视口到可显示目标点的位置（去除负向值）
+    // 然后计算出相对视口的渲染位置后重新构造相对视口的 x，y 值
+    QPoint targetPoint(0, 0);
+
+    QWebFrame* frame = webView->page()->mainFrame();
+    QSize viewPortSize = webView->page()->viewportSize();
+    QPoint scorllPoint = frame->scrollPosition();
+
+
+    int viewPortTop = scorllPoint.y();
+    int viewPortBottom = viewPortSize.height() + scorllPoint.y();
+    int viewPortLeft = scorllPoint.x();
+    int viewPortRight = viewPortSize.width() + scorllPoint.x();
+
+    // 视口位置在 0,0
+    if (scorllPoint.y() == 0 && scorllPoint.x() == 0) {
+        // 坐标超出视口情况，修正 xy 值
+        if (x > viewPortRight || y > viewPortBottom) {
+            // 调整视口位置, 使坐标点在视口内
+            frame->setScrollPosition(QPoint(x, y));
+            // 获取新 scroll 值
+            QPoint currentScrollPoint = frame->scrollPosition();
+            y = y - scorllPoint.y();
+            x = x - scorllPoint.x();
+        }
+
+    } else {
+        // 视口位置不在 0,0
+
+        // 坐标没有超出视口情况，修正 xy 值
+        if (y > viewPortTop && y < viewPortBottom &&
+            x > viewPortLeft && x < viewPortRight) {
+            y = y - scorllPoint.y();
+            x = x - scorllPoint.x();
+        } else {
+            // 坐标超出视口情况，修正 xy 值
+            // 调整视口位置, 使坐标点在视口内
+            frame->setScrollPosition(QPoint(x, y));
+            // 获取新 scroll 值
+            QPoint currentScrollPoint = frame->scrollPosition();
+            // 仅修正 xy 值为相对视口的值
+            y = y - currentScrollPoint.y();
+            x = x - currentScrollPoint.x();
+        }
+
+    }
+
+    targetPoint = QPoint(x, y);
 
     // 构造默认值鼠标事件类型默认值
     QMap<QString, QEvent::Type> mouseEventTypeMap;

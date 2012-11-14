@@ -1020,7 +1020,7 @@ QScriptValue ScriptBinding::process(QScriptContext *context, QScriptEngine *inte
     }
 
     if (context->argument(2).isNumber()) {
-        msecs = context->argument(2).toString().toInt();
+        msecs = int(context->argument(2).toNumber());
     }
 
     QProcess process;
