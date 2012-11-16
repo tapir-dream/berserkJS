@@ -1,3 +1,4 @@
+#include <QAbstractNetworkCache>
 #include "networkaccessmanager.h"
 #include "customdownload.h"
 
@@ -5,7 +6,8 @@ bool NetworkAccessManager::isListener = false;
 NetworkAccessManager::NetworkAccessManager(QNetworkAccessManager *manager, QObject *parent)
     : QNetworkAccessManager(parent)
 {
-    setCache(manager->cache());
+    // 不需要缓存
+    //setCache(manager->cache());
     setCookieJar(manager->cookieJar());
     setProxy(manager->proxy());
     setProxyFactory(manager->proxyFactory());
@@ -14,6 +16,7 @@ NetworkAccessManager::NetworkAccessManager(QNetworkAccessManager *manager, QObje
 QNetworkReply* NetworkAccessManager::createRequest(QNetworkAccessManager::Operation operation,
     const QNetworkRequest &request, QIODevice *device)
 {
+
     qint64 time;
     if (isListener) {
         time = QDateTime::currentDateTime().toMSecsSinceEpoch();

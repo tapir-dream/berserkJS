@@ -97,12 +97,13 @@ void MainWindow::initWebViewAttributes()
     // 使用系统代理
     QNetworkProxyFactory::setUseSystemConfiguration(true);
 
-    // 设置本地缓存
-    QNetworkDiskCache *diskCache = new QNetworkDiskCache(webView);
-    QString location = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
-    diskCache->setCacheDirectory(location);
-    page->networkAccessManager()->setCache(diskCache);
-    page->settings()->setMaximumPagesInCache(100);
+    // 不需要设置本地缓存，storage 可以写在内存中，不会报错。
+    // 这样避免了某些小文件挤占本地缓存，从而导致个别文件是从缓存中读取的现象产生。
+    //QNetworkDiskCache *diskCache = new QNetworkDiskCache(webView);
+    //QString location = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
+    //diskCache->setCacheDirectory(location);
+    //page->networkAccessManager()->setCache(diskCache);
+    //page->settings()->setMaximumPagesInCache(100);
 }
 
 void MainWindow::initAppEngine()

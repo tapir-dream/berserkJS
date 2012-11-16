@@ -24,7 +24,7 @@ public:
     explicit NetworkAccessManager(QNetworkAccessManager *manager, QObject *parent);
 
     QNetworkReply* createRequest(QNetworkAccessManager::Operation operation,
-                       const QNetworkRequest &request, QIODevice *device);
+        const QNetworkRequest &request, QIODevice *device);
 
     static bool isListener;
 
