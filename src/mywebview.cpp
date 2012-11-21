@@ -8,7 +8,6 @@ PageExtension* pageExtension;
 
 MyWebView::MyWebView()
 {        
-
     // 扩展页面对象
     pageExtension = new PageExtension(this);
 
@@ -19,7 +18,9 @@ MyWebView::MyWebView()
     myFrame = myPage->mainFrame();
 
     // 初始化页面首次渲染标志
-    firstPaintFinished = false;
+    hasFirstPaintFinished = false;
+    // 监控 DOMContentLoaded 标志
+    hasDOMLoaded = false;
 
     // 建立首屏监控对象
     firstScreen = new FirstScreen(myPage);
@@ -77,11 +78,18 @@ void MyWebView::initEventNameMap()
     eventNameMap.insert("alert", &pageAlertFunc);
     eventNameMap.insert("prompt", &pagePromptFunc);
 
+    eventNameMap.insert("print", &printRequestedFunc);
+    eventNameMap.insert("scroll", &scrollRequestedFunc);
+    eventNameMap.insert("selectionchanged", &selectionChangedFunc);
+    eventNameMap.insert("close", &windowCloseRequestedFunc);
+    eventNameMap.insert("statusbarmessage", &statusBarMessageFunc);
 
     // 加入页面首次渲染完成事件回调
     eventNameMap.insert("firstpaintfinished", &pageFirstPaintFinishedFunc);
     // 加入页面首屏渲染完成事件回调
     eventNameMap.insert("firstscreenfinished", &pageFirstScreenFinishedFunc);
+    // 加入COMContentLoaded时间回调
+    eventNameMap.insert("domcontentloaded", &DOMContentLoadedFunc);
 
     // 加入每个请求开始时事件回调
     eventNameMap.insert("requeststart", &requestStartFunc);
@@ -111,18 +119,31 @@ void MyWebView::initEvents()
     connect(myPage, SIGNAL(repaintRequested(const QRect)), this, SLOT(onRepaintRequested(const QRect)));
     connect(myPage, SIGNAL(geometryChangeRequested(const QRect)), this, SLOT(onGeometryChangeRequested(const QRect)));
 
-    connect(myPage, SIGNAL(pageConsoleMessage(QString,int,QString)), this, SLOT(onPageConsoleMessage(QString,int,QString)));
+    connect(myPage, SIGNAL(pageConsoleMessage(QString, int ,QString)), this, SLOT(onPageConsoleMessage(QString,int,QString)));
     connect(myPage, SIGNAL(pageAlert(QString)), this, SLOT(onPageAlert(QString)));
     connect(myPage, SIGNAL(pageConfirm(QString)), this, SLOT(onPageConfirm(QString)));
     connect(myPage, SIGNAL(pagePrompt(QString,QString)), this, SLOT(onPagePrompt(QString,QString)));
 
+    connect(myPage, SIGNAL(printRequested(QWebFrame*)), this, SLOT(onPrintRequested(QWebFrame*)));
+    connect(myPage, SIGNAL(scrollRequested(int, int, const QRect)), this, SLOT(onScrollRequested(int, int, const QRect)));
+    connect(myPage, SIGNAL(selectionChanged()), this, SLOT(onSelectionChanged()));
+    connect(myPage, SIGNAL(windowCloseRequested()), this, SLOT(onWindowCloseRequested()));
+    connect(myPage, SIGNAL(statusBarMessage(const QString)), this, SLOT(onStatusBarMessage(const QString)));
 
+    // ======= 单独处理 DOM 的组合事件 ======= //
+    connect(myFrame, SIGNAL(urlChanged(const QUrl)), this, SLOT(onDOMLoaded_UrlChanged(const QUrl)));
+    connect(myFrame, SIGNAL(titleChanged(const QString)), this, SLOT(onDOMLoaded_TitleChanged(const QString)));
+    connect(this, SIGNAL(DOMContentLoaded(int, QString)), this, SLOT(onDOMContentLoaded(int, QString)));
+    // ======= 单独处理 DOM 的组合事件 END ======= //
 
-
+    // ======= 单独处理首屏首次渲染的组合事件 ======= //
+    connect(myFrame, SIGNAL(urlChanged(const QUrl)), this, SLOT(onFirst_UrlChanged(const QUrl)));
+    connect(myPage, SIGNAL(repaintRequested(const QRect)), this, SLOT(onFirst_RepaintRequested(const QRect)));
     connect(newManager, SIGNAL(requestFinished(QString)),
             this, SLOT(onRequestFinished(QString)));
     connect(newManager, SIGNAL(requestStart(QString)),
             this, SLOT(onRequestStart(QString)));
+    // ======= 单独处理首屏首次渲染的组合事件 END ======= ///
 };
 
 void MyWebView::initAppScriptEngine(ScriptBinding* scriptBinding)
@@ -1060,33 +1081,6 @@ void MyWebView::normalFireEvent(QList<ContextInfo> eventHandleList)
 
 void MyWebView::onRepaintRequested(const QRect & dirtyRect)
 {
-    // 第一次 repaint 时，将首次渲染标志设置为true。
-    if (!firstPaintFinished) {
-        firstPaintFinished = true;
-        qint64 firePaintTimeout =
-                QDateTime::currentDateTime().toMSecsSinceEpoch()
-                - urlChangedTime;
-        // 负值修正
-        if (firePaintTimeout < 0)
-             firePaintTimeout = 0;
-
-        int c = pageFirstPaintFinishedFunc.size();
-        if (c > 0) {
-            for (int i = 0; i < c; ++i) {
-                ContextInfo contextInfo = pageFirstPaintFinishedFunc.at(i);
-                contextInfo.func.setScope(contextInfo.activationObject.scope());
-                contextInfo
-                    .func.call(
-                      contextInfo.thisObject,
-                      QScriptValueList()
-                        << QScriptValue(QString::number(firePaintTimeout).toInt())
-                        << QScriptValue(myFrame->url().toString())
-                      );
-            }
-        }
-        firstScreen->setStartScanViewTime(firePaintTimeout);
-    }
-
     int c = repaintRequestedFunc.size();
     if (c > 0) {
         for (int i = 0; i < c; ++i) {
@@ -1135,6 +1129,7 @@ void MyWebView::onLoadProgress(int progress)
 
 void MyWebView::onTitleChanged(const QString & title)
 {
+
     int c = titleChangedFunc.size();
     if (c > 0) {
         for (int i = 0; i < c; ++i) {
@@ -1147,15 +1142,72 @@ void MyWebView::onTitleChanged(const QString & title)
 
 void MyWebView::onUrlChanged(const QUrl & url)
 {
+    // 执行事件监听回调
+    int c = urlChangedFunc.size();
+    if (c > 0) {
+        for (int i = 0; i < c; ++i) {
+            ContextInfo contextInfo = urlChangedFunc.at(i);
+            contextInfo.func.setScope(contextInfo.activationObject.scope());
+            contextInfo.func.call(contextInfo.thisObject, QScriptValueList() << QScriptValue(url.toString()));
+        }
+    }
+}
+
+//============= 为 DOMContentLoaded 准备的综合事件处理 ============//
+void MyWebView::onDOMLoaded_UrlChanged(const QUrl & url)
+{
+    if (DOMContentLoadedFunc.size() > 0) {
+        // 将DOM加载注入监控标示设置为false
+        hasDOMLoaded = false;
+    }
+}
+
+void MyWebView::onDOMLoaded_TitleChanged(const QString & title)
+{
+    // 仅当DOMContentLoaded内有回调时候且注入标示为假
+    if (DOMContentLoadedFunc.size() > 0 &&  !hasDOMLoaded) {
+        QString pageJS = "(function(doc) {\n";
+        pageJS += "doc.addEventListener(\'DOMContentLoaded\', function(){\n";
+        pageJS += "var d = new Date().getTime();\n";
+        pageJS += "__pageExtension.sendSignal(\'DOMContentLoaded\', d + '' );\n";
+        pageJS += "});\n";
+        pageJS += "})(document);";
+        myFrame->evaluateJavaScript(pageJS);
+
+        // 一旦注入脚本到页面中，则将注入完成标示置为true
+        // 避免由于 document.title 赋值导致多处注入代码
+        hasDOMLoaded = true;
+    }
+}
+
+void MyWebView::onDOMContentLoaded(int timeout, QString url)
+{
+    int c = DOMContentLoadedFunc.size();
+    if (c > 0) {
+        for (int i = 0; i < c; ++i) {
+            ContextInfo contextInfo = DOMContentLoadedFunc.at(i);
+            contextInfo.func.setScope(contextInfo.activationObject.scope());
+            contextInfo.func.call(contextInfo.thisObject,
+                                  QScriptValueList()
+                                  << QScriptValue(timeout)
+                                  << QScriptValue(url));
+        }
+    }
+}
+
+//============= 为 DOMContentLoaded 准备的综合事件处理 END ============//
+
+//============= 单独处理首屏首次渲染事件部分 ============//
+
+void MyWebView::onFirst_UrlChanged(const QUrl & url)
+{
     // 如果URL变更了并且监听了任意回调（首屏回调依赖于首次渲染）
     // 那么页面的首次渲染标记将被设置为flase
     // 这个标志等到第一次repaint事件被触发时才被设置为true
-    if (firstPaintFinished &&
+    if (hasFirstPaintFinished &&
             (pageFirstPaintFinishedFunc.size() > 0 ||
              pageFirstScreenFinishedFunc.size() >0)) {
-        firstPaintFinished = false;
-        // 设置页面变更时间戳
-        urlChangedTime = QDateTime::currentDateTime().toMSecsSinceEpoch();
+        hasFirstPaintFinished = false;
     }
 
     // 如果 URL 变更了
@@ -1178,15 +1230,35 @@ void MyWebView::onUrlChanged(const QUrl & url)
         connect(firstScreen, SIGNAL(firstScreenRenderFinish(int, QString)),
                    this, SLOT(onFirstScreenRenderTimeout(int, QString)));
     }
+}
 
-    // 执行事件监听回调
-    int c = urlChangedFunc.size();
-    if (c > 0) {
-        for (int i = 0; i < c; ++i) {
-            ContextInfo contextInfo = urlChangedFunc.at(i);
-            contextInfo.func.setScope(contextInfo.activationObject.scope());
-            contextInfo.func.call(contextInfo.thisObject, QScriptValueList() << QScriptValue(url.toString()));
+void MyWebView::onFirst_RepaintRequested(const QRect & dirtyRect)
+{
+    // 第一次 repaint 时，将首次渲染标志设置为true。
+    if (!hasFirstPaintFinished) {
+        hasFirstPaintFinished = true;
+        qint64 firePaintTimeout =
+                QDateTime::currentDateTime().toMSecsSinceEpoch()
+                - loadStartedTime;
+        // 负值修正
+        if (firePaintTimeout < 0)
+             firePaintTimeout = 0;
+
+        int c = pageFirstPaintFinishedFunc.size();
+        if (c > 0) {
+            for (int i = 0; i < c; ++i) {
+                ContextInfo contextInfo = pageFirstPaintFinishedFunc.at(i);
+                contextInfo.func.setScope(contextInfo.activationObject.scope());
+                contextInfo
+                    .func.call(
+                      contextInfo.thisObject,
+                      QScriptValueList()
+                        << QScriptValue(QString::number(firePaintTimeout).toInt())
+                        << QScriptValue(myFrame->url().toString())
+                      );
+            }
         }
+        firstScreen->setStartScanViewTime(firePaintTimeout);
     }
 }
 
@@ -1205,6 +1277,8 @@ void MyWebView::onFirstScreenRenderTimeout(int timeout, QString url)
     }
 }
 
+//============= 单独处理首屏首次渲染事件部分 END ============//
+
 void MyWebView::onIconChanged()
 {
     normalFireEvent(iconChangedFunc);
@@ -1212,6 +1286,8 @@ void MyWebView::onIconChanged()
 
 void MyWebView::onLoadStarted()
 {
+    // 设置页面变更时间戳
+    loadStartedTime = QDateTime::currentDateTime().toMSecsSinceEpoch();
     normalFireEvent(loadStartedFunc);
 }
 
@@ -1227,11 +1303,6 @@ void MyWebView::onJavaScriptWindowObjectCleared()
             << "}";
     myFrame->evaluateJavaScript(postMessageScript.join(""));
     normalFireEvent(javaScriptWindowObjectClearedFunc);
-}
-
-void MyWebView::onInitialLayoutCompleted()
-{
-    normalFireEvent(initialLayoutCompletedFunc);
 }
 
 void MyWebView::onPageChanged()
@@ -1252,12 +1323,30 @@ void MyWebView::sendPageMessage(QString wparam, QString lparam)
 void MyWebView::onLoadFinished(bool ok)
 {
     int c = loadFinishedFunc.size();
+    qsreal timeout = QDateTime::currentDateTime().toMSecsSinceEpoch() - loadStartedTime;
     if (c > 0) {
         for (int i = 0; i < c; ++i) {
             ContextInfo contextInfo = loadFinishedFunc.at(i);
             contextInfo.func.setScope(contextInfo.activationObject.scope());
             contextInfo.func.call(contextInfo.thisObject,
                                   QScriptValueList()
+                                  << QScriptValue(timeout)
+                                  << QScriptValue(this->url().toString()));
+        }
+    }
+}
+
+void MyWebView::onInitialLayoutCompleted()
+{
+    int c = initialLayoutCompletedFunc.size();
+    qsreal timeout = QDateTime::currentDateTime().toMSecsSinceEpoch() - loadStartedTime;
+    if (c > 0) {
+        for (int i = 0; i < c; ++i) {
+            ContextInfo contextInfo = initialLayoutCompletedFunc.at(i);
+            contextInfo.func.setScope(contextInfo.activationObject.scope());
+            contextInfo.func.call(contextInfo.thisObject,
+                                  QScriptValueList()
+                                  << QScriptValue(timeout)
                                   << QScriptValue(this->url().toString()));
         }
     }
@@ -1366,6 +1455,91 @@ void MyWebView::onRequestFinished(QString url)
     }
 }
 
+void MyWebView::onPrintRequested (QWebFrame * frame)
+{
+    int c = printRequestedFunc.size();
+    if (c > 0) {
+        for (int i = 0; i < c; ++i) {
+            ContextInfo contextInfo = printRequestedFunc.at(i);
+            contextInfo.func.setScope(contextInfo.activationObject.scope());
+            contextInfo.func.call(contextInfo.thisObject,
+                                  QScriptValueList()
+                                  << QScriptValue(this->myFrame->url().toString()));
+        }
+    }
+}
+
+void MyWebView::onScrollRequested (int dx, int dy, const QRect & rectToScroll)
+{
+    int c = scrollRequestedFunc.size();
+    int top = myFrame->scrollPosition().y();
+    int left = myFrame->scrollPosition().x();
+    if (c > 0) {
+        for (int i = 0; i < c; ++i) {
+            ContextInfo contextInfo = scrollRequestedFunc.at(i);
+            contextInfo.func.setScope(contextInfo.activationObject.scope());
+            contextInfo.func.call(contextInfo.thisObject,
+                                  QScriptValueList()
+                                  << QScriptValue(top)
+                                  << QScriptValue(left)
+                                  << QScriptValue(-dy)
+                                  << QScriptValue(-dx));
+        }
+    }
+}
+
+void MyWebView::onSelectionChanged()
+{
+    int c = selectionChangedFunc.size();
+    QString selectedText = this->myPage->selectedHtml();
+    // 将输出的 HTML包裹节点替换掉
+    selectedText = selectedText.replace(QRegExp("<span([^>]+)?>"), "");
+    selectedText = selectedText.replace(QRegExp("</span>$"), "");
+
+    if (selectedText.isEmpty() || selectedText.isEmpty()) {
+        return;
+    }
+
+    if (c > 0) {
+        for (int i = 0; i < c; ++i) {
+            ContextInfo contextInfo = selectionChangedFunc.at(i);
+            contextInfo.func.setScope(contextInfo.activationObject.scope());
+            contextInfo.func.call(contextInfo.thisObject,
+                                  QScriptValueList()
+                                  << QScriptValue(selectedText));
+        }
+    }
+}
+
+
+void MyWebView::onWindowCloseRequested()
+{
+    int c = windowCloseRequestedFunc.size();
+    if (c > 0) {
+        for (int i = 0; i < c; ++i) {
+            ContextInfo contextInfo = windowCloseRequestedFunc.at(i);
+            contextInfo.func.setScope(contextInfo.activationObject.scope());
+            contextInfo.func.call(contextInfo.thisObject,
+                                  QScriptValueList()
+                                  << QScriptValue(this->myFrame->url().toString()));
+        }
+    }
+}
+
+void MyWebView::onStatusBarMessage(const QString & text)
+{
+    int c = statusBarMessageFunc.size();
+    if (c > 0) {
+        for (int i = 0; i < c; ++i) {
+            ContextInfo contextInfo = statusBarMessageFunc.at(i);
+            contextInfo.func.setScope(contextInfo.activationObject.scope());
+            contextInfo.func.call(contextInfo.thisObject,
+                                  QScriptValueList()
+                                  << QScriptValue(text));
+        }
+    }
+}
+
 void MyWebView::onTimeout()
 {
     QTimer* timer = qobject_cast<QTimer *>(sender());
@@ -1400,4 +1574,15 @@ QString MyWebView::rectToJson(const QRect & rect)
             ", width: "+ QString::number(rect.width()) +
             ", height: "+ QString::number(rect.height()) +
             "}";
+}
+
+// 由页面中 __pageExtension 触发的内置事件和其所需的值
+void MyWebView::sendSignal(QString signal, QString value)
+{
+    // 考虑到每个信号所带回调参数不同，且这样特殊触发将来不会超过 20 个。
+    // 使用 Map 来做对应，还不如使用if硬编码更清晰
+    if (signal == "DOMContentLoaded") {
+        emit DOMContentLoaded(value.toLongLong() - loadStartedTime, myFrame->url().toString());
+        return;
+    }
 }

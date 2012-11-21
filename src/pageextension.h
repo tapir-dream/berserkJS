@@ -22,6 +22,8 @@ signals:
 public slots:
     void message(QString wparam = "",
                  QString lparam = "");
+    void sendSignal(QString signal = "",
+                    QString value = "");
     double cpu();
     double memory();
 };

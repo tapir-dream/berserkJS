@@ -531,6 +531,12 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
        |              |                                   &lt; - firstPaintFinished
        |              |                                   &lt; - requestStart
        |              |                                   &lt; - requestFinished
+       |              |                                   &lt; - print
+       |              |                                   &lt; - close
+       |              |                                   &lt; - scroll
+       |              |                                   &lt; - selectionChanged
+       |              |                                   &lt; - statusBarMessage
+       |              |                                   &lt; - DOMContentLoaded
        |              |                  + [function] on &lt;- addEventListener alias
        |              |                  + [function] removeEventListener
        |              |                  + [function] un &lt;- removeEventListener alias
@@ -1323,6 +1329,7 @@ seletedNetwrokData = App.selecotr.get();
 </p><p>eventName &lt;string&gt; 所需监听的事件名。值范围(不区分大小写)：
 </p>
 <ul><li> "load" --页面载入完成后触发
+</li><li> "DOMContentLoaded" --页面 DOM 构造完成时触发
 </li><li> "initLayoutCompleted"--页面首次布局完成后触发
 </li><li> "pageChanged"--页面跳转完成时触发
 </li><li> "contentsSizeChanged"--文档总渲染大小发生变化后触发
@@ -1343,6 +1350,11 @@ seletedNetwrokData = App.selecotr.get();
 </li><li> "firstScreenFinished" ---首屏渲染完成后触发
 </li><li> "requestStart"--网络请求监听被开启情况下，一旦页面某资源试图发起网络请求，此事件将被触发。
 </li><li> "requestFinished" --网络请求监听被开启情况下，页面某资源的网络请求完成时，此事件将被触发。
+</li><li> "print" --当页面使用 window.print 方法时触发
+</li><li> "close" --当页面使用 window.close 方法时触发 <b>【注意】工具中页面调用alert方法无法关闭页面，它的输出被事件化。</b>
+</li><li> "scroll" --当页面滚动条位置被修改后触发
+</li><li> "selectionChanged" --当页面内容被框选时触发
+</li><li> "statusBarMessage" --当页面状态栏内容变更时触发
 </li></ul>
 <p><br />
 <b>说明:</b>用来监听页面事件，触发回调函数执行。
@@ -1350,64 +1362,93 @@ seletedNetwrokData = App.selecotr.get();
 callback &lt;function&gt; 事件触发时的回调函数。
 </p><p>根据事件不同回调函的参数值也不同，其中具有参数的事件如下：
 </p>
-<ul><li> <b>load(url &lt;string&gt;)</b> ：
-<ul><li> 参数 url 返回当前 url 字符串。
+<ul><li> <b>load([timeout&lt;number&gt;, url &lt;string&gt;])</b>：
+<ul><li> 参数 timeout 返回从 <b>loadStarted 事件开始到 load 事件</b>的间隔值，单位毫秒。
+</li><li> 参数 url 返回当前 url 字符串。
 </li></ul>
-</li><li> <b>contentsSizeChanged(size &lt;Object&gt;</b>：
+</li></ul>
+<ul><li> <b>load([timeout&lt;number&gt;, url &lt;string&gt;])</b>：
+<ul><li> 参数 timeout 返回从 <b>loadStarted 事件开始到 load 事件</b>的间隔值，单位毫秒。
+</li><li> 参数 url 返回当前 url 字符串。
+</li></ul>
+</li></ul>
+<ul><li> <b>DOMContentLoaded([timeout&lt;number&gt;, url &lt;string&gt;])</b>：
+<ul><li> 参数 timeout 返回从 <b>loadStarted 事件开始到 DOMContentLoaded 事件</b>的间隔值，单位毫秒。
+</li><li> 参数 url 返回当前 url 字符串。
+</li></ul>
+</li></ul>
+<ul><li> <b>initLayoutCompleted([timeout&lt;number&gt;, url &lt;string&gt;])</b>：
+<ul><li> 参数 timeout 返回从 <b>loadStarted 事件开始到 initLayoutCompleted 事件</b>的间隔值，单位毫秒。
+</li><li> 参数 url 返回当前 url 字符串。
+</li></ul>
+</li></ul>
+<ul><li> <b>contentsSizeChanged([size &lt;Object&gt;])</b> ：
 <ul><li> 参数 size 返回当前内容大小， 数据格式 {width, height}
 </li></ul>
-</li><li> <b>titleChanged(title &lt;string&gt;)</b>：
+</li></ul>
+<ul><li> <b>titleChanged([title &lt;string&gt;])</b>：
 <ul><li> 参数 title 返回当前 title 字符串。
 </li></ul>
-</li><li> <b>urlChanged(url &lt;string&gt;)</b>：
+</li></ul>
+<ul><li> <b>urlChanged([url &lt;string&gt;])</b>：
 <ul><li> 参数 url 返回当前 url 字符串。
 </li></ul>
-</li><li> <b>loadProgress(progress &lt;number&gt;)</b>：
+</li></ul>
+<ul><li> <b>loadProgress([progress &lt;number&gt;])</b>：
 <ul><li> 参数 progress 返回当前加载进度值，范围 1-100。
 </li></ul>
-</li><li> <b>repaint(rect &lt;Object&gt;)</b> ：
+</li></ul>
+<ul><li> <b>repaint([rect &lt;Object&gt;])</b> ：
 <ul><li> 参数 rect 返回当前重绘区域， 数据格式 {x, y, left, right, top, bottom, width,height} 。
 </li></ul>
-</li><li> <b>pageRectChanged(rect &lt;Object&gt;)</b> ：
+</li></ul>
+<ul><li> <b>pageRectChanged([rect &lt;Object&gt;])</b> ：
 <ul><li> 参数 rect 返回当前视口区域， 数据格式 {x, y, left, right, top, bottom, width,height} 。
 </li></ul>
-</li><li> <b>consoleMessage(msg&lt;string&gt;, lineNumber&lt;number&gt;, sourceID&lt;string&gt;)：</b> ：
+</li></ul>
+<ul><li> <b>consoleMessage([msg&lt;string&gt;, lineNumber&lt;number&gt;, sourceID&lt;string&gt;])</b>：
 <ul><li> 参数 msg: 控制台输出内容
 </li><li> 参数 lineNumber: 行号
 </li><li> 参数 sourceID: 如果是脚本执行错误，则 sourceID 会指出是那个脚本触发。
 </li></ul>
-</li><li> <b>prompt(msg&lt;string&gt;, defaultValue&lt;number&gt;)：</b> ：
-<ul><li> 参数 msg: prompt方法的首参数
-</li><li>参数 defaultValue: prompt方法的次参数
 </li></ul>
-</li><li> <b>confirm(msg&lt;string&gt;)：</b> ：
+<ul><li> <b>prompt([msg&lt;string&gt;, defaultValue&lt;number&gt;])</b>：
+<ul><li> 参数 msg: prompt方法的首参数
+</li><li> 参数 defaultValue: prompt方法的次参数
+</li></ul>
+</li></ul>
+<ul><li> <b>confirm([msg&lt;string&gt;])</b>：
 <ul><li> 参数 msg: confirm中的提示文字
 </li></ul>
-</li><li> <b>alert(msg&lt;string&gt;)：</b> ：
+</li></ul>
+<ul><li> <b>alert([msg&lt;string&gt;])</b>：
 <ul><li> 参数 msg: alert中的提示文字
 </li></ul>
-</li><li> <b>message(wparam &lt;Object|string|number&gt;, lparam&lt;Object|string|number&gt;)</b>：
-<ul><li>  参数返回页面中执行 __pageExtension.postMessage 方法时的两个信息参数，参数类型根据 __pageExtension.postMessage 方法执行时具体传入参数而定。
 </li></ul>
-</li><li> <b>firstPaintFinished(timeout &lt;int&gt;, url&lt;string&gt;)</b>：
-<ul><li> 参数 timeout 返回当前从 <b>urlChanged 事件开始到首次渲染时间</b>的间隔值。
+<ul><li> <b>message([wparam &lt;string&gt;, lparam&lt;string&gt;])</b>：
+<ul><li> 参数返回页面中执行 __pageExtension.postMessage 方法时的两个字符串参数。
+</li></ul>
+</li></ul>
+<ul><li> <b>firstPaintFinished([timeout &lt;int&gt;, url&lt;string&gt;])</b>：
+<ul><li> 参数 timeout 返回当前从 <b>loadStarted 事件开始到首次渲染时间</b>的间隔值，单位毫秒。
 </li><li> 参数 url 返回当前 url 字符串。
 </li><li> <b>注意：此事件可以通过其他事件组合，由JS实现，此处仅给出内置的组合方案。</b>
 </li></ul>
-</li><li> <b>firstScreenFinished(timeout &lt;int&gt;, url&lt;string&gt;)</b>：
-<ul><li> 参数 timeout 返回当前从 <b>urlChanged 事件开始到首屏渲染完毕</b>的间隔值。
+</li></ul>
+<ul><li> <b>firstScreenFinished([timeout &lt;int&gt;, url&lt;string&gt;])</b>：
+<ul><li> 参数 timeout 返回当前从 <b>loadStarted 事件开始到首屏渲染完毕</b>的间隔值，单位毫秒。
 </li><li> 参数 url 返回当前 url 字符串。
 </li><li> <b>事件说明(非常重要): 此方法为模拟实现！其中，首屏区域为当前 webview 视口区域，它可以使用 setViewport 方法设置，或使用 viewport 方法获取大小。 </b>
 </li><li> <b>首屏渲染时间计算方法有两种(非常重要): </b>
 <ul><li> 默认检测方法:
-<ul><li> 从 urlChanged 事件触发开始计时
+<ul><li> 从 <b>loadStarted</b> 事件触发开始计时
 </li><li> 从 firstPaintFinished 事件触发后，按照当前视口区域平均分布 14400 个像素监控点
 </li><li> 每 250 ms 检测一次所有监控点 RGB 值变化
 </li><li> 如果连续 12 次大于 12000 个像素点无变化，则结束计时，减去 12*250 ms 后返回耗时。
 </li><li> 如果连续 12 次内出现像素变化，则计数清空，重新循环检测直至达到上一步条件为止。
 </li></ul>
 </li><li> 自定义监控点检测方法:
-<ul><li> 从 urlChanged 事件触发开始计时
+<ul><li> 从 <b>loadStarted</b> 事件触发开始计时
 </li><li> 从 firstPaintFinished 事件触发后，按照 setDetectionRects 方法设置的重点检测区块内分布像素级检测点
 </li><li> 每 250 ms 检测一次所有监控点 RGB 值变化
 </li><li> 如果连续 12 次大于检测区块总像素*设置相同率（见 setDetectionRects  方法说明）个像素点无变化，则结束计时，减去 12*250 ms 后返回耗时。
@@ -1416,26 +1457,48 @@ callback &lt;function&gt; 事件触发时的回调函数。
 </li></ul>
 </li></ul>
 </li></ul>
-<ul><li><ul><li> <b>firstScreenFinished 事件缺陷(非常重要): </b>
+<ul><li><ul><li> <b>此事件缺陷(非常重要): </b>
 <ul><li> 默认检测方法不适合用于长时间有大规模像素变化的页面。
 </li><li> 由于检测分布点色值取自 webkit 渲染内核，如果存在 wmode 属性值为 window 的 Flash (它由系统接管渲染，而非浏览器)，那么检测点将无法获得它的色值变化。此类页面的首屏时间可能会不准确。
 </li></ul>
 </li></ul>
 </li></ul>
-<ul><li> <b>requestStart(url &lt;string&gt;)</b> ：
+<ul><li> <b>requestStart([url &lt;string&gt;])</b> ：
 <ul><li> 参数: url 返回正在发送请求的 url。
 </li><li> 说明: 当页面资源开始试图发起请求时，此事件被触发。
 </li><li> 注意: <b>此事件只能在 App.netListener(true) 设置后被响应</b>
 </li></ul>
 </li></ul>
-<ul><li> <b>requestFinished(url &lt;string&gt;)</b> ：
+<ul><li> <b>requestFinished([url &lt;string&gt;])</b> ：
 <ul><li> 参数: url 返回请求已经结束的 url。
 </li><li> 说明: 当页面资源的网络请求已经完成时，此事件被触发。
 </li><li> 注意: <b>此事件只能在 App.netListener(true) 设置后被响应</b>
 </li></ul>
 </li></ul>
-<p><br />
-</p>
+<ul><li> <b>print([url &lt;string&gt;])</b>：
+<ul><li> 参数 url 返回当前 url 字符串。
+</li></ul>
+</li></ul>
+<ul><li> <b>close([title &lt;string&gt;])</b>：
+<ul><li> 参数 url 返回当前 url 字符串。
+</li></ul>
+</li></ul>
+<ul><li> <b>scroll([top&lt;number&gt;, left&lt;number&gt;, diffTop&lt;number&gt;, diffLeft&lt;number&gt;])</b>：
+<ul><li> 参数 top 返回垂直滚动条当前位置距离页面顶部距离。
+</li><li> 参数 left 返回水平滚动条当前位置距离页面左部距离。
+</li><li> 参数 diffTop 返回垂直滚动条当前移动增量。
+</li><li> 参数 diffLeft 返回水平滚动条当前移动增量。
+</li></ul>
+</li></ul>
+<ul><li> <b>selectionChanged([html &lt;string&gt;])</b>：
+<ul><li> 参数 html 返回被框选的 html 字符串。
+</li></ul>
+</li></ul>
+<ul><li> <b>statusBarMessage([text &lt;string&gt;])</b>：
+<ul><li> 参数 text 返回当前状态条内容。
+</li></ul>
+</li></ul>
+<p><br /></p>
 <h4><span id="App.webview.on.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><b>App.webview.on(eventName &lt;string&gt;, callback &lt;function&gt;)</b></span></h4>
 <p><b>说明:</b> addEventListener 方法的别名方法。
 </p><p><br />

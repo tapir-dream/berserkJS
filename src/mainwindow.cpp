@@ -92,8 +92,6 @@ void MainWindow::initLayout()
 
 void MainWindow::initWebViewAttributes()
 {
-    QWebPage* page = webView->page();
-
     // 使用系统代理
     QNetworkProxyFactory::setUseSystemConfiguration(true);
 

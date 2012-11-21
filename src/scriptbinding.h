@@ -103,6 +103,12 @@
  *        |                                                            < - firstScreenFinished
  *        |                                                            < - requestStart
  *        |                                                            < - requestFinished
+ *        |                                                            < - print
+ *        |                                                            < - close
+ *        |                                                            < - scroll
+ *        |                                                            < - selectionChanged
+ *        |                                                            < - statusBarMessage
+ *        |                                                            < - DOMContentLoaded
  *        |                              + [function] on <- addEventListener alias
  *        |                              + [function] removeEventListener
  *        |                              + [function] un <- removeEventListener alias

@@ -32,6 +32,7 @@ public:
     ~MyWebView();
     void setAppScriptEngine(ScriptBinding* scriptBinding);
     void sendPageMessage(QString message, QString type);
+    void sendSignal(QString signal, QString value = "");
 
     Q_INVOKABLE QScriptValue open(QScriptValue url =  QScriptValue::UndefinedValue);
     Q_INVOKABLE QScriptValue execScript(QScriptValue scriptFunc, QScriptValue args = QScriptValue::UndefinedValue);
@@ -110,8 +111,10 @@ private:
     QScriptEngine* appEngine;
     QString webViewNamespace;
 
-    bool firstPaintFinished;
-    qint64 urlChangedTime;
+    bool hasFirstPaintFinished;
+    bool hasDOMLoaded;
+
+    qint64 loadStartedTime;
 
     QMap<QString, QList<ContextInfo>* > eventNameMap;
     QList<ContextInfo> javaScriptWindowObjectClearedFunc;
@@ -135,6 +138,12 @@ private:
     QList<ContextInfo> pagePromptFunc;
     QList<ContextInfo> pageConfirmFunc;
     QList<ContextInfo> pageAlertFunc;
+    QList<ContextInfo> printRequestedFunc;
+    QList<ContextInfo> scrollRequestedFunc;
+    QList<ContextInfo> selectionChangedFunc;
+    QList<ContextInfo> windowCloseRequestedFunc;
+    QList<ContextInfo> statusBarMessageFunc;
+    QList<ContextInfo> DOMContentLoadedFunc;
 
     QMap<QString, TimerInfo> timeEventMap;
 
@@ -145,8 +154,9 @@ private:
     void setAppScriptWebViewObject();
     QScriptValue getWebViewObjcet();
 
-    void setCustomNetWorkAccessManager();
-    void resetNetWorkAccessManager();
+    // 移除无用方法定义
+    //void setCustomNetWorkAccessManager();
+    //void resetNetWorkAccessManager();
 
     QString sizeToJson(const QSize & size);
     QString rectToJson(const QRect & rect);
@@ -170,6 +180,8 @@ private:
 
 
 signals:
+    // 使用自定义信号构造一个 DOMContentLoaded 事件
+    void DOMContentLoaded(int timeout, QString url);
 
 private slots:
     void onJavaScriptWindowObjectCleared();
@@ -182,10 +194,15 @@ private slots:
     void onTitleChanged(const QString & title);
     void onUrlChanged(const QUrl & url);
 
+    void onPrintRequested (QWebFrame * frame);
+    void onScrollRequested (int dx, int dy, const QRect & rectToScroll);
+    void onSelectionChanged();
+    void onWindowCloseRequested();
+    void onStatusBarMessage(const QString & text);
+
     void onRepaintRequested(const QRect & dirtyRect);
     void onGeometryChangeRequested(const QRect & geom);
     void onLoadProgress(int progress);
-    void onFirstScreenRenderTimeout(int timeout, QString url);
     void onTimeout();
 
     void onRequestStart(QString url);
@@ -197,6 +214,16 @@ private slots:
     void onPageAlert(QString msg);
 
     void onOpenUrl(QUrl targetURL);
+
+
+    // 为首屏与首次渲染准备的综合事件处理
+    void onFirst_UrlChanged(const QUrl & url);
+    void onFirst_RepaintRequested(const QRect & dirtyRect);
+    void onFirstScreenRenderTimeout(int timeout, QString url);
+    // 为 DOMContentLoaded 准备的综合事件处理
+    void onDOMLoaded_UrlChanged(const QUrl & url);
+    void onDOMLoaded_TitleChanged(const QString & title);
+    void onDOMContentLoaded(int timeout, QString url);
 };
 
 #endif // MYWEBVIEW_H
