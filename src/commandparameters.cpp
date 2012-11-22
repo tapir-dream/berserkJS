@@ -2,6 +2,7 @@
 
 CommandParameters::CommandParameters()
 {
+    params = getParams();
 }
 
 QMap<QString, QString> CommandParameters::getParams()
@@ -29,6 +30,8 @@ QMap<QString, QString> CommandParameters::getParams()
               params["command"] = "1";
           } else if (strncmp("--version", s, 9) == 0) {
               params["version"] = "1";
+          } else if (strncmp("--cache", s, 7) == 0) {
+              params["cache"] = "1";
           }
           continue;
       }
@@ -54,32 +57,33 @@ QMap<QString, QString> CommandParameters::getParams()
 
 bool CommandParameters::isCommandMode()
 {
-    QMap<QString, QString> params = getParams();
     return params.contains("command");
 }
 
 bool CommandParameters::hasStart()
 {
-    QMap<QString, QString> params = getParams();
     return params.contains("start");
 }
 
 
 bool CommandParameters::hasScript()
 {
-    QMap<QString, QString> params = getParams();
     return params.contains("script") && params["script"] != "";
 }
 
 
 bool CommandParameters::hasHelp()
 {
-    QMap<QString, QString> params = getParams();
     return params.contains("help");
 }
 
 bool CommandParameters::hasVersion()
 {
-    QMap<QString, QString> params = getParams();
     return params.contains("version") && params["version"] != "";
 }
+
+bool CommandParameters::hasCache()
+{
+    return params.contains("help");
+}
+

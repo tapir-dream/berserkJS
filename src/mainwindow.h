@@ -60,7 +60,7 @@ private:
     void initAppEngine();
     void keyPressEvent(QKeyEvent *e);
     void viewChange();
-    void startSafeMode(CommandParameters* cmdParam);
+    void startSafeMode();
 
     QString helpUrl;
     QString scriptFunc;

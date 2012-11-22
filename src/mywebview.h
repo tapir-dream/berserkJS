@@ -81,6 +81,10 @@ public:
     Q_INVOKABLE QScriptValue setPageHTML(QScriptValue html = QScriptValue(""));
     Q_INVOKABLE QScriptValue pageText();
     Q_INVOKABLE QScriptValue setUploadFile(QScriptValue selector, QScriptValue path, QScriptValue index = QScriptValue(0));
+    Q_INVOKABLE QScriptValue setMaxPagesInCache(QScriptValue num = QScriptValue(100));
+    Q_INVOKABLE QScriptValue maxPagesInCache();
+    Q_INVOKABLE QScriptValue clearAllPagesInCache();
+
 
     bool clipRenderToImage(QString path, QString type = "JPG",
                        int quality = 60,  QRect clipRect = QRect());

@@ -6,7 +6,7 @@ bool NetworkAccessManager::isListener = false;
 NetworkAccessManager::NetworkAccessManager(QNetworkAccessManager *manager, QObject *parent)
     : QNetworkAccessManager(parent)
 {
-    // 不需要缓存
+    // TODO:不需要在这里设置缓存, 外部会设置
     //setCache(manager->cache());
     setCookieJar(manager->cookieJar());
     setProxy(manager->proxy());

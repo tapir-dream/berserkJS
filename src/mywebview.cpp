@@ -881,6 +881,31 @@ QScriptValue MyWebView::pageText()
     return QScriptValue(myFrame->toPlainText());
 }
 
+QScriptValue MyWebView::setMaxPagesInCache(QScriptValue num)
+{
+    if (num.isNull() || num.isUndefined() || num.isObject() || num.isArray()) {
+        return false;
+    }
+
+    int count = num.toInt32();
+    if (count < 0) {
+        count = 0;
+    }
+    settings()->setMaximumPagesInCache(count);
+    return true;
+}
+
+QScriptValue MyWebView::maxPagesInCache()
+{
+    return QScriptValue(QWebSettings::maximumPagesInCache());
+}
+
+QScriptValue MyWebView::clearAllPagesInCache()
+{
+    QWebSettings::clearMemoryCaches();
+    return true;
+}
+
 QScriptValue MyWebView::setUploadFile(QScriptValue selector, QScriptValue path, QScriptValue index)
 {
     if (!selector.isString())

@@ -23,20 +23,19 @@ MainWindow::MainWindow(QWidget *parent) :
     scriptFunc = "App.loadScript(App.path + 'js/conf/init.js', function(err, func){func(App,App.webview)});";
 
     window = this;
+    cmdParams = new CommandParameters();
     ui->setupUi(this);
     initLayout();
     initWebViewAttributes();
     initAppEngine();
     // 延时至 exec() 的消息循环启动，否则 close 、hide 等方法会失效。
     QTimer::singleShot(1, this, SLOT(initUserScript()));
-
 }
 
 void MainWindow::initUserScript()
 {
 
-    cmdParams = new CommandParameters();
-    startSafeMode(cmdParams);
+    startSafeMode();
 
     if (cmdParams->hasHelp()) {
         webView->load(QUrl(helpUrl));
@@ -44,11 +43,11 @@ void MainWindow::initUserScript()
     }
 
     if (cmdParams->hasScript()) {
-        QString file = cmdParams->getParams()["script"];
+        QString file = cmdParams->params["script"];
         QFileInfo fileInfo(file);
         // 尝试直接路径探测文件存在否
         if (!fileInfo.exists()) {
-            file = getAppPath() + cmdParams->getParams()["script"];
+            file = getAppPath() + cmdParams->params["script"];
             fileInfo.setFile(file);
             // 尝试从应用程序路径探测文件存在否
             if (!fileInfo.exists()) {
@@ -94,14 +93,18 @@ void MainWindow::initWebViewAttributes()
 {
     // 使用系统代理
     QNetworkProxyFactory::setUseSystemConfiguration(true);
-
-    // 不需要设置本地缓存，storage 可以写在内存中，不会报错。
-    // 这样避免了某些小文件挤占本地缓存，从而导致个别文件是从缓存中读取的现象产生。
-    //QNetworkDiskCache *diskCache = new QNetworkDiskCache(webView);
-    //QString location = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
-    //diskCache->setCacheDirectory(location);
-    //page->networkAccessManager()->setCache(diskCache);
-    //page->settings()->setMaximumPagesInCache(100);
+    QWebPage* page = webView->page();
+    QWebSettings* settings = webView->settings();
+    // 如果开启了缓存设置，则设置本地缓存
+    if (cmdParams->hasCache()) {
+        QNetworkDiskCache *diskCache = new QNetworkDiskCache(webView);
+        QString location = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
+        QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
+        page->networkAccessManager()->setCache(diskCache);
+        settings->setMaximumPagesInCache(100);
+    } else {
+        settings->setMaximumPagesInCache(0);
+    }
 }
 
 void MainWindow::initAppEngine()
@@ -459,9 +462,9 @@ void MainWindow::onConsoleLogMessage(QString str)
                      ui->outputLogResults_txt->toPlainText());
 }
 
-void MainWindow::startSafeMode(CommandParameters* cmdParam)
+void MainWindow::startSafeMode()
 {
-    if (cmdParam->isCommandMode()) {
+    if (cmdParams->isCommandMode()) {
         QTimer* timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()), this, SLOT(onTimeout()));
         timer->start(1000);

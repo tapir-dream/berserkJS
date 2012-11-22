@@ -8,12 +8,16 @@ class CommandParameters
 {
 public:
     CommandParameters();
-    QMap<QString, QString> getParams();
     bool isCommandMode();
+    bool hasCache();
     bool hasScript();
     bool hasStart();
     bool hasHelp();
     bool hasVersion();
+    QMap<QString, QString> params;
+private:
+    QMap<QString, QString> getParams();
+
 };
 
 #endif // COMMANDPARAMETERS_H

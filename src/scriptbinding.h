@@ -144,6 +144,9 @@
  *        |                              + [function] setPageHTML
  *        |                              + [function] pageText
  *        |                              + [function] setUploadFile
+ *        |                              + [function] setMaxPagesInCache
+ *        |                              + [function] maxPagesInCache
+ *        |                              + [function] clearAllPagesInCache
  *        |
  *        |
  *        + [object] console + [function] log
