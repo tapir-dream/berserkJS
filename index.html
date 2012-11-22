@@ -224,6 +224,8 @@
 </li>
 <li> --script 该参数表示要自动执行某路径下js文件。其规则是<b>先以参数值为实际路径</b>嗅探文件，如果存在则执行，否则执行<b>以berserkJS路径为基准</b>的脚本文件。<b>此js文件将自动以 uft-8 编码格式读取并执行；此参数存在时 --start 参数自动失效。</b>
 </li>
+<li> --cache 该参数表示要开启浏览器缓存保存到本地硬盘。<b>此参数还在开发中，稳定性未知，暂时不建议使用。</b>
+</li>
 </ol>
 <p><br></p>
 <h2> 项目核心源文件概要 </h2>
@@ -368,6 +370,9 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
        |              |                  + [function] setPageHTML
        |              |                  + [function] pageText
        |              |                  + [function] setUploadFile
+       |              |                  + [function] setMaxPagesInCache
+       |              |                  + [function] maxPagesInCache
+       |              |                  + [function] clearAllPagesInCache           
        |              |
        |              + [object] helper &lt;-- 非内部包装的JS命名空间，由用户扩展
        |
@@ -1783,7 +1788,7 @@ callback &lt;function&gt; 事件触发时的回调函数。
 </p>
 <p><br></p>
 <h4><b>App.webview.setPageHTML(html &lt;string&gt;)</b></h4>
-<p><b>参数:</b> html  html格式的字符串。
+<p><b>参数:</b> html &lt;string&gt; html格式的字符串。
 </p>
 <p><b>返回值:</b> &lt;boolean&gt; 成功设置返回 true，反之返回 false。
 </p>
@@ -1816,6 +1821,26 @@ callback &lt;function&gt; 事件触发时的回调函数。
 <p><b>说明:</b> 此函数用于为指定文件域 (&lt;input type="file"&gt;) 设置上传文件内容。
 </p>
 <p><b>【注意】：为了实现此功能，GUI 模式下页面的文件域将无法通过手动点击打开文件选择对话框。</b>
+</p>
+<p><br></p>
+<h4><b>App.webview.setMaxPagesInCache(num &lt;number&gt;)</b></h4>
+<p><b>参数:</b> num &lt;number&gt; 设置缓存页数值。
+</p>
+<p><b>返回值:</b> &lt;boolean&gt; 成功设置返回 true，反之返回 false。
+</p>
+<p><b>说明:</b> 此函数用于设置 webview 可在内存缓存的页面数。
+</p>
+<p><br></p>
+<h4><b>App.webview.maxPagesInCache()</b></h4>
+<p><b>返回值:</b> &lt;number&gt;  webview 已被设置的内存缓存页面数
+</p>
+<p><b>说明:</b> 此函数用于查看 webview 被设置在内存的缓存页面数。
+</p>
+<p><br></p>
+<h4><b>App.webview.clearAllPagesInCache()</b></h4>
+<p><b>返回值:</b> &lt;boolean&gt;  成功返回 true，反之返回 false。
+</p>
+<p><b>说明:</b> 此函数用于清除 webview 所有内存缓存的页面数据（同浏览器清除缓存的页面数据功能）。
 </p>
 <p><br></p>
 <h3> console 命名空间下函数与属性 </h3>
