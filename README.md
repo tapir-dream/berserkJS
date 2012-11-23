@@ -48,3 +48,6 @@ http://tapir-dream.github.com/berserkJS
 #介绍PPT
 =========
 - **下载地址**：http://t.cn/zWcKani
+
+#LICENCE
+- 采用 BSD 开源协议，细节请阅读项目中的 LICENSE.BSD 文件内容。
