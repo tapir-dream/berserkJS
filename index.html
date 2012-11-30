@@ -31,7 +31,7 @@
       </header>
       <section>
         <div>
-<h1>RIA 网络数据自动化输出工具（berserkJS）</h1>
+<h1>前端自动化监测工具（BerserkJS）</h1>
 <h2> 演示视频 </h2>
 <p><a href="http://www.tudou.com/v/pu5xvmzVZbU/&amp;resourceId=0_04_05_99/v.swf" rel="nofollow" target="_blank">http://www.tudou.com/v/pu5xvmzVZbU/&amp;resourceId=0_04_05_99/v.swf</a>
 </p>
@@ -260,6 +260,7 @@
 <p>整体方法树如下：
 </p>
 <pre>
+
 Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数组
        |              + [function] close
        |              + [function] loadScript
@@ -316,27 +317,33 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
        |              |                  + [function] setInterval
        |              |                  + [function] clearInterval
        |              |                  + [function] addEventListener 
-       |              |                                   &lt; - pageScriptCreated
-       |              |                                   &lt; - load
-       |              |                                   &lt; - initLayoutCompleted
-       |              |                                   &lt; - pageChanged
-       |              |                                   &lt; - contentsSizeChanged
-       |              |                                   &lt; - iconchanged
-       |              |                                   &lt; - loadStarted
-       |              |                                   &lt; - titleChanged
-       |              |                                   &lt; - urlChanged
-       |              |                                   &lt; - repaint
-       |              |                                   &lt; - pageRectChanged
-       |              |                                   &lt; - loadProgress
-       |              |                                   &lt; - firstPaintFinished
-       |              |                                   &lt; - requestStart
-       |              |                                   &lt; - requestFinished
-       |              |                                   &lt; - print
-       |              |                                   &lt; - close
-       |              |                                   &lt; - scroll
-       |              |                                   &lt; - selectionChanged
-       |              |                                   &lt; - statusBarMessage
-       |              |                                   &lt; - DOMContentLoaded
+       |              |                                     &lt; - pageScriptCreated
+       |              |                                     &lt; - load
+       |              |                                     &lt; - initLayoutCompleted
+       |              |                                     &lt; - pageChanged
+       |              |                                     &lt; - contentsSizeChanged
+       |              |                                     &lt; - iconChanged
+       |              |                                     &lt; - loadStarted
+       |              |                                     &lt; - titleChanged
+       |              |                                     &lt; - urlChanged
+       |              |                                     &lt; - repaint
+       |              |                                     &lt; - pageRectChanged
+       |              |                                     &lt; - loadProgress
+       |              |                                     &lt; - message
+       |              |                                     &lt; - firstPaintFinished
+       |              |                                     &lt; - firstScreenFinished
+       |              |                                     &lt; - requestStart
+       |              |                                     &lt; - requestFinished
+       |              |                                     &lt; - consoleMessage
+       |              |                                     &lt; - alert
+       |              |                                     &lt; - confirm
+       |              |                                     &lt; - propmt
+       |              |                                     &lt; - print
+       |              |                                     &lt; - close
+       |              |                                     &lt; - scroll
+       |              |                                     &lt; - selectionChanged
+       |              |                                     &lt; - statusBarMessage
+       |              |                                     &lt; - DOMContentLoaded
        |              |                  + [function] on &lt;- addEventListener alias
        |              |                  + [function] removeEventListener
        |              |                  + [function] un &lt;- removeEventListener alias
@@ -345,7 +352,7 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
        |              |                  + [function] unAll &lt;- removeAllEventListener alias
        |              |                  + [function] elementRects
        |              |                  + [function] saveImage  &lt;-  *支持 JPG/JPEG/PNG/BMP/PPM/TIFF 格式保存;
-       |              |                  + [function] savePdf 
+       |              |                  + [function] savePdf
        |              |                  + [function] sendMouseEvent + click/mousedown/mouseup/mousemove
        |              |                  + [function] dataURIFromRect
        |              |                  + [function] viewport
@@ -353,6 +360,10 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
        |              |                  + [function] contentRect
        |              |                  + [function] cookiesFromUrl
        |              |                  + [function] setCookiesFromUrl
+       |              |                  + [function] cookieObject
+       |              |                  + [function] setCookie
+       |              |                  + [function] removeCookie
+       |              |                  + [function] clearCookie
        |              |                  + [function] userAgent
        |              |                  + [function] defaultUserAgent
        |              |                  + [function] setUserAgent
@@ -372,21 +383,20 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
        |              |                  + [function] setUploadFile
        |              |                  + [function] setMaxPagesInCache
        |              |                  + [function] maxPagesInCache
-       |              |                  + [function] clearAllPagesInCache           
+       |              |                  + [function] clearAllPagesInCache
        |              |
        |              + [object] helper &lt;-- 非内部包装的JS命名空间，由用户扩展
        |
        + [object] console + [function] log 
-                          + [function] dir 
+                          + [function] dir
                           + [function] time 
                           + [function] timeEnd
        + [function] alert &lt;--- App.alert 的快捷引用
        + [function] setTimeout &lt;-- webview.setTimeout 方法的引用
        + [function] clearTimeout &lt;-- webview.clearTimeout 方法的引用
        + [function] setInterval &lt;-- webview.setInterval 方法的引用
-       + [function] clearInterval &lt;-- webview.clearInterval 方法的引用   
-       + [function] print
-
+       + [function] clearInterval &lt;-- webview.clearInterval 方法的引用                
+       + [function] print     
 
 
     
@@ -1371,6 +1381,42 @@ seletedNetwrokData = App.selecotr.get();
 <p><b>返回值:</b> &lt;boolean&gt; 成功返回 true ，否则返回 false。
 </p>
 <p><b>说明:</b> 此方法用来将 cookie 内容设置到指定 URL 下。一般配合  cookiesFromUrl 、writeFile 、readFile 等 API 将某 URL 中的 cookie 恢复。预期用来解决依赖cookies（cookies 中的 sessionid 或其他）的自动登录验证问题。
+</p>
+<p><br></p>
+<h4><b>App.webview.cookieObject([url &lt;string&gt;])</b></h4>
+<p><b>参数:</b>  url &lt;string&gt;  可选参数，一个合法的 URL 字符串，<b>必须以 http:// 或 https:// 开头</b>，<b>默认值为当前工具正在访问的URL</b>。
+</p>
+<p><b>返回值:</b> &lt;Array&gt; 返回一个数组，其每一项均为一个 <b>包含 name、value、domain 三个 key</b> 的 JS Object。
+</p>
+<p><b>说明:</b> 此方法用来返回一个容易处理的 cookie 值数组。
+</p>
+<p><br></p>
+<h4><b>App.webview.setCookie(cookieObject &lt;Object&gt;)</b></h4>
+<p><b>参数:</b> cookieObject &lt;Object&gt; 一个 cooke 对象，其格式为 {name: your_cookie_name, value:your_cookie_value, domain: your_domain}
+</p>
+<p><b>返回值:</b>  &lt;boolean&gt; 成功返回 true 反之为 false。
+</p>
+<p><b>说明:</b> 此方法用来为指定的域设置 cookie 内容，如果 cookie 存在则改写其值，否则为新建 cookie 内容。
+</p>
+<p><b>【注意】: 其中的 domain 的值需为 .domain ，如为 weibo.com 域设置值，其 domain 应写为 .weibo.com （注意前面的点字符）， 如此 key 没有赋值，则默认为当前访问的 url 值。</b> 
+</p>
+<p><br></p>
+<h4><b>App.webview.removeCookie(name &lt;string&gt;[, domain &lt;string&gt;])</b></h4>
+<p><b>参数:</b>
+</p>
+<p>name &lt;string&gt;  cookie 字符串
+</p>
+<p>domain &lt;string&gt; 非必选参数，默认为当前访问页面的 url。
+</p>
+<p><b>返回值:</b> &lt;boolean&gt; 找到指定名字与 domian 的 cookie 并删除成功则返回 true，反之为 false。
+</p>
+<p><b>【注意】: 其中的 domain 的值需为 .domain ，如为 weibo.com 域设置值，其 domain 应写为 .weibo.com （注意前面的点字符）</b>
+</p>
+<p><br></p>
+<h4><b>App.webview.clearCookie()</b></h4>
+<p><b>返回值:</b> 清理成功返回 true，反之 false。
+</p>
+<p><b>说明:</b> 此方法用于清除所有 domain 下的 cookie。 <b>请慎用</b>
 </p>
 <p><br></p>
 <h4><b>App.webview.elementRects(cssSelectorString &lt;string&gt;)</b></h4>
