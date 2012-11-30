@@ -29,7 +29,8 @@ SOURCES += main.cpp\
     filesystemwatcher.cpp \
     firstscreen.cpp \
     scriptsignalfactory.cpp \
-    appinfo.cpp
+    appinfo.cpp \
+    cookiejar.cpp
 
 HEADERS  += mainwindow.h \
     networkaccessmanager.h \
@@ -46,7 +47,8 @@ HEADERS  += mainwindow.h \
     firstscreen.h \
     scriptsignalfactory.h \
     appinfo.h \
-    consts.h
+    consts.h \
+    cookiejar.h
 
 FORMS    += mainwindow.ui
 

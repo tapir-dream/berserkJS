@@ -103,6 +103,10 @@
  *        |                                                            < - firstScreenFinished
  *        |                                                            < - requestStart
  *        |                                                            < - requestFinished
+ *        |                                                            < - consoleMessage
+ *        |                                                            < - alert
+ *        |                                                            < - confirm
+ *        |                                                            < - propmt
  *        |                                                            < - print
  *        |                                                            < - close
  *        |                                                            < - scroll
@@ -127,6 +131,10 @@
  *        |                              + [function] netListener
  *        |                              + [function] cookiesFromUrl
  *        |                              + [function] setCookiesFromUrl
+ *        |                              + [function] cookieObject
+ *        |                              + [function] setCookie
+ *        |                              + [function] removeCookie
+ *        |                              + [function] clearCookie
  *        |                              + [function] userAgent
  *        |                              + [function] defaultUserAgent
  *        |                              + [function] setUserAgent

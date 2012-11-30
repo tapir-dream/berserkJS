@@ -19,6 +19,7 @@
 #include <QNetworkCookieJar>
 
 #include "networkaccessmanager.h"
+#include "cookiejar.h"
 #include "scriptbinding.h"
 #include "monitordatamap.h"
 #include "mywebpage.h"
@@ -60,6 +61,14 @@ public:
     Q_INVOKABLE QScriptValue cookiesFromUrl(QScriptValue url = QScriptValue::UndefinedValue);
     Q_INVOKABLE QScriptValue setCookiesFromUrl(QScriptValue cookie,
                                                QScriptValue url = QScriptValue::UndefinedValue);
+    Q_INVOKABLE QScriptValue cookieObject(QScriptValue url = QScriptValue::UndefinedValue);
+    Q_INVOKABLE QScriptValue setCookie(QScriptValue cookieObject = QScriptValue::UndefinedValue);
+
+    Q_INVOKABLE QScriptValue removeCookie(QScriptValue name = QScriptValue::UndefinedValue,
+                                          QScriptValue domain = QScriptValue::UndefinedValue);
+
+    Q_INVOKABLE QScriptValue clearCookie();
+
     Q_INVOKABLE QScriptValue setProxy(QScriptValue host,
                                       QScriptValue type = QScriptValue::UndefinedValue,
                                       QScriptValue userName = QScriptValue::UndefinedValue,
@@ -110,7 +119,7 @@ private:
     MyWebPage* myPage;
     QWebFrame* myFrame;
     NetworkAccessManager *newManager;
-    QNetworkCookieJar* cookieJar;
+    CookieJar* cookieJar;
     ScriptBinding* script;
     QScriptEngine* appEngine;
     QString webViewNamespace;
@@ -178,6 +187,7 @@ private:
     QScriptValue timer(QScriptValue scriptFunc, QScriptValue timeout, bool singleShot);
     QScriptValue clearTimer(QScriptValue timeId);
 
+    QUrl checkURL(QScriptValue url);
 
     void onPageMessage(QString wparam, QString lparam);
 

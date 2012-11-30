@@ -31,7 +31,7 @@ MyWebView::MyWebView()
     myPage->setNetworkAccessManager(newManager);
 
     // 设置cookie处理
-    cookieJar = new QNetworkCookieJar();
+    cookieJar = new CookieJar();
     myPage->networkAccessManager()->setCookieJar(cookieJar);
 
     initEventNameMap();
@@ -163,23 +163,29 @@ QScriptValue MyWebView::getWebViewObjcet()
     return script->getRootSpace().property("webview");
 }
 
-QScriptValue MyWebView::cookiesFromUrl(QScriptValue url)
+QUrl MyWebView::checkURL(QScriptValue url)
 {
     QUrl targetUrl;
     if (url.isUndefined()) {
         targetUrl = this->url();
-    } else if (url.toString().toLower().trimmed().indexOf("http://") == 0) {
+    } else if (url.toString().toLower().trimmed().indexOf("http://") == 0 ||
+               url.toString().toLower().trimmed().indexOf("https://") == 0) {
         targetUrl = QUrl(url.toString().toLower().trimmed());
     } else {
         targetUrl = this->url();
     }
+    return targetUrl;
+}
 
+QScriptValue MyWebView::cookiesFromUrl(QScriptValue url)
+{
+
+    QUrl targetUrl = checkURL(url);
     QByteArray str;
 
     QNetworkCookie cookie;
     QList<QNetworkCookie> list = cookieJar->cookiesForUrl(targetUrl);
-    foreach (cookie, list)
-    {
+    foreach (cookie, list) {
         str += cookie.toRawForm() + "\n";
     }
     return QScriptValue(QString(str));
@@ -187,21 +193,139 @@ QScriptValue MyWebView::cookiesFromUrl(QScriptValue url)
 
 QScriptValue MyWebView::setCookiesFromUrl(QScriptValue cookie, QScriptValue url)
 {
-    QUrl targetUrl;
     QString targetCookie;
 
     if (!cookie.isString()) {
         return QScriptValue(false);
     }
 
-    targetCookie = cookie.toString().trimmed();
-
-    if (!url.isString()) {
-        targetUrl = this->url();
-    } else if (url.toString().toLower().trimmed().indexOf("http://") == 0) {
-        targetUrl = QUrl(url.toString());
-    }
+    QUrl targetUrl = checkURL(url);
     cookieJar->setCookiesFromUrl(QNetworkCookie::parseCookies(targetCookie.toUtf8()), targetUrl);
+    return QScriptValue(true);
+}
+
+/*
+ * cookie 相关封装操作不涉及对 path 和 expires 的显示与修正
+ * 这是考虑到未开启缓存情况下 cookie 不存储在本地磁盘复用
+ * 设置它们并没有意义，如果想让 cookie 失效，关闭进程或者采用 removeCookie 操作就可以了
+ */
+
+QScriptValue MyWebView::cookieObject(QScriptValue url)
+{
+    QUrl targetUrl = checkURL(url);
+
+    QByteArray str;
+
+    QList<QNetworkCookie> cookieList = cookieJar->cookiesForUrl(targetUrl);
+
+    QScriptValue arr = appEngine->newArray();
+    for (int i = 0, c = cookieList.count(); i < c; ++i) {
+        QNetworkCookie cookie = cookieList.at(i);
+        QScriptValue object = appEngine->newObject();
+        object.setProperty("name", QString(cookie.name()));
+        object.setProperty("value",  QString(cookie.value()));
+        object.setProperty("domain",  QString(cookie.domain()));
+        arr.setProperty(i, object);
+    }
+    return arr;
+}
+
+QScriptValue MyWebView::setCookie(QScriptValue cookieObject)
+{
+    if (!cookieObject.isObject()) {
+        return QScriptValue(false);
+    }
+
+    if (cookieObject.property("name").isUndefined()) {
+        return QScriptValue(false);
+    }
+
+    QString name = cookieObject.property("name").toString().trimmed();
+    if (name.isEmpty() || name.isNull()) {
+         return QScriptValue(false);
+    }
+
+    QString value = cookieObject.property("value").toString();
+    if (value.isEmpty() || name.isNull()) {
+        value = "";
+    }
+
+    QString domain;
+    if (!cookieObject.property("domain").isString()) {
+        domain = this->url().host()
+                .replace(QRegExp("^http://", Qt::CaseInsensitive), "")
+                .replace(QRegExp("^https://", Qt::CaseInsensitive), "")
+                .replace(QRegExp("^www", Qt::CaseInsensitive), "");
+    } else {
+        domain = cookieObject.property("domain").toString();
+    }
+
+    QNetworkCookie cookie;
+
+    QList<QNetworkCookie> cookieList = cookieJar->all();
+    bool hasCookie = false;
+    for (int i = 0, c = cookieList.count(); i < c; ++i) {
+        QNetworkCookie tmp = cookieList.at(i);
+        if (QString(tmp.name()) == name &&
+            QString(tmp.domain()) == domain) {
+            // TODO: 此处没有对设置的 cookie 进行转码
+            // 需要用户使用时编码非 ASCII 字符
+            cookie = tmp;
+            cookieList.removeAt(i);
+            hasCookie = true;
+            break;
+        }
+    }
+
+    if (hasCookie) {
+        cookie.setValue(value.toAscii());
+    } else {
+        cookie.setName(name.toAscii());
+        cookie.setValue(value.toAscii());
+        cookie.setDomain(domain);
+    }
+    cookieList.append(cookie);
+    cookieJar->set(cookieList);
+    return QScriptValue(true);
+}
+
+QScriptValue MyWebView::removeCookie(QScriptValue name, QScriptValue domain)
+{
+    QString sName;
+    QString sDomain;
+    if (name.isUndefined() || name.isNull() ||
+        !name.isString() || name.toString().trimmed().isEmpty()) {
+        return QScriptValue(false);
+    }
+    sName = name.toString();
+
+    if (domain.isUndefined() || domain.isNull() ||
+        !domain.isString() || domain.toString().trimmed().isEmpty()) {
+        sDomain = this->url().host()
+                .replace(QRegExp("^http://", Qt::CaseInsensitive), "")
+                .replace(QRegExp("^https://", Qt::CaseInsensitive), "")
+                .replace(QRegExp("^www", Qt::CaseInsensitive), "");
+    } else {
+        sDomain = domain.toString();
+    }
+
+    QNetworkCookie cookie;
+    QList<QNetworkCookie> cookieList = cookieJar->all();
+    for (int i = 0, c = cookieList.count(); i < c; ++i) {
+        cookie = cookieList.at(i);
+        if (QString(cookie.name()) == sName &&
+            QString(cookie.domain()) == sDomain) {
+            cookieList.removeAt(i);
+            cookieJar->set(cookieList);
+            return QScriptValue(true);
+        }
+    }
+    return QScriptValue(false);
+}
+
+QScriptValue MyWebView::clearCookie()
+{
+    cookieJar->set(QList<QNetworkCookie>());
     return QScriptValue(true);
 }
 

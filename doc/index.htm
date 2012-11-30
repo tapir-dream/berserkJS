@@ -141,7 +141,7 @@ pre {
 <body>
 <table id="toc"><tr><td><div id="toctitle"><h2>目录</h2></div>
 <ul id="tocList">
-<li><a href="#RIA_.E7.BD.91.E7.BB.9C.E6.95.B0.E6.8D.AE.E8.87.AA.E5.8A.A8.E5.8C.96.E8.BE.93.E5.87.BA.E5.B7.A5.E5.85.B7.EF.BC.88BerserkJS.EF.BC.89"><span>1</span> <span>RIA 网络数据自动化输出工具（BerserkJS）</span></a>
+<li><a href="#RIA_.E7.BD.91.E7.BB.9C.E6.95.B0.E6.8D.AE.E8.87.AA.E5.8A.A8.E5.8C.96.E8.BE.93.E5.87.BA.E5.B7.A5.E5.85.B7.EF.BC.88BerserkJS.EF.BC.89"><span>1</span> <span>前端自动化监测工具（BerserkJS）</span></a>
 <ul>
 <li><a href="#.E6.BC.94.E7.A4.BA.E8.A7.86.E9.A2.91"><span>1.1</span> <span>演示视频</span></a></li>
 <li><a href="#.E5.B7.A5.E5.85.B7.E4.BB.8B.E7.BB.8D_PPT"><span>1.2</span> <span>工具介绍 PPT</span></a></li>
@@ -250,30 +250,34 @@ pre {
 <li><a href="#App.webview.netListener.28enabled_.3Cboolean.3E.29"><span>1.17.4.19</span> <span>App.webview.netListener(enabled &lt;boolean&gt;)</span></a></li>
 <li><a href="#App.webview.cookiesFromUrl.28.5Burl_.3Cstring.3E.5D.29"><span>1.17.4.20</span> <span>App.webview.cookiesFromUrl([url &lt;string&gt;])</span></a></li>
 <li><a href="#App.webview.setCookiesFromUrl.28cookies_.3Cstring.3E.5B.2C_url_.3Cstring.3E.5D.29"><span>1.17.4.21</span> <span>App.webview.setCookiesFromUrl(cookies &lt;string&gt;[, url &lt;string&gt;])</span></a></li>
-<li><a href="#App.webview.elementRects.28cssSelectorString_.3Cstring.3E.29"><span>1.17.4.22</span> <span>App.webview.elementRects(cssSelectorString &lt;string&gt;)</span></a></li>
-<li><a href="#App.webview.sendMouseEvent.28argPoint_.3CObject.3E.5B.2C_argEvt_.3Cstring.3E.2C_argKey_.3Cstring.3E.5D.29"><span>1.17.4.23</span> <span>App.webview.sendMouseEvent(argPoint &lt;Object&gt;[, argEvt &lt;string&gt;, argKey &lt;string&gt;])</span></a></li>
-<li><a href="#App.webview.addEventListener.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.4.24</span> <span>App.webview.addEventListener(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
-<li><a href="#App.webview.on.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.4.25</span> <span>App.webview.on(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
-<li><a href="#App.webview.removeEventListener.28eventName_.3Cstring.3E.2C_callbackHandle_.3Cfunction.3E.29"><span>1.17.4.26</span> <span>App.webview.removeEventListener(eventName &lt;string&gt;, callbackHandle &lt;function&gt;)</span></a></li>
-<li><a href="#App.webview.un.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.4.27</span> <span>App.webview.un(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
-<li><a href="#App.webview.once.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.4.28</span> <span>App.webview.once(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
-<li><a href="#App.webview.removeAllEventListener.28.5BeventName_.3Cstring.3E.5D.29"><span>1.17.4.29</span> <span>App.webview.removeAllEventListener([eventName &lt;string&gt;])</span></a></li>
-<li><a href="#App.webview.unAll.28.5BeventName_.3Cstring.3E.5D.29"><span>1.17.4.30</span> <span>App.webview.unAll([eventName &lt;string&gt;])</span></a></li>
-<li><a href="#App.webview.setDetectionRects.28rects_.3CArray.3E.5B.2C_sameRate_.3Cnumber.3E.5D.29"><span>1.17.4.31</span> <span>App.webview.setDetectionRects(rects &lt;Array&gt;[, sameRate &lt;number&gt;])</span></a></li>
-<li><a href="#App.webview.clearDetectionRects.28.29"><span>1.17.4.32</span> <span>App.webview.clearDetectionRects()</span></a></li>
-<li><a href="#App.webview.hasDetectionRects.28.29"><span>1.17.4.33</span> <span>App.webview.hasDetectionRects()</span></a></li>
-<li><a href="#App.webview.execScript.28sandbox_.3Cfunction.3E_.5B.2C_argObject_.3CObject.3E.7C.3CArray.3E.7C.3Cstring.3E.7C.3Cnumber.3E.5D.29"><span>1.17.4.34</span> <span>App.webview.execScript(sandbox &lt;function&gt; [, argObject &lt;Object&gt;|&lt;Array&gt;|&lt;string&gt;|&lt;number&gt;])</span></a></li>
-<li><a href="#App.webview.setPageZoom.28zoom_.3Cnumber.3E.29"><span>1.17.4.35</span> <span>App.webview.setPageZoom(zoom &lt;number&gt;)</span></a></li>
-<li><a href="#App.webview.pageZoom.28.29"><span>1.17.4.36</span> <span>App.webview.pageZoom()</span></a></li>
-<li><a href="#App.webview.setPageScroll.28point_.3CObject.3E.29"><span>1.17.4.37</span> <span>App.webview.setPageScroll(point &lt;Object&gt;)</span></a></li>
-<li><a href="#App.webview.pageScroll.28.29"><span>1.17.4.38</span> <span>App.webview.pageScroll()</span></a></li>
-<li><a href="#App.webview.setPageHTML.28html_.3Cstring.3E.29"><span>1.17.4.39</span> <span>App.webview.setPageHTML(html &lt;string&gt;)</span></a></li>
-<li><a href="#App.webview.pageHTML.28.29"><span>1.17.4.40</span> <span>App.webview.pageHTML()</span></a></li>
-<li><a href="#App.webview.pageText.28.29"><span>1.17.4.41</span> <span>App.webview.pageText()</span></a></li>
-<li><a href="#App.webview.setUploadFile.28cssSelectorString_.3Cstring.3E.2C_path_.3Cstring.3E.5B.2C_index_.3Cnumber.3E.5D.29"><span>1.17.4.42</span> <span>App.webview.setUploadFile(cssSelectorString &lt;string&gt;, path &lt;string&gt;[, index &lt;number&gt;])</span></a></li>
-<li><a href="#App.webview.setMaxPagesInCache.28num.3Cnumber.3E.29"><span>1.17.4.43</span> <span>App.webview.setMaxPagesInCache(num&lt;number&gt;)</span></a></li>
-<li><a href="#App.webview.maxPagesInCache.28.29"><span>1.17.4.44</span> <span>App.webview.maxPagesInCache()</span></a></li>
-<li><a href="#App.webview.clearAllPagesInCache.28.29"><span>1.17.4.45</span> <span>App.webview.clearAllPagesInCache()</span></a></li>
+<li><a href="#App.webview.cookieObject.28.5Burl_.3Cstring.3E.5D.29"><span>1.17.4.22</span> <span>App.webview.cookieObject([url &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.setCookie.28cookieObject_.3CObject.3E.29"><span>1.17.4.23</span> <span>App.webview.setCookie(cookieObject &lt;Object&gt;)</span></a></li>
+<li><a href="#App.webview.removeCookie.28name_.3Cstring.3E.5B.2C_domain_.3Cstring.3E.5D.29"><span>1.17.4.24</span> <span>App.webview.removeCookie(name &lt;string&gt;[, domain &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.clearCookie.28.29"><span class="tocnumber">1.17.4.25</span> <span>App.webview.clearCookie()</span></a></li>
+<li><a href="#App.webview.elementRects.28cssSelectorString_.3Cstring.3E.29"><span>1.17.4.26</span> <span>App.webview.elementRects(cssSelectorString &lt;string&gt;)</span></a></li>
+<li><a href="#App.webview.sendMouseEvent.28argPoint_.3CObject.3E.5B.2C_argEvt_.3Cstring.3E.2C_argKey_.3Cstring.3E.5D.29"><span>1.17.4.27</span> <span>App.webview.sendMouseEvent(argPoint &lt;Object&gt;[, argEvt &lt;string&gt;, argKey &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.addEventListener.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.4.28</span> <span>App.webview.addEventListener(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.on.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.4.29</span> <span>App.webview.on(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.removeEventListener.28eventName_.3Cstring.3E.2C_callbackHandle_.3Cfunction.3E.29"><span>1.17.4.30</span> <span>App.webview.removeEventListener(eventName &lt;string&gt;, callbackHandle &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.un.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.4.31</span> <span>App.webview.un(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.once.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.4.32</span> <span>App.webview.once(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.removeAllEventListener.28.5BeventName_.3Cstring.3E.5D.29"><span>1.17.4.33</span> <span>App.webview.removeAllEventListener([eventName &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.unAll.28.5BeventName_.3Cstring.3E.5D.29"><span>1.17.4.34</span> <span>App.webview.unAll([eventName &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.setDetectionRects.28rects_.3CArray.3E.5B.2C_sameRate_.3Cnumber.3E.5D.29"><span>1.17.4.35</span> <span>App.webview.setDetectionRects(rects &lt;Array&gt;[, sameRate &lt;number&gt;])</span></a></li>
+<li><a href="#App.webview.clearDetectionRects.28.29"><span>1.17.4.36</span> <span>App.webview.clearDetectionRects()</span></a></li>
+<li><a href="#App.webview.hasDetectionRects.28.29"><span>1.17.4.37</span> <span>App.webview.hasDetectionRects()</span></a></li>
+<li><a href="#App.webview.execScript.28sandbox_.3Cfunction.3E_.5B.2C_argObject_.3CObject.3E.7C.3CArray.3E.7C.3Cstring.3E.7C.3Cnumber.3E.5D.29"><span>1.17.4.38</span> <span>App.webview.execScript(sandbox &lt;function&gt; [, argObject &lt;Object&gt;|&lt;Array&gt;|&lt;string&gt;|&lt;number&gt;])</span></a></li>
+<li><a href="#App.webview.setPageZoom.28zoom_.3Cnumber.3E.29"><span>1.17.4.39</span> <span>App.webview.setPageZoom(zoom &lt;number&gt;)</span></a></li>
+<li><a href="#App.webview.pageZoom.28.29"><span>1.17.4.40</span> <span>App.webview.pageZoom()</span></a></li>
+<li><a href="#App.webview.setPageScroll.28point_.3CObject.3E.29"><span>1.17.4.41</span> <span>App.webview.setPageScroll(point &lt;Object&gt;)</span></a></li>
+<li><a href="#App.webview.pageScroll.28.29"><span>1.17.4.42</span> <span>App.webview.pageScroll()</span></a></li>
+<li><a href="#App.webview.setPageHTML.28html_.3Cstring.3E.29"><span>1.17.4.43</span> <span>App.webview.setPageHTML(html &lt;string&gt;)</span></a></li>
+<li><a href="#App.webview.pageHTML.28.29"><span>1.17.4.44</span> <span>App.webview.pageHTML()</span></a></li>
+<li><a href="#App.webview.pageText.28.29"><span>1.17.4.45</span> <span>App.webview.pageText()</span></a></li>
+<li><a href="#App.webview.setUploadFile.28cssSelectorString_.3Cstring.3E.2C_path_.3Cstring.3E.5B.2C_index_.3Cnumber.3E.5D.29"><span>1.17.4.46</span> <span>App.webview.setUploadFile(cssSelectorString &lt;string&gt;, path &lt;string&gt;[, index &lt;number&gt;])</span></a></li>
+<li><a href="#App.webview.setMaxPagesInCache.28num.3Cnumber.3E.29"><span>1.17.4.47</span> <span>App.webview.setMaxPagesInCache(num&lt;number&gt;)</span></a></li>
+<li><a href="#App.webview.maxPagesInCache.28.29"><span>1.17.4.48</span> <span>App.webview.maxPagesInCache()</span></a></li>
+<li><a href="#App.webview.clearAllPagesInCache.28.29"><span>1.17.4.49</span> <span>App.webview.clearAllPagesInCache()</span></a></li>
 </ul>
 </li>
 <li><a href="#console_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0.E4.B8.8E.E5.B1.9E.E6.80.A7"><span>1.17.5</span> <span>console 命名空间下函数与属性</span></a>
@@ -306,7 +310,7 @@ pre {
 </ul>
 </td></tr></table>
 <div id="doc">
-<h1><span id="RIA_.E7.BD.91.E7.BB.9C.E6.95.B0.E6.8D.AE.E8.87.AA.E5.8A.A8.E5.8C.96.E8.BE.93.E5.87.BA.E5.B7.A5.E5.85.B7.EF.BC.88berserkJS.EF.BC.89">RIA 网络数据自动化输出工具（berserkJS）</span></h1>
+<h1><span id="RIA_.E7.BD.91.E7.BB.9C.E6.95.B0.E6.8D.AE.E8.87.AA.E5.8A.A8.E5.8C.96.E8.BE.93.E5.87.BA.E5.B7.A5.E5.85.B7.EF.BC.88berserkJS.EF.BC.89">前端自动化监测工具（BerserkJS）</span></h1>
 <h2><span id=".E6.BC.94.E7.A4.BA.E8.A7.86.E9.A2.91"> 演示视频 </span></h2>
 <p><a href="http://www.tudou.com/v/pu5xvmzVZbU/&amp;resourceId=0_04_05_99/v.swf"  rel="nofollow" target="_blank">http://www.tudou.com/v/pu5xvmzVZbU/&amp;resourceId=0_04_05_99/v.swf</a>
 </p><p><br />
@@ -464,6 +468,7 @@ pre {
 </p><p>整体方法树如下：
 </p>
 <pre>
+
 Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数组
        |              + [function] close
        |              + [function] loadScript
@@ -520,27 +525,33 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
        |              |                  + [function] setInterval
        |              |                  + [function] clearInterval
        |              |                  + [function] addEventListener 
-       |              |                                   &lt; - pageScriptCreated
-       |              |                                   &lt; - load
-       |              |                                   &lt; - initLayoutCompleted
-       |              |                                   &lt; - pageChanged
-       |              |                                   &lt; - contentsSizeChanged
-       |              |                                   &lt; - iconchanged
-       |              |                                   &lt; - loadStarted
-       |              |                                   &lt; - titleChanged
-       |              |                                   &lt; - urlChanged
-       |              |                                   &lt; - repaint
-       |              |                                   &lt; - pageRectChanged
-       |              |                                   &lt; - loadProgress
-       |              |                                   &lt; - firstPaintFinished
-       |              |                                   &lt; - requestStart
-       |              |                                   &lt; - requestFinished
-       |              |                                   &lt; - print
-       |              |                                   &lt; - close
-       |              |                                   &lt; - scroll
-       |              |                                   &lt; - selectionChanged
-       |              |                                   &lt; - statusBarMessage
-       |              |                                   &lt; - DOMContentLoaded
+       |              |                                     &lt; - pageScriptCreated
+       |              |                                     &lt; - load
+       |              |                                     &lt; - initLayoutCompleted
+       |              |                                     &lt; - pageChanged
+       |              |                                     &lt; - contentsSizeChanged
+       |              |                                     &lt; - iconChanged
+       |              |                                     &lt; - loadStarted
+       |              |                                     &lt; - titleChanged
+       |              |                                     &lt; - urlChanged
+       |              |                                     &lt; - repaint
+       |              |                                     &lt; - pageRectChanged
+       |              |                                     &lt; - loadProgress
+       |              |                                     &lt; - message
+       |              |                                     &lt; - firstPaintFinished
+       |              |                                     &lt; - firstScreenFinished
+       |              |                                     &lt; - requestStart
+       |              |                                     &lt; - requestFinished
+       |              |                                     &lt; - consoleMessage
+       |              |                                     &lt; - alert
+       |              |                                     &lt; - confirm
+       |              |                                     &lt; - propmt
+       |              |                                     &lt; - print
+       |              |                                     &lt; - close
+       |              |                                     &lt; - scroll
+       |              |                                     &lt; - selectionChanged
+       |              |                                     &lt; - statusBarMessage
+       |              |                                     &lt; - DOMContentLoaded
        |              |                  + [function] on &lt;- addEventListener alias
        |              |                  + [function] removeEventListener
        |              |                  + [function] un &lt;- removeEventListener alias
@@ -549,7 +560,7 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
        |              |                  + [function] unAll &lt;- removeAllEventListener alias
        |              |                  + [function] elementRects
        |              |                  + [function] saveImage  &lt;-  *支持 JPG/JPEG/PNG/BMP/PPM/TIFF 格式保存;
-       |              |                  + [function] savePdf 
+       |              |                  + [function] savePdf
        |              |                  + [function] sendMouseEvent + click/mousedown/mouseup/mousemove
        |              |                  + [function] dataURIFromRect
        |              |                  + [function] viewport
@@ -557,6 +568,10 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
        |              |                  + [function] contentRect
        |              |                  + [function] cookiesFromUrl
        |              |                  + [function] setCookiesFromUrl
+       |              |                  + [function] cookieObject
+       |              |                  + [function] setCookie
+       |              |                  + [function] removeCookie
+       |              |                  + [function] clearCookie
        |              |                  + [function] userAgent
        |              |                  + [function] defaultUserAgent
        |              |                  + [function] setUserAgent
@@ -576,21 +591,20 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
        |              |                  + [function] setUploadFile
        |              |                  + [function] setMaxPagesInCache
        |              |                  + [function] maxPagesInCache
-       |              |                  + [function] clearAllPagesInCache			 
+       |              |                  + [function] clearAllPagesInCache
        |              |
        |              + [object] helper &lt;-- 非内部包装的JS命名空间，由用户扩展
        |
        + [object] console + [function] log 
-                          + [function] dir 
+                          + [function] dir
                           + [function] time 
                           + [function] timeEnd
        + [function] alert &lt;--- App.alert 的快捷引用
        + [function] setTimeout &lt;-- webview.setTimeout 方法的引用
        + [function] clearTimeout &lt;-- webview.clearTimeout 方法的引用
        + [function] setInterval &lt;-- webview.setInterval 方法的引用
-       + [function] clearInterval &lt;-- webview.clearInterval 方法的引用   
-       + [function] print
-
+       + [function] clearInterval &lt;-- webview.clearInterval 方法的引用                
+       + [function] print     
 
 
     
@@ -1314,6 +1328,32 @@ seletedNetwrokData = App.selecotr.get();
 </p><p><b>返回值:</b> &lt;boolean&gt; 成功返回 true ，否则返回 false。
 </p><p><b>说明:</b> 此方法用来将 cookie 内容设置到指定 URL 下。一般配合  cookiesFromUrl 、writeFile 、readFile 等 API 将某 URL 中的 cookie 恢复。预期用来解决依赖cookies（cookies 中的 sessionid 或其他）的自动登录验证问题。
 </p><p><br />
+</p>
+<h4><span id="App.webview.cookieObject.28.5Burl_.3Cstring.3E.5D.29"><b>App.webview.cookieObject([url &lt;string&gt;])</b></span></h4>
+<p><b>参数:</b>  url &lt;string&gt;  可选参数，一个合法的 URL 字符串，<b>必须以 http:// 或 https:// 开头</b>，<b>默认值为当前工具正在访问的URL</b>。
+</p><p><b>返回值:</b> &lt;Array&gt; 返回一个数组，其每一项均为一个 <b>包含 name、value、domain 三个 key</b> 的 JS Object。
+</p><p><b>说明:</b> 此方法用来返回一个容易处理的 cookie 值数组。
+</p><p><br>
+</p>
+<h4><span id="App.webview.setCookie.28cookieObject_.3CObject.3E.29"><b>App.webview.setCookie(cookieObject &lt;Object&gt;)</b></span></h4>
+<p><b>参数:</b> cookieObject &lt;Object&gt; 一个 cooke 对象，其格式为 {name: your_cookie_name, value:your_cookie_value, domain: your_domain}
+</p><p><b>返回值:</b>  &lt;boolean&gt; 成功返回 true 反之为 false。
+</p><p><b>说明:</b> 此方法用来为指定的域设置 cookie 内容，如果 cookie 存在则改写其值，否则为新建 cookie 内容。
+</p><p><b>【注意】: 其中的 domain 的值需为 .domain ，如为 weibo.com 域设置值，其 domain 应写为 .weibo.com （注意前面的点字符）， 如此 key 没有赋值，则默认为当前访问的 url 值。</b> 
+</p><p><br>
+</p>
+<h4><span id="App.webview.removeCookie.28name_.3Cstring.3E.5B.2C_domain_.3Cstring.3E.5D.29"><b>App.webview.removeCookie(name &lt;string&gt;[, domain &lt;string&gt;])</b></span></h4>
+<p><b>参数:</b>
+</p><p>name &lt;string&gt;  cookie 字符串
+</p><p>domain &lt;string&gt; 非必选参数，默认为当前访问页面的 url。
+</p><p><b>返回值:</b> &lt;boolean&gt; 找到指定名字与 domian 的 cookie 并删除成功则返回 true，反之为 false。
+</p><p><b>【注意】: 其中的 domain 的值需为 .domain ，如为 weibo.com 域设置值，其 domain 应写为 .weibo.com （注意前面的点字符）</b>
+</p><p><br>
+</p>
+<h4><span id="App.webview.clearCookie.28.29"><b>App.webview.clearCookie()</b></span></h4>
+<p><b>返回值:</b> 清理成功返回 true，反之 false。
+</p><p><b>说明:</b> 此方法用于清除所有 domain 下的 cookie。 <b>请慎用</b>
+</p><p><br>
 </p>
 <h4><span id="App.webview.elementRects.28cssSelectorString_.3Cstring.3E.29"><b>App.webview.elementRects(cssSelectorString &lt;string&gt;)</b></span></h4>
 <p><b>参数:</b> cssSelectorString &lt;string&gt; 一个符合 CSS 规范的选择器字符串 （同浏览器的 querySelectorAll 参数值）
