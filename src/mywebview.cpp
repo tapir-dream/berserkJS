@@ -200,8 +200,9 @@ QScriptValue MyWebView::setCookiesFromUrl(QScriptValue cookie, QScriptValue url)
     }
 
     QUrl targetUrl = checkURL(url);
-    cookieJar->setCookiesFromUrl(QNetworkCookie::parseCookies(targetCookie.toUtf8()), targetUrl);
-    return QScriptValue(true);
+    targetCookie = cookie.toString().trimmed();
+    bool ok = cookieJar->setCookiesFromUrl(QNetworkCookie::parseCookies(targetCookie.toUtf8()), targetUrl);
+    return QScriptValue(ok);
 }
 
 /*
