@@ -1,35 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>berserkJS by tapir-dream</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="berserkJS : 基于 qt webkit，使用 JS 语法开发检测逻辑的 webkit netwrok request 检测工具。" />
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>berserkJS</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1 class="header">berserkJS</h1>
-        <p class="header">基于 qt webkit，使用 JS 语法开发检测逻辑的 webkit netwrok request 检测工具。</p>
 
-        <ul>
-          <li class="download"><a class="buttons" href="https://github.com/tapir-dream/berserkJS/zipball/master">Download ZIP</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/tapir-dream/berserkJS/tarball/master">Download TAR</a></li>
-          <li><a class="buttons github" href="https://github.com/tapir-dream/berserkJS">View On GitHub</a></li>
-        </ul>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/tapir-dream/berserkJS">View on GitHub</a>
 
-        <p class="header">This project is maintained by <a class="header name" href="https://github.com/tapir-dream">tapir-dream</a></p>
+          <h1 id="project_title">berserkJS</h1>
+          <h2 id="project_tagline">基于 qt webkit，使用 JS 语法开发检测逻辑的 webkit netwrok request 检测工具。</h2>
 
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/tapir-dream/berserkJS/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/tapir-dream/berserkJS/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
 
-      </header>
-      <section>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <div>
 <h1>
 <a name="%E5%89%8D%E7%AB%AF%E8%87%AA%E5%8A%A8%E5%8C%96%E7%9B%91%E6%B5%8B%E5%B7%A5%E5%85%B7berserkjs" class="anchor" href="#%E5%89%8D%E7%AB%AF%E8%87%AA%E5%8A%A8%E5%8C%96%E7%9B%91%E6%B5%8B%E5%B7%A5%E5%85%B7berserkjs"><span class="octicon octicon-link"></span></a>前端自动化监测工具（BerserkJS）</h1>
@@ -235,7 +236,7 @@
 </li>
 <li> --script 该参数表示要自动执行某路径下js文件。其规则是<b>先以参数值为实际路径</b>嗅探文件，如果存在则执行，否则执行<b>以berserkJS路径为基准</b>的脚本文件。<b>此js文件将自动以 uft-8 编码格式读取并执行；此参数存在时 --start 参数自动失效。</b>
 </li>
-<li> --cache 该参数表示要开启浏览器缓存保存到本地硬盘。<b>此参数还在开发中，稳定性未知，暂时不建议使用。</b>
+<li> --cache 该参数表示启用页面本地缓存以及 Offline Web Application Cache、Local storage。
 </li>
 </ol>
 <p><br></p>
@@ -2269,11 +2270,17 @@ App.webview.execScript(function(s) {
 <a name="-end-" class="anchor" href="#-end-"><span class="octicon octicon-link"></span></a> END </h2>
 </div>
       </section>
-      <footer>
-        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">berserkJS maintained by <a href="https://github.com/tapir-dream">tapir-dream</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		
+
+    
+
   </body>
 </html>
