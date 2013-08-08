@@ -14,7 +14,7 @@
 
 MyWebView* MainWindow::webView;
 MainWindow* MainWindow::window;
-
+using namespace WebCore;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -94,16 +94,34 @@ void MainWindow::initWebViewAttributes()
     // 使用系统代理
     QNetworkProxyFactory::setUseSystemConfiguration(true);
     QWebPage* page = webView->page();
-    QWebSettings* settings = webView->settings();
+    // QWebSettings* settings = webView->settings();
+
     // 如果开启了缓存设置，则设置本地缓存
     if (cmdParams->hasCache()) {
         QNetworkDiskCache *diskCache = new QNetworkDiskCache(webView);
         QString location = QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
         QDesktopServices::storageLocation(QDesktopServices::CacheLocation);
+        //ui->outputLogResults_txt->setPlainText(location);
+        diskCache->setCacheDirectory(location);
         page->networkAccessManager()->setCache(diskCache);
-        settings->setMaximumPagesInCache(100);
+
+        // 启用数据持久化
+        QWebSettings::enablePersistentStorage(location);
+        QWebSettings::setOfflineStorageDefaultQuota(1024*1024*1024);
+
+        // 不要为OfflineWebApplicationCache设置分片大小
+        // 其源码：
+        // WebCore::cacheStorage().empty();
+        // WebCore::cacheStorage().vacuumDatabaseFile();
+        // WebCore::cacheStorage().setMaximumSize(maximumSize);
+        // 看见，如果设置会先将初始的 cacheStorage 清空
+        // 这导致每次开启应用，设置后 cacheStorage 就是全新的了
+        // 上一次的 cacheStorage 将完全无效
+        //QWebSettings::setOfflineWebApplicationCacheQuota(maxCache);
+
+        QWebSettings::setMaximumPagesInCache(65535);
     } else {
-        settings->setMaximumPagesInCache(0);
+        QWebSettings::setMaximumPagesInCache(0);
     }
 }
 

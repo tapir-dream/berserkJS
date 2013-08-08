@@ -84,6 +84,6 @@ bool CommandParameters::hasVersion()
 
 bool CommandParameters::hasCache()
 {
-    return params.contains("help");
+    return params.contains("cache");
 }
 

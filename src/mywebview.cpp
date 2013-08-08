@@ -1016,7 +1016,7 @@ QScriptValue MyWebView::setMaxPagesInCache(QScriptValue num)
     if (count < 0) {
         count = 0;
     }
-    settings()->setMaximumPagesInCache(count);
+    QWebSettings::setMaximumPagesInCache(count);
     return true;
 }
 
