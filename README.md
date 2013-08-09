@@ -9,7 +9,8 @@
 
 
 #使用案例
-=========
+
+
 - **无界面浏览器测试**：在不依赖本地任何浏览器的情况下，运行测试框架，如 QUnit，Capybara, QUnit, Mocha, WebDriver, YUI Test, BusterJS, FuncUnit, Robot Framework 等。
 - **页面自动化**：可以无障碍访问和操作网页的标准 DOM API 以及页面所用 JS 变量、对象、属性等内容。
 - **屏幕捕获**：以编程方式获取网页全部或部分内容，可根据 Selector 截取指定 DOM 元素渲染情况；包括 CSS，SVG 和 Canvas。可将截取图片 base64 化，以便发送给远端服务器保存。
@@ -18,7 +19,7 @@
 
 
 #工具特性
-=========
+
 - **跨平台性**：基于 Qt 开发，可跨平台编译，部署。内置基于 QtWebkit 的浏览器环境。源码需在目标系统中编译后，可产生运行于 Windows / Linux / Mac 系统的可执行文件。
 - **功能性**：工具内置 webkit 浏览器内核，可响应浏览器内核事件回调、支持发送鼠标消息给浏览器、包装浏览器网络请求数据为JS数据格式、可与浏览器内JS做数据交互。
 - **开放性**：工具将主要操作均包装为JS语法与数据格式，采用JS语法包装，前端工程师可根据API组装出符合各自预期的检测功能。
@@ -27,7 +28,7 @@
 
 
 #特点差异
-=========
+
 与 PhantomJS 相比具有以下不同：
 - **API 简易**: 更直接的 API，如获取网络性能数据，仅需 3 行代码，而非 PhantomJS 的几十行，且信息量比 PhantomJS 丰富。
 - **API 标准化**： 常用 API 均采用 W3 规范标准命名，事件处理代码可重复绑定而不相互覆盖，可以无缝兼容 Wind.JS 等异步流程处理库来解决自动化时异步流程控制问题。
@@ -36,18 +37,49 @@
 
 
 #应用企业
-=========
+
 - **新浪微博**：已使用 berserkJS 构建前端性能监测数据分析平台，防止微博主要产品在不停开发迭代时，页面性能产生退化。
 - **Cisco**: 用于 WebEx 项目的自动化测试
 
 #API 页面
-=========
+
 - **详情请看文档页**：
 http://tapir-dream.github.com/berserkJS
 
 #介绍PPT
-=========
+
 - **下载地址**：http://t.cn/zWcKani
+
+
+#如何使用
+
+## Windows
+- 直接执行源码包下 build\release\berserkJS.exe
+
+## Mac
+1. 下载并安装 Qt libraries 4.8.5 for Mac
+2. 执行源码包下 build\mac_64\berserkJS
+
+>【官网地址】 http://qt-project.org/downloads 
+
+>【立即下载】 http://download.qt-project.org/official_releases/qt/4.8/4.8.5/qt-mac-opensource-4.8.5.dmg
+
+## Linux
+1. 下载 Qt libraries 4.8.5 for Linux/X11
+2. 确定系统内存在 X11 lib，否则请使用 yum 等工具安装依赖
+3. 如果需要在纯命令行下使用，请使用yum 等工具安装 Xvfb 来模拟 X11 环境。
+4. 解压 Qt libraries 4.8.5 for Linux/X11，并进入目录
+5. 执行 ./configure
+6. 执行 make
+7. 执行 install
+8. 进入 berserkjs 源码包的 src 目录
+9. 执行 qmark berserkjs.pro
+10. 执行 mark 后可编译出 berserkJS 的可执行文件
+11. 执行 berserkJS
+
+>【官网地址】 http://qt-project.org/downloads 
+
+>【立即下载】 http://download.qt-project.org/official_releases/qt/4.8/4.8.5/qt-everywhere-opensource-src-4.8.5.tar.gz
 
 #LICENCE
 - 采用 BSD 开源协议，细节请阅读项目中的 LICENSE.BSD 文件内容。

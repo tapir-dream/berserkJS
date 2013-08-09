@@ -120,6 +120,17 @@ pre {
 	font-family: Consolas, Courier, SimSun, monospace;
 }
 
+pre a:link, pre a:visited {
+  color: #ACE;
+  text-decoration: none;
+	outline: none;
+}
+
+pre a:hover, pre a:active {
+  color: #FF0;
+  outline: none;
+}
+
 #toc {
 	width: 480px;
   position: fixed;
@@ -145,167 +156,174 @@ pre {
 <ul>
 <li><a href="#.E6.BC.94.E7.A4.BA.E8.A7.86.E9.A2.91"><span>1.1</span> <span>演示视频</span></a></li>
 <li><a href="#.E5.B7.A5.E5.85.B7.E4.BB.8B.E7.BB.8D_PPT"><span>1.2</span> <span>工具介绍 PPT</span></a></li>
-<li><a href="#.E5.B7.A5.E5.85.B7.E8.AF.B4.E6.98.8E"><span>1.3</span> <span>工具说明</span></a></li>
-<li><a href="#.E5.B7.A5.E5.85.B7.E7.9A.84.E9.80.82.E7.94.A8.E5.9C.BA.E6.99.AF"><span>1.4</span> <span>工具的适用场景</span></a></li>
-<li><a href="#.E4.BD.9C.E8.80.85.E4.BF.A1.E6.81.AF"><span>1.5</span> <span>作者信息</span></a></li>
-<li><a href="#.E5.91.BD.E5.90.8D.E4.BB.8B.E7.BB.8D"><span>1.6</span> <span>命名介绍</span></a></li>
-<li><a href="#.E5.BC.80.E5.8F.91.E7.8E.AF.E5.A2.83"><span>1.7</span> <span>开发环境</span></a></li>
-<li><a href="#.E8.8E.B7.E5.8F.96.E6.BA.90.E7.A0.81"><span>1.8</span> <span>获取源码</span></a></li>
-<li><a href="#.E5.B7.A5.E5.85.B7.E4.B8.BB.E8.A6.81.E6.96.87.E4.BB.B6"><span>1.9</span> <span>工具主要文件</span></a></li>
-<li><a href="#.E5.91.BD.E4.BB.A4.E8.A1.8C.E5.8F.82.E6.95.B0"><span>1.10</span> <span>命令行参数</span></a></li>
-<li><a href="#.E9.A1.B9.E7.9B.AE.E6.A0.B8.E5.BF.83.E6.BA.90.E6.96.87.E4.BB.B6.E6.A6.82.E8.A6.81"><span>1.11</span> <span>项目核心源文件概要</span></a></li>
-<li><a href="#.E5.86.85.E9.83.A8.E5.8C.85.E8.A3.85.E5.87.BA.E7.9A.84JS.E6.96.B9.E6.B3.95.E8.A1.A8"><span>1.12</span> <span>内部包装出的JS方法表</span></a></li>
-<li><a href="#.E5.A4.96.E9.83.A8JS.E6.A8.A1.E5.9D.97"><span>1.13</span> <span>外部JS模块</span></a></li>
-<li><a href="#.E6.A8.A1.E5.9D.97.E6.96.87.E4.BB.B6.E4.B9.A6.E5.86.99.E8.A7.84.E5.88.99"><span>1.14</span> <span>模块文件书写规则</span></a></li>
-<li><a href="#.E9.85.8D.E7.BD.AE.E7.AE.A1.E7.90.86.E6.96.87.E4.BB.B6"><span>1.15</span> <span>配置管理文件</span></a></li>
-<li><a href="#.E5.88.9D.E5.A7.8B.E5.8C.96.E9.85.8D.E7.BD.AE.E4.BB.A5.E5.8F.8A.E5.BC.80.E5.A7.8B.E8.BF.90.E8.A1.8C"><span>1.16</span> <span>初始化配置以及开始运行</span></a></li>
-<li><a href="#API_.E6.96.87.E6.A1.A3"><span>1.17</span> <span>API 文档</span></a>
+<li><a href="#.E5.A6.82.E4.BD.95.E4.BD.BF.E7.94.A8"><span>1.3</span> <span>如何使用</span></a>
 <ul>
-<li><a href="#.E5.85.A8.E5.B1.80.E7.8B.AC.E7.AB.8B.E5.87.BD.E6.95.B0"><span>1.17.1</span> <span>全局独立函数</span></a>
-<ul>
-<li><a href="#print.28arg1.2C_.5Barg2.2C_arg3.2C_arg4.2C_....29"><span>1.17.1.1</span> <span>print(arg1, [arg2, arg3, arg4, ...)</span></a></li>
+<li><a href="#Windows"><span>1.3.1</span> <span>Windows</span></a></li>
+<li><a href="#Mac"><span>1.3.2</span> <span>Mac</span></a></li>
+<li><a href="#Linux"><span>1.3.3</span> <span>Linux</span></a></li>
 </ul>
 </li>
-<li><a href="#App_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0.E4.B8.8E.E5.B1.9E.E6.80.A7"><span>1.17.2</span> <span>App 命名空间下函数与属性</span></a>
+<li><a href="#.E5.B7.A5.E5.85.B7.E8.AF.B4.E6.98.8E"><span>1.4</span> <span>工具说明</span></a></li>
+<li><a href="#.E5.B7.A5.E5.85.B7.E7.9A.84.E9.80.82.E7.94.A8.E5.9C.BA.E6.99.AF"><span>1.5</span> <span>工具的适用场景</span></a></li>
+<li><a href="#.E4.BD.9C.E8.80.85.E4.BF.A1.E6.81.AF"><span>1.6</span> <span>作者信息</span></a></li>
+<li><a href="#.E5.91.BD.E5.90.8D.E4.BB.8B.E7.BB.8D"><span>1.7</span> <span>命名介绍</span></a></li>
+<li><a href="#.E5.BC.80.E5.8F.91.E7.8E.AF.E5.A2.83"><span>1.8</span> <span>开发环境</span></a></li>
+<li><a href="#.E8.8E.B7.E5.8F.96.E6.BA.90.E7.A0.81"><span>1.9</span> <span>获取源码</span></a></li>
+<li><a href="#.E5.B7.A5.E5.85.B7.E4.B8.BB.E8.A6.81.E6.96.87.E4.BB.B6"><span>1.10</span> <span>工具主要文件</span></a></li>
+<li><a href="#.E5.91.BD.E4.BB.A4.E8.A1.8C.E5.8F.82.E6.95.B0"><span>1.11</span> <span>命令行参数</span></a></li>
+<li><a href="#.E9.A1.B9.E7.9B.AE.E6.A0.B8.E5.BF.83.E6.BA.90.E6.96.87.E4.BB.B6.E6.A6.82.E8.A6.81"><span>1.12</span> <span>项目核心源文件概要</span></a></li>
+<li><a href="#.E5.86.85.E9.83.A8.E5.8C.85.E8.A3.85.E5.87.BA.E7.9A.84JS.E6.96.B9.E6.B3.95.E8.A1.A8"><span>1.13</span> <span>内部包装出的JS方法表</span></a></li>
+<li><a href="#.E5.A4.96.E9.83.A8JS.E6.A8.A1.E5.9D.97"><span>1.14</span> <span>外部JS模块</span></a></li>
+<li><a href="#.E6.A8.A1.E5.9D.97.E6.96.87.E4.BB.B6.E4.B9.A6.E5.86.99.E8.A7.84.E5.88.99"><span>1.15</span> <span>模块文件书写规则</span></a></li>
+<li><a href="#.E9.85.8D.E7.BD.AE.E7.AE.A1.E7.90.86.E6.96.87.E4.BB.B6"><span>1.16</span> <span>配置管理文件</span></a></li>
+<li><a href="#.E5.88.9D.E5.A7.8B.E5.8C.96.E9.85.8D.E7.BD.AE.E4.BB.A5.E5.8F.8A.E5.BC.80.E5.A7.8B.E8.BF.90.E8.A1.8C"><span>1.17</span> <span>初始化配置以及开始运行</span></a></li>
+<li><a href="#API_.E6.96.87.E6.A1.A3"><span>1.18</span> <span>API 文档</span></a>
 <ul>
-<li><a href="#App.netListener.28enabled_.3CBoolean.3E.29"><span>1.17.2.1</span> <span>App.netListener(enabled &lt;Boolean&gt;)</span></a></li>
-<li><a href="#App.networkData.28.29"><span>1.17.2.2</span> <span>App.networkData()</span></a></li>
-<li><a href="#App.loadScript.28path_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.2.3</span> <span>App.loadScript(path &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
-<li><a href="#App.readFile.28path_.3Cstring.3E.5B.2C_charset_.3Cstring.3E.5D_.29"><span>1.17.2.4</span> <span>App.readFile(path &lt;string&gt;[, charset &lt;string&gt;] )</span></a></li>
-<li><a href="#App.writeFile.28path_.3Cstring.3E.2C_content_.3Cstring.3E.5B.2C_charset_.3Cstring.3E.2C_appendMode.3Cboolean.3E.5D_.29"><span>1.17.2.5</span> <span>App.writeFile(path &lt;string&gt;, content &lt;string&gt;[, charset &lt;string&gt;, appendMode&lt;boolean&gt;] )</span></a></li>
-<li><a href="#App.base64FromFile.28file_.3Cstring.3E.29"><span>1.17.2.6</span> <span>App.base64FromFile(file &lt;string&gt;)</span></a></li>
-<li><a href="#App.dataURIFromImage.28image_.3Cstring.3E.29"><span>1.17.2.7</span> <span>App.dataURIFromImage(image &lt;string&gt;)</span></a></li>
-<li><a href="#App.httpRequest.28method_.3Cstring.3E.2C_url_.3Cstring.3E_.5B.2C_data_.3Cstring.3E.2C_charset_.3Cstring.3E.5D.29"><span>1.17.2.8</span> <span>App.httpRequest(method &lt;string&gt;,  url &lt;string&gt; [, data &lt;string&gt;, charset &lt;string&gt;])</span></a></li>
-<li><a href="#App.process.28program_.3Cstring.3E.2C_.5Bargs_.3CArray.3E.2C_timeout_.3Cnumber.3E.2C_debug_.3Cfunction.3E.5D.29"><span>1.17.2.9</span> <span>App.process(program &lt;string&gt;, [args &lt;Array&gt;, timeout &lt;number&gt;, debug &lt;function&gt;])</span></a></li>
-<li><a href="#App.watchFile.28flie_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.2.10</span> <span>App.watchFile(flie &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
-<li><a href="#App.unWatcher.28file_.3Cstring.3E_.7C_callbackHandle_.3Cfunction.3E.29"><span>1.17.2.11</span> <span>App.unWatcher(file &lt;string&gt; | callbackHandle &lt;function&gt;)</span></a></li>
-<li><a href="#App.watchedFiles.28.29"><span>1.17.2.12</span> <span>App.watchedFiles()</span></a></li>
-<li><a href="#App.watcherClose.28.29"><span>1.17.2.13</span> <span>App.watcherClose()</span></a></li>
-<li><a href="#App.cpu.28.29"><span>1.17.2.14</span> <span>App.cpu()</span></a></li>
-<li><a href="#App.memory.28.29"><span>1.17.2.15</span> <span>App.memory()</span></a></li>
-<li><a href="#App.setTimeout.28callback_.3Cfunction.3E.2C_timeout_.3Cnumber.3E.29"><span>1.17.2.16</span> <span>App.setTimeout(callback &lt;function&gt;, timeout &lt;number&gt;)</span></a></li>
-<li><a href="#App.clearTimeout.28timeId_.3Cnumber.3E.29"><span>1.17.2.17</span> <span>App.clearTimeout(timeId &lt;number&gt;)</span></a></li>
-<li><a href="#App.setInterval.28callback_.3Cfunction.3E.2C_interval_.3Cnumber.3E.29"><span>1.17.2.18</span> <span>App.setInterval(callback &lt;function&gt;, interval &lt;number&gt;)</span></a></li>
-<li><a href="#App.clearInterval.28timeId_.3Cnumber.3E.29"><span>1.17.2.19</span> <span>App.clearInterval(timeId &lt;number&gt;)</span></a></li>
-<li><a href="#App.alert.28message_.3Cnumber.3E.7C.3Cstring.3E.7C.3Cboolean.3E.7C.3Cfunction.3E.7C.3CArray.3E.7C.3CObject.3E.29"><span>1.17.2.20</span> <span>App.alert(message &lt;number&gt;|&lt;string&gt;|&lt;boolean&gt;|&lt;function&gt;|&lt;Array&gt;|&lt;Object&gt;)</span></a></li>
-<li><a href="#App.hide.28.29"><span>1.17.2.21</span> <span>App.hide()</span></a></li>
-<li><a href="#App.show.28.29"><span>1.17.2.22</span> <span>App.show()</span></a></li>
-<li><a href="#App.about.28.29"><span>1.17.2.23</span> <span>App.about()</span></a></li>
-<li><a href="#App.close.28.29"><span>1.17.2.24</span> <span>App.close()</span></a></li>
-<li><a href="#App.isOnline.28.29"><span>1.17.2.25</span> <span>App.isOnline()</span></a></li>
-<li><a href="#App.path_.5Breadonly.5D"><span>1.17.2.26</span> <span>App.path [readonly]</span></a></li>
-<li><a href="#App.file_.5Breadonly.5D"><span>1.17.2.27</span> <span>App.file [readonly]</span></a></li>
-<li><a href="#App.args_.5Breadonly.5D"><span>1.17.2.28</span> <span>App.args [readonly]</span></a></li>
-</ul>
-</li>
-<li class="toclevel-3 tocsection-49"><a href="#App.selector_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"><span>1.17.3</span> <span>App.selector 命名空间下函数</span></a>
+<li><a href="#.E5.85.A8.E5.B1.80.E7.8B.AC.E7.AB.8B.E5.87.BD.E6.95.B0"><span>1.18.1</span> <span>全局独立函数</span></a>
 <ul>
-<li><a href="#App.selector.img.28.29"><span>1.17.3.1</span> <span>App.selector.img()</span></a></li>
-<li><a href="#App.selector.png.28.29"><span>1.17.3.2</span> <span>App.selector.png()</span></a></li>
-<li><a href="#App.selector.gif.28.29"><span>1.17.3.3</span> <span>App.selector.gif()</span></a></li>
-<li><a href="#App.selector.ico.28.29"><span>1.17.3.4</span> <span>App.selector.ico()</span></a></li>
-<li><a href="#App.selector.jpg.28.29"><span>1.17.3.5</span> <span>App.selector.jpg()</span></a></li>
-<li><a href="#App.selector.svg.28.29"><span>1.17.3.6</span> <span>App.selector.svg()</span></a></li>
-<li><a href="#App.selector.doc.28.29"><span>1.17.3.7</span> <span>App.selector.doc()</span></a></li>
-<li><a href="#App.selector.css.28.29"><span>1.17.3.8</span> <span>App.selector.css()</span></a></li>
-<li><a href="#App.selector.js.28.29"><span>1.17.3.9</span> <span>App.selector.js()</span></a></li>
-<li><a href="#App.selector.cookie.28.29"><span>1.17.3.10</span> <span>App.selector.cookie()</span></a></li>
-<li><a href="#App.selector.nonegzip.28.29"><span>1.17.3.11</span> <span>App.selector.nonegzip()</span></a></li>
-<li><a href="#App.selector.nonecache.28.29"><span>1.17.3.12</span> <span>App.selector.nonecache()</span></a></li>
-<li><a href="#App.selector.nonecdn.28.29"><span>1.17.3.13</span> <span>App.selector.nonecdn()</span></a></li>
-<li><a href="#App.selector.totaltimeout.28duration_.3Cnumber.3E.29"><span>1.17.3.14</span> <span>App.selector.totaltimeout(duration &lt;number&gt;)</span></a></li>
-<li><a href="#App.selector.waittimeout.28duration_.3Cnumber.3E.29"><span>1.17.3.15</span> <span>App.selector.waittimeout(duration &lt;number&gt;)</span></a></li>
-<li><a href="#App.selector.downloadtimeout.28duration_.3Cnumber.3E.29"><span>1.17.3.16</span> <span>App.selector.downloadtimeout(duration &lt;number&gt;)</span></a></li>
-<li><a href="#App.selector.dnstimeout.28duration_.3Cnumber.3E.29"><span>1.17.3.17</span> <span>App.selector.dnstimeout(duration &lt;number&gt;)</span></a></li>
-<li><a href="#App.selector.sizeout.28size_.3Cnumber.3E.29"><span>1.17.3.18</span> <span>App.selector.sizeout(size &lt;number&gt;)</span></a></li>
-<li><a href="#App.selector.http200.28.29"><span>1.17.3.19</span> <span>App.selector.http200()</span></a></li>
-<li><a href="#App.selector.http301.28.29"><span>1.17.3.20</span> <span>App.selector.http301()</span></a></li>
-<li><a href="#App.selector.http302.28.29"><span>1.17.3.21</span> <span>App.selector.http302()</span></a></li>
-<li><a href="#App.selector.http304.28.29"><span>1.17.3.22</span> <span>App.selector.http304()</span></a></li>
-<li><a href="#App.selector.http404.28.29"><span>1.17.3.23</span> <span>App.selector.http404()</span></a></li>
-<li><a href="#App.selector.fromcdn.28.29"><span>1.17.3.24</span> <span>App.selector.fromcdn()</span></a></li>
-<li><a href="#App.selector.get.28.29"><span>1.17.3.25</span> <span>App.selector.get()</span></a></li>
-<li><a href="#App.selector.clear.28.29"><span>1.17.3.26</span> <span>App.selector.clear()</span></a></li>
+<li><a href="#print.28arg1.2C_.5Barg2.2C_arg3.2C_arg4.2C_....29"><span>1.18.1.1</span> <span>print(arg1, [arg2, arg3, arg4, ...)</span></a></li>
 </ul>
 </li>
-<li class="toclevel-3 tocsection-76"><a href="#App.webview.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"><span>1.17.4</span> <span>App.webview命名空间下函数</span></a>
+<li><a href="#App_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0.E4.B8.8E.E5.B1.9E.E6.80.A7"><span>1.18.2</span> <span>App 命名空间下函数与属性</span></a>
 <ul>
-<li><a href="#App.webview.setUserAgent.28userAgent_.3Cstring.3E.29"><span>1.17.4.1</span> <span>App.webview.setUserAgent(userAgent &lt;string&gt;)</span></a></li>
-<li><a href="#App.webview.userAgent.28.29"><span>1.17.4.2</span> <span>App.webview.userAgent()</span></a></li>
-<li><a href="#App.webview.defaultUserAgent.28.29"><span>1.17.4.3</span> <span>App.webview.defaultUserAgent()</span></a></li>
-<li><a href="#App.webview.getUrl.28.29"><span>1.17.4.4</span> <span>App.webview.getUrl()</span></a></li>
-<li><a href="#App.webview.open.28url_.3Cstring.3E.29"><span>1.17.4.5</span> <span>App.webview.open(url &lt;string&gt;)</span></a></li>
-<li><a href="#App.webview.setProxy.28host_.3Cstring.3E.5B.2C_type_.3Cstring.3E.2C_userName_.3Cstring.3E.2C_password_.3Cstring.3E.29"><span>1.17.4.6</span> <span>App.webview.setProxy(host &lt;string&gt;[, type &lt;string&gt;, userName &lt;string&gt;, password &lt;string&gt;)</span></a></li>
-<li><a href="#App.webview.clearProxy.28.29"><span>1.17.4.7</span> <span>App.webview.clearProxy()</span></a></li>
-<li><a href="#App.webview.useSystemProxy.28.5Bindex_.3Cnumber.3E.5D.29"><span>1.17.4.8</span> <span>App.webview.useSystemProxy([index &lt;number&gt;])</span></a></li>
-<li><a href="#App.webview.viewport.28.29"><span>1.17.4.9</span> <span>App.webview.viewport()</span></a></li>
-<li><a href="#App.webview.setViewport.28size_.3CObject.3E.29"><span>1.17.4.10</span> <span>App.webview.setViewport(size &lt;Object&gt;)</span></a></li>
-<li><a href="#App.webview.contentRect.28.29"><span>1.17.4.11</span> <span>App.webview.contentRect()</span></a></li>
-<li><a href="#App.webview.saveImage.28path_.3Cstring.3E.5B.2C_imgType_.3Cstring.3E.2C_quality_.3Cnumber.3E.2C_rect_.3CObject.3E.5D.29"><span>1.17.4.12</span> <span>App.webview.saveImage(path &lt;string&gt;[, imgType &lt;string&gt;, quality &lt;number&gt;, rect &lt;Object&gt;])</span></a></li>
-<li><a href="#App.webview.dataURIFromRect.28.5Brect_.3CObject.3E.2C_imgType_.3Cstring.3E.2C_quality_.3Cnumber.3E.5D.29"><span>1.17.4.13</span> <span>App.webview.dataURIFromRect([rect &lt;Object&gt;, imgType &lt;string&gt;, quality &lt;number&gt;])</span></a></li>
-<li><a href="#App.webview.savePdf.28path_.3Cstring.3E.29"><span>1.17.4.14</span> <span>App.webview.savePdf(path &lt;string&gt;)</span></a></li>
-<li><a href="#App.webview.setTimeout.28callback_.3Cfunction.3E.2C_timeout_.3Cnumber.3E.29"><span>1.17.4.15</span> <span>App.webview.setTimeout(callback &lt;function&gt;, timeout &lt;number&gt;)</span></a></li>
-<li><a href="#App.webview.clearTimeout.28timeId_.3Cnumber.3E.29"><span>1.17.4.16</span> <span>App.webview.clearTimeout(timeId &lt;number&gt;)</span></a></li>
-<li><a href="#App.webview.setInterval.28callback_.3Cfunction.3E.2C_interval_.3Cnumber.3E.29"><span>1.17.4.17</span> <span>App.webview.setInterval(callback &lt;function&gt;, interval &lt;number&gt;)</span></a></li>
-<li><a href="#App.webview.clearInterval.28timeId_.3Cnumber.3E.29"><span>1.17.4.18</span> <span>App.webview.clearInterval(timeId &lt;number&gt;)</span></a></li>
-<li><a href="#App.webview.netListener.28enabled_.3Cboolean.3E.29"><span>1.17.4.19</span> <span>App.webview.netListener(enabled &lt;boolean&gt;)</span></a></li>
-<li><a href="#App.webview.cookiesFromUrl.28.5Burl_.3Cstring.3E.5D.29"><span>1.17.4.20</span> <span>App.webview.cookiesFromUrl([url &lt;string&gt;])</span></a></li>
-<li><a href="#App.webview.setCookiesFromUrl.28cookies_.3Cstring.3E.5B.2C_url_.3Cstring.3E.5D.29"><span>1.17.4.21</span> <span>App.webview.setCookiesFromUrl(cookies &lt;string&gt;[, url &lt;string&gt;])</span></a></li>
-<li><a href="#App.webview.cookieObject.28.5Burl_.3Cstring.3E.5D.29"><span>1.17.4.22</span> <span>App.webview.cookieObject([url &lt;string&gt;])</span></a></li>
-<li><a href="#App.webview.setCookie.28cookieObject_.3CObject.3E.29"><span>1.17.4.23</span> <span>App.webview.setCookie(cookieObject &lt;Object&gt;)</span></a></li>
-<li><a href="#App.webview.removeCookie.28name_.3Cstring.3E.5B.2C_domain_.3Cstring.3E.5D.29"><span>1.17.4.24</span> <span>App.webview.removeCookie(name &lt;string&gt;[, domain &lt;string&gt;])</span></a></li>
-<li><a href="#App.webview.clearCookie.28.29"><span class="tocnumber">1.17.4.25</span> <span>App.webview.clearCookie()</span></a></li>
-<li><a href="#App.webview.elementRects.28cssSelectorString_.3Cstring.3E.29"><span>1.17.4.26</span> <span>App.webview.elementRects(cssSelectorString &lt;string&gt;)</span></a></li>
-<li><a href="#App.webview.sendMouseEvent.28argPoint_.3CObject.3E.5B.2C_argEvt_.3Cstring.3E.2C_argKey_.3Cstring.3E.5D.29"><span>1.17.4.27</span> <span>App.webview.sendMouseEvent(argPoint &lt;Object&gt;[, argEvt &lt;string&gt;, argKey &lt;string&gt;])</span></a></li>
-<li><a href="#App.webview.addEventListener.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.4.28</span> <span>App.webview.addEventListener(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
-<li><a href="#App.webview.on.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.4.29</span> <span>App.webview.on(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
-<li><a href="#App.webview.removeEventListener.28eventName_.3Cstring.3E.2C_callbackHandle_.3Cfunction.3E.29"><span>1.17.4.30</span> <span>App.webview.removeEventListener(eventName &lt;string&gt;, callbackHandle &lt;function&gt;)</span></a></li>
-<li><a href="#App.webview.off.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.4.31</span> <span>App.webview.off(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
-<li><a href="#App.webview.once.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.4.32</span> <span>App.webview.once(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
-<li><a href="#App.webview.removeAllEventListener.28.5BeventName_.3Cstring.3E.5D.29"><span>1.17.4.33</span> <span>App.webview.removeAllEventListener([eventName &lt;string&gt;])</span></a></li>
-<li><a href="#App.webview.offAll.28.5BeventName_.3Cstring.3E.5D.29"><span>1.17.4.34</span> <span>App.webview.offAll([eventName &lt;string&gt;])</span></a></li>
-<li><a href="#App.webview.setDetectionRects.28rects_.3CArray.3E.5B.2C_sameRate_.3Cnumber.3E.5D.29"><span>1.17.4.35</span> <span>App.webview.setDetectionRects(rects &lt;Array&gt;[, sameRate &lt;number&gt;])</span></a></li>
-<li><a href="#App.webview.clearDetectionRects.28.29"><span>1.17.4.36</span> <span>App.webview.clearDetectionRects()</span></a></li>
-<li><a href="#App.webview.hasDetectionRects.28.29"><span>1.17.4.37</span> <span>App.webview.hasDetectionRects()</span></a></li>
-<li><a href="#App.webview.execScript.28sandbox_.3Cfunction.3E_.5B.2C_argObject_.3CObject.3E.7C.3CArray.3E.7C.3Cstring.3E.7C.3Cnumber.3E.5D.29"><span>1.17.4.38</span> <span>App.webview.execScript(sandbox &lt;function&gt; [, argObject &lt;Object&gt;|&lt;Array&gt;|&lt;string&gt;|&lt;number&gt;])</span></a></li>
-<li><a href="#App.webview.setPageZoom.28zoom_.3Cnumber.3E.29"><span>1.17.4.39</span> <span>App.webview.setPageZoom(zoom &lt;number&gt;)</span></a></li>
-<li><a href="#App.webview.pageZoom.28.29"><span>1.17.4.40</span> <span>App.webview.pageZoom()</span></a></li>
-<li><a href="#App.webview.setPageScroll.28point_.3CObject.3E.29"><span>1.17.4.41</span> <span>App.webview.setPageScroll(point &lt;Object&gt;)</span></a></li>
-<li><a href="#App.webview.pageScroll.28.29"><span>1.17.4.42</span> <span>App.webview.pageScroll()</span></a></li>
-<li><a href="#App.webview.setPageHTML.28html_.3Cstring.3E.29"><span>1.17.4.43</span> <span>App.webview.setPageHTML(html &lt;string&gt;)</span></a></li>
-<li><a href="#App.webview.pageHTML.28.29"><span>1.17.4.44</span> <span>App.webview.pageHTML()</span></a></li>
-<li><a href="#App.webview.pageText.28.29"><span>1.17.4.45</span> <span>App.webview.pageText()</span></a></li>
-<li><a href="#App.webview.setUploadFile.28cssSelectorString_.3Cstring.3E.2C_path_.3Cstring.3E.5B.2C_index_.3Cnumber.3E.5D.29"><span>1.17.4.46</span> <span>App.webview.setUploadFile(cssSelectorString &lt;string&gt;, path &lt;string&gt;[, index &lt;number&gt;])</span></a></li>
-<li><a href="#App.webview.setMaxPagesInCache.28num.3Cnumber.3E.29"><span>1.17.4.47</span> <span>App.webview.setMaxPagesInCache(num&lt;number&gt;)</span></a></li>
-<li><a href="#App.webview.maxPagesInCache.28.29"><span>1.17.4.48</span> <span>App.webview.maxPagesInCache()</span></a></li>
-<li><a href="#App.webview.clearAllPagesInCache.28.29"><span>1.17.4.49</span> <span>App.webview.clearAllPagesInCache()</span></a></li>
+<li><a href="#App.netListener.28enabled_.3CBoolean.3E.29"><span>1.18.2.1</span> <span>App.netListener(enabled &lt;Boolean&gt;)</span></a></li>
+<li><a href="#App.networkData.28.29"><span>1.18.2.2</span> <span>App.networkData()</span></a></li>
+<li><a href="#App.loadScript.28path_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.18.2.3</span> <span>App.loadScript(path &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.readFile.28path_.3Cstring.3E.5B.2C_charset_.3Cstring.3E.5D_.29"><span>1.18.2.4</span> <span>App.readFile(path &lt;string&gt;[, charset &lt;string&gt;] )</span></a></li>
+<li><a href="#App.writeFile.28path_.3Cstring.3E.2C_content_.3Cstring.3E.5B.2C_charset_.3Cstring.3E.2C_appendMode.3Cboolean.3E.5D_.29"><span>1.18.2.5</span> <span>App.writeFile(path &lt;string&gt;, content &lt;string&gt;[, charset &lt;string&gt;, appendMode&lt;boolean&gt;] )</span></a></li>
+<li><a href="#App.base64FromFile.28file_.3Cstring.3E.29"><span>1.18.2.6</span> <span>App.base64FromFile(file &lt;string&gt;)</span></a></li>
+<li><a href="#App.dataURIFromImage.28image_.3Cstring.3E.29"><span>1.18.2.7</span> <span>App.dataURIFromImage(image &lt;string&gt;)</span></a></li>
+<li><a href="#App.httpRequest.28method_.3Cstring.3E.2C_url_.3Cstring.3E_.5B.2C_data_.3Cstring.3E.2C_charset_.3Cstring.3E.5D.29"><span>1.18.2.8</span> <span>App.httpRequest(method &lt;string&gt;,  url &lt;string&gt; [, data &lt;string&gt;, charset &lt;string&gt;])</span></a></li>
+<li><a href="#App.process.28program_.3Cstring.3E.2C_.5Bargs_.3CArray.3E.2C_timeout_.3Cnumber.3E.2C_debug_.3Cfunction.3E.5D.29"><span>1.18.2.9</span> <span>App.process(program &lt;string&gt;, [args &lt;Array&gt;, timeout &lt;number&gt;, debug &lt;function&gt;])</span></a></li>
+<li><a href="#App.watchFile.28flie_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.18.2.10</span> <span>App.watchFile(flie &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.unWatcher.28file_.3Cstring.3E_.7C_callbackHandle_.3Cfunction.3E.29"><span>1.18.2.11</span> <span>App.unWatcher(file &lt;string&gt; | callbackHandle &lt;function&gt;)</span></a></li>
+<li><a href="#App.watchedFiles.28.29"><span>1.18.2.12</span> <span>App.watchedFiles()</span></a></li>
+<li><a href="#App.watcherClose.28.29"><span>1.18.2.13</span> <span>App.watcherClose()</span></a></li>
+<li><a href="#App.cpu.28.29"><span>1.18.2.14</span> <span>App.cpu()</span></a></li>
+<li><a href="#App.memory.28.29"><span>1.18.2.15</span> <span>App.memory()</span></a></li>
+<li><a href="#App.setTimeout.28callback_.3Cfunction.3E.2C_timeout_.3Cnumber.3E.29"><span>1.18.2.16</span> <span>App.setTimeout(callback &lt;function&gt;, timeout &lt;number&gt;)</span></a></li>
+<li><a href="#App.clearTimeout.28timeId_.3Cnumber.3E.29"><span>1.18.2.17</span> <span>App.clearTimeout(timeId &lt;number&gt;)</span></a></li>
+<li><a href="#App.setInterval.28callback_.3Cfunction.3E.2C_interval_.3Cnumber.3E.29"><span>1.18.2.18</span> <span>App.setInterval(callback &lt;function&gt;, interval &lt;number&gt;)</span></a></li>
+<li><a href="#App.clearInterval.28timeId_.3Cnumber.3E.29"><span>1.18.2.19</span> <span>App.clearInterval(timeId &lt;number&gt;)</span></a></li>
+<li><a href="#App.alert.28message_.3Cnumber.3E.7C.3Cstring.3E.7C.3Cboolean.3E.7C.3Cfunction.3E.7C.3CArray.3E.7C.3CObject.3E.29"><span>1.18.2.20</span> <span>App.alert(message &lt;number&gt;|&lt;string&gt;|&lt;boolean&gt;|&lt;function&gt;|&lt;Array&gt;|&lt;Object&gt;)</span></a></li>
+<li><a href="#App.hide.28.29"><span>1.18.2.21</span> <span>App.hide()</span></a></li>
+<li><a href="#App.show.28.29"><span>1.18.2.22</span> <span>App.show()</span></a></li>
+<li><a href="#App.about.28.29"><span>1.18.2.23</span> <span>App.about()</span></a></li>
+<li><a href="#App.close.28.29"><span>1.18.2.24</span> <span>App.close()</span></a></li>
+<li><a href="#App.isOnline.28.29"><span>1.18.2.25</span> <span>App.isOnline()</span></a></li>
+<li><a href="#App.path_.5Breadonly.5D"><span>1.18.2.26</span> <span>App.path [readonly]</span></a></li>
+<li><a href="#App.file_.5Breadonly.5D"><span>1.18.2.27</span> <span>App.file [readonly]</span></a></li>
+<li><a href="#App.args_.5Breadonly.5D"><span>1.18.2.28</span> <span>App.args [readonly]</span></a></li>
 </ul>
 </li>
-<li><a href="#console_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0.E4.B8.8E.E5.B1.9E.E6.80.A7"><span>1.17.5</span> <span>console 命名空间下函数与属性</span></a>
+<li><a href="#App.selector_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"><span>1.18.3</span> <span>App.selector 命名空间下函数</span></a>
 <ul>
-<li><a href="#console_.log.28arg1.2C_.5Barg2.2C_arg3.2C_arg4.2C_....5D.29"><span>1.17.5.1</span> <span>console .log(arg1, [arg2, arg3, arg4, ...])</span></a></li>
-<li><a href="#console_.dir.28arg.29"><span>1.17.5.2</span> <span>console .dir(arg)</span></a></li>
-<li><a href="#console_.time.28flag_.3Cstring.3E.29"><span>1.17.5.3</span> <span>console .time(flag &lt;string&gt;)</span></a></li>
-<li><a href="#console_.timeEnd.28flag_.3Cstring.3E.29"><span>1.17.5.4</span> <span>console .timeEnd(flag &lt;string&gt;)</span></a></li>
+<li><a href="#App.selector.img.28.29"><span>1.18.3.1</span> <span>App.selector.img()</span></a></li>
+<li><a href="#App.selector.png.28.29"><span>1.18.3.2</span> <span>App.selector.png()</span></a></li>
+<li><a href="#App.selector.gif.28.29"><span>1.18.3.3</span> <span>App.selector.gif()</span></a></li>
+<li><a href="#App.selector.ico.28.29"><span>1.18.3.4</span> <span>App.selector.ico()</span></a></li>
+<li><a href="#App.selector.jpg.28.29"><span>1.18.3.5</span> <span>App.selector.jpg()</span></a></li>
+<li><a href="#App.selector.svg.28.29"><span>1.18.3.6</span> <span>App.selector.svg()</span></a></li>
+<li><a href="#App.selector.doc.28.29"><span>1.18.3.7</span> <span>App.selector.doc()</span></a></li>
+<li><a href="#App.selector.css.28.29"><span>1.18.3.8</span> <span>App.selector.css()</span></a></li>
+<li><a href="#App.selector.js.28.29"><span>1.18.3.9</span> <span>App.selector.js()</span></a></li>
+<li><a href="#App.selector.cookie.28.29"><span>1.18.3.10</span> <span>App.selector.cookie()</span></a></li>
+<li><a href="#App.selector.nonegzip.28.29"><span>1.18.3.11</span> <span>App.selector.nonegzip()</span></a></li>
+<li><a href="#App.selector.nonecache.28.29"><span>1.18.3.12</span> <span>App.selector.nonecache()</span></a></li>
+<li><a href="#App.selector.nonecdn.28.29"><span>1.18.3.13</span> <span>App.selector.nonecdn()</span></a></li>
+<li><a href="#App.selector.totaltimeout.28duration_.3Cnumber.3E.29"><span>1.18.3.14</span> <span>App.selector.totaltimeout(duration &lt;number&gt;)</span></a></li>
+<li><a href="#App.selector.waittimeout.28duration_.3Cnumber.3E.29"><span>1.18.3.15</span> <span>App.selector.waittimeout(duration &lt;number&gt;)</span></a></li>
+<li><a href="#App.selector.downloadtimeout.28duration_.3Cnumber.3E.29"><span>1.18.3.16</span> <span>App.selector.downloadtimeout(duration &lt;number&gt;)</span></a></li>
+<li><a href="#App.selector.dnstimeout.28duration_.3Cnumber.3E.29"><span>1.18.3.17</span> <span>App.selector.dnstimeout(duration &lt;number&gt;)</span></a></li>
+<li><a href="#App.selector.sizeout.28size_.3Cnumber.3E.29"><span>1.18.3.18</span> <span>App.selector.sizeout(size &lt;number&gt;)</span></a></li>
+<li><a href="#App.selector.http200.28.29"><span>1.18.3.19</span> <span>App.selector.http200()</span></a></li>
+<li><a href="#App.selector.http301.28.29"><span>1.18.3.20</span> <span>App.selector.http301()</span></a></li>
+<li><a href="#App.selector.http302.28.29"><span>1.18.3.21</span> <span>App.selector.http302()</span></a></li>
+<li><a href="#App.selector.http304.28.29"><span>1.18.3.22</span> <span>App.selector.http304()</span></a></li>
+<li><a href="#App.selector.http404.28.29"><span>1.18.3.23</span> <span>App.selector.http404()</span></a></li>
+<li><a href="#App.selector.fromcdn.28.29"><span>1.18.3.24</span> <span>App.selector.fromcdn()</span></a></li>
+<li><a href="#App.selector.get.28.29"><span>1.18.3.25</span> <span>App.selector.get()</span></a></li>
+<li><a href="#App.selector.clear.28.29"><span>1.18.3.26</span> <span>App.selector.clear()</span></a></li>
 </ul>
 </li>
-<li><a href="#pageExtension_.E9.A1.B5.E9.9D.A2.E6.89.A9.E5.B1.95.E5.AF.B9.E8.B1.A1"><span>1.17.6</span> <span>__pageExtension 页面扩展对象</span></a>
+<li><a href="#App.webview.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"><span>1.18.4</span> <span>App.webview命名空间下函数</span></a>
 <ul>
-<li><a href="#pageExtension.postMessage.28.5Bwparam_.3CObject.7Cstring.7Cnumber.3E.2C_lparam_.3CObject.7Cstring.7Cnumber.3E.5D.29"><span>1.17.6.1</span> <span>__pageExtension.postMessage([wparam &lt;Object|string|number&gt;, lparam &lt;Object|string|number&gt;])</span></a></li>
-<li><a href="#pageExtension.cpu.28.29"><span>1.17.6.2</span> <span>__pageExtension.cpu()</span></a></li>
-<li><a href="#pageExtension.memory.28.29"><span>1.17.6.3</span> <span>__pageExtension.memory()</span></a></li>
+<li><a href="#App.webview.setUserAgent.28userAgent_.3Cstring.3E.29"><span>1.18.4.1</span> <span>App.webview.setUserAgent(userAgent &lt;string&gt;)</span></a></li>
+<li><a href="#App.webview.userAgent.28.29"><span>1.18.4.2</span> <span>App.webview.userAgent()</span></a></li>
+<li><a href="#App.webview.defaultUserAgent.28.29"><span>1.18.4.3</span> <span>App.webview.defaultUserAgent()</span></a></li>
+<li><a href="#App.webview.getUrl.28.29"><span>1.18.4.4</span> <span>App.webview.getUrl()</span></a></li>
+<li><a href="#App.webview.open.28url_.3Cstring.3E.29"><span>1.18.4.5</span> <span>App.webview.open(url &lt;string&gt;)</span></a></li>
+<li><a href="#App.webview.setProxy.28host_.3Cstring.3E.5B.2C_type_.3Cstring.3E.2C_userName_.3Cstring.3E.2C_password_.3Cstring.3E.29"><span>1.18.4.6</span> <span>App.webview.setProxy(host &lt;string&gt;[, type &lt;string&gt;, userName &lt;string&gt;, password &lt;string&gt;)</span></a></li>
+<li><a href="#App.webview.clearProxy.28.29"><span>1.18.4.7</span> <span>App.webview.clearProxy()</span></a></li>
+<li><a href="#App.webview.useSystemProxy.28.5Bindex_.3Cnumber.3E.5D.29"><span>1.18.4.8</span> <span>App.webview.useSystemProxy([index &lt;number&gt;])</span></a></li>
+<li><a href="#App.webview.viewport.28.29"><span>1.18.4.9</span> <span>App.webview.viewport()</span></a></li>
+<li><a href="#App.webview.setViewport.28size_.3CObject.3E.29"><span>1.18.4.10</span> <span>App.webview.setViewport(size &lt;Object&gt;)</span></a></li>
+<li><a href="#App.webview.contentRect.28.29"><span>1.18.4.11</span> <span>App.webview.contentRect()</span></a></li>
+<li><a href="#App.webview.saveImage.28path_.3Cstring.3E.5B.2C_imgType_.3Cstring.3E.2C_quality_.3Cnumber.3E.2C_rect_.3CObject.3E.5D.29"><span>1.18.4.12</span> <span>App.webview.saveImage(path &lt;string&gt;[, imgType &lt;string&gt;, quality &lt;number&gt;, rect &lt;Object&gt;])</span></a></li>
+<li><a href="#App.webview.dataURIFromRect.28.5Brect_.3CObject.3E.2C_imgType_.3Cstring.3E.2C_quality_.3Cnumber.3E.5D.29"><span>1.18.4.13</span> <span>App.webview.dataURIFromRect([rect &lt;Object&gt;, imgType &lt;string&gt;, quality &lt;number&gt;])</span></a></li>
+<li><a href="#App.webview.savePdf.28path_.3Cstring.3E.29"><span>1.18.4.14</span> <span>App.webview.savePdf(path &lt;string&gt;)</span></a></li>
+<li><a href="#App.webview.setTimeout.28callback_.3Cfunction.3E.2C_timeout_.3Cnumber.3E.29"><span>1.18.4.15</span> <span>App.webview.setTimeout(callback &lt;function&gt;, timeout &lt;number&gt;)</span></a></li>
+<li><a href="#App.webview.clearTimeout.28timeId_.3Cnumber.3E.29"><span>1.18.4.16</span> <span>App.webview.clearTimeout(timeId &lt;number&gt;)</span></a></li>
+<li><a href="#App.webview.setInterval.28callback_.3Cfunction.3E.2C_interval_.3Cnumber.3E.29"><span>1.18.4.17</span> <span>App.webview.setInterval(callback &lt;function&gt;, interval &lt;number&gt;)</span></a></li>
+<li><a href="#App.webview.clearInterval.28timeId_.3Cnumber.3E.29"><span>1.18.4.18</span> <span>App.webview.clearInterval(timeId &lt;number&gt;)</span></a></li>
+<li><a href="#App.webview.netListener.28enabled_.3Cboolean.3E.29"><span>1.18.4.19</span> <span>App.webview.netListener(enabled &lt;boolean&gt;)</span></a></li>
+<li><a href="#App.webview.cookiesFromUrl.28.5Burl_.3Cstring.3E.5D.29"><span>1.18.4.20</span> <span>App.webview.cookiesFromUrl([url &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.setCookiesFromUrl.28cookies_.3Cstring.3E.5B.2C_url_.3Cstring.3E.5D.29"><span>1.18.4.21</span> <span>App.webview.setCookiesFromUrl(cookies &lt;string&gt;[, url &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.cookieObject.28.5Burl_.3Cstring.3E.5D.29"><span>1.18.4.22</span> <span>App.webview.cookieObject([url &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.setCookie.28cookieObject_.3CObject.3E.29"><span>1.18.4.23</span> <span>App.webview.setCookie(cookieObject &lt;Object&gt;)</span></a></li>
+<li><a href="#App.webview.removeCookie.28name_.3Cstring.3E.5B.2C_domain_.3Cstring.3E.5D.29"><span>1.18.4.24</span> <span>App.webview.removeCookie(name &lt;string&gt;[, domain &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.clearCookie.28.29"><span>1.18.4.25</span> <span>App.webview.clearCookie()</span></a></li>
+<li><a href="#App.webview.elementRects.28cssSelectorString_.3Cstring.3E.29"><span>1.18.4.26</span> <span>App.webview.elementRects(cssSelectorString &lt;string&gt;)</span></a></li>
+<li><a href="#App.webview.sendMouseEvent.28argPoint_.3CObject.3E.5B.2C_argEvt_.3Cstring.3E.2C_argKey_.3Cstring.3E.5D.29"><span>1.18.4.27</span> <span>App.webview.sendMouseEvent(argPoint &lt;Object&gt;[, argEvt &lt;string&gt;, argKey &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.addEventListener.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.18.4.28</span> <span>App.webview.addEventListener(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.on.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.18.4.29</span> <span>App.webview.on(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.removeEventListener.28eventName_.3Cstring.3E.2C_callbackHandle_.3Cfunction.3E.29"><span>1.18.4.30</span> <span>App.webview.removeEventListener(eventName &lt;string&gt;, callbackHandle &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.off.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.18.4.31</span> <span>App.webview.off(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.once.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.18.4.32</span> <span>App.webview.once(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.removeAllEventListener.28.5BeventName_.3Cstring.3E.5D.29"><span>1.18.4.33</span> <span>App.webview.removeAllEventListener([eventName &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.offAll.28.5BeventName_.3Cstring.3E.5D.29"><span>1.18.4.34</span> <span>App.webview.offAll([eventName &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.setDetectionRects.28rects_.3CArray.3E.5B.2C_sameRate_.3Cnumber.3E.5D.29"><span>1.18.4.35</span> <span>App.webview.setDetectionRects(rects &lt;Array&gt;[, sameRate &lt;number&gt;])</span></a></li>
+<li><a href="#App.webview.clearDetectionRects.28.29"><span>1.18.4.36</span> <span>App.webview.clearDetectionRects()</span></a></li>
+<li><a href="#App.webview.hasDetectionRects.28.29"><span>1.18.4.37</span> <span>App.webview.hasDetectionRects()</span></a></li>
+<li><a href="#App.webview.execScript.28sandbox_.3Cfunction.3E_.5B.2C_argObject_.3CObject.3E.7C.3CArray.3E.7C.3Cstring.3E.7C.3Cnumber.3E.5D.29"><span>1.18.4.38</span> <span>App.webview.execScript(sandbox &lt;function&gt; [, argObject &lt;Object&gt;|&lt;Array&gt;|&lt;string&gt;|&lt;number&gt;])</span></a></li>
+<li><a href="#App.webview.setPageZoom.28zoom_.3Cnumber.3E.29"><span>1.18.4.39</span> <span>App.webview.setPageZoom(zoom &lt;number&gt;)</span></a></li>
+<li><a href="#App.webview.pageZoom.28.29"><span>1.18.4.40</span> <span>App.webview.pageZoom()</span></a></li>
+<li><a href="#App.webview.setPageScroll.28point_.3CObject.3E.29"><span>1.18.4.41</span> <span>App.webview.setPageScroll(point &lt;Object&gt;)</span></a></li>
+<li><a href="#App.webview.pageScroll.28.29"><span>1.18.4.42</span> <span>App.webview.pageScroll()</span></a></li>
+<li><a href="#App.webview.setPageHTML.28html_.3Cstring.3E.29"><span>1.18.4.43</span> <span>App.webview.setPageHTML(html &lt;string&gt;)</span></a></li>
+<li><a href="#App.webview.pageHTML.28.29"><span>1.18.4.44</span> <span>App.webview.pageHTML()</span></a></li>
+<li><a href="#App.webview.pageText.28.29"><span>1.18.4.45</span> <span>App.webview.pageText()</span></a></li>
+<li><a href="#App.webview.setUploadFile.28cssSelectorString_.3Cstring.3E.2C_path_.3Cstring.3E.5B.2C_index_.3Cnumber.3E.5D.29"><span>1.18.4.46</span> <span>App.webview.setUploadFile(cssSelectorString &lt;string&gt;, path &lt;string&gt;[, index &lt;number&gt;])</span></a></li>
+<li><a href="#App.webview.setMaxPagesInCache.28num_.3Cnumber.3E.29"><span>1.18.4.47</span> <span>App.webview.setMaxPagesInCache(num &lt;number&gt;)</span></a></li>
+<li><a href="#App.webview.maxPagesInCache.28.29"><span>1.18.4.48</span> <span>App.webview.maxPagesInCache()</span></a></li>
+<li><a href="#App.webview.clearAllPagesInCache.28.29"><span>1.18.4.49</span> <span>App.webview.clearAllPagesInCache()</span></a></li>
 </ul>
 </li>
-<li class="toclevel-3 tocsection-120"><a href="#App.helper_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"><span>1.17.7</span> <span>App.helper 命名空间下函数</span></a>
+<li><a href="#console_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0.E4.B8.8E.E5.B1.9E.E6.80.A7"><span>1.18.5</span> <span>console 命名空间下函数与属性</span></a>
 <ul>
-<li><a href="#App.helper.supplant.28template.3Cstring.3E.2C_data_.3CObject.3E.29"><span>1.17.7.1</span> <span>App.helper.supplant(template&lt;string&gt;, data &lt;Object&gt;)</span></a></li>
-<li><a href="#App.helper.require.28moduleName.3Cstring.3E.5B.2C_args_.3CArray.3E.5D.29"><span>1.17.7.2</span> <span>App.helper.require(moduleName&lt;string&gt;[, args &lt;Array&gt;])</span></a></li>
-<li><a href="#App.helper.log.28msg_.3Cstring.3E.7C.3Cnumber.3E.29"><span>1.17.7.3</span> <span>App.helper.log(msg &lt;string&gt;|&lt;number&gt;)</span></a></li>
+<li><a href="#console_.log.28arg1.2C_.5Barg2.2C_arg3.2C_arg4.2C_....5D.29"><span>1.18.5.1</span> <span>console .log(arg1, [arg2, arg3, arg4, ...])</span></a></li>
+<li><a href="#console_.dir.28arg.29"><span>1.18.5.2</span> <span>console .dir(arg)</span></a></li>
+<li><a href="#console_.time.28flag_.3Cstring.3E.29"><span>1.18.5.3</span> <span>console .time(flag &lt;string&gt;)</span></a></li>
+<li><a href="#console_.timeEnd.28flag_.3Cstring.3E.29"><span>1.18.5.4</span> <span>console .timeEnd(flag &lt;string&gt;)</span></a></li>
+</ul>
+</li>
+<li><a href="#pageExtension_.E9.A1.B5.E9.9D.A2.E6.89.A9.E5.B1.95.E5.AF.B9.E8.B1.A1"><span>1.18.6</span> <span>__pageExtension 页面扩展对象</span></a>
+<ul>
+<li><a href="#pageExtension.postMessage.28.5Bwparam_.3CObject.7Cstring.7Cnumber.3E.2C_lparam_.3CObject.7Cstring.7Cnumber.3E.5D.29"><span>1.18.6.1</span> <span>__pageExtension.postMessage([wparam &lt;Object|string|number&gt;, lparam &lt;Object|string|number&gt;])</span></a></li>
+<li><a href="#pageExtension.cpu.28.29"><span>1.18.6.2</span> <span>__pageExtension.cpu()</span></a></li>
+<li><a href="#pageExtension.memory.28.29"><span>1.18.6.3</span> <span>__pageExtension.memory()</span></a></li>
+</ul>
+</li>
+<li><a href="#App.helper_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"><span>1.18.7</span> <span>App.helper 命名空间下函数</span></a>
+<ul>
+<li><a href="#App.helper.supplant.28template.3Cstring.3E.2C_data_.3CObject.3E.29"><span>1.18.7.1</span> <span>App.helper.supplant(template&lt;string&gt;, data &lt;Object&gt;)</span></a></li>
+<li><a href="#App.helper.require.28moduleName.3Cstring.3E.5B.2C_args_.3CArray.3E.5D.29"><span>1.18.7.2</span> <span>App.helper.require(moduleName&lt;string&gt;[, args &lt;Array&gt;])</span></a></li>
+<li><a href="#App.helper.log.28msg_.3Cstring.3E.7C.3Cnumber.3E.29"><span>1.18.7.3</span> <span>App.helper.log(msg &lt;string&gt;|&lt;number&gt;)</span></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toclevel-2 tocsection-124"><a href="#END"><span>1.18</span> <span>END</span></a></li>
+<li><a href="#END"><span>1.19</span> <span>END</span></a></li>
 </ul>
 </li>
 </ul>
@@ -319,6 +337,35 @@ pre {
 <h2><span id=".E5.B7.A5.E5.85.B7.E4.BB.8B.E7.BB.8D_PPT"> 工具介绍 PPT  </span></h2>
 <p> D2 前端论坛中使用的 PPT : <a href="http://t.cn/zQI8hrz">【点此下载】</a>  <a href="http://wenku.it168.com/d_000434396.shtml">【在线看1(墙内)】</a>  <a href="https://speakerdeck.com/d2forum/berserkjs">【在线看2(墙外)】</a>
 </p>
+<p><br />
+</p>
+<h2><span id=".E5.A6.82.E4.BD.95.E4.BD.BF.E7.94.A8"> 如何使用 </span></h2>
+<h3><span id="Windows"> Windows </span></h3>
+<p>直接执行源码包下 build\release\berserkJS.exe
+</p>
+<h3><span id="Mac"> Mac </span></h3>
+<ol><li> 下载并安装 Qt libraries 4.8.5 for Mac
+</li><li> 执行源码包下 build\mac_64\berserkJS
+</li></ol>
+<pre>【官网地址】 <a href="http://qt-project.org/downloads" class="external free" rel="nofollow" target="_blank">http://qt-project.org/downloads</a> 
+【立即下载】 <a href="http://download.qt-project.org/official_releases/qt/4.8/4.8.5/qt-mac-opensource-4.8.5.dmg" class="external free" rel="nofollow" target="_blank">http://download.qt-project.org/official_releases/qt/4.8/4.8.5/qt-mac-opensource-4.8.5.dmg</a>
+</pre>
+<h3><span id="Linux"> Linux </span></h3>
+<ol><li> 下载 Qt libraries 4.8.5 for Linux/X11
+</li><li> 确定系统内存在 X11 lib，否则请使用 yum 等工具安装依赖
+</li><li> 如果需要在纯命令行下使用，请使用yum 等工具安装 Xvfb 来模拟 X11 环境。
+</li><li> 解压 Qt libraries 4.8.5 for Linux/X11，并进入目录
+</li><li> 执行 ./configure
+</li><li> 执行 make
+</li><li> 执行 install
+</li><li> 进入 berserkjs 源码包的 src 目录
+</li><li> 执行 qmark berserkjs.pro
+</li><li> 执行 mark 后可编译出 berserkJS 的可执行文件
+</li><li> 执行 berserkJS
+</li></ol>
+<pre>【官网地址】 <a href="http://qt-project.org/downloads" class="external free" rel="nofollow" target="_blank">http://qt-project.org/downloads</a> 
+【立即下载】 <a href="http://download.qt-project.org/official_releases/qt/4.8/4.8.5/qt-everywhere-opensource-src-4.8.5.tar.gz" class="external free" rel="nofollow" target="_blank">http://download.qt-project.org/official_releases/qt/4.8/4.8.5/qt-everywhere-opensource-src-4.8.5.tar.gz</a>
+</pre>
 <p><br />
 </p>
 <h2><span id=".E5.B7.A5.E5.85.B7.E8.AF.B4.E6.98.8E"> 工具说明 </span></h2>
