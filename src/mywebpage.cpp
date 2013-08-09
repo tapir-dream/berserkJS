@@ -16,8 +16,8 @@ MyWebPage::MyWebPage()
     settings()->setAttribute(QWebSettings::OfflineWebApplicationCacheEnabled, true);
     settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
 
-    // 暂时不开启它，功能待测。
-    // settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, true);
+    // 开启，功能待测。
+    settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, true);
     // 启用后台渲染将导致操作渲染错误
     //page->settings()->setAttribute(QWebSettings::TiledBackingStoreEnabled, true);
 }

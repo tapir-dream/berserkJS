@@ -189,9 +189,9 @@ void MainWindow::initAppEngine()
     // 做 webview 相关方法的别名
     webViewNamespace.setProperty("on",
         webViewNamespace.property("addEventListener"));
-    webViewNamespace.setProperty("un",
+    webViewNamespace.setProperty("off",
         webViewNamespace.property("removeEventListener"));
-    webViewNamespace.setProperty("unAll",
+    webViewNamespace.setProperty("offAll",
         webViewNamespace.property("removeAllEventListener"));
 
     // 做APP下方法的便捷引用

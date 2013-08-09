@@ -3,6 +3,7 @@
 #include "scriptsignalfactory.h"
 #include "consts.h"
 #include <QNetworkAccessManager>
+#include <QNetworkConfigurationManager>
 #include <QNetworkReply>
 
 // 静态非int常量不可以在类体内初始化……
@@ -454,82 +455,82 @@ QScriptValue ScriptBinding::wrapperSelector()
     QScriptValue nativeMathod;
 
     nativeMathod = engine->newFunction(ScriptBinding::selectorClear);
-    obj.setProperty("clear", nativeMathod);
+    obj.setProperty("clear", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedIMG);
-    obj.setProperty("img", nativeMathod);
+    obj.setProperty("img", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedPNG);
-    obj.setProperty("png", nativeMathod);
+    obj.setProperty("png", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedGIF);
-    obj.setProperty("gif", nativeMathod);
+    obj.setProperty("gif", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedICO);
-    obj.setProperty("ico", nativeMathod);
+    obj.setProperty("ico", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedJPG);
-    obj.setProperty("jpg", nativeMathod);
+    obj.setProperty("jpg", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedSVG);
-    obj.setProperty("svg", nativeMathod);
+    obj.setProperty("svg", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedDoc);
-    obj.setProperty("doc", nativeMathod);
+    obj.setProperty("doc", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedCSS);
-    obj.setProperty("css", nativeMathod);
+    obj.setProperty("css", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedJS);
-    obj.setProperty("js", nativeMathod);
+    obj.setProperty("js", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedTotalTimeout);
-    obj.setProperty("totaltimeout", nativeMathod);
+    obj.setProperty("totaltimeout", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedWaitTimeout);
-    obj.setProperty("waittimeout", nativeMathod);
+    obj.setProperty("waittimeout", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedDownloadTimeout);
-    obj.setProperty("downloadtimeout", nativeMathod);
+    obj.setProperty("downloadtimeout", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedDNSLookupTimeout);
-    obj.setProperty("dnstimeout", nativeMathod);
+    obj.setProperty("dnstimeout", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedNoneGZip);
-    obj.setProperty("nonegzip", nativeMathod);
+    obj.setProperty("nonegzip", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedNoneCache);
-    obj.setProperty("nonecache", nativeMathod);
+    obj.setProperty("nonecache", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedNoneCDN);
-    obj.setProperty("nonecdn", nativeMathod);
+    obj.setProperty("nonecdn", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedCookie);
-    obj.setProperty("cookie", nativeMathod);
+    obj.setProperty("cookie", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedFromCDN);
-    obj.setProperty("fromcdn", nativeMathod);
+    obj.setProperty("fromcdn", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedSizeOut);
-    obj.setProperty("sizeout", nativeMathod);
+    obj.setProperty("sizeout", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedHttp200);
-    obj.setProperty("http200", nativeMathod);
+    obj.setProperty("http200", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedHttp301);
-    obj.setProperty("http301", nativeMathod);
+    obj.setProperty("http301", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedHttp302);
-    obj.setProperty("http302", nativeMathod);
+    obj.setProperty("http302", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedHttp304);
-    obj.setProperty("http304", nativeMathod);
+    obj.setProperty("http304", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::selectedHttp404);
-    obj.setProperty("http404", nativeMathod);
+    obj.setProperty("http404", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::getSelectedData);
-    obj.setProperty("get", nativeMathod);
+    obj.setProperty("get", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
     return obj;
 }
 
@@ -539,56 +540,59 @@ void ScriptBinding::initNativeMethodToRootSpace()
     QScriptValue nativeMathod;
 
     // selector 空间下所有函数统一包装
-    getRootSpace().setProperty("selector", wrapperSelector());
+    getRootSpace().setProperty("selector", wrapperSelector(), QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     // 其他内置函数包装
-    nativeMathod = engine->newFunction(ScriptBinding::getNetworkData);
-    getRootSpace().setProperty("networkData", nativeMathod);
+    nativeMathod = engine->newFunction(ScriptBinding::isOnline);
+    getRootSpace().setProperty("isOnline", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
+
+    nativeMathod = engine->newFunction(ScriptBinding::getNetworkData, QScriptValue::ReadOnly | QScriptValue::Undeletable);
+    getRootSpace().setProperty("networkData", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::httpRequest);
-    getRootSpace().setProperty("httpRequest", nativeMathod);
+    getRootSpace().setProperty("httpRequest", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::process);
-    getRootSpace().setProperty("process", nativeMathod);
+    getRootSpace().setProperty("process", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::loadScript);
-    getRootSpace().setProperty("loadScript", nativeMathod);
+    getRootSpace().setProperty("loadScript", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::readFile);
-    getRootSpace().setProperty("readFile", nativeMathod);
+    getRootSpace().setProperty("readFile", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::writeFile);
-    getRootSpace().setProperty("writeFile", nativeMathod);
+    getRootSpace().setProperty("writeFile", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::base64FromFile);
-    getRootSpace().setProperty("base64FromFile", nativeMathod);
+    getRootSpace().setProperty("base64FromFile", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::dataURIFromImage);
-    getRootSpace().setProperty("dataURIFromImage", nativeMathod);
+    getRootSpace().setProperty("dataURIFromImage", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::cpu);
-    getRootSpace().setProperty("cpu", nativeMathod);
+    getRootSpace().setProperty("cpu", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::memory);
-    getRootSpace().setProperty("memory", nativeMathod);
+    getRootSpace().setProperty("memory", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::alert);
-    getRootSpace().setProperty("alert", nativeMathod);
+    getRootSpace().setProperty("alert", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::about);
-    getRootSpace().setProperty("about", nativeMathod);
+    getRootSpace().setProperty("about", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::watchedFiles);
-    getRootSpace().setProperty("watchedFiles", nativeMathod);
+    getRootSpace().setProperty("watchedFiles", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::unWatcher);
-    getRootSpace().setProperty("unWatcher", nativeMathod);
+    getRootSpace().setProperty("unWatcher", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::watchFile);
-    getRootSpace().setProperty("watchFile", nativeMathod);
+    getRootSpace().setProperty("watchFile", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::watcherClose);
-    getRootSpace().setProperty("watcherClose", nativeMathod);
+    getRootSpace().setProperty("watcherClose", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 }
 
 // 由js实现的扩展放置在此命名空间下
@@ -735,12 +739,6 @@ QScriptValue ScriptBinding::selectorClear(QScriptContext *context, QScriptEngine
 
 QScriptValue ScriptBinding::getSelectedData(QScriptContext *context, QScriptEngine *interpreter)
 {
-    /*
-    App.selector.clear();
-    App.selector.http200();
-    var arr = App.selector.get();
-    arr.length;
-    */
     QMap<QString, MonitorData*> map = ScriptBinding::selector->get();
     QScriptValue data = wrapperHttpDataArray(map, interpreter);
     ScriptBinding::selector->clear();
@@ -1200,6 +1198,11 @@ QScriptValue ScriptBinding::about(QScriptContext *context, QScriptEngine *interp
     QMessageBox messageBox;
     messageBox.about(NULL, "About", about.join(""));
     return QScriptValue::UndefinedValue;
+}
+
+QScriptValue ScriptBinding::isOnline(QScriptContext *context, QScriptEngine *interpreter) {
+    QNetworkConfigurationManager net;
+    return QScriptValue(net.isOnline());
 }
 
 

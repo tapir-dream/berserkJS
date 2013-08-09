@@ -50,6 +50,7 @@
  *        |              + [function] show
  *        |              + [function] alert
  *        |              + [function] about
+ *        |              + [function] isOnline
  *        |              + [string] path
  *        |              + [string] file
  *        |              + [array] args
@@ -115,10 +116,10 @@
  *        |                                                            < - DOMContentLoaded
  *        |                              + [function] on <- addEventListener alias
  *        |                              + [function] removeEventListener
- *        |                              + [function] un <- removeEventListener alias
+ *        |                              + [function] off <- removeEventListener alias
  *        |                              + [function] once
  *        |                              + [function] removeAllEventListener
- *        |                              + [function] unAll <- removeAllEventListener alias
+ *        |                              + [function] offAll <- removeAllEventListener alias
  *        |                              + [function] elementRects
  *        |                              + [function] saveImage  <-  * JPG/JPEG/PNG/BMP/PPM/TIFF;
  *        |                              + [function] dataURIFromRect
@@ -248,6 +249,7 @@ public:
     static QString readFile(QString fileName, QTextCodec* charset);
 
     /* 包裹方法需要是静态的  */
+    static QScriptValue isOnline(QScriptContext *context, QScriptEngine *interpreter);
 
     /* console 相关方法实现 */
     static QMap<QString, qint64> timeMap;

@@ -192,9 +192,10 @@ pre {
 <li><a href="#App.show.28.29"><span>1.17.2.22</span> <span>App.show()</span></a></li>
 <li><a href="#App.about.28.29"><span>1.17.2.23</span> <span>App.about()</span></a></li>
 <li><a href="#App.close.28.29"><span>1.17.2.24</span> <span>App.close()</span></a></li>
-<li><a href="#App.path_.5Breadonly.5D"><span>1.17.2.25</span> <span>App.path [readonly]</span></a></li>
-<li><a href="#App.file_.5Breadonly.5D"><span>1.17.2.26</span> <span>App.file [readonly]</span></a></li>
-<li><a href="#App.args_.5Breadonly.5D"><span>1.17.2.27</span> <span>App.args [readonly]</span></a></li>
+<li><a href="#App.isOnline.28.29"><span>1.17.2.25</span> <span>App.isOnline()</span></a></li>
+<li><a href="#App.path_.5Breadonly.5D"><span>1.17.2.26</span> <span>App.path [readonly]</span></a></li>
+<li><a href="#App.file_.5Breadonly.5D"><span>1.17.2.27</span> <span>App.file [readonly]</span></a></li>
+<li><a href="#App.args_.5Breadonly.5D"><span>1.17.2.28</span> <span>App.args [readonly]</span></a></li>
 </ul>
 </li>
 <li class="toclevel-3 tocsection-49"><a href="#App.selector_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"><span>1.17.3</span> <span>App.selector 命名空间下函数</span></a>
@@ -259,10 +260,10 @@ pre {
 <li><a href="#App.webview.addEventListener.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.4.28</span> <span>App.webview.addEventListener(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
 <li><a href="#App.webview.on.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.4.29</span> <span>App.webview.on(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
 <li><a href="#App.webview.removeEventListener.28eventName_.3Cstring.3E.2C_callbackHandle_.3Cfunction.3E.29"><span>1.17.4.30</span> <span>App.webview.removeEventListener(eventName &lt;string&gt;, callbackHandle &lt;function&gt;)</span></a></li>
-<li><a href="#App.webview.un.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.4.31</span> <span>App.webview.un(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
+<li><a href="#App.webview.off.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.4.31</span> <span>App.webview.off(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
 <li><a href="#App.webview.once.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><span>1.17.4.32</span> <span>App.webview.once(eventName &lt;string&gt;, callback &lt;function&gt;)</span></a></li>
 <li><a href="#App.webview.removeAllEventListener.28.5BeventName_.3Cstring.3E.5D.29"><span>1.17.4.33</span> <span>App.webview.removeAllEventListener([eventName &lt;string&gt;])</span></a></li>
-<li><a href="#App.webview.unAll.28.5BeventName_.3Cstring.3E.5D.29"><span>1.17.4.34</span> <span>App.webview.unAll([eventName &lt;string&gt;])</span></a></li>
+<li><a href="#App.webview.offAll.28.5BeventName_.3Cstring.3E.5D.29"><span>1.17.4.34</span> <span>App.webview.offAll([eventName &lt;string&gt;])</span></a></li>
 <li><a href="#App.webview.setDetectionRects.28rects_.3CArray.3E.5B.2C_sameRate_.3Cnumber.3E.5D.29"><span>1.17.4.35</span> <span>App.webview.setDetectionRects(rects &lt;Array&gt;[, sameRate &lt;number&gt;])</span></a></li>
 <li><a href="#App.webview.clearDetectionRects.28.29"><span>1.17.4.36</span> <span>App.webview.clearDetectionRects()</span></a></li>
 <li><a href="#App.webview.hasDetectionRects.28.29"><span>1.17.4.37</span> <span>App.webview.hasDetectionRects()</span></a></li>
@@ -487,6 +488,7 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
        |              + [function] memory
        |              + [function] alert
        |              + [function] about
+       |              + [function] isOnline
        |              + [string] path
        |              + [string] file
        |              + [string] args
@@ -554,10 +556,10 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
        |              |                                     &lt; - DOMContentLoaded
        |              |                  + [function] on &lt;- addEventListener alias
        |              |                  + [function] removeEventListener
-       |              |                  + [function] un &lt;- removeEventListener alias
+       |              |                  + [function] off &lt;- removeEventListener alias
        |              |                  + [function] once
        |              |                  + [function] removeAllEventListener
-       |              |                  + [function] unAll &lt;- removeAllEventListener alias
+       |              |                  + [function] offAll &lt;- removeAllEventListener alias
        |              |                  + [function] elementRects
        |              |                  + [function] saveImage  &lt;-  *支持 JPG/JPEG/PNG/BMP/PPM/TIFF 格式保存;
        |              |                  + [function] savePdf
@@ -1006,6 +1008,12 @@ alert(a);
 <p><b>参数:</b> 无
 </p><p><b>返回值:</b> 无
 </p><p><b>说明:</b>该方法用来关闭工具自身进程。
+</p><p><br />
+</p>
+<h4><span id="App.isOnline.28.29"><b>App.isOnline()</b></span></h4>
+<p><b>参数:</b> 无
+</p><p><b>返回值:</b> true 或 false
+<p><b>说明:</b> 在线为 true 否则为 false， <b>不要过于信任此方法</b>。
 </p><p><br />
 </p>
 <h4><span id="App.path_.5Breadonly.5D"><b>App.path [readonly]</b></span></h4>
@@ -1558,7 +1566,7 @@ callback &lt;function&gt; 事件触发时的回调函数。
 </p><p><b>说明:</b> 此函数用来移除指定事件的某条执行回调。
 </p><p><br />
 </p>
-<h4><span id="App.webview.un.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><b>App.webview.un(eventName &lt;string&gt;, callback &lt;function&gt;)</b></span></h4>
+<h4><span id="App.webview.off.28eventName_.3Cstring.3E.2C_callback_.3Cfunction.3E.29"><b>App.webview.un(eventName &lt;string&gt;, callback &lt;function&gt;)</b></span></h4>
 <p><b>说明:</b> removeEventListener 方法的别名方法。
 </p><p><br />
 </p>
@@ -1573,7 +1581,7 @@ callback &lt;function&gt; 事件触发时的回调函数。
 </p><p><b>说明:</b> 此函数用来移除指定事件的<b>全部</b>执行回调。如果 eventName 值为空字符串或者未传值，则会<b>移除所有事件的全部</b>执行回调。
 </p><p><br />
 </p>
-<h4><span id="App.webview.unAll.28.5BeventName_.3Cstring.3E.5D.29"><b>App.webview.unAll([eventName &lt;string&gt;])</b></span></h4>
+<h4><span id="App.webview.offAll.28.5BeventName_.3Cstring.3E.5D.29"><b>App.webview.unAll([eventName &lt;string&gt;])</b></span></h4>
 <p><b>说明:</b> removeAllEventListener 方法的别名方法。
 </p><p><br />
 </p>
