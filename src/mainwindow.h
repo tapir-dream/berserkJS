@@ -10,8 +10,9 @@
 #include <QtScript>
 #include <QStringList>
 #include <QWebInspector>
-#include <QtUiTools/QtUiTools>
-#include <QtUiTools/QUiLoader>
+// mac 下编译有问题，不要了……
+//#include <QtUiTools/QtUiTools>
+//#include <QtUiTools/QUiLoader>
 #include <QKeyEvent>
 
 #include "networkaccessmanager.h"

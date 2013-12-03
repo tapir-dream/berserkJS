@@ -409,7 +409,7 @@ QScriptValue ScriptBinding::wrapperHttpDataArray(QMap<QString, MonitorData*> map
                 "'; return img.width + '|' + img.height;})();"
              ).toString().split("|");
              obj.setProperty("width", QScriptValue(rect.at(0).toInt()), QScriptValue::ReadOnly);
-             obj.setProperty("height", QScriptValue(rect.at(0).toInt()), QScriptValue::ReadOnly);
+             obj.setProperty("height", QScriptValue(rect.at(1).toInt()), QScriptValue::ReadOnly);
         } else {
             obj.setProperty("width", QScriptValue(-1), QScriptValue::ReadOnly);
             obj.setProperty("height", QScriptValue(-1), QScriptValue::ReadOnly);
