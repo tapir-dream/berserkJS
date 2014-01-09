@@ -87,6 +87,10 @@ void MainWindow::initLayout()
     webView = new MyWebView();
     webView->setGeometry(10,10,1024,600);
     this->ui->verticalLayout->addWidget(webView);
+    #if defined(Q_OS_MAC)
+    this->ui->runScript_btn->setText("Run Script (Command+Enter)");
+    this->ui->clearLog_btn->setText("Clear Log (Command+Shift+Enter)");
+    #endif
 }
 
 void MainWindow::initWebViewAttributes()

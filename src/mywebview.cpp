@@ -476,8 +476,10 @@ QScriptValue MyWebView::setViewport(QScriptValue size)
 
 QScriptValue MyWebView::timer(QScriptValue scriptFunc, QScriptValue timeout, bool singleShot)
 {
+    bool isString = false;
     if (scriptFunc.isString()) {
-        scriptFunc = QScriptValue("function () {" + scriptFunc.toString() + "}");
+        scriptFunc = appEngine->evaluate("new Function('return " + scriptFunc.toString() + ";')");
+        isString = true;
     }
     if (!scriptFunc.isFunction()) {
         return QScriptValue::UndefinedValue;
@@ -500,8 +502,10 @@ QScriptValue MyWebView::timer(QScriptValue scriptFunc, QScriptValue timeout, boo
 
     // 记录相关环境内容
     ContextInfo contextInfo;
-    contextInfo.thisObject = appEngine->currentContext()->thisObject();
-    contextInfo.activationObject = appEngine->currentContext()->activationObject();
+    contextInfo.thisObject = appEngine->globalObject();
+    contextInfo.activationObject = isString == true
+            ? scriptFunc
+            : appEngine->currentContext()->activationObject();
     contextInfo.func = scriptFunc;
 
     TimerInfo timerInfo;
@@ -1699,7 +1703,7 @@ void MyWebView::onTimeout()
         return;
 
     ContextInfo contextInfo = timeEventMap[key].info;
-    contextInfo.func.setScope(contextInfo.activationObject);
+    contextInfo.func.setScope(contextInfo.activationObject.scope());
     contextInfo.func.call(contextInfo.thisObject);
     if (timer->isSingleShot()) {
         timeEventMap.remove(key);
