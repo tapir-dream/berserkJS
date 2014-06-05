@@ -40,6 +40,8 @@
  *        |              + [function] netListener <--referenced from webview.netListener method
  *        |              + [function] process
  *        |              + [function] httpRequest
+ *        |              + [function] download
+ *        |              + [function] mkdir
  *        |              + [function] watchFile
  *        |              + [function] unWatcher
  *        |              + [function] watchedFiles
@@ -247,6 +249,7 @@ public:
     static QScriptValue wrapperHttpDataArray(QMap<QString, MonitorData*> map, QScriptEngine* engine);
     static QTextCodec* getCodec(QString charset);
     static QString readFile(QString fileName, QTextCodec* charset);
+    static void mkdir(QString path);
 
     /* 包裹方法需要是静态的  */
     static QScriptValue isOnline(QScriptContext *context, QScriptEngine *interpreter);
@@ -292,9 +295,11 @@ public:
     /* 其他包裹方法 */
     static QScriptValue process(QScriptContext *context, QScriptEngine *interpreter);
     static QScriptValue httpRequest(QScriptContext *context, QScriptEngine *interpreter);
+    static QScriptValue download(QScriptContext *context, QScriptEngine *interpreter);
     static QScriptValue loadScript(QScriptContext *context, QScriptEngine *interpreter);
     static QScriptValue writeFile(QScriptContext *context, QScriptEngine *interpreter);
     static QScriptValue readFile(QScriptContext *context, QScriptEngine *interpreter);
+    static QScriptValue mkdir(QScriptContext *context, QScriptEngine *interpreter);
     static QScriptValue alert(QScriptContext *context, QScriptEngine *interpreter);
     static QScriptValue about(QScriptContext *context, QScriptEngine *interpreter);
     static QScriptValue base64FromFile(QScriptContext *context, QScriptEngine *interpreter);
@@ -308,6 +313,7 @@ public:
     static QScriptValue watcherClose(QScriptContext *context, QScriptEngine *interpreter);
     static QScriptValue watchedFiles(QScriptContext *context, QScriptEngine *interpreter);
     // TODO: ...
+
 
 signals:
 

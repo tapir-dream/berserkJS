@@ -51,6 +51,19 @@ void MyWebView::setAppScriptEngine(ScriptBinding* scriptBinding)
     initAppScriptEngine(scriptBinding);
     setAppScriptWebViewObject();
 }
+void MyWebView::scriptError()
+{
+    if (appEngine->hasUncaughtException()) {
+        QString scriptErr = "Uncaught exception at line "
+             + QString::number(appEngine->uncaughtExceptionLineNumber()) + ": "
+             + appEngine->uncaughtException().toString()
+             + ";\n Backtrace: "
+             + appEngine->uncaughtExceptionBacktrace().join(", ");
+        QScriptValue log = appEngine->evaluate("console.log");
+        QScriptValue console = appEngine->evaluate("console");
+        log.call(console,QScriptValueList() << scriptErr);
+    }
+}
 
 void MyWebView::initEventNameMap()
 {
@@ -1229,6 +1242,7 @@ void MyWebView::normalFireEvent(QList<ContextInfo> eventHandleList)
             contextInfo.func.setScope(contextInfo.activationObject.scope());
             // 执行函数
             contextInfo.func.call(contextInfo.thisObject);
+            scriptError();
         }
     }
 }
@@ -1241,6 +1255,7 @@ void MyWebView::onRepaintRequested(const QRect & dirtyRect)
             ContextInfo contextInfo = repaintRequestedFunc.at(i);
             contextInfo.func.setScope(contextInfo.activationObject.scope());
             contextInfo.func.call(contextInfo.thisObject, QScriptValueList() << rectToScriptObject(dirtyRect));
+            scriptError();
         }
     }
 }
@@ -1253,6 +1268,7 @@ void MyWebView::onGeometryChangeRequested(const QRect & geom)
             ContextInfo contextInfo = geometryChangeRequestedFunc.at(i);
             contextInfo.func.setScope(contextInfo.activationObject.scope());
             contextInfo.func.call(contextInfo.thisObject, QScriptValueList() << rectToScriptObject(geom));
+            scriptError();
         }
     }
 }
@@ -1265,6 +1281,7 @@ void MyWebView::onContentsSizeChanged (const QSize & size)
             ContextInfo contextInfo = contentsSizeChangedFunc.at(i);
             contextInfo.func.setScope(contextInfo.activationObject.scope());
             contextInfo.func.call(contextInfo.thisObject, QScriptValueList() << sizeToScriptObject(size));
+            scriptError();
         }
     }
 }
@@ -1277,6 +1294,7 @@ void MyWebView::onLoadProgress(int progress)
             ContextInfo contextInfo = loadProgressFunc.at(i);
             contextInfo.func.setScope(contextInfo.activationObject.scope());
             contextInfo.func.call(contextInfo.thisObject, QScriptValueList() << QScriptValue(progress));
+            scriptError();
         }
     }
 }
@@ -1290,6 +1308,7 @@ void MyWebView::onTitleChanged(const QString & title)
             ContextInfo contextInfo = titleChangedFunc.at(i);
             contextInfo.func.setScope(contextInfo.activationObject.scope());
             contextInfo.func.call(contextInfo.thisObject, QScriptValueList() << QScriptValue(title));
+            scriptError();
         }
     }
 }
@@ -1303,6 +1322,7 @@ void MyWebView::onUrlChanged(const QUrl & url)
             ContextInfo contextInfo = urlChangedFunc.at(i);
             contextInfo.func.setScope(contextInfo.activationObject.scope());
             contextInfo.func.call(contextInfo.thisObject, QScriptValueList() << QScriptValue(url.toString()));
+            scriptError();
         }
     }
 }
@@ -1345,6 +1365,7 @@ void MyWebView::onDOMContentLoaded(int timeout, QString url)
                                   QScriptValueList()
                                   << QScriptValue(timeout)
                                   << QScriptValue(url));
+            scriptError();
         }
     }
 }
@@ -1427,6 +1448,7 @@ void MyWebView::onFirstScreenRenderTimeout(int timeout, QString url)
                                   QScriptValueList()
                                   << QScriptValue(timeout)
                                   << QScriptValue(url));
+            scriptError();
         }
     }
 }
@@ -1486,6 +1508,7 @@ void MyWebView::onLoadFinished(bool ok)
                                   QScriptValueList()
                                   << QScriptValue(timeout)
                                   << QScriptValue(this->url().toString()));
+            scriptError();
         }
     }
 }
@@ -1502,6 +1525,7 @@ void MyWebView::onInitialLayoutCompleted()
                                   QScriptValueList()
                                   << QScriptValue(timeout)
                                   << QScriptValue(this->url().toString()));
+            scriptError();
         }
     }
 }
@@ -1519,6 +1543,7 @@ void MyWebView::onPageConsoleMessage(QString message, int lineNumber, QString so
                                   << QScriptValue(message)
                                   << QScriptValue(lineNumber)
                                   << QScriptValue(sourceID));
+            scriptError();
         }
     }
 }
@@ -1534,6 +1559,7 @@ void MyWebView::onPagePrompt(QString msg, QString defaultValue)
                                   QScriptValueList()
                                   << QScriptValue(msg)
                                   << QScriptValue(defaultValue));
+            scriptError();
         }
     }
 }
@@ -1548,6 +1574,7 @@ void MyWebView::onPageConfirm(QString msg)
             contextInfo.func.call(contextInfo.thisObject,
                                   QScriptValueList()
                                   << QScriptValue(msg));
+            scriptError();
         }
     }
 }
@@ -1562,6 +1589,7 @@ void MyWebView::onPageAlert(QString msg)
             contextInfo.func.call(contextInfo.thisObject,
                                   QScriptValueList()
                                   << QScriptValue(msg));
+            scriptError();
         }
     }
 }
@@ -1577,6 +1605,7 @@ void MyWebView::onPageMessage(QString wparam, QString lparam)
                                   QScriptValueList()
                                   << jsonParse(wparam)
                                   << jsonParse(lparam));
+            scriptError();
         }
     }
 }
@@ -1591,6 +1620,7 @@ void MyWebView::onRequestStart(QString url)
             contextInfo.func.call(contextInfo.thisObject,
                                   QScriptValueList()
                                   << QScriptValue(url));
+            scriptError();
         }
     }
 }
@@ -1605,6 +1635,7 @@ void MyWebView::onRequestFinished(QString url)
             contextInfo.func.call(contextInfo.thisObject,
                                   QScriptValueList()
                                   << QScriptValue(url));
+            scriptError();
         }
     }
 }
@@ -1619,6 +1650,7 @@ void MyWebView::onPrintRequested (QWebFrame * frame)
             contextInfo.func.call(contextInfo.thisObject,
                                   QScriptValueList()
                                   << QScriptValue(this->myFrame->url().toString()));
+            scriptError();
         }
     }
 }
@@ -1638,6 +1670,7 @@ void MyWebView::onScrollRequested (int dx, int dy, const QRect & rectToScroll)
                                   << QScriptValue(left)
                                   << QScriptValue(-dy)
                                   << QScriptValue(-dx));
+            scriptError();
         }
     }
 }
@@ -1661,6 +1694,7 @@ void MyWebView::onSelectionChanged()
             contextInfo.func.call(contextInfo.thisObject,
                                   QScriptValueList()
                                   << QScriptValue(selectedText));
+            scriptError();
         }
     }
 }
@@ -1676,6 +1710,7 @@ void MyWebView::onWindowCloseRequested()
             contextInfo.func.call(contextInfo.thisObject,
                                   QScriptValueList()
                                   << QScriptValue(this->myFrame->url().toString()));
+            scriptError();
         }
     }
 }
@@ -1690,6 +1725,7 @@ void MyWebView::onStatusBarMessage(const QString & text)
             contextInfo.func.call(contextInfo.thisObject,
                                   QScriptValueList()
                                   << QScriptValue(text));
+            scriptError();
         }
     }
 }
@@ -1709,6 +1745,7 @@ void MyWebView::onTimeout()
         timeEventMap.remove(key);
         delete timer;
     }
+    scriptError();
 }
 
 QString MyWebView::sizeToJson(const QSize & size)

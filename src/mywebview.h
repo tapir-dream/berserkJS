@@ -35,6 +35,7 @@ public:
     void sendPageMessage(QString message, QString type);
     void sendSignal(QString signal, QString value = "");
 
+
     Q_INVOKABLE QScriptValue open(QScriptValue url =  QScriptValue::UndefinedValue);
     Q_INVOKABLE QScriptValue execScript(QScriptValue scriptFunc, QScriptValue args = QScriptValue::UndefinedValue);
     Q_INVOKABLE QScriptValue setTimeout(QScriptValue scriptFunc, QScriptValue timeout = 1);
@@ -159,7 +160,7 @@ private:
     QList<ContextInfo> DOMContentLoadedFunc;
 
     QMap<QString, TimerInfo> timeEventMap;
-
+    void scriptError();
     void normalFireEvent(QList<ContextInfo> eventHandleList);
     void initEventNameMap();
     void initEvents();

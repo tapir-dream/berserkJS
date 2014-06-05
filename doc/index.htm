@@ -214,6 +214,8 @@ pre a:hover, pre a:active {
 <li><a href="#App.path_.5Breadonly.5D"><span>1.18.2.26</span> <span>App.path [readonly]</span></a></li>
 <li><a href="#App.file_.5Breadonly.5D"><span>1.18.2.27</span> <span>App.file [readonly]</span></a></li>
 <li><a href="#App.args_.5Breadonly.5D"><span>1.18.2.28</span> <span>App.args [readonly]</span></a></li>
+<li><a href="#App.download.28url_.3Cstring.3E.2C_dir_.3Cstring.3E.5B.2C_filename_.3Cstring.3E.5D.29"><span>1.18.2.29</span> <span>App.download(url &lt;string&gt;, dir &lt;string&gt;[, filename &lt;string&gt;])</span></a></li>
+<li><a href="#App.mkdir.28dir_.3Cstring.3E.29"><span>1.18.2.30</span> <span>App.mkdir(dir &lt;string&gt;)</span></a></li>
 </ul>
 </li>
 <li><a href="#App.selector_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"><span>1.18.3</span> <span>App.selector 命名空间下函数</span></a>
@@ -527,6 +529,8 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
        |              + [function] netListener &lt;-- webview.netListener 方法的引用
        |              + [function] process
        |              + [function] httpRequest
+       |              + [function] download
+       |              + [function] mkdir
        |              + [function] watchFile
        |              + [function] unWatcher
        |              + [function] watchedFiles
@@ -1075,6 +1079,21 @@ alert(a);
 <p><b>说明:</b>该属性为只读，返回启动工具时的运行参数数组。如无启动参数，则返回 undefined。
 </p><p><br />
 </p>
+<h4><span id="App.download.28url_.3Cstring.3E.2C_dir_.3Cstring.3E.5B.2C_filename_.3Cstring.3E.5D.29"><b>App.download(url &lt;string&gt;, dir &lt;string&gt;[, filename &lt;string&gt;])</b></span></h4>
+<p><b>参数:</b>
+</p><p>url &lt;string&gt; 一个合法的 HTTP 协议 URL
+</p><p>url &lt;string&gt; 一个合法的 HTTP 协议 URL
+</p><p>filenmae &lt;string&gt; 指定文件名，<b>如果没有传入此参数，则按照URL结构递归创建出对应目录，并使用原始文件名保存</b> 
+</p><p><b>说明:</b> 用来下载指定文件，如：App.downloadhttp://img.t.sinajs.cn/t5/skin/skin048/images/body_bg.png?id=1376628763520', '/data') 则会自动创建目录 /data/img.t.sinajs.cn/t5/skin/skin048/images/ 并在images 目录下保存 body_bg.png 文件。 而 App.download('http://img.t.sinajs.cn/t5/skin/skin048/images/body_bg.png?id=1376628763520', '/data', '1.png') 则不自动构造url 目录，仅将body_bg.png 下载并保存为 /data/1.png 。
+</p><p><b>注意: 此方法是同步的</b>
+</p><p><br>
+</p>
+<h4><span id="App.mkdir.28dir_.3Cstring.3E.29"><b>App.mkdir(dir &lt;string&gt;)</b></span></h4>
+<p><b>参数:</b>
+</p><p>dir &lt;string&gt; 一个合法的目录名
+</p><p><b>说明:</b> 用来递归创建目录
+</p>
+
 <h3><span id="App.selector_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"> App.selector 命名空间下函数 </span></h3>
 <p>selector 是一组特定数据选择器，可以从 network 数据中<b>累积</b>选择出所要的数据子集。其返回数据结构与 App.netwrokData 函数返回值一致。
 </p><p>如下例：

@@ -127,6 +127,38 @@ QString ScriptBinding::readFile(QString fileName, QTextCodec* charset)
     return code;
 }
 
+void ScriptBinding::mkdir(QString path)
+{
+    QStringList list = path.split('/');
+    if (list.length() == 0) {
+        return;
+    }
+    QDir dir;
+    QString cur = "";
+    for (int i = 0, c = list.length(); i < c; ++i) {
+        if (list.at(i).isEmpty()) break;
+        cur = cur + list.at(i) + '/';
+        if (!dir.exists(cur)) {
+            dir.mkdir(cur);
+        }
+    }
+}
+
+QScriptValue ScriptBinding::mkdir(QScriptContext *context, QScriptEngine *interpreter)
+{
+    if (context->argumentCount() == 0)
+        return QScriptValue(false);
+
+    QScriptValue path = context->argument(0);
+
+    if (!path.isString())
+        return QScriptValue(false);
+
+    QString dir = path.toString().replace("\\", "/");
+    ScriptBinding::mkdir(dir);
+    return QScriptValue(true);
+}
+
 /*
  * loadScript 方法
  * @param string  js路径(支持本地路径以及http与https协议下远程js获取)
@@ -217,7 +249,7 @@ QScriptValue ScriptBinding::loadScript(QScriptContext *context, QScriptEngine *i
             QString scriptErr = "Uncaught exception at line "
                  + QString::number(interpreter->uncaughtExceptionLineNumber()) + ": "
                  + interpreter->uncaughtException().toString()
-                 + "; Backtrace: "
+                 + ";\n Backtrace: "
                  + interpreter->uncaughtExceptionBacktrace().join(", ");
             interpreter->evaluate("console.log('" + scriptErr + "')");
             return  QScriptValue(false);
@@ -242,7 +274,7 @@ QScriptValue ScriptBinding::runScript(const QString code)
               return "Uncaught exception at line "
                      + QString::number(engine->uncaughtExceptionLineNumber()) + ": "
                      + engine->uncaughtException().toString()
-                     + "Backtrace: "
+                     + ";\n Backtrace: "
                      + engine->uncaughtExceptionBacktrace().join(", ");
 
         }
@@ -542,7 +574,10 @@ void ScriptBinding::initNativeMethodToRootSpace()
     // selector 空间下所有函数统一包装
     getRootSpace().setProperty("selector", wrapperSelector(), QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
-    // 其他内置函数包装
+    // 其他内置函数包装 好多地方都没用宏好蛋疼 懒得改怎么破 >_<
+    nativeMathod = engine->newFunction(ScriptBinding::mkdir);
+    getRootSpace().setProperty("mkdir", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
+
     nativeMathod = engine->newFunction(ScriptBinding::isOnline);
     getRootSpace().setProperty("isOnline", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
@@ -551,6 +586,9 @@ void ScriptBinding::initNativeMethodToRootSpace()
 
     nativeMathod = engine->newFunction(ScriptBinding::httpRequest);
     getRootSpace().setProperty("httpRequest", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
+
+    nativeMathod = engine->newFunction(ScriptBinding::download);
+    getRootSpace().setProperty("download", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
     nativeMathod = engine->newFunction(ScriptBinding::process);
     getRootSpace().setProperty("process", nativeMathod, QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -1159,6 +1197,77 @@ QScriptValue ScriptBinding::httpRequest(QScriptContext *context, QScriptEngine *
     return QScriptValue(QString(stream.readAll()));
 }
 
+QScriptValue ScriptBinding::download(QScriptContext *context, QScriptEngine *interpreter)
+{
+
+    QString urlString = "";
+    QString directory = "";
+    QString filename = "";
+    if (context->argumentCount() > 2) {
+        return QScriptValue(false);
+    }
+
+    if (context->argument(0).isString()) {
+        urlString = context->argument(0).toString().trimmed();
+    }
+
+    if (context->argument(1).isString()) {
+        directory = context->argument(1).toString().trimmed();
+    }
+
+    if (context->argument(2).isString()) {
+        filename = context->argument(2).toString().trimmed();
+    }
+
+    if (urlString.toLower().indexOf("http://") != 0 &&
+        urlString.toLower().indexOf("https://") != 0 &&
+        urlString.toLower().indexOf("ftp://") != 0) {
+        context->throwError("URIError: URL is not http:// or https:// or ftp://");
+    }
+
+    int len = directory.length();
+    if (!(directory.lastIndexOf('/') == len - 1 ||
+          directory.lastIndexOf('\\') == len - 1)) {
+        directory += '/';
+    }
+
+    ScriptBinding::mkdir(directory);
+
+    QNetworkReply* reply;
+    QNetworkRequest req;
+    QUrl url = QUrl(urlString);
+    QNetworkAccessManager* manager = new QNetworkAccessManager();
+    reply = manager->get(QNetworkRequest(url));
+
+
+    // 开启局部事件循环
+    // 当finished信号触发时自动退出
+    // 这样将异步信号变为同步
+    QEventLoop eventLoop;
+    connect(manager, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
+    eventLoop.exec();
+
+    QByteArray responseData;
+    responseData = reply->readAll();
+
+    QFileInfo fileInfo(url.path());
+
+    if (filename.isEmpty()) {
+        QString path = directory + url.host() + fileInfo.path();
+        ScriptBinding::mkdir(path);
+        directory = path;
+        filename = fileInfo.fileName();
+    }
+
+    QFile file(directory + '/' + filename);
+    qDebug()<<directory + '/' + filename;
+    if (!file.open(QIODevice::WriteOnly)) {
+        return QScriptValue(false);
+    }
+    file.write(responseData);
+    file.close();
+    return QScriptValue(true);
+}
 
 QScriptValue ScriptBinding::cpu(QScriptContext *context, QScriptEngine *interpreter)
 {

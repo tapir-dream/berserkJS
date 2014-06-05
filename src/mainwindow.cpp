@@ -118,7 +118,7 @@ void MainWindow::initWebViewAttributes()
         // WebCore::cacheStorage().empty();
         // WebCore::cacheStorage().vacuumDatabaseFile();
         // WebCore::cacheStorage().setMaximumSize(maximumSize);
-        // 看见，如果设置会先将初始的 cacheStorage 清空
+        // 可见，如果设置会先将初始的 cacheStorage 清空
         // 这导致每次开启应用，设置后 cacheStorage 就是全新的了
         // 上一次的 cacheStorage 将完全无效
         //QWebSettings::setOfflineWebApplicationCacheQuota(maxCache);
@@ -222,8 +222,8 @@ void MainWindow::initAppEngine()
             if (!evtName) return;\n\
             if (typeof func != 'function') return;\n\
             var cb = function() {\n\
-               func.apply(App.webview, arguments);\n\
-               App.webview.removeEventListener(evtName, cb);\n\
+                App.webview.removeEventListener(evtName, cb);\n\
+                func.apply(App.webview, arguments);\n\
             };\n\
             App.webview.addEventListener(evtName, cb);\n\
         };\
@@ -499,7 +499,7 @@ QString MainWindow::getScriptError(QScriptEngine* interpreter)
     QString scriptErr = "Uncaught exception at line "
          + QString::number(interpreter->uncaughtExceptionLineNumber()) + ": "
          + interpreter->uncaughtException().toString()
-         + "; Backtrace: "
+         + ";\n Backtrace: "
          + interpreter->uncaughtExceptionBacktrace().join(", ");
     return scriptErr;
 }
