@@ -7,9 +7,7 @@
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -19,7 +17,10 @@
       <header>
         <h1>berserkJS</h1>
         <p>基于 qt webkit，使用 JS 语法开发检测逻辑的 webkit netwrok request 检测工具。</p>
+
         <p class="view"><a href="https://github.com/tapir-dream/berserkJS">View the Project on GitHub <small>tapir-dream/berserkJS</small></a></p>
+
+
         <ul>
           <li><a href="https://github.com/tapir-dream/berserkJS/zipball/master">Download <strong>ZIP File</strong></a></li>
           <li><a href="https://github.com/tapir-dream/berserkJS/tarball/master">Download <strong>TAR Ball</strong></a></li>
@@ -32,13 +33,60 @@
 <a name="%E5%89%8D%E7%AB%AF%E8%87%AA%E5%8A%A8%E5%8C%96%E7%9B%91%E6%B5%8B%E5%B7%A5%E5%85%B7berserkjs" class="anchor" href="#%E5%89%8D%E7%AB%AF%E8%87%AA%E5%8A%A8%E5%8C%96%E7%9B%91%E6%B5%8B%E5%B7%A5%E5%85%B7berserkjs"><span class="octicon octicon-link"></span></a>前端自动化监测工具（BerserkJS）</h1>
 <h2>
 <a name="-%E6%BC%94%E7%A4%BA%E8%A7%86%E9%A2%91-" class="anchor" href="#-%E6%BC%94%E7%A4%BA%E8%A7%86%E9%A2%91-"><span class="octicon octicon-link"></span></a> 演示视频 </h2>
-<p><a href="http://www.tudou.com/v/pu5xvmzVZbU/&amp;resourceId=0_04_05_99/v.swf" rel="nofollow" target="_blank">http://www.tudou.com/v/pu5xvmzVZbU/&amp;resourceId=0_04_05_99/v.swf</a>
+<p><a href="http://www.tudou.com/v/pu5xvmzVZbU/&amp;resourceId=0_04_05_99/v.swf" target="_blank">http://www.tudou.com/v/pu5xvmzVZbU/&amp;resourceId=0_04_05_99/v.swf</a>
 </p>
 <p><br></p>
 <h2>
 <a name="-%E5%B7%A5%E5%85%B7%E4%BB%8B%E7%BB%8D-ppt--" class="anchor" href="#-%E5%B7%A5%E5%85%B7%E4%BB%8B%E7%BB%8D-ppt--"><span class="octicon octicon-link"></span></a> 工具介绍 PPT  </h2>
 <p> D2 前端论坛中使用的 PPT : <a href="http://t.cn/zQI8hrz">【点此下载】</a>  <a href="http://wenku.it168.com/d_000434396.shtml">【在线看1(墙内)】</a>  <a href="https://speakerdeck.com/d2forum/berserkjs">【在线看2(墙外)】</a>
 </p>
+<p><br></p>
+<h2>
+<a name="-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-" class="anchor" href="#-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-"><span class="octicon octicon-link"></span></a> 如何使用 </h2>
+<h3>
+<a name="-windows-" class="anchor" href="#-windows-"><span class="octicon octicon-link"></span></a> Windows </h3>
+<p>直接执行源码包下 build\release\berserkJS.exe
+</p>
+<h3>
+<a name="-mac-" class="anchor" href="#-mac-"><span class="octicon octicon-link"></span></a> Mac </h3>
+<ol>
+<li> 下载并安装 Qt libraries 4.8.5 for Mac
+</li>
+<li> 执行源码包下 build\mac_64\berserkJS
+</li>
+</ol>
+<pre>【官网地址】 <a href="http://qt-project.org/downloads" target="_blank">http://qt-project.org/downloads</a> 
+【立即下载】 <a href="http://download.qt-project.org/official_releases/qt/4.8/4.8.5/qt-mac-opensource-4.8.5.dmg" target="_blank">http://download.qt-project.org/official_releases/qt/4.8/4.8.5/qt-mac-opensource-4.8.5.dmg</a>
+</pre>
+<h3>
+<a name="-linux-" class="anchor" href="#-linux-"><span class="octicon octicon-link"></span></a> Linux </h3>
+<ol>
+<li> 下载 Qt libraries 4.8.5 for Linux/X11
+</li>
+<li> 确定系统内存在 X11 lib，否则请使用 yum 等工具安装依赖
+</li>
+<li> 如果需要在纯命令行下使用，请使用yum 等工具安装 Xvfb 来模拟 X11 环境。
+</li>
+<li> 解压 Qt libraries 4.8.5 for Linux/X11，并进入目录
+</li>
+<li> 执行 ./configure
+</li>
+<li> 执行 make
+</li>
+<li> 执行 install
+</li>
+<li> 进入 berserkjs 源码包的 src 目录
+</li>
+<li> 执行 qmark berserkjs.pro
+</li>
+<li> 执行 mark 后可编译出 berserkJS 的可执行文件
+</li>
+<li> 执行 berserkJS
+</li>
+</ol>
+<pre>【官网地址】 <a href="http://qt-project.org/downloads" target="_blank">http://qt-project.org/downloads</a> 
+【立即下载】 <a href="http://download.qt-project.org/official_releases/qt/4.8/4.8.5/qt-everywhere-opensource-src-4.8.5.tar.gz" target="_blank">http://download.qt-project.org/official_releases/qt/4.8/4.8.5/qt-everywhere-opensource-src-4.8.5.tar.gz</a>
+</pre>
 <p><br></p>
 <h2>
 <a name="-%E5%B7%A5%E5%85%B7%E8%AF%B4%E6%98%8E-" class="anchor" href="#-%E5%B7%A5%E5%85%B7%E8%AF%B4%E6%98%8E-"><span class="octicon octicon-link"></span></a> 工具说明 </h2>
@@ -90,11 +138,11 @@
 <a name="-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83-" class="anchor" href="#-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83-"><span class="octicon octicon-link"></span></a> 开发环境 </h2>
 <p>基于 QtWebKit （QtWebKit-2.2 Release 基于 WebKit 主干稳定版 r85855 ）开发，采用 <b>Qt 4.8.0</b> （Qt SDK Version 1.2）环境编译：<br></p>
 <ol>
-<li> Qt 项目地址：<a href="http://qt.nokia.com" rel="nofollow" target="_blank">http://qt.nokia.com</a>
+<li> Qt 项目地址：<a href="http://qt.nokia.com" target="_blank">http://qt.nokia.com</a>
 </li>
-<li> Qt SDK 地址：<a href="http://qt.nokia.com/downloads" rel="nofollow" target="_blank">http://qt.nokia.com/downloads</a>
+<li> Qt SDK 地址：<a href="http://qt.nokia.com/downloads" target="_blank">http://qt.nokia.com/downloads</a>
 </li>
-<li> Qt 文档地址：<a href="http://doc.qt.nokia.com/" rel="nofollow" target="_blank">http://doc.qt.nokia.com/</a>
+<li> Qt 文档地址：<a href="http://doc.qt.nokia.com/" target="_blank">http://doc.qt.nokia.com/</a>
 </li>
 </ol>
 <p>如果你的系统是非 windows 需要重新编译源码取得当前平台的可执行文件时，才需要搭建开发环境。
@@ -281,6 +329,8 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
        |              + [function] netListener &lt;-- webview.netListener 方法的引用
        |              + [function] process
        |              + [function] httpRequest
+       |              + [function] download
+       |              + [function] mkdir
        |              + [function] watchFile
        |              + [function] unWatcher
        |              + [function] watchedFiles
@@ -1055,6 +1105,32 @@ alert(a);
 <p><b>说明:</b>该属性为只读，返回启动工具时的运行参数数组。如无启动参数，则返回 undefined。
 </p>
 <p><br></p>
+<h4>
+<a name="appdownloadurl-string-dir-string-filename-string" class="anchor" href="#appdownloadurl-string-dir-string-filename-string"><span class="octicon octicon-link"></span></a><b>App.download(url &lt;string&gt;, dir &lt;string&gt;[, filename &lt;string&gt;])</b>
+</h4>
+<p><b>参数:</b>
+</p>
+<p>url &lt;string&gt; 一个合法的 HTTP 协议 URL
+</p>
+<p>url &lt;string&gt; 一个合法的 HTTP 协议 URL
+</p>
+<p>filenmae &lt;string&gt; 指定文件名，<b>如果没有传入此参数，则按照URL结构递归创建出对应目录，并使用原始文件名保存</b> 
+</p>
+<p><b>说明:</b> 用来下载指定文件，如：App.downloadhttp://img.t.sinajs.cn/t5/skin/skin048/images/body_bg.png?id=1376628763520', '/data') 则会自动创建目录 /data/img.t.sinajs.cn/t5/skin/skin048/images/ 并在images 目录下保存 body_bg.png 文件。 而 App.download('http://img.t.sinajs.cn/t5/skin/skin048/images/body_bg.png?id=1376628763520', '/data', '1.png') 则不自动构造url 目录，仅将body_bg.png 下载并保存为 /data/1.png 。
+</p>
+<p><b>注意: 此方法是同步的</b>
+</p>
+<p><br></p>
+<h4>
+<a name="appmkdirdir-string" class="anchor" href="#appmkdirdir-string"><span class="octicon octicon-link"></span></a><b>App.mkdir(dir &lt;string&gt;)</b>
+</h4>
+<p><b>参数:</b>
+</p>
+<p>dir &lt;string&gt; 一个合法的目录名
+</p>
+<p><b>说明:</b> 用来递归创建目录
+</p>
+
 <h3>
 <a name="-appselector-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E4%B8%8B%E5%87%BD%E6%95%B0-" class="anchor" href="#-appselector-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E4%B8%8B%E5%87%BD%E6%95%B0-"><span class="octicon octicon-link"></span></a> App.selector 命名空间下函数 </h3>
 <p>selector 是一组特定数据选择器，可以从 network 数据中<b>累积</b>选择出所要的数据子集。其返回数据结构与 App.netwrokData 函数返回值一致。
@@ -2277,12 +2353,12 @@ App.webview.execScript(function(s) {
 <a name="-end-" class="anchor" href="#-end-"><span class="octicon octicon-link"></span></a> END </h2>
 </div>
       </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/tapir-dream">tapir-dream</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
     </div>
-    <footer>
-      <p>Project maintained by <a href="https://github.com/tapir-dream">tapir-dream</a></p>
-      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
-    </footer>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script src="javascripts/scale.fix.js"></script>
     
   </body>
 </html>
