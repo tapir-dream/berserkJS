@@ -1140,13 +1140,13 @@ QScriptValue ScriptBinding::httpRequest(QScriptContext *context, QScriptEngine *
 
     QNetworkReply* reply;
     QNetworkRequest req;
-    QNetworkAccessManager* manager = new QNetworkAccessManager();
+    QNetworkAccessManager manager;
 
     if (method == POST) {
         // post 数据编码
         req.setUrl(QUrl(url));
         req.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
-        reply = manager->post(req, QUrl(data).toEncoded());
+        reply = manager.post(req, QUrl(data).toEncoded());
     } else {
         if (data != "") {
             if (url.indexOf("?") != -1) {
@@ -1160,14 +1160,14 @@ QScriptValue ScriptBinding::httpRequest(QScriptContext *context, QScriptEngine *
             }
         }
 
-        reply = manager->get(QNetworkRequest(QUrl(url)));
+        reply = manager.get(QNetworkRequest(QUrl(url)));
     }
 
     // 开启局部事件循环
     // 当finished信号触发时自动退出
     // 这样将异步信号变为同步
     QEventLoop eventLoop;
-    connect(manager, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
+    connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
     eventLoop.exec();
 
     QByteArray responseData;
@@ -1194,6 +1194,7 @@ QScriptValue ScriptBinding::httpRequest(QScriptContext *context, QScriptEngine *
 
     QTextStream stream(responseData);
     stream.setCodec(getCodec(charset));
+    reply->close();
     return QScriptValue(QString(stream.readAll()));
 }
 
@@ -1236,15 +1237,14 @@ QScriptValue ScriptBinding::download(QScriptContext *context, QScriptEngine *int
     QNetworkReply* reply;
     QNetworkRequest req;
     QUrl url = QUrl(urlString);
-    QNetworkAccessManager* manager = new QNetworkAccessManager();
-    reply = manager->get(QNetworkRequest(url));
-
+    QNetworkAccessManager manager;
 
     // 开启局部事件循环
     // 当finished信号触发时自动退出
     // 这样将异步信号变为同步
     QEventLoop eventLoop;
-    connect(manager, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
+    reply = manager.get(QNetworkRequest(url));
+    connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
     eventLoop.exec();
 
     QByteArray responseData;
@@ -1260,12 +1260,13 @@ QScriptValue ScriptBinding::download(QScriptContext *context, QScriptEngine *int
     }
 
     QFile file(directory + '/' + filename);
-    qDebug()<<directory + '/' + filename;
+    //qDebug() << directory + '/' + filename;
     if (!file.open(QIODevice::WriteOnly)) {
         return QScriptValue(false);
     }
     file.write(responseData);
     file.close();
+    reply->close();
     return QScriptValue(true);
 }
 
