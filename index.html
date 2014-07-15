@@ -1,34 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>berserkJS by tapir-dream</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    <title>berserkJS by tapir-dream</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
+    <header>
+      <div class="inner">
         <h1>berserkJS</h1>
-        <p>基于 qt webkit，使用 JS 语法开发检测逻辑的 webkit netwrok request 检测工具。</p>
+        <h2>基于 qt webkit，使用 JS 语法开发检测逻辑的 webkit netwrok request 检测工具。</h2>
+        <a href="https://github.com/tapir-dream/berserkJS" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
 
-        <p class="view"><a href="https://github.com/tapir-dream/berserkJS">View the Project on GitHub <small>tapir-dream/berserkJS</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/tapir-dream/berserkJS/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/tapir-dream/berserkJS/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/tapir-dream/berserkJS">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <div>
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <div>
 <h1>
 <a name="%E5%89%8D%E7%AB%AF%E8%87%AA%E5%8A%A8%E5%8C%96%E7%9B%91%E6%B5%8B%E5%B7%A5%E5%85%B7berserkjs" class="anchor" href="#%E5%89%8D%E7%AB%AF%E8%87%AA%E5%8A%A8%E5%8C%96%E7%9B%91%E6%B5%8B%E5%B7%A5%E5%85%B7berserkjs"><span class="octicon octicon-link"></span></a>前端自动化监测工具（BerserkJS）</h1>
 <h2>
@@ -320,181 +320,11 @@
 <pre>
 
 Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数组
-       |              + [function] close
-       |              + [function] loadScript
-       |              + [function] readFile
-       |              + [function] writeFile
-       |              + [function] base64FromFile
-       |              + [function] dataURIFromImage
-       |              + [function] netListener &lt;-- webview.netListener 方法的引用
-       |              + [function] process
-       |              + [function] httpRequest
-       |              + [function] download
-       |              + [function] mkdir
-       |              + [function] watchFile
-       |              + [function] unWatcher
-       |              + [function] watchedFiles
-       |              + [function] watcherClose
-       |              + [function] cpu
-       |              + [function] memory
-       |              + [function] alert
-       |              + [function] about
-       |              + [function] isOnline
-       |              + [string] path
-       |              + [string] file
-       |              + [string] args
-       |              + [object] selector + [function] clear
-       |              |                   + [function] img
-       |              |                   + [function] png
-       |              |                   + [function] gif
-       |              |                   + [function] ico
-       |              |                   + [function] jpg
-       |              |                   + [function] svg
-       |              |                   + [function] doc
-       |              |                   + [function] css
-       |              |                   + [function] js
-       |              |                   + [function] cookie;
-       |              |                   + [function] nonegzip;
-       |              |                   + [function] nonecache;
-       |              |                   + [function] nonecdn;
-       |              |                   + [function] totaltimeout
-       |              |                   + [function] waittimeout
-       |              |                   + [function] downloadtimeout
-       |              |                   + [function] dnstimeout
-       |              |                   + [function] sizeout
-       |              |                   + [function] http200
-       |              |                   + [function] http301
-       |              |                   + [function] http302
-       |              |                   + [function] http304
-       |              |                   + [function] http404
-       |              |                   + [function] fromcdn
-       |              |                   + [function] get
-       |              |
-       |              + [object] webview + [function] getUrl
-       |              |                  + [function] open
-       |              |                  + [function] execScript &lt;-- *这里将切换到页面JS环境，与原始JS不在同一个JS引擎（即脚本沙箱）
-       |              |                  + [function] setTimeout
-       |              |                  + [function] clearTimeout
-       |              |                  + [function] setInterval
-       |              |                  + [function] clearInterval
-       |              |                  + [function] addEventListener 
-       |              |                                     &lt; - pageScriptCreated
-       |              |                                     &lt; - load
-       |              |                                     &lt; - initLayoutCompleted
-       |              |                                     &lt; - pageChanged
-       |              |                                     &lt; - contentsSizeChanged
-       |              |                                     &lt; - iconChanged
-       |              |                                     &lt; - loadStarted
-       |              |                                     &lt; - titleChanged
-       |              |                                     &lt; - urlChanged
-       |              |                                     &lt; - repaint
-       |              |                                     &lt; - pageRectChanged
-       |              |                                     &lt; - loadProgress
-       |              |                                     &lt; - message
-       |              |                                     &lt; - firstPaintFinished
-       |              |                                     &lt; - firstScreenFinished
-       |              |                                     &lt; - requestStart
-       |              |                                     &lt; - requestFinished
-       |              |                                     &lt; - consoleMessage
-       |              |                                     &lt; - alert
-       |              |                                     &lt; - confirm
-       |              |                                     &lt; - propmt
-       |              |                                     &lt; - print
-       |              |                                     &lt; - close
-       |              |                                     &lt; - scroll
-       |              |                                     &lt; - selectionChanged
-       |              |                                     &lt; - statusBarMessage
-       |              |                                     &lt; - DOMContentLoaded
-       |              |                  + [function] on &lt;- addEventListener alias
-       |              |                  + [function] removeEventListener
-       |              |                  + [function] off &lt;- removeEventListener alias
-       |              |                  + [function] once
-       |              |                  + [function] removeAllEventListener
-       |              |                  + [function] offAll &lt;- removeAllEventListener alias
-       |              |                  + [function] elementRects
-       |              |                  + [function] saveImage  &lt;-  *支持 JPG/JPEG/PNG/BMP/PPM/TIFF 格式保存;
-       |              |                  + [function] savePdf
-       |              |                  + [function] sendMouseEvent + click/mousedown/mouseup/mousemove
-       |              |                  + [function] dataURIFromRect
-       |              |                  + [function] viewport
-       |              |                  + [function] setViewport
-       |              |                  + [function] contentRect
-       |              |                  + [function] cookiesFromUrl
-       |              |                  + [function] setCookiesFromUrl
-       |              |                  + [function] cookieObject
-       |              |                  + [function] setCookie
-       |              |                  + [function] removeCookie
-       |              |                  + [function] clearCookie
-       |              |                  + [function] userAgent
-       |              |                  + [function] defaultUserAgent
-       |              |                  + [function] setUserAgent
-       |              |                  + [function] setProxy
-       |              |                  + [function] clearProxy
-       |              |                  + [function] useSystemProxy
-       |              |                  + [function] setDetectionRects
-       |              |                  + [function] clearDetectionRects
-       |              |                  + [function] hasDetectionRects
-       |              |                  + [function] setPageZoom
-       |              |                  + [function] pageZoom
-       |              |                  + [function] setPageScroll
-       |              |                  + [function] pageScroll
-       |              |                  + [function] pageHTML
-       |              |                  + [function] setPageHTML
-       |              |                  + [function] pageText
-       |              |                  + [function] setUploadFile
-       |              |                  + [function] setMaxPagesInCache
-       |              |                  + [function] maxPagesInCache
-       |              |                  + [function] clearAllPagesInCache
-       |              |
-       |              + [object] helper &lt;-- 非内部包装的JS命名空间，由用户扩展
-       |
-       + [object] console + [function] log 
-                          + [function] dir
-                          + [function] time 
-                          + [function] timeEnd
-       + [function] alert &lt;--- App.alert 的快捷引用
-       + [function] setTimeout &lt;-- webview.setTimeout 方法的引用
-       + [function] clearTimeout &lt;-- webview.clearTimeout 方法的引用
-       + [function] setInterval &lt;-- webview.setInterval 方法的引用
-       + [function] clearInterval &lt;-- webview.clearInterval 方法的引用                
-       + [function] print     
-
-
-    
- ps: 一下方法和属性由 QtWebKit 自动包装，参数以及返回值都需 Qt 类型，如无特殊需要强烈不建议使用。
-     此处仅列出供参考：
- 
-   objectName       windowOpacity           sizeIncrement        customContextMenuRequested(QPoint)
-   modal            windowModified          baseSize             setEnabled(bool)
-   windowModality   toolTip                 palette              setDisabled(bool)
-   enabled          statusTip               font                 setWindowModified(bool)
-   geometry         whatsThis               cursor               setWindowTitle(QString)
-   frameGeometry    accessibleName          mouseTracking        setStyleSheet(QString)
-   normalGeometry   accessibleDescription   isActiveWindow       setFocus()
-   x                layoutDirection         focusPolicy          update()
-   y                autoFillBackground      focus                setVisible(bool)
-   pos              styleSheet              contextMenuPolicy    setHidden(bool)
-   frameSize        locale                  updatesEnabled       show()
-   size             windowFilePath          visible              hide()
-   width            inputMethodHints        minimized            setShown(bool)
-   height           title                   maximized            showMinimized()
-   rect             url                     fullScreen           showMaximized()
-   childrenRect     icon                    sizeHint             showFullScreen()
-   childrenRegion   selectedText            minimumSizeHint      showNormal()
-   sizePolicy       modified                acceptDrops          raise()
-   minimumSize      textSizeMultiplier      windowTitle          lower()
-   maximumSize      zoomFactor              windowIcon           updateMicroFocus()
-   minimumWidth     renderHints             windowIconText       stop()
-   minimumHeight    destroyed(QObject*)                          back()
-   maximumWidth     destroyed()                                  forward()
-   maximumHeight    deleteLater()                                reload()
- 
-</pre>
+       |              + [function] networkResources 
 <h2>
 <a name="-%E5%A4%96%E9%83%A8js%E6%A8%A1%E5%9D%97-" class="anchor" href="#-%E5%A4%96%E9%83%A8js%E6%A8%A1%E5%9D%97-"><span class="octicon octicon-link"></span></a> 外部JS模块 </h2>
 <p>除了工具内核包裹出的JS属性以及方法外。工具可使用外部的标准ECMAScript代码执行检测分析工作。
-</p>
-<p>这些JS代码均是按照指定模块规格编写。
+</p><p>这些JS代码均是按照指定模块规格编写。
 </p>
 <h2>
 <a name="-%E6%A8%A1%E5%9D%97%E6%96%87%E4%BB%B6%E4%B9%A6%E5%86%99%E8%A7%84%E5%88%99--" class="anchor" href="#-%E6%A8%A1%E5%9D%97%E6%96%87%E4%BB%B6%E4%B9%A6%E5%86%99%E8%A7%84%E5%88%99--"><span class="octicon octicon-link"></span></a> 模块文件书写规则  </h2>
@@ -510,8 +340,7 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
 <h2>
 <a name="-%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86%E6%96%87%E4%BB%B6--" class="anchor" href="#-%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86%E6%96%87%E4%BB%B6--"><span class="octicon octicon-link"></span></a> 配置管理文件  </h2>
 <p>工具提供了一组基于JS配置管理模块，辅助用户管理自己的检测 JS 模块。
-</p>
-<p>配置管理文件同样是一个JS模块，文件名为 ‘’‘config.js’‘’，会返回一个 JOSN 作为配置表，规格如下：
+</p><p>配置管理文件同样是一个JS模块，文件名为 ‘’‘config.js’‘’，会返回一个 JOSN 作为配置表，规格如下：
 </p>
 <pre>
 /**
@@ -587,20 +416,14 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
 </li>
 </ol>
 </li>
-</ol>
-<h2>
+</ol><h2>
 <a name="-%E5%88%9D%E5%A7%8B%E5%8C%96%E9%85%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E5%BC%80%E5%A7%8B%E8%BF%90%E8%A1%8C--" class="anchor" href="#-%E5%88%9D%E5%A7%8B%E5%8C%96%E9%85%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E5%BC%80%E5%A7%8B%E8%BF%90%E8%A1%8C--"><span class="octicon octicon-link"></span></a> 初始化配置以及开始运行  </h2>
 <p>同配置文件一样，<b>init.js</b> 文件也是个模块文件，它负责初始化配置，并且执行具体检测模块代码。
-</p>
-<p>init.js 文件需要使用 loadScript 方法被执行，方式如下：
-</p>
-<p>App.loadScript(App.path + 'js/conf/init.js', function(err, func){func(App,App.webview)});
-</p>
-<p>这行代码可以在工具启动后敲入工具的 JS 执行框内运行。
-</p>
-<p>也可以使用命令参数 --start=true 使工具在开始运行后自动执行。
-</p>
-<p><br></p>
+</p><p>init.js 文件需要使用 loadScript 方法被执行，方式如下：
+</p><p>App.loadScript(App.path + 'js/conf/init.js', function(err, func){func(App,App.webview)});
+</p><p>这行代码可以在工具启动后敲入工具的 JS 执行框内运行。
+</p><p>也可以使用命令参数 --start=true 使工具在开始运行后自动执行。
+</p><p><br></p>
 <h2>
 <a name="-api-%E6%96%87%E6%A1%A3-" class="anchor" href="#-api-%E6%96%87%E6%A1%A3-"><span class="octicon octicon-link"></span></a> API 文档 </h2>
 <h3>
@@ -609,22 +432,16 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
 <a name="appnetlistenerenabled-boolean" class="anchor" href="#appnetlistenerenabled-boolean"><span class="octicon octicon-link"></span></a><b>App.netListener(enabled &lt;Boolean&gt;)</b>
 </h4>
 <p><b>参数:</b> enabled  &lt;Boolean&gt; 是否开始数据收集
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b>
-</p>
-<p>当 netListener(true) 时表示开始收集网络数据，当 netListener(false) 时停止收集。<b>再次 netListener(true) 时将清空上次的数据开始新数据采集</b>。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b>
+</p><p>当 netListener(true) 时表示开始收集网络数据，当 netListener(false) 时停止收集。<b>再次 netListener(true) 时将清空上次的数据开始新数据采集</b>。
+</p><p><br></p>
 <h4>
 <a name="appnetworkdata" class="anchor" href="#appnetworkdata"><span class="octicon octicon-link"></span></a><b>App.networkData()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> [&lt;Object&gt;,&lt;Object&gt;,&lt;Object&gt;……]
-</p>
-<p>Object 明细：
+</p><p><b>返回值:</b> [&lt;Object&gt;,&lt;Object&gt;,&lt;Object&gt;……]
+</p><p>Object 明细：
 </p>
 <ol>
 <li> "StatusCode": &lt;string&gt; [readonly]
@@ -769,42 +586,29 @@ Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数�
 </li>
 <li> "isHttp404": &lt;boolean&gt;
 </li>
-</ol>
-<p>以上值对应同名的HTTP头数据，不再一一特殊说明。
-</p>
-<p>其中标注  [readonly] 的值项为只读。
-</p>
-<p>考虑到内核提供的 Boolean 数据可能会由于特殊情况而不准确。用户可以根据 HTTP头数据来复写他们，修正问题。
-</p>
-<p>【注意】：<b>如果有非常规头数据或者未被收录在此规定数据中的头内容，同样会被收集，采用 头名 + 值 形式存放。因此实际每条请求所获取的数据并非仅有以上罗列内容。</b>
-</p>
-<p>【注意】：<b>每次 App.netListener(true) 方法被执行后，工具将会收集数据，直到  App.netListener(false) 被执行 时停止，停止后 App.networkData() 方法才可以获取到数据内容。</b>
-</p>
-<p><br></p>
+</ol><p>以上值对应同名的HTTP头数据，不再一一特殊说明。
+</p><p>其中标注  [readonly] 的值项为只读。
+</p><p>考虑到内核提供的 Boolean 数据可能会由于特殊情况而不准确。用户可以根据 HTTP头数据来复写他们，修正问题。
+</p><p>【注意】：<b>如果有非常规头数据或者未被收录在此规定数据中的头内容，同样会被收集，采用 头名 + 值 形式存放。因此实际每条请求所获取的数据并非仅有以上罗列内容。</b>
+</p><p>【注意】：<b>每次 App.netListener(true) 方法被执行后，工具将会收集数据，直到  App.netListener(false) 被执行 时停止，停止后 App.networkData() 方法才可以获取到数据内容。</b>
+</p><p><br></p>
 <h4>
 <a name="apploadscriptpath-string-callback-function" class="anchor" href="#apploadscriptpath-string-callback-function"><span class="octicon octicon-link"></span></a><b>App.loadScript(path &lt;string&gt;, callback &lt;function&gt;)</b>
 </h4>
 <p><b>参数:</b>
-</p>
-<p>path  &lt;string&gt; js模块文件路径（支持本地文件路径或 HTTP 、HTTPS 协议的远程文件路径）
-</p>
-<p>callback &lt;function&gt; load完毕后执行的回调函数
-</p>
-<p><b>返回值:</b> 依赖 callback 函数返回值
-</p>
-<p><b>说明:</b>
-</p>
-<p>如果可载人的 js 文件是一个js模块文件。callback 函数内有会传入 err 和 module 两个参数。
+</p><p>path  &lt;string&gt; js模块文件路径（支持本地文件路径或 HTTP 、HTTPS 协议的远程文件路径）
+</p><p>callback &lt;function&gt; load完毕后执行的回调函数
+</p><p><b>返回值:</b> 依赖 callback 函数返回值
+</p><p><b>说明:</b>
+</p><p>如果可载人的 js 文件是一个js模块文件。callback 函数内有会传入 err 和 module 两个参数。
 </p>
 <ol>
 <li> err 为 true 表示被 load 的 JS 模块有误，执行错误。
 </li>
 <li> module 模块函数本身，可以直接调用执行。
 </li>
-</ol>
-<p><b>这个操作是同步的</b> callback 函数的返回值就是loadScript函数的返回值。
-</p>
-<p><br>
+</ol><p><b>这个操作是同步的</b> callback 函数的返回值就是loadScript函数的返回值。
+</p><p><br>
 例子：
 </p>
 <pre>
@@ -835,106 +639,68 @@ alert(a);
 <a name="appreadfilepath-string-charset-string-" class="anchor" href="#appreadfilepath-string-charset-string-"><span class="octicon octicon-link"></span></a><b>App.readFile(path &lt;string&gt;[, charset &lt;string&gt;] )</b>
 </h4>
 <p><b>参数:</b>
-</p>
-<p>path  &lt;string&gt; 读取的<b>文本文件</b>路径
-</p>
-<p>charset &lt;string&gt; 读取文件的编码，可选参数，默认 ”UTF-8“。 
-</p>
-<p><b>值范围:</b> "UTF-8"、 "UTF-16"、 "GBK"、 "GB18030-0"、 "ISO 8859-1"、 "BIG5"、 "BIG5-HKSCS"
-</p>
-<p><b>返回值:</b> &lt;string&gt; 返回文件内容。
-</p>
-<p><br></p>
+</p><p>path  &lt;string&gt; 读取的<b>文本文件</b>路径
+</p><p>charset &lt;string&gt; 读取文件的编码，可选参数，默认 ”UTF-8“。 
+</p><p><b>值范围:</b> "UTF-8"、 "UTF-16"、 "GBK"、 "GB18030-0"、 "ISO 8859-1"、 "BIG5"、 "BIG5-HKSCS"
+</p><p><b>返回值:</b> &lt;string&gt; 返回文件内容。
+</p><p><br></p>
 <h4>
 <a name="appwritefilepath-string-content-string-charset-string-appendmodeboolean-" class="anchor" href="#appwritefilepath-string-content-string-charset-string-appendmodeboolean-"><span class="octicon octicon-link"></span></a><b>App.writeFile(path &lt;string&gt;, content &lt;string&gt;[, charset &lt;string&gt;, appendMode&lt;boolean&gt;] )</b>
 </h4>
 <p><b>参数:</b>
-</p>
-<p>path  &lt;string&gt; 写入的<b>文本文件</b>路径
-</p>
-<p>content &lt;string&gt; 写入内容。 
-</p>
-<p>charset &lt;string&gt; 指定写入的文件编码，可选参数，默认 ”UTF-8“。 
-</p>
-<p>appendMode&lt;boolean&gt; 采用追加模式写文件，可选参数。默认是值为 flase，当设置为 true 时，如文件存在，新写入内容不会将老文件内容盖，而是在文件尾追加写入新数据。
-</p>
-<p><b>值范围:</b> "UTF-8"、 "UTF-16"、 "GBK"、 "GB18030-0"、 "ISO 8859-1"、 "BIG5"、 "BIG5-HKSCS"
-</p>
-<p><b>返回值:</b> &lt;Boolean&gt; true 为写成功，false 为写失败。
-</p>
-<p><br></p>
+</p><p>path  &lt;string&gt; 写入的<b>文本文件</b>路径
+</p><p>content &lt;string&gt; 写入内容。 
+</p><p>charset &lt;string&gt; 指定写入的文件编码，可选参数，默认 ”UTF-8“。 
+</p><p>appendMode&lt;boolean&gt; 采用追加模式写文件，可选参数。默认是值为 flase，当设置为 true 时，如文件存在，新写入内容不会将老文件内容盖，而是在文件尾追加写入新数据。
+</p><p><b>值范围:</b> "UTF-8"、 "UTF-16"、 "GBK"、 "GB18030-0"、 "ISO 8859-1"、 "BIG5"、 "BIG5-HKSCS"
+</p><p><b>返回值:</b> &lt;Boolean&gt; true 为写成功，false 为写失败。
+</p><p><br></p>
 <h4>
 <a name="appbase64fromfilefile-string" class="anchor" href="#appbase64fromfilefile-string"><span class="octicon octicon-link"></span></a><b>App.base64FromFile(file &lt;string&gt;)</b>
 </h4>
 <p><b>参数:</b>  file &lt;string&gt; 一个合法的可打开的目标文件路径。
-</p>
-<p><b>返回值:</b> &lt;string&gt; 正常情况返回文件内容的base64编码字符串。错误返回 false。
-</p>
-<p><b>说明:</b> 此方法用来读取一个文件二进制内容，base64编码后返回字符串。它可以配合 httpRequest 方法将指定文件内容上传到服务器，服务器可解码base64后还原文件二进制内容。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> &lt;string&gt; 正常情况返回文件内容的base64编码字符串。错误返回 false。
+</p><p><b>说明:</b> 此方法用来读取一个文件二进制内容，base64编码后返回字符串。它可以配合 httpRequest 方法将指定文件内容上传到服务器，服务器可解码base64后还原文件二进制内容。
+</p><p><br></p>
 <h4>
 <a name="appdataurifromimageimage-string" class="anchor" href="#appdataurifromimageimage-string"><span class="octicon octicon-link"></span></a><b>App.dataURIFromImage(image &lt;string&gt;)</b>
 </h4>
 <p><b>参数:</b>  image &lt;string&gt; 一个合法的可打开的目标图片路径。<b>图片格式支持: jpg/jpeg/png/bmp/gi/ico，根据文件扩展名确定文件格式</b>。
-</p>
-<p><b>返回值:</b> &lt;string&gt; 正常情况返回浏览器可识别的标准Data URI 字符串。错误返回 false。
-</p>
-<p><b>说明:</b> 此方法用来读取图片内容，将其 Data URI 化后返回。此内容可被传入到浏览器环境中用 img 标签还原图片显示。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> &lt;string&gt; 正常情况返回浏览器可识别的标准Data URI 字符串。错误返回 false。
+</p><p><b>说明:</b> 此方法用来读取图片内容，将其 Data URI 化后返回。此内容可被传入到浏览器环境中用 img 标签还原图片显示。
+</p><p><br></p>
 <h4>
 <a name="apphttprequestmethod-string--url-string--data-string-charset-string" class="anchor" href="#apphttprequestmethod-string--url-string--data-string-charset-string"><span class="octicon octicon-link"></span></a><b>App.httpRequest(method &lt;string&gt;,  url &lt;string&gt; [, data &lt;string&gt;, charset &lt;string&gt;])</b>
 </h4>
 <p><b>参数:</b>
-</p>
-<p>method &lt;string&gt; 请求方式字符串，值可以为 "GET" 或 "POST" （不区分大小写），如不在此范围则默认为 "GET"。
-</p>
-<p>url &lt;string&gt; 一个合法的 HTTP 协议 URL，<b>注意此字符串会被检查开头字符是否为 http://，不支持其他协议</b>
-</p>
-<p>data&lt;string&gt; 请求数据字符串，可选参数，需要符URL参数编码规范。
-</p>
-<p>charset &lt;string&gt; 设置请求返回结果字符串编码，可选参数。
-</p>
-<p><b>返回值:</b> 被转为 string 的 responseText。
-</p>
-<p><b>说明:</b> 用来发起一个HTTP请求，用于获取数据或者提交数据操作。<b>其返回值编码根据 HTTP Header 的 content-type 识别，如无此 head 则将使用默认的 </b>UTF-8<b> 编码数据返回。当用户同时设置了 charset 时，以用户设置为优先。</b>
-</p>
-<p><b>注意: 此方法是同步的，并且不能用以二进制方式上传。因为工具没有开放 enctype 设置项用来设置 multipart/form-data，同时也没有开放以流形式读取文件的功能。但是你可以配合 base64FromFile 方法，将指定文件二进制内容的 base64 字符串上传至服务器，再由服务器解码后还原文件。</b>
-</p>
-<p><br></p>
+</p><p>method &lt;string&gt; 请求方式字符串，值可以为 "GET" 或 "POST" （不区分大小写），如不在此范围则默认为 "GET"。
+</p><p>url &lt;string&gt; 一个合法的 HTTP 协议 URL，<b>注意此字符串会被检查开头字符是否为 http://，不支持其他协议</b>
+</p><p>data&lt;string&gt; 请求数据字符串，可选参数，需要符URL参数编码规范。
+</p><p>charset &lt;string&gt; 设置请求返回结果字符串编码，可选参数。
+</p><p><b>返回值:</b> 被转为 string 的 responseText。
+</p><p><b>说明:</b> 用来发起一个HTTP请求，用于获取数据或者提交数据操作。<b>其返回值编码根据 HTTP Header 的 content-type 识别，如无此 head 则将使用默认的 </b>UTF-8<b> 编码数据返回。当用户同时设置了 charset 时，以用户设置为优先。</b>
+</p><p><b>注意: 此方法是同步的，并且不能用以二进制方式上传。因为工具没有开放 enctype 设置项用来设置 multipart/form-data，同时也没有开放以流形式读取文件的功能。但是你可以配合 base64FromFile 方法，将指定文件二进制内容的 base64 字符串上传至服务器，再由服务器解码后还原文件。</b>
+</p><p><br></p>
 <h4>
 <a name="appprocessprogram-string-args-array-timeout-number-debug-function" class="anchor" href="#appprocessprogram-string-args-array-timeout-number-debug-function"><span class="octicon octicon-link"></span></a><b>App.process(program &lt;string&gt;, [args &lt;Array&gt;, timeout &lt;number&gt;, debug &lt;function&gt;])</b>
 </h4>
 <p><b>参数:</b>
-</p>
-<p>program &lt;string&gt; 目标程序路径字符串(<b>window 下请注意转义 \ 字符</b>)，均会被执行 ToString 操作后显示出来。
-</p>
-<p>args &lt;Array&gt; 可选，进程执行所需参数列表数组。<b>注意：参数列表将解析到数组内任意值不为 string 或 number 时止</b> ，参数默认值为 null。
-</p>
-<p>timeout &lt;number&gt; 可选，进程最长存活时间。如果处理进程执行时间过长超过此阈值，将被强行终止并返回终止前存在的标准输出。 <b>参数默认值是 30000，参数单位为 ms (毫秒)</b>
-</p>
-<p>debug &lt;function&gt; 可选，debug 回调函数。如果进程处理事件过长或无响应时，使用此参数可<b>每 300ms</b> 获取一次进程运行状态以及标准输出。回调函数存在两个参数 state （当前状态 string）与 output (当前累积的标准输出)。 建议回调中使用 console.log 方法来输出它们辅助调试。 
-</p>
-<p><b>返回值:</b> 被转为 string 的所有进程标准输出。
-</p>
-<p><b>说明:</b> 用来执行一个外部命令行程序。使用者可以将工具中某些数据传入给外部处理程序处理，再从标准输出中得到处理结果，继续在工具环境中处理。
-</p>
-<p><b>注意: 此方法是同步的，不建议用来执行运行时间很长的外部进程或是无返回值的后台运行进程。此外，需注意此方法的安全性！！不要用来执行 rm -rf  之类的操作。</b>
-</p>
-<p><br></p>
+</p><p>program &lt;string&gt; 目标程序路径字符串(<b>window 下请注意转义 \ 字符</b>)，均会被执行 ToString 操作后显示出来。
+</p><p>args &lt;Array&gt; 可选，进程执行所需参数列表数组。<b>注意：参数列表将解析到数组内任意值不为 string 或 number 时止</b> ，参数默认值为 null。
+</p><p>timeout &lt;number&gt; 可选，进程最长存活时间。如果处理进程执行时间过长超过此阈值，将被强行终止并返回终止前存在的标准输出。 <b>参数默认值是 30000，参数单位为 ms (毫秒)</b>
+</p><p>debug &lt;function&gt; 可选，debug 回调函数。如果进程处理事件过长或无响应时，使用此参数可<b>每 300ms</b> 获取一次进程运行状态以及标准输出。回调函数存在两个参数 state （当前状态 string）与 output (当前累积的标准输出)。 建议回调中使用 console.log 方法来输出它们辅助调试。 
+</p><p><b>返回值:</b> 被转为 string 的所有进程标准输出。
+</p><p><b>说明:</b> 用来执行一个外部命令行程序。使用者可以将工具中某些数据传入给外部处理程序处理，再从标准输出中得到处理结果，继续在工具环境中处理。
+</p><p><b>注意: 此方法是同步的，不建议用来执行运行时间很长的外部进程或是无返回值的后台运行进程。此外，需注意此方法的安全性！！不要用来执行 rm -rf  之类的操作。</b>
+</p><p><br></p>
 <h4>
 <a name="appwatchfileflie-string-callback-function" class="anchor" href="#appwatchfileflie-string-callback-function"><span class="octicon octicon-link"></span></a><b>App.watchFile(flie &lt;string&gt;, callback &lt;function&gt;)</b>
 </h4>
 <p><b>参数:</b> 
-</p>
-<p>file &lt;string&gt; 指定需要监听的文件。
-</p>
-<p>callbackHandle &lt;function&gt; 文件改时执行的回调函数。
-</p>
-<p><b>说明:</b> 此方法用来指定监听文件或目录改变，一旦<b>文件内容发生变化</b> 则触发回调函数。 此方法可以传入目录，但需要注意的是，<b>仅在指定目录内发生目录级变化</b>时 (如创建、删除子目录)，将触发回调函数。
-</p>
-<p><b>注意:</b> 
+</p><p>file &lt;string&gt; 指定需要监听的文件。
+</p><p>callbackHandle &lt;function&gt; 文件改时执行的回调函数。
+</p><p><b>说明:</b> 此方法用来指定监听文件或目录改变，一旦<b>文件内容发生变化</b> 则触发回调函数。 此方法可以传入目录，但需要注意的是，<b>仅在指定目录内发生目录级变化</b>时 (如创建、删除子目录)，将触发回调函数。
+</p><p><b>注意:</b> 
 </p>
 <ol>
 <li> 此方法针对文件监控时，仅对文件内容变更有效。如果文件名被修改，对该文件的监控将自动移除。
@@ -943,38 +709,28 @@ alert(a);
 </li>
 <li> 原则上不建议用来监控目录。
 </li>
-</ol>
-<p><br></p>
+</ol><p><br></p>
 <h4>
 <a name="appunwatcherfile-string--callbackhandle-function" class="anchor" href="#appunwatcherfile-string--callbackhandle-function"><span class="octicon octicon-link"></span></a><b>App.unWatcher(file &lt;string&gt; | callbackHandle &lt;function&gt;)</b>
 </h4>
 <p><b>参数:</b> 
-</p>
-<p>file &lt;string&gt; 如果传入 string 则为从监听列表内去除文件监听。
-</p>
-<p>callbackHandle &lt;function&gt; 如果传入 function 则为从监听回调函数列表内去除指定的回调函数。
-</p>
-<p><b>说明:</b> 移除指定监听文件、目录或指定的监听回调函数。
-</p>
-<p><br></p>
+</p><p>file &lt;string&gt; 如果传入 string 则为从监听列表内去除文件监听。
+</p><p>callbackHandle &lt;function&gt; 如果传入 function 则为从监听回调函数列表内去除指定的回调函数。
+</p><p><b>说明:</b> 移除指定监听文件、目录或指定的监听回调函数。
+</p><p><br></p>
 <h4>
 <a name="appwatchedfiles" class="anchor" href="#appwatchedfiles"><span class="octicon octicon-link"></span></a><b>App.watchedFiles()</b>
 </h4>
 <p><b>参数:</b> 无 
-</p>
-<p><b>返回值:</b> &lt;Array&gt;  返回所有监听文件列表数组。
-</p>
-<p>'<i>说明:</i> 查看所有监听文件和目录列表。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> &lt;Array&gt;  返回所有监听文件列表数组。
+</p><p>'<i>说明:</i> 查看所有监听文件和目录列表。
+</p><p><br></p>
 <h4>
 <a name="appwatcherclose" class="anchor" href="#appwatcherclose"><span class="octicon octicon-link"></span></a><b>App.watcherClose()</b>
 </h4>
 <p><b>参数:</b> 无 
-</p>
-<p><b>说明:</b> 关闭文件监听，调用后监听文件列表以及回调函数将全部被清除。
-</p>
-<p><br></p>
+</p><p><b>说明:</b> 关闭文件监听，调用后监听文件列表以及回调函数将全部被清除。
+</p><p><br></p>
 <h4>
 <a name="appcpu" class="anchor" href="#appcpu"><span class="octicon octicon-link"></span></a><b>App.cpu()</b>
 </h4>
@@ -989,153 +745,172 @@ alert(a);
 <p><b>参数:</b> 无 
 </p>
 <p><b>说明:</b> 获取当前进程的内存使用值，返回 number，单位为KB。
-</p>
-<p><b>注意: 此方法在 win 系统下，返回值通常会比在任务管理器中看到的值要大。这是因为它是返回程序使用内存的工作总集，而任务管理器中仅显示专用内存集，其区别在于后者不包括可共享的内存（如加载的DLL）。</b>
-</p>
-<p><br></p>
+</p><p><b>注意: 此方法在 win 系统下，返回值通常会比在任务管理器中看到的值要大。这是因为它是返回程序使用内存的工作总集，而任务管理器中仅显示专用内存集，其区别在于后者不包括可共享的内存（如加载的DLL）。</b>
+</p><p><br></p>
 <h4>
 <a name="appsettimeoutcallback-function-timeout-number" class="anchor" href="#appsettimeoutcallback-function-timeout-number"><span class="octicon octicon-link"></span></a><b>App.setTimeout(callback &lt;function&gt;, timeout &lt;number&gt;)</b>
 </h4>
 <p><b>说明:</b>与 App.webview 内同名函数的使用方法一致。
-</p>
-<p><b>注意: 此方法被引用到 Global 中，可以用 setTimeout直接调用。</b>
-</p>
-<p><br></p>
+</p><p><b>注意: 此方法被引用到 Global 中，可以用 setTimeout直接调用。</b>
+</p><p><br></p>
 <h4>
 <a name="appcleartimeouttimeid-number" class="anchor" href="#appcleartimeouttimeid-number"><span class="octicon octicon-link"></span></a><b>App.clearTimeout(timeId &lt;number&gt;)</b>
 </h4>
 <p><b>说明:</b>与 App.webview 内同名函数的使用方法一致。
-</p>
-<p><b>注意: 此方法被引用到 Global 中，可以用 clearTimeout直接调用。</b>
-</p>
-<p><br></p>
+</p><p><b>注意: 此方法被引用到 Global 中，可以用 clearTimeout直接调用。</b>
+</p><p><br></p>
 <h4>
 <a name="appsetintervalcallback-function-interval-number" class="anchor" href="#appsetintervalcallback-function-interval-number"><span class="octicon octicon-link"></span></a><b>App.setInterval(callback &lt;function&gt;, interval &lt;number&gt;)</b>
 </h4>
 <p><b>说明:</b>与 App.webview 内同名函数的使用方法一致。
-</p>
-<p><b>注意: 此方法被引用到 Global 中，可以用 setInterval直接调用。</b>
-</p>
-<p><br></p>
+</p><p><b>注意: 此方法被引用到 Global 中，可以用 setInterval直接调用。</b>
+</p><p><br></p>
 <h4>
 <a name="appclearintervaltimeid-number" class="anchor" href="#appclearintervaltimeid-number"><span class="octicon octicon-link"></span></a><b>App.clearInterval(timeId &lt;number&gt;)</b>
 </h4>
 <p><b>说明:</b>与 App.webview 内同名函数的使用方法一致。
-</p>
-<p><b>注意: 此方法被引用到 Global 中，可以用 clearInterval 直接调用。</b>
-</p>
-<p><br></p>
+</p><p><b>注意: 此方法被引用到 Global 中，可以用 clearInterval 直接调用。</b>
+</p><p><br></p>
 <h4>
 <a name="appalertmessage-numberstringbooleanfunctionarrayobject" class="anchor" href="#appalertmessage-numberstringbooleanfunctionarrayobject"><span class="octicon octicon-link"></span></a><b>App.alert(message &lt;number&gt;|&lt;string&gt;|&lt;boolean&gt;|&lt;function&gt;|&lt;Array&gt;|&lt;Object&gt;)</b>
 </h4>
 <p><b>参数:</b> message 参数类型不限，均会被执行 ToString 操作后显示出来。message 参数支持简易的HTML标签字符串，提示窗口将渲染以HTML方式渲染他们。
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 此方法是工具提供的内置方法<b>（非浏览器提供的alert方法）</b>，其所有传入值都将在JS引擎层面做 ToString 操作。<b>这个方法预期用来辅助做简单的 JS 编码调试</b>。
-</p>
-<p><b>注意: 此方法被引用到 Global 中，可以用 alert 直接调用。</b>
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 此方法是工具提供的内置方法<b>（非浏览器提供的alert方法）</b>，其所有传入值都将在JS引擎层面做 ToString 操作。<b>这个方法预期用来辅助做简单的 JS 编码调试</b>。
+</p><p><b>注意: 此方法被引用到 Global 中，可以用 alert 直接调用。</b>
+</p><p><br></p>
 <h4>
 <a name="apphide" class="anchor" href="#apphide"><span class="octicon octicon-link"></span></a><b>App.hide()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 隐藏工具窗口。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 隐藏工具窗口。
+</p><p><br></p>
 <h4>
 <a name="appshow" class="anchor" href="#appshow"><span class="octicon octicon-link"></span></a><b>App.show()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 显示工具窗口。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 显示工具窗口。
+</p><p><br></p>
 <h4>
 <a name="appabout" class="anchor" href="#appabout"><span class="octicon octicon-link"></span></a><b>App.about()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p>返回值 无
-</p>
-<p><b>说明:</b> 关于信息提示框。
-</p>
-<p><br></p>
+</p><p>返回值 无
+</p><p><b>说明:</b> 关于信息提示框。
+</p><p><br></p>
 <h4>
 <a name="appclose" class="anchor" href="#appclose"><span class="octicon octicon-link"></span></a><b>App.close()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b>该方法用来关闭工具自身进程。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b>该方法用来关闭工具自身进程。
+</p><p><br></p>
 <h4>
 <a name="appisonline" class="anchor" href="#appisonline"><span class="octicon octicon-link"></span></a><b>App.isOnline()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> true 或 false
-</p>
-<p><b>说明:</b> 在线为 true 否则为 false， <b>不要过于信任此方法</b>。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> true 或 false
+</p><p><b>说明:</b> 在线为 true 否则为 false， <b>不要过于信任此方法</b>。
+</p><p><br></p>
 <h4>
 <a name="apppath-readonly" class="anchor" href="#apppath-readonly"><span class="octicon octicon-link"></span></a><b>App.path [readonly]</b>
 </h4>
 <p><b>说明:</b>该属性为只读，返回工具所处路径。
-</p>
-<p><br></p>
+</p><p><br></p>
 <h4>
 <a name="appfile-readonly" class="anchor" href="#appfile-readonly"><span class="octicon octicon-link"></span></a><b>App.file [readonly]</b>
 </h4>
 <p><b>说明:</b>该属性为只读，返回工具文件名。
-</p>
-<p><br></p>
+</p><p><br></p>
 <h4>
 <a name="appargs-readonly" class="anchor" href="#appargs-readonly"><span class="octicon octicon-link"></span></a><b>App.args [readonly]</b>
 </h4>
 <p><b>说明:</b>该属性为只读，返回启动工具时的运行参数数组。如无启动参数，则返回 undefined。
-</p>
-<p><br></p>
+</p><p><br></p>
 <h4>
 <a name="appdownloadurl-string-dir-string-filename-string" class="anchor" href="#appdownloadurl-string-dir-string-filename-string"><span class="octicon octicon-link"></span></a><b>App.download(url &lt;string&gt;, dir &lt;string&gt;[, filename &lt;string&gt;])</b>
 </h4>
 <p><b>参数:</b>
-</p>
-<p>url &lt;string&gt; 一个合法的 HTTP 协议 URL
-</p>
-<p>url &lt;string&gt; 一个合法的 HTTP 协议 URL
-</p>
-<p>filenmae &lt;string&gt; 指定文件名，<b>如果没有传入此参数，则按照URL结构递归创建出对应目录，并使用原始文件名保存</b> 
-</p>
-<p><b>说明:</b> 用来下载指定文件，如：App.downloadhttp://img.t.sinajs.cn/t5/skin/skin048/images/body_bg.png?id=1376628763520', '/data') 则会自动创建目录 /data/img.t.sinajs.cn/t5/skin/skin048/images/ 并在images 目录下保存 body_bg.png 文件。 而 App.download('http://img.t.sinajs.cn/t5/skin/skin048/images/body_bg.png?id=1376628763520', '/data', '1.png') 则不自动构造url 目录，仅将body_bg.png 下载并保存为 /data/1.png 。
-</p>
-<p><b>注意: 此方法是同步的</b>
-</p>
-<p><br></p>
+</p><p>url &lt;string&gt; 一个合法的 HTTP 协议 URL
+</p><p>url &lt;string&gt; 一个合法的 HTTP 协议 URL
+</p><p>filenmae &lt;string&gt; 指定文件名，<b>如果没有传入此参数，则按照URL结构递归创建出对应目录，并使用原始文件名保存</b> 
+</p><p><b>说明:</b> 用来下载指定文件，如：App.downloadhttp://img.t.sinajs.cn/t5/skin/skin048/images/body_bg.png?id=1376628763520', '/data') 则会自动创建目录 /data/img.t.sinajs.cn/t5/skin/skin048/images/ 并在images 目录下保存 body_bg.png 文件。 而 App.download('http://img.t.sinajs.cn/t5/skin/skin048/images/body_bg.png?id=1376628763520', '/data', '1.png') 则不自动构造url 目录，仅将body_bg.png 下载并保存为 /data/1.png 。
+</p><p><b>注意: 此方法是同步的</b>
+</p><p><br></p>
 <h4>
 <a name="appmkdirdir-string" class="anchor" href="#appmkdirdir-string"><span class="octicon octicon-link"></span></a><b>App.mkdir(dir &lt;string&gt;)</b>
 </h4>
 <p><b>参数:</b>
+</p><p>dir &lt;string&gt; 一个合法的目录名
+</p><p><b>说明:</b> 用来递归创建目录
 </p>
-<p>dir &lt;string&gt; 一个合法的目录名
-</p>
-<p><b>说明:</b> 用来递归创建目录
-</p>
+<h4>
+<a name="appnetworkresources" class="anchor" href="#appnetworkresources"><span class="octicon octicon-link"></span></a><b>App.networkResources()</b>
+</h4>
+<p><b>说明:</b> 同 networkData 使用方式，但返回更详细的 network 数据，但无法使用selector系列方法筛选数据。
+</p><p>格式为：
+</p><pre>[
+  {
+    "request": {
+      "headers": {
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/534.34 (KHTML, like Gecko) Qt/4.8.0 Safari/534.34 berserkJS",
+        ....
+      },
+      "base": {
+        "url": "http://xxxx.com/",
+        "FromCache": false,
+        "method": "GET",
+        "bodySize": 0,
+        "postData": "",
+        "queryString": "",
+        "headersSize": 179
+      }
+    },
+    "response": {
+      "headers": {
+        "Accept-Ranges": "bytes",
+        "Cache-Control": "max-age=86400",
+        "Connection": "Keep-Alive",
+        "Content-Length": "81",
+        "Content-Type": "text/html",
+        "Date": "Mon, 14 Jul 2014 07:18:18 GMT",
+        "ETag": "\"51-4b4c7d90\"",
+        "Expires": "Tue, 15 Jul 2014 07:18:18 GMT",
+        "Last-Modified": "Tue, 12 Jan 2010 13:48:00 GMT",
+        "Server": "Apache",
+        ....
+      },
+      "base": {
+        "status": 200,
+        "statusText": "OK",
+        "headersSize": 241,
+        "bodySize": 81
+      }
+    },
+    "timings": {
+      "blocked": 0, // 该值此工具无法获取
+      "connect": 0,// 该值此工具无法获取
+      "dns": 5,// 该值为此工具推算值
+      "endTime": 867992646,
+      "receive": 25,
+      "send": 0,
+      "ssl": -1,
+      "startTime": 867987982,
+      "wait": 115
+    }
+  },
+  // 第二个请求数据
+  .....
+]
+</pre><p><br></p>
 
 <h3>
 <a name="-appselector-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E4%B8%8B%E5%87%BD%E6%95%B0-" class="anchor" href="#-appselector-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E4%B8%8B%E5%87%BD%E6%95%B0-"><span class="octicon octicon-link"></span></a> App.selector 命名空间下函数 </h3>
-<p>selector 是一组特定数据选择器，可以从 network 数据中<b>累积</b>选择出所要的数据子集。其返回数据结构与 App.netwrokData 函数返回值一致。
-</p>
-<p>如下例：
+<p>selector 是一组特定数据选择器，可以从 network 数据中<b>累积</b>选择出所要的数据子集。其返回数据结构与 App.networkData 函数返回值一致。
+</p><p>如下例：
 </p>
 <pre>
 // 清空选择器
@@ -1148,573 +923,403 @@ App.selecotr.http304();
 App.selecotr.img();
 
 // 获取数据
-seletedNetwrokData = App.selecotr.get();
+seletedNetworkData = App.selecotr.get();
 </pre>
 <p>上例中使用 selecotr 功能从所有数据集中选择出 产生 304 请求的 img 文件。 
-</p>
-<p>【注意】：选择器所做的是<b>累积</b>操作，先选择出所有 304 请求集，然后从 304 请求集中再选择出图片类型文件。<b>而不是选择所有 304 请求和所有图片请求的合集</b>。<b>并且，此方法附带 App.selector.clear() 效果，执行后将会自动清理累积选择数据。</b>
-</p>
-<p><br></p>
+</p><p>【注意】：选择器所做的是<b>累积</b>操作，先选择出所有 304 请求集，然后从 304 请求集中再选择出图片类型文件。<b>而不是选择所有 304 请求和所有图片请求的合集</b>。<b>并且，此方法附带 App.selector.clear() 效果，执行后将会自动清理累积选择数据。</b>
+</p><p><br></p>
 <h4>
 <a name="appselectorimg" class="anchor" href="#appselectorimg"><span class="octicon octicon-link"></span></a><b>App.selector.img()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有图片请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有图片请求。
+</p><p><br></p>
 <h4>
 <a name="appselectorpng" class="anchor" href="#appselectorpng"><span class="octicon octicon-link"></span></a><b>App.selector.png()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有 png 类型图片请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有 png 类型图片请求。
+</p><p><br></p>
 <h4>
 <a name="appselectorgif" class="anchor" href="#appselectorgif"><span class="octicon octicon-link"></span></a><b>App.selector.gif()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有 gif 图片请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有 gif 图片请求。
+</p><p><br></p>
 <h4>
 <a name="appselectorico" class="anchor" href="#appselectorico"><span class="octicon octicon-link"></span></a><b>App.selector.ico()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有 ico 请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有 ico 请求。
+</p><p><br></p>
 <h4>
 <a name="appselectorjpg" class="anchor" href="#appselectorjpg"><span class="octicon octicon-link"></span></a><b>App.selector.jpg()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有 jpg 请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有 jpg 请求。
+</p><p><br></p>
 <h4>
 <a name="appselectorsvg" class="anchor" href="#appselectorsvg"><span class="octicon octicon-link"></span></a><b>App.selector.svg()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有 svg 请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有 svg 请求。
+</p><p><br></p>
 <h4>
 <a name="appselectordoc" class="anchor" href="#appselectordoc"><span class="octicon octicon-link"></span></a><b>App.selector.doc()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有文档类型文件（HTML/XHTML）。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有文档类型文件（HTML/XHTML）。
+</p><p><br></p>
 <h4>
 <a name="appselectorcss" class="anchor" href="#appselectorcss"><span class="octicon octicon-link"></span></a><b>App.selector.css()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有 css 请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有 css 请求。
+</p><p><br></p>
 <h4>
 <a name="appselectorjs" class="anchor" href="#appselectorjs"><span class="octicon octicon-link"></span></a><b>App.selector.js()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有 js 请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出所有 js 请求。
+</p><p><br></p>
 <h4>
 <a name="appselectorcookie" class="anchor" href="#appselectorcookie"><span class="octicon octicon-link"></span></a><b>App.selector.cookie()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出携带 cookie 头的请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出携带 cookie 头的请求。
+</p><p><br></p>
 <h4>
 <a name="appselectornonegzip" class="anchor" href="#appselectornonegzip"><span class="octicon octicon-link"></span></a><b>App.selector.nonegzip()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出没有启动 gzip 的请求。
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出没有启动 gzip 的请求。
 </p>
 <h4>
 <a name="appselectornonecache" class="anchor" href="#appselectornonecache"><span class="octicon octicon-link"></span></a><b>App.selector.nonecache()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出没有从浏览器缓存内取出的请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出没有从浏览器缓存内取出的请求。
+</p><p><br></p>
 <h4>
 <a name="appselectornonecdn" class="anchor" href="#appselectornonecdn"><span class="octicon octicon-link"></span></a><b>App.selector.nonecdn()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出无 CDN 的请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出无 CDN 的请求。
+</p><p><br></p>
 <h4>
 <a name="appselectortotaltimeoutduration-number" class="anchor" href="#appselectortotaltimeoutduration-number"><span class="octicon octicon-link"></span></a><b>App.selector.totaltimeout(duration &lt;number&gt;)</b>
 </h4>
 <p><b>参数:</b> duration &lt;number&gt; 用来指定最大请求时间，超过此值的请求将被选择。 <b>时间单位 ms</b>
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内筛选出超出指定请求时间的请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内筛选出超出指定请求时间的请求。
+</p><p><br></p>
 <h4>
 <a name="appselectorwaittimeoutduration-number" class="anchor" href="#appselectorwaittimeoutduration-number"><span class="octicon octicon-link"></span></a><b>App.selector.waittimeout(duration &lt;number&gt;)</b>
 </h4>
 <p><b>参数:</b> duration &lt;number&gt; 用来指定请求的最大等待时间，超过此值的请求将被选择。 <b>时间单位 ms</b>
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出超出指定请求等待时间的请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出超出指定请求等待时间的请求。
+</p><p><br></p>
 <h4>
 <a name="appselectordownloadtimeoutduration-number" class="anchor" href="#appselectordownloadtimeoutduration-number"><span class="octicon octicon-link"></span></a><b>App.selector.downloadtimeout(duration &lt;number&gt;)</b>
 </h4>
 <p><b>参数:</b> duration &lt;number&gt; 用来指定请求的最大数据下载时间，超过此值的请求将被选择。 <b>时间单位 ms</b>
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出超出指定请求数据下载时间的请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出超出指定请求数据下载时间的请求。
+</p><p><br></p>
 <h4>
 <a name="appselectordnstimeoutduration-number" class="anchor" href="#appselectordnstimeoutduration-number"><span class="octicon octicon-link"></span></a><b>App.selector.dnstimeout(duration &lt;number&gt;)</b>
 </h4>
 <p><b>参数:</b> duration &lt;number&gt; 用来指定请求的最大 DNS 查找时间，超过此值的请求将被选择。 <b>时间单位 ms</b>
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出超出指定DNS查找时间的请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出超出指定DNS查找时间的请求。
+</p><p><br></p>
 <h4>
 <a name="appselectorsizeoutsize-number" class="anchor" href="#appselectorsizeoutsize-number"><span class="octicon octicon-link"></span></a><b>App.selector.sizeout(size &lt;number&gt;)</b>
 </h4>
 <p><b>参数:</b> duration &lt;number&gt; 用来指定最大文件，超过此值的请求将被选择。 <b>尺寸单位 byte </b>
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出超出指定文件大小的请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出超出指定文件大小的请求。
+</p><p><br></p>
 <h4>
 <a name="appselectorhttp200" class="anchor" href="#appselectorhttp200"><span class="octicon octicon-link"></span></a><b>App.selector.http200()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出 HTTP 200 的请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出 HTTP 200 的请求。
+</p><p><br></p>
 <h4>
 <a name="appselectorhttp301" class="anchor" href="#appselectorhttp301"><span class="octicon octicon-link"></span></a><b>App.selector.http301()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出 HTTP 301的请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出 HTTP 301的请求。
+</p><p><br></p>
 <h4>
 <a name="appselectorhttp302" class="anchor" href="#appselectorhttp302"><span class="octicon octicon-link"></span></a><b>App.selector.http302()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出 HTTP 302 的请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出 HTTP 302 的请求。
+</p><p><br></p>
 <h4>
 <a name="appselectorhttp304" class="anchor" href="#appselectorhttp304"><span class="octicon octicon-link"></span></a><b>App.selector.http304()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出 HTTP 304 的请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出 HTTP 304 的请求。
+</p><p><br></p>
 <h4>
 <a name="appselectorhttp404" class="anchor" href="#appselectorhttp404"><span class="octicon octicon-link"></span></a><b>App.selector.http404()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出 HTTP 404 的请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出 HTTP 404 的请求。
+</p><p><br></p>
 <h4>
 <a name="appselectorfromcdn" class="anchor" href="#appselectorfromcdn"><span class="octicon octicon-link"></span></a><b>App.selector.fromcdn()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来在当前筛选数据集合内，筛选出来自浏览器缓存的请求。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来在当前筛选数据集合内，筛选出来自浏览器缓存的请求。
+</p><p><br></p>
 <h4>
 <a name="appselectorget" class="anchor" href="#appselectorget"><span class="octicon octicon-link"></span></a><b>App.selector.get()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> &lt;Array&gt; 返回选择集内数据。
-</p>
-<p><b>说明:</b> 用来得到累积选择的内容。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> &lt;Array&gt; 返回选择集内数据。
+</p><p><b>说明:</b> 用来得到累积选择的内容。
+</p><p><br></p>
 <h4>
 <a name="appselectorclear" class="anchor" href="#appselectorclear"><span class="octicon octicon-link"></span></a><b>App.selector.clear()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 用来清除累积选择的内容，如果没有执行过 App.selector.get() 方法获取累积选择记录，则在需要选择新数据内容前执行此函数保证数据集纯净。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 用来清除累积选择的内容，如果没有执行过 App.selector.get() 方法获取累积选择记录，则在需要选择新数据内容前执行此函数保证数据集纯净。
+</p><p><br></p>
 <h3>
 <a name="-appwebview%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E4%B8%8B%E5%87%BD%E6%95%B0-" class="anchor" href="#-appwebview%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E4%B8%8B%E5%87%BD%E6%95%B0-"><span class="octicon octicon-link"></span></a> App.webview命名空间下函数 </h3>
 <p>App.webview命名空间主要封装了 webview 组件控制相关方法。
-</p>
-<p>如果你需要浏览器的当前页面做某些工作，将会大量的使用到此命名空间下函数。
-</p>
-<p><b>需要注意的是，该空间下的 execScript 方法将产生 JS 沙箱效果，你不能期望把页面 JS 或者页面的 DOM 对象放置到此沙箱外调用</b>。
-</p>
-<p><br></p>
+</p><p>如果你需要浏览器的当前页面做某些工作，将会大量的使用到此命名空间下函数。
+</p><p><b>需要注意的是，该空间下的 execScript 方法将产生 JS 沙箱效果，你不能期望把页面 JS 或者页面的 DOM 对象放置到此沙箱外调用</b>。
+</p><p><br></p>
 <h4>
 <a name="appwebviewsetuseragentuseragent-string" class="anchor" href="#appwebviewsetuseragentuseragent-string"><span class="octicon octicon-link"></span></a><b>App.webview.setUserAgent(userAgent &lt;string&gt;)</b>
 </h4>
 <p><b>参数:</b> userAgent &lt;string&gt;，将工具原始的 UA 值设置为自己的个性化值。
-</p>
-<p><b>返回值:</b> &lt;string&gt; 设置的 UA 值。
-</p>
-<p><b>说明:</b> 当前工具使用的 User Agent 字符串。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> &lt;string&gt; 设置的 UA 值。
+</p><p><b>说明:</b> 当前工具使用的 User Agent 字符串。
+</p><p><br></p>
 <h4>
 <a name="appwebviewuseragent" class="anchor" href="#appwebviewuseragent"><span class="octicon octicon-link"></span></a><b>App.webview.userAgent()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> &lt;string&gt; 当前工具使用的 User Agent 字符串。
-</p>
-<p><b>说明:</b> 当前工具使用的 User Agent 字符串。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> &lt;string&gt; 当前工具使用的 User Agent 字符串。
+</p><p><b>说明:</b> 当前工具使用的 User Agent 字符串。
+</p><p><br></p>
 <h4>
 <a name="appwebviewdefaultuseragent" class="anchor" href="#appwebviewdefaultuseragent"><span class="octicon octicon-link"></span></a><b>App.webview.defaultUserAgent()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> &lt;string&gt; 工具原始的 User Agent 字符串。
-</p>
-<p><b>说明:</b> 用来获取工具原始的不可被变更 User Agent 字符串，它不是 setUserAgent 之后使用的当前 UA 值。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> &lt;string&gt; 工具原始的 User Agent 字符串。
+</p><p><b>说明:</b> 用来获取工具原始的不可被变更 User Agent 字符串，它不是 setUserAgent 之后使用的当前 UA 值。
+</p><p><br></p>
 <h4>
 <a name="appwebviewgeturl" class="anchor" href="#appwebviewgeturl"><span class="octicon octicon-link"></span></a><b>App.webview.getUrl()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> &lt;string&gt;
-</p>
-<p><b>说明:</b> 当前浏览页面的 URL 。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> &lt;string&gt;
+</p><p><b>说明:</b> 当前浏览页面的 URL 。
+</p><p><br></p>
 <h4>
 <a name="appwebviewopenurl-string" class="anchor" href="#appwebviewopenurl-string"><span class="octicon octicon-link"></span></a><b>App.webview.open(url &lt;string&gt;)</b>
 </h4>
 <p><b>参数:</b> url &lt;string&gt; 目标 URL
-</p>
-<p><b>返回值:</b> 无
-</p>
-<p><b>说明:</b> 指定浏览页面，webview 将访问此 URL 并渲染页面。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> 无
+</p><p><b>说明:</b> 指定浏览页面，webview 将访问此 URL 并渲染页面。
+</p><p><br></p>
 <h4>
 <a name="appwebviewsetproxyhost-string-type-string-username-string-password-string" class="anchor" href="#appwebviewsetproxyhost-string-type-string-username-string-password-string"><span class="octicon octicon-link"></span></a><b>App.webview.setProxy(host &lt;string&gt;[, type &lt;string&gt;, userName &lt;string&gt;, password &lt;string&gt;)</b>
 </h4>
 <p><b>参数:</b> 
-</p>
-<p>host &lt;string&gt; 代理服务器地址字符串，如果有端口请用 “:” 字符分割，如 "127.0.0.1:8888"
-</p>
-<p>type &lt;string&gt; 可选参数，代理类型字符串，可选值范围 “HTTP. SOCKS5” （不区分大小写），默认值为 "HTTP"。
-</p>
-<p>userName &lt;string&gt; 可选参数，设置代理所需的用户名，默认值为空。
-</p>
-<p>password &lt;string&gt; 可选参数，设置代理所需的密码，默认值为空。 
-</p>
-<p><b>返回值:</b> &lt;boolean&gt; 如果成功返回 true， 否则 false。
-</p>
-<p><b>说明:</b> 为 webview 设置指定代理。
-</p>
-<p><br></p>
+</p><p>host &lt;string&gt; 代理服务器地址字符串，如果有端口请用 “:” 字符分割，如 "127.0.0.1:8888"
+</p><p>type &lt;string&gt; 可选参数，代理类型字符串，可选值范围 “HTTP. SOCKS5” （不区分大小写），默认值为 "HTTP"。
+</p><p>userName &lt;string&gt; 可选参数，设置代理所需的用户名，默认值为空。
+</p><p>password &lt;string&gt; 可选参数，设置代理所需的密码，默认值为空。 
+</p><p><b>返回值:</b> &lt;boolean&gt; 如果成功返回 true， 否则 false。
+</p><p><b>说明:</b> 为 webview 设置指定代理。
+</p><p><br></p>
 <h4>
 <a name="appwebviewclearproxy" class="anchor" href="#appwebviewclearproxy"><span class="octicon octicon-link"></span></a><b>App.webview.clearProxy()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b>  &lt;boolean&gt; 如果成功返回 true。
-</p>
-<p><b>说明:</b>  清除 webview 所有代理设置（也将不使用系统代理）。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b>  &lt;boolean&gt; 如果成功返回 true。
+</p><p><b>说明:</b>  清除 webview 所有代理设置（也将不使用系统代理）。
+</p><p><br></p>
 <h4>
 <a name="appwebviewusesystemproxyindex-number" class="anchor" href="#appwebviewusesystemproxyindex-number"><span class="octicon octicon-link"></span></a><b>App.webview.useSystemProxy([index &lt;number&gt;])</b>
 </h4>
 <p><b>参数:</b> index &lt;number&gt; 可选参数，系统设置的代理索引值，从 0 开始，默认值为 0。
-</p>
-<p><b>返回值:</b>  &lt;boolean&gt; 如果成功返回 true。
-</p>
-<p><b>说明:</b>  为 webview 设置系统代理。
-</p>
-<p><b>注意:</b> 工具默认已经启用了系统代理，如没有使用过 clearProxy 方法，将不用手动调用此方法。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b>  &lt;boolean&gt; 如果成功返回 true。
+</p><p><b>说明:</b>  为 webview 设置系统代理。
+</p><p><b>注意:</b> 工具默认已经启用了系统代理，如没有使用过 clearProxy 方法，将不用手动调用此方法。
+</p><p><br></p>
 <h4>
 <a name="appwebviewviewport" class="anchor" href="#appwebviewviewport"><span class="octicon octicon-link"></span></a><b>App.webview.viewport()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> &lt;Object&gt; {widht, height}
-</p>
-<p><b>说明:</b> 返回 webview 的视口大小（同浏览器的浏览窗口大小）。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> &lt;Object&gt; {widht, height}
+</p><p><b>说明:</b> 返回 webview 的视口大小（同浏览器的浏览窗口大小）。
+</p><p><br></p>
 <h4>
 <a name="appwebviewsetviewportsize-object" class="anchor" href="#appwebviewsetviewportsize-object"><span class="octicon octicon-link"></span></a><b>App.webview.setViewport(size &lt;Object&gt;)</b>
 </h4>
 <p><b>参数:</b> size &lt;Object&gt; {widht, height}
-</p>
-<p><b>返回值:</b> &lt;Boolean&gt; 
-</p>
-<p><b>说明:</b> 设置 webview 的视口大小，设置成功返回 true。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> &lt;Boolean&gt; 
+</p><p><b>说明:</b> 设置 webview 的视口大小，设置成功返回 true。
+</p><p><br></p>
 <h4>
 <a name="appwebviewcontentrect" class="anchor" href="#appwebviewcontentrect"><span class="octicon octicon-link"></span></a><b>App.webview.contentRect()</b>
 </h4>
 <p><b>参数:</b> 无
-</p>
-<p><b>返回值:</b> &lt;Object&gt; {x:&lt;number&gt;,y:&lt;number&gt;, widht,&lt;number&gt;, height:&lt;number&gt;}
-</p>
-<p><b>说明:</b> 返回当前页面正文的整体宽高。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> &lt;Object&gt; {x:&lt;number&gt;,y:&lt;number&gt;, widht,&lt;number&gt;, height:&lt;number&gt;}
+</p><p><b>说明:</b> 返回当前页面正文的整体宽高。
+</p><p><br></p>
 <h4>
 <a name="appwebviewsaveimagepath-string-imgtype-string-quality-number-rect-object" class="anchor" href="#appwebviewsaveimagepath-string-imgtype-string-quality-number-rect-object"><span class="octicon octicon-link"></span></a><b>App.webview.saveImage(path &lt;string&gt;[, imgType &lt;string&gt;, quality &lt;number&gt;, rect &lt;Object&gt;])</b>
 </h4>
 <p><b>参数:</b> 
-</p>
-<p>path &lt;string&gt; 指定保存图片的文件绝对路径和文件名
-</p>
-<p>imgType &lt;string&gt; 可选参数。用于指定图片格式，默认值为 "PNG"。可选值 JPG/JPEG/PNG/BMP/PPM/TIFF。
-</p>
-<p>quality &lt;number&gt; 可选参数。用于指定图片压缩率，默认值为 100。 可选值范围 1-100。
-</p>
-<p>rect &lt;Object&gt; 可选参数。用于指定保存区域，默认为全页面范围。<b>该参数格式: {x:&lt;number&gt;,y:&lt;number&gt;,width:&lt;number&gt;,height:&lt;number&gt;}</b> 
-</p>
-<p><b>返回值:</b> &lt;Boolean&gt; 成功 true ，失败 false。
-</p>
-<p><b>说明:</b> 保存当前页面截图到指定位置，<b>保存区域如果超出整体图片范围，则该指定区域会被调整，超出部分被忽略</b>。
-</p>
-<p><br></p>
+</p><p>path &lt;string&gt; 指定保存图片的文件绝对路径和文件名
+</p><p>imgType &lt;string&gt; 可选参数。用于指定图片格式，默认值为 "PNG"。可选值 JPG/JPEG/PNG/BMP/PPM/TIFF。
+</p><p>quality &lt;number&gt; 可选参数。用于指定图片压缩率，默认值为 100。 可选值范围 1-100。
+</p><p>rect &lt;Object&gt; 可选参数。用于指定保存区域，默认为全页面范围。<b>该参数格式: {x:&lt;number&gt;,y:&lt;number&gt;,width:&lt;number&gt;,height:&lt;number&gt;}</b> 
+</p><p><b>返回值:</b> &lt;Boolean&gt; 成功 true ，失败 false。
+</p><p><b>说明:</b> 保存当前页面截图到指定位置，<b>保存区域如果超出整体图片范围，则该指定区域会被调整，超出部分被忽略</b>。
+</p><p><br></p>
 <h4>
 <a name="appwebviewdataurifromrectrect-object-imgtype-string-quality-number" class="anchor" href="#appwebviewdataurifromrectrect-object-imgtype-string-quality-number"><span class="octicon octicon-link"></span></a><b>App.webview.dataURIFromRect([rect &lt;Object&gt;, imgType &lt;string&gt;, quality &lt;number&gt;])</b>
 </h4>
 <p>rect  &lt;Object&gt; 可选参数。用于截取当前webview渲染区域内图形。<b>默认值为整个渲染区域。值格式：{x:&lt;number&gt;, y:&lt;number&gt;, width:&lt;number&gt;, height:&lt;number&gt;}</b>。
-</p>
-<p>imgType &lt;string&gt; 可选参数。用于指定图片格式，<b>默认值为 "PNG"。可选值 JPG/JPEG/PNG/BMP/PPM/TIFF</b>。
-</p>
-<p>quality &lt;number&gt; 可选参数。用于指定图片压缩率，<b>默认值为 100。 可选值范围 1-100</b>。
-</p>
-<p><b>说明:</b> 此方法用将当前渲染区域内指定位置范围的渲染结果，进行 Data URI 编码后返回其字符串。一般可用将此值放置在页面的中的 img 中显示，或配合 httpRequest 方法将内容提交到远程服务器。<b>指定位置范围如果超出整体渲染区域，则该范围会被调整，超出部分被忽略。</b>。
-</p>
-<p><br></p>
+</p><p>imgType &lt;string&gt; 可选参数。用于指定图片格式，<b>默认值为 "PNG"。可选值 JPG/JPEG/PNG/BMP/PPM/TIFF</b>。
+</p><p>quality &lt;number&gt; 可选参数。用于指定图片压缩率，<b>默认值为 100。 可选值范围 1-100</b>。
+</p><p><b>说明:</b> 此方法用将当前渲染区域内指定位置范围的渲染结果，进行 Data URI 编码后返回其字符串。一般可用将此值放置在页面的中的 img 中显示，或配合 httpRequest 方法将内容提交到远程服务器。<b>指定位置范围如果超出整体渲染区域，则该范围会被调整，超出部分被忽略。</b>。
+</p><p><br></p>
 <h4>
 <a name="appwebviewsavepdfpath-string" class="anchor" href="#appwebviewsavepdfpath-string"><span class="octicon octicon-link"></span></a><b>App.webview.savePdf(path &lt;string&gt;)</b>
 </h4>
 <p><b>参数:</b> 
-</p>
-<p>path &lt;string&gt; 指定保存PDF的文件绝对路径和文件名
-</p>
-<p><b>说明:</b> 此方法将当前页面全部内容保存为 PDF 文件。
+</p><p>path &lt;string&gt; 指定保存PDF的文件绝对路径和文件名
+</p><p><b>说明:</b> 此方法将当前页面全部内容保存为 PDF 文件。
 </p>
 <h4>
 <a name="appwebviewsettimeoutcallback-function-timeout-number" class="anchor" href="#appwebviewsettimeoutcallback-function-timeout-number"><span class="octicon octicon-link"></span></a><b>App.webview.setTimeout(callback &lt;function&gt;, timeout &lt;number&gt;)</b>
 </h4>
 <p><b>说明:</b>与浏览器内同名函数的使用方法一致，且此方法被引用到 App 命名空间以及 Globla 全局对象中，可直接调用。
-</p>
-<p><br></p>
+</p><p><br></p>
 <h4>
 <a name="appwebviewcleartimeouttimeid-number" class="anchor" href="#appwebviewcleartimeouttimeid-number"><span class="octicon octicon-link"></span></a><b>App.webview.clearTimeout(timeId &lt;number&gt;)</b>
 </h4>
 <p><b>说明:</b>与浏览器内同名函数的使用方法一致，且此方法被引用到 App 命名空间以及 Globla 全局对象中，可直接调用。
-</p>
-<p><br></p>
+</p><p><br></p>
 <h4>
 <a name="appwebviewsetintervalcallback-function-interval-number" class="anchor" href="#appwebviewsetintervalcallback-function-interval-number"><span class="octicon octicon-link"></span></a><b>App.webview.setInterval(callback &lt;function&gt;, interval &lt;number&gt;)</b>
 </h4>
 <p><b>说明:</b>与浏览器内同名函数的使用方法一致，且此方法被引用到 App 命名空间以及 Globla 全局对象中，可直接调用。
-</p>
-<p><br></p>
+</p><p><br></p>
 <h4>
 <a name="appwebviewclearintervaltimeid-number" class="anchor" href="#appwebviewclearintervaltimeid-number"><span class="octicon octicon-link"></span></a><b>App.webview.clearInterval(timeId &lt;number&gt;)</b>
 </h4>
 <p><b>说明:</b>与浏览器内同名函数的使用方法一致，且此方法被引用到 App 命名空间以及 Globla 全局对象中，可直接调用。
-</p>
-<p><br></p>
+</p><p><br></p>
 <h4>
 <a name="appwebviewnetlistenerenabled-boolean" class="anchor" href="#appwebviewnetlistenerenabled-boolean"><span class="octicon octicon-link"></span></a><b>App.webview.netListener(enabled &lt;boolean&gt;)</b>
 </h4>
 <p><b>说明:</b>此方法被引用到 App 命名空间下，见 App 命名空间下的同名 API 说明。
-</p>
-<p><br></p>
+</p><p><br></p>
 <h4>
 <a name="appwebviewcookiesfromurlurl-string" class="anchor" href="#appwebviewcookiesfromurlurl-string"><span class="octicon octicon-link"></span></a><b>App.webview.cookiesFromUrl([url &lt;string&gt;])</b>
 </h4>
 <p><b>参数:</b> url &lt;string&gt; 可选参数， 一个合法的 URL 字符串，<b>必须以 http:// 开头</b>。如果没有或不合法，则为从当前工具访问的 URL 中获取 cookies。
-</p>
-<p><b>返回值:</b> &lt;string&gt; 指定 URL 的 cookies 字符串。
-</p>
-<p><b>说明:</b> 此方法用来获取指定URL下的Cookies内容，<b>前提是此URL已被工具访问过</b>。用户可将获取的 Cookies 内容使用 writeFile API 保存到特特定文件中待用。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> &lt;string&gt; 指定 URL 的 cookies 字符串。
+</p><p><b>说明:</b> 此方法用来获取指定URL下的Cookies内容，<b>前提是此URL已被工具访问过</b>。用户可将获取的 Cookies 内容使用 writeFile API 保存到特特定文件中待用。
+</p><p><br></p>
 <h4>
 <a name="appwebviewsetcookiesfromurlcookies-string-url-string" class="anchor" href="#appwebviewsetcookiesfromurlcookies-string-url-string"><span class="octicon octicon-link"></span></a><b>App.webview.setCookiesFromUrl(cookies &lt;string&gt;[, url &lt;string&gt;])</b>
 </h4>
 <p><b>参数:</b> 
-</p>
-<p>cookies &lt;string&gt; 一个合法的 cookies 字符串，如使用 cookiesFromUrl API 获取的内容。
-</p>
-<p>url &lt;string&gt;  可选参数，一个合法的 URL 字符串，<b>必须以 http:// 开头</b>，<b>默认值为当前工具正在访问的URL</b>。
-</p>
-<p><b>返回值:</b> &lt;boolean&gt; 成功返回 true ，否则返回 false。
-</p>
-<p><b>说明:</b> 此方法用来将 cookie 内容设置到指定 URL 下。一般配合  cookiesFromUrl 、writeFile 、readFile 等 API 将某 URL 中的 cookie 恢复。预期用来解决依赖cookies（cookies 中的 sessionid 或其他）的自动登录验证问题。
-</p>
-<p><br></p>
+</p><p>cookies &lt;string&gt; 一个合法的 cookies 字符串，如使用 cookiesFromUrl API 获取的内容。
+</p><p>url &lt;string&gt;  可选参数，一个合法的 URL 字符串，<b>必须以 http:// 开头</b>，<b>默认值为当前工具正在访问的URL</b>。
+</p><p><b>返回值:</b> &lt;boolean&gt; 成功返回 true ，否则返回 false。
+</p><p><b>说明:</b> 此方法用来将 cookie 内容设置到指定 URL 下。一般配合  cookiesFromUrl 、writeFile 、readFile 等 API 将某 URL 中的 cookie 恢复。预期用来解决依赖cookies（cookies 中的 sessionid 或其他）的自动登录验证问题。
+</p><p><br></p>
 <h4>
 <a name="appwebviewcookieobjecturl-string" class="anchor" href="#appwebviewcookieobjecturl-string"><span class="octicon octicon-link"></span></a><b>App.webview.cookieObject([url &lt;string&gt;])</b>
 </h4>
 <p><b>参数:</b>  url &lt;string&gt;  可选参数，一个合法的 URL 字符串，<b>必须以 http:// 或 https:// 开头</b>，<b>默认值为当前工具正在访问的URL</b>。
-</p>
-<p><b>返回值:</b> &lt;Array&gt; 返回一个数组，其每一项均为一个 <b>包含 name、value、domain 三个 key</b> 的 JS Object。
-</p>
-<p><b>说明:</b> 此方法用来返回一个容易处理的 cookie 值数组。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> &lt;Array&gt; 返回一个数组，其每一项均为一个 <b>包含 name、value、domain 三个 key</b> 的 JS Object。
+</p><p><b>说明:</b> 此方法用来返回一个容易处理的 cookie 值数组。
+</p><p><br></p>
 <h4>
 <a name="appwebviewsetcookiecookieobject-object" class="anchor" href="#appwebviewsetcookiecookieobject-object"><span class="octicon octicon-link"></span></a><b>App.webview.setCookie(cookieObject &lt;Object&gt;)</b>
 </h4>
 <p><b>参数:</b> cookieObject &lt;Object&gt; 一个 cooke 对象，其格式为 {name: your_cookie_name, value:your_cookie_value, domain: your_domain}
-</p>
-<p><b>返回值:</b>  &lt;boolean&gt; 成功返回 true 反之为 false。
-</p>
-<p><b>说明:</b> 此方法用来为指定的域设置 cookie 内容，如果 cookie 存在则改写其值，否则为新建 cookie 内容。
-</p>
-<p><b>【注意】: 其中的 domain 的值需为 .domain ，如为 weibo.com 域设置值，其 domain 应写为 .weibo.com （注意前面的点字符）， 如此 key 没有赋值，则默认为当前访问的 url 值。</b> 
-</p>
-<p><br></p>
+</p><p><b>返回值:</b>  &lt;boolean&gt; 成功返回 true 反之为 false。
+</p><p><b>说明:</b> 此方法用来为指定的域设置 cookie 内容，如果 cookie 存在则改写其值，否则为新建 cookie 内容。
+</p><p><b>【注意】: 其中的 domain 的值需为 .domain ，如为 weibo.com 域设置值，其 domain 应写为 .weibo.com （注意前面的点字符）， 如此 key 没有赋值，则默认为当前访问的 url 值。</b> 
+</p><p><br></p>
 <h4>
 <a name="appwebviewremovecookiename-string-domain-string" class="anchor" href="#appwebviewremovecookiename-string-domain-string"><span class="octicon octicon-link"></span></a><b>App.webview.removeCookie(name &lt;string&gt;[, domain &lt;string&gt;])</b>
 </h4>
 <p><b>参数:</b>
-</p>
-<p>name &lt;string&gt;  cookie 字符串
-</p>
-<p>domain &lt;string&gt; 非必选参数，默认为当前访问页面的 url。
-</p>
-<p><b>返回值:</b> &lt;boolean&gt; 找到指定名字与 domian 的 cookie 并删除成功则返回 true，反之为 false。
-</p>
-<p><b>【注意】: 其中的 domain 的值需为 .domain ，如为 weibo.com 域设置值，其 domain 应写为 .weibo.com （注意前面的点字符）</b>
-</p>
-<p><br></p>
+</p><p>name &lt;string&gt;  cookie 字符串
+</p><p>domain &lt;string&gt; 非必选参数，默认为当前访问页面的 url。
+</p><p><b>返回值:</b> &lt;boolean&gt; 找到指定名字与 domian 的 cookie 并删除成功则返回 true，反之为 false。
+</p><p><b>【注意】: 其中的 domain 的值需为 .domain ，如为 weibo.com 域设置值，其 domain 应写为 .weibo.com （注意前面的点字符）</b>
+</p><p><br></p>
 <h4>
 <a name="appwebviewclearcookie" class="anchor" href="#appwebviewclearcookie"><span class="octicon octicon-link"></span></a><b>App.webview.clearCookie()</b>
 </h4>
 <p><b>返回值:</b> 清理成功返回 true，反之 false。
-</p>
-<p><b>说明:</b> 此方法用于清除所有 domain 下的 cookie。 <b>请慎用</b>
-</p>
-<p><br></p>
+</p><p><b>说明:</b> 此方法用于清除所有 domain 下的 cookie。 <b>请慎用</b>
+</p><p><br></p>
 <h4>
 <a name="appwebviewelementrectscssselectorstring-string" class="anchor" href="#appwebviewelementrectscssselectorstring-string"><span class="octicon octicon-link"></span></a><b>App.webview.elementRects(cssSelectorString &lt;string&gt;)</b>
 </h4>
 <p><b>参数:</b> cssSelectorString &lt;string&gt; 一个符合 CSS 规范的选择器字符串 （同浏览器的 querySelectorAll 参数值）
-</p>
-<p><b>返回值:</b> &lt;Array&gt; [&lt;Object&gt;, &lt;Object&gt;, &lt;Object&gt;, ……] 返回包含指定节点的渲染区域，如没有找到节点则返回 undefined。
-</p>
-<p>&lt;Object&gt; 格式 {x, y, left, right, top, bottom, width,height} 
-</p>
-<p><b>说明:</b> 用来返回一组元素的渲染区域信息。
-</p>
-<p><br></p>
+</p><p><b>返回值:</b> &lt;Array&gt; [&lt;Object&gt;, &lt;Object&gt;, &lt;Object&gt;, ……] 返回包含指定节点的渲染区域，如没有找到节点则返回 undefined。
+</p><p>&lt;Object&gt; 格式 {x, y, left, right, top, bottom, width,height} 
+</p><p><b>说明:</b> 用来返回一组元素的渲染区域信息。
+</p><p><br></p>
 <h4>
 <a name="appwebviewsendmouseeventargpoint-object-argevt-string-argkey-string" class="anchor" href="#appwebviewsendmouseeventargpoint-object-argevt-string-argkey-string"><span class="octicon octicon-link"></span></a><b>App.webview.sendMouseEvent(argPoint &lt;Object&gt;[, argEvt &lt;string&gt;, argKey &lt;string&gt;])</b>
 </h4>
 <p><b>参数:</b>
-</p>
-<p>argPoint &lt;Object&gt; {x, y} 鼠标事件发生的点
-</p>
-<p>argEvt &lt;string&gt; 可选值。鼠标事件名，默认值为 "click"，值范围 mousedown/mouseup/mousemove。
-</p>
-<p>argKey &lt;string&gt; 可选值。鼠标事件发生时，同时按下的按键。 默认值为空。值范围 shift/ctrl/alt。
-</p>
-<p><b>说明:</b> 此方法用来向 webview 渲染页面的指定区域发送鼠标事件。通常配合 App.webview.elementRects 方法来向选定的 DOM 元素发送合法的 click 事件，用来做模拟用户点击操作。
-</p>
-<p><b>【注意】: 由于 App.webview.elementRects 方法仅返回元素布局信息，如果需要更为精确的点击到元素上，你应该将 App.webview.elementRects 方法返回的 x 与 y 值均多加几像素值。</b>
-</p>
-<p><br></p>
+</p><p>argPoint &lt;Object&gt; {x, y} 鼠标事件发生的点
+</p><p>argEvt &lt;string&gt; 可选值。鼠标事件名，默认值为 "click"，值范围 mousedown/mouseup/mousemove。
+</p><p>argKey &lt;string&gt; 可选值。鼠标事件发生时，同时按下的按键。 默认值为空。值范围 shift/ctrl/alt。
+</p><p><b>说明:</b> 此方法用来向 webview 渲染页面的指定区域发送鼠标事件。通常配合 App.webview.elementRects 方法来向选定的 DOM 元素发送合法的 click 事件，用来做模拟用户点击操作。
+</p><p><b>【注意】: 由于 App.webview.elementRects 方法仅返回元素布局信息，如果需要更为精确的点击到元素上，你应该将 App.webview.elementRects 方法返回的 x 与 y 值均多加几像素值。</b>
+</p><p><br></p>
 <h4>
 <a name="appwebviewaddeventlistenereventname-string-callback-function" class="anchor" href="#appwebviewaddeventlistenereventname-string-callback-function"><span class="octicon octicon-link"></span></a><b>App.webview.addEventListener(eventName &lt;string&gt;, callback &lt;function&gt;)</b>
 </h4>
 <p><b>参数:</b>
+</p><p>eventName &lt;string&gt; 所需监听的事件名。值范围(不区分大小写)：
 </p>
-<p>eventName &lt;string&gt; 所需监听的事件名。值范围(不区分大小写)：
-</p>
+</pre>
 <ul>
 <li> "load" --页面载入完成后触发
 </li>
@@ -2352,13 +1957,25 @@ App.webview.execScript(function(s) {
 <h2>
 <a name="-end-" class="anchor" href="#-end-"><span class="octicon octicon-link"></span></a> END </h2>
 </div>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/tapir-dream">tapir-dream</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/tapir-dream/berserkJS/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/tapir-dream/berserkJS/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/tapir-dream/berserkJS"></a> is maintained by <a href="https://github.com/tapir-dream">tapir-dream</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
+
+  
   </body>
 </html>
