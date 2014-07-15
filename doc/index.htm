@@ -216,6 +216,7 @@ pre a:hover, pre a:active {
 <li><a href="#App.args_.5Breadonly.5D"><span>1.18.2.28</span> <span>App.args [readonly]</span></a></li>
 <li><a href="#App.download.28url_.3Cstring.3E.2C_dir_.3Cstring.3E.5B.2C_filename_.3Cstring.3E.5D.29"><span>1.18.2.29</span> <span>App.download(url &lt;string&gt;, dir &lt;string&gt;[, filename &lt;string&gt;])</span></a></li>
 <li><a href="#App.mkdir.28dir_.3Cstring.3E.29"><span>1.18.2.30</span> <span>App.mkdir(dir &lt;string&gt;)</span></a></li>
+<li><a href="#App.networkResources.28.29"><span>1.18.2.31</span> <span>App.networkResources()</span></a></li>
 </ul>
 </li>
 <li><a href="#App.selector_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"><span>1.18.3</span> <span>App.selector 命名空间下函数</span></a>
@@ -520,6 +521,7 @@ pre a:hover, pre a:active {
 <pre>
 
 Global + [object] APP + [function] networkData &lt;-- 返回 network 数据数组
+       |              + [function] networkResources <-- 返回更详细的 network 数据数组
        |              + [function] close
        |              + [function] loadScript
        |              + [function] readFile
@@ -1093,9 +1095,68 @@ alert(a);
 </p><p>dir &lt;string&gt; 一个合法的目录名
 </p><p><b>说明:</b> 用来递归创建目录
 </p>
+<h4><span id="App.networkResources.28.29"><b>App.networkResources()</b></span></h4>
+<p><b>说明:</b> 同 networkData 使用方式，但返回更详细的 network 数据，但无法使用selector系列方法筛选数据。
+</p><p>格式为：
+</p><pre style="font-size:12px; font-family: Consolas, Courier, SimSun, monospace;">[
+  {
+    "request": {
+      "headers": {
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/534.34 (KHTML, like Gecko) Qt/4.8.0 Safari/534.34 berserkJS",
+        ....
+      },
+      "base": {
+        "url": "http://xxxx.com/",
+        "FromCache": false,
+        "method": "GET",
+        "bodySize": 0,
+        "postData": "",
+        "queryString": "",
+        "headersSize": 179
+      }
+    },
+    "response": {
+      "headers": {
+        "Accept-Ranges": "bytes",
+        "Cache-Control": "max-age=86400",
+        "Connection": "Keep-Alive",
+        "Content-Length": "81",
+        "Content-Type": "text/html",
+        "Date": "Mon, 14 Jul 2014 07:18:18 GMT",
+        "ETag": "\"51-4b4c7d90\"",
+        "Expires": "Tue, 15 Jul 2014 07:18:18 GMT",
+        "Last-Modified": "Tue, 12 Jan 2010 13:48:00 GMT",
+        "Server": "Apache",
+        ....
+      },
+      "base": {
+        "status": 200,
+        "statusText": "OK",
+        "headersSize": 241,
+        "bodySize": 81
+      }
+    },
+    "timings": {
+      "blocked": 0, // 该值此工具无法获取
+      "connect": 0,// 该值此工具无法获取
+      "dns": 5,// 该值为此工具推算值
+      "endTime": 867992646,
+      "receive": 25,
+      "send": 0,
+      "ssl": -1,
+      "startTime": 867987982,
+      "wait": 115
+    }
+  },
+  // 第二个请求数据
+  .....
+]
+</pre><p><br>
+</p>
 
 <h3><span id="App.selector_.E5.91.BD.E5.90.8D.E7.A9.BA.E9.97.B4.E4.B8.8B.E5.87.BD.E6.95.B0"> App.selector 命名空间下函数 </span></h3>
-<p>selector 是一组特定数据选择器，可以从 network 数据中<b>累积</b>选择出所要的数据子集。其返回数据结构与 App.netwrokData 函数返回值一致。
+<p>selector 是一组特定数据选择器，可以从 network 数据中<b>累积</b>选择出所要的数据子集。其返回数据结构与 App.networkData 函数返回值一致。
 </p><p>如下例：
 </p>
 <pre>
@@ -1109,7 +1170,7 @@ App.selecotr.http304();
 App.selecotr.img();
 
 // 获取数据
-seletedNetwrokData = App.selecotr.get();
+seletedNetworkData = App.selecotr.get();
 </pre>
 <p>上例中使用 selecotr 功能从所有数据集中选择出 产生 304 请求的 img 文件。 
 </p><p>【注意】：选择器所做的是<b>累积</b>操作，先选择出所有 304 请求集，然后从 304 请求集中再选择出图片类型文件。<b>而不是选择所有 304 请求和所有图片请求的合集</b>。<b>并且，此方法附带 App.selector.clear() 效果，执行后将会自动清理累积选择数据。</b>

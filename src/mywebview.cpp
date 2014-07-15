@@ -1,5 +1,6 @@
 #include "mywebview.h"
 #include "pageextension.h"
+#include "networkresources.h"
 #include "consts.h"
 #include <QTemporaryFile>
 #include <QPrinter>
@@ -385,6 +386,7 @@ QScriptValue MyWebView::netListener(QScriptValue enabled)
     if (enabled.toBool() == true) {
         NetworkAccessManager::isListener = true;
         MonitorDataMap::getMonitorDataMap()->clear();
+        NetworkResources::getInstance()->clear();
     } else {
         NetworkAccessManager::isListener = false;
     }

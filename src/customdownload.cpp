@@ -1,9 +1,11 @@
 #include "customdownload.h"
 #include "monitordata.h"
 #include "monitordatamap.h"
+#include "networkresources.h"
+
 
 CustomDownload::CustomDownload(QNetworkReply *reply,
-                               QNetworkRequest request,
+                               QIODevice *device,
                                qint64 dnsLookupTime,
                                qint64 requestStartTime)
 {
@@ -12,8 +14,9 @@ CustomDownload::CustomDownload(QNetworkReply *reply,
     this->requestStartTime = requestStartTime;
     this->waitingTime =  QDateTime::currentDateTime().toMSecsSinceEpoch();
     this->dnsLookupTime = dnsLookupTime;
-    this->request = request;
+    this->request = reply->request();
     this->reply = reply;
+    this->device = device;
     this->bytesTotal = 0;
 
     connect(reply, SIGNAL(finished()),
@@ -180,4 +183,17 @@ void CustomDownload::onFinished()
         }
         MonitorDataMap::getMonitorDataMap()->set(monitorData->RequestURL, monitorData);
     }
+
+    QMap<QString, qint64> responseOtherData;
+    responseOtherData["blocked"] =  0;
+    responseOtherData["dns"] = monitorData->ResponseDNSLookupDuration;;
+    responseOtherData["connect"] = 0;
+    responseOtherData["send"] = 0;
+    responseOtherData["wait"] =  monitorData->ResponseWaitingDuration;
+    responseOtherData["receive"] = monitorData->ResponseDownloadDuration;
+    responseOtherData["size"] = monitorData->ResponseSize;
+    responseOtherData["start"] = monitorData->RequestStartTime;
+    responseOtherData["end"] = monitorData->RequestEndTime;
+    NetworkResources* nwr = NetworkResources::getInstance();
+    nwr->addData(reply, device, responseOtherData);
 }

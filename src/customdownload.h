@@ -13,6 +13,8 @@
 #include <QObject>
 #include <QNetworkRequest>
 #include <QNetworkReply>
+#include <QIODevice>
+#include <QNetworkCookieJar>
 #include <QDebug>
 #include <QDateTime>
 
@@ -21,12 +23,13 @@ class CustomDownload : public QObject
     Q_OBJECT
 public:
     explicit CustomDownload(QNetworkReply* reply,
-                            QNetworkRequest request,
+                            QIODevice *device,
                             qint64 dnsLookupTime,
                             qint64 requestStartTime);
 private:
-    QNetworkRequest request;
     QNetworkReply *reply;
+    QNetworkRequest request;
+    QIODevice *device;
     qint64 totalTime;
     qint64 waitingTime;
     qint64 dnsLookupTime;
@@ -38,7 +41,6 @@ private:
     qint64 bytesTotal;
 
     qint64 max(qint64 num1, qint64 num2);
-
 
 signals:
     void requestFinished(QString url);

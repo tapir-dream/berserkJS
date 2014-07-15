@@ -8,7 +8,8 @@ NetworkAccessManager::NetworkAccessManager(QNetworkAccessManager *manager, QObje
 {
     // TODO:不需要在这里设置缓存, 外部会设置
     //setCache(manager->cache());
-    setCookieJar(manager->cookieJar());
+    cookieJar = manager->cookieJar();
+    setCookieJar(cookieJar);
     setProxy(manager->proxy());
     setProxyFactory(manager->proxyFactory());
 }
@@ -30,7 +31,7 @@ QNetworkReply* NetworkAccessManager::createRequest(QNetworkAccessManager::Operat
 
        // 不清除这个指针
        // TODO: 该类由 webview 接管处理
-       CustomDownload* customDownload = new CustomDownload(reply, request,
+       CustomDownload* customDownload = new CustomDownload(reply, device,
                            QDateTime::currentDateTime().toMSecsSinceEpoch() - time,
                            time);
 

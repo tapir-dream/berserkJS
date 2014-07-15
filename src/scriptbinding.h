@@ -12,11 +12,10 @@
 #include <QWebView>
 #include <QWebPage>
 #include <QWebFrame>
-#include "monitordatamap.h"
-#include "selector.h"
+
 #include "filesystemwatcher.h"
 #include "appinfo.h"
-
+#include "selector.h"
 
 /**
  * ScriptBinding 类
@@ -31,9 +30,10 @@
  * Namespace diagram
  *
  * Global + [object] APP + [function] networkData
- * print  |              + [function] close
- * gc     |              + [function] loadScript
- * version|              + [function] readFile
+ * print  |              + [function] networkResources
+ * gc     |              + [function] close
+ * version|              + [function] loadScript
+ *        |              + [function] readFile
  *        |              + [function] writeFile
  *        |              + [function] base64FrommFile
  *        |              + [function] dataURIFromImage
@@ -263,6 +263,8 @@ public:
 
     /* JS获取当前所有network数据 */
     static QScriptValue getNetworkData(QScriptContext *context, QScriptEngine *interpreter);
+    static QScriptValue getNetworkResourceData(QScriptContext *context, QScriptEngine *interpreter);
+
 
     /* Selector 类需要暴露的方法包裹 */
     static QScriptValue selectorClear(QScriptContext *context, QScriptEngine *interpreter);

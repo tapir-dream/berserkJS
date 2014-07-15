@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     firstscreen.cpp \
     scriptsignalfactory.cpp \
     appinfo.cpp \
-    cookiejar.cpp
+    cookiejar.cpp \
+    networkresources.cpp
 
 HEADERS  += mainwindow.h \
     networkaccessmanager.h \
@@ -48,7 +49,8 @@ HEADERS  += mainwindow.h \
     scriptsignalfactory.h \
     appinfo.h \
     consts.h \
-    cookiejar.h
+    cookiejar.h \
+    networkresources.h
 
 FORMS    += mainwindow.ui
 

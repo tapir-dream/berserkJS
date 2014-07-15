@@ -30,6 +30,7 @@ public:
 
 private:
     QNetworkRequest request;
+    QNetworkCookieJar* cookieJar;
 
 signals:
     void requestFinished(QString url);
