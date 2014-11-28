@@ -48,7 +48,7 @@ http://tapir-dream.github.com/berserkJS
 
 #介绍PPT
 
-- **下载地址**：http://t.cn/zWcKani
+- **观看地址**：http://vdisk.weibo.com/s/Des0SwUIlPVp
 
 
 #如何使用
