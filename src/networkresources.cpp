@@ -1,5 +1,6 @@
 #include "networkresources.h"
 #include <QDebug>
+#include <QHostInfo>
 
 const qint64 MAX_REQUEST_POST_BODY_SIZE = 5 * 1024 * 1024; //最大5M
 
@@ -40,7 +41,11 @@ void NetworkResources::addData(const QNetworkReply *reply,  QIODevice *device,
         res.request.headers[QString(requestHeader)] = QString(requestHeaderValue);
         headersSize += requestHeader.size() + requestHeaderValue.size();
     }
-
+    QHostInfo info = QHostInfo::fromName(reply->url().host());
+    qDebug()<<info.addresses().isEmpty();
+    if (!info.addresses().isEmpty()) {
+        res.request.base["serverIPAddress"] = info.addresses().first().toString();
+    }
     res.request.base["url"] = QVariant(url);
     res.request.base["FromCache"] = request.attribute(QNetworkRequest::SourceIsFromCacheAttribute);
     res.request.base["method"] =  (op == QNetworkAccessManager::GetOperation)

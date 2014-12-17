@@ -422,6 +422,7 @@ QScriptValue ScriptBinding::wrapperHttpDataArray(QMap<QString, MonitorData*> map
         obj.setProperty("XCacheVarnish", QScriptValue(map[keys.at(i)]->XCacheVarnish), QScriptValue::ReadOnly);
         obj.setProperty("PoweredByChinaCache", QScriptValue(map[keys.at(i)]->PoweredByChinaCache), QScriptValue::ReadOnly);
         obj.setProperty("SINALB", QScriptValue(map[keys.at(i)]->SINALB), QScriptValue::ReadOnly);
+        obj.setProperty("ServerIPAddress", QScriptValue(map[keys.at(i)]->ServerIPAddress), QScriptValue::ReadOnly);
 
         // 遍历输出未知应答头（自定义私有头）
         QMap<QString, QString> other = map[keys.at(i)]->other;
@@ -797,6 +798,7 @@ QScriptValue ScriptBinding::getNetworkResourceData(QScriptContext *context, QScr
         }
         request.setProperty("headers", requestHeader);
 
+        requestBase.setProperty("serverIPAddress", QScriptValue(res.request.base["serverIPAddress"].toString()));
         requestBase.setProperty("url", QScriptValue(res.request.base["url"].toString()));
         requestBase.setProperty("FromCache", QScriptValue(res.request.base["FromCache"].toBool()));
         requestBase.setProperty("method", QScriptValue(res.request.base["method"].toString()));

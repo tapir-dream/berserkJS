@@ -2,6 +2,7 @@
 #include "monitordata.h"
 #include "monitordatamap.h"
 #include "networkresources.h"
+#include <QHostInfo>
 
 
 CustomDownload::CustomDownload(QNetworkReply *reply,
@@ -180,6 +181,10 @@ void CustomDownload::onFinished()
             monitorData->SINALB = value;
         } else {
             monitorData->other[key] = value;
+        }
+        QHostInfo info = QHostInfo::fromName(reply->url().host());
+        if (!info.addresses().isEmpty()) {
+            monitorData->ServerIPAddress = info.addresses().first().toString();
         }
         MonitorDataMap::getMonitorDataMap()->set(monitorData->RequestURL, monitorData);
     }

@@ -24,6 +24,7 @@ QNetworkReply* NetworkAccessManager::createRequest(QNetworkAccessManager::Operat
     }
 
     QNetworkReply *reply = QNetworkAccessManager::createRequest(operation, request, device);
+
     reply->ignoreSslErrors();
     if (isListener) {
        // 触发请求开始的自定义信号

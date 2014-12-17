@@ -26,6 +26,7 @@ public:
     int StatusCode;
     QString ReasonPhrase;
     bool FromCache;
+    QString ServerIPAddress;
     QString RequestURL;
     // 请求大小
     qint64 ResponseSize;

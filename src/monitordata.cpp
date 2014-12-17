@@ -2,6 +2,7 @@
 
 MonitorData::MonitorData()
 {
+    ServerIPAddress = "unknown";
     StatusCode = 0;
     ReasonPhrase = "";
     FromCache = false;
