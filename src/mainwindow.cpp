@@ -428,7 +428,8 @@ QScriptValue MainWindow::sendEvent(QScriptContext *context, QScriptEngine *inter
 
 QScriptValue MainWindow::close(QScriptContext *context, QScriptEngine *interpreter)
 {
-    QApplication::quit();
+
+    QApplication::exit(0);
     return QScriptValue::UndefinedValue;
 }
 
